@@ -41,13 +41,18 @@ public partial class JobPosts : System.Web.UI.Page
         }
     }
 
+    protected void lbEdit_Click(object sender, EventArgs e)
+    {
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+    }
+
     //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     //{
     //    if (e.Row.RowType == DataControlRowType.DataRow)
     //    {
-    //        e.Row.Attributes["onclick"] = Page.ClientScript.GetPostBackClientHyperlink(GridView1, "Select$" + e.Row.RowIndex);
-            
-    //    }               
+    //        e.Row.Attributes.Add("onmouseover", id = "PostID");
+
+    //    }
     //}
 
     //protected void Gridview1_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,7 +60,7 @@ public partial class JobPosts : System.Web.UI.Page
     //    foreach (GridViewRow row in GridView1.Rows)
     //    {
     //        if (row.RowIndex == GridView1.SelectedIndex)
-    //        {               
+    //        {
     //            id = row.Cells[0].Text;
     //        }
     //    }

@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JobPosts.aspx.cs" Inherits="JobPosts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <script type="text/javascript">
+    function openModal() {
+        $('#myModal3').modal('show');
+    }
+</script>
 
 </asp:Content>
 
@@ -114,7 +119,8 @@
                                 runat="server"
                                 GridLines="none"
                                 AutoGenerateColumns="False"
-                                ForeColor="#343A40">
+                                ForeColor="#343A40"
+                                SelectedIndexChanged ="Gridview1_SelectedIndexChanged">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
