@@ -1,0 +1,29 @@
+name: 'Wingman Bootstrap Theme'
+shortName: Wingman
+theme_version: 1.1.0
+bootstrap_version: 4.2.1
+domain: wingman
+scripts:
+    external:
+        - jquery
+        - prismjs
+        - scrollmonitor
+        - smartwizard
+        - smooth-scroll
+    globals:
+        jquery: jQuery
+        prismjs: Prism
+        scrollmonitor: scrollMonitor
+        smooth-scroll: SmoothScroll
+minify_scripts: true
+blur_images:
+    - photo-man-book.jpg
+    - photo-man-box.jpg
+    - photo-man-diary.jpg
+    - photo-team-desk-blog.jpg
+    - photo-team-desk.jpg
+    - photo-woman-hat.jpg
+    - photo-woman-laptop.jpg
+    - photo-woman-sand.jpg
+subDomain: wingman
+purchase_link: 'https://themes.getbootstrap.com/product/wingman-landing-page-app-template'

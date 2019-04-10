@@ -1,0 +1,58 @@
+-
+  files: "jquery.min.js"
+  from: "node_modules/jquery/dist"
+  to: "pages/assets/js"
+-
+  files: "jquery.smartWizard.min.js"
+  from: "node_modules/smartwizard/dist/js"
+  to: "pages/assets/js"
+-
+  files: "flickity.pkgd.js"
+  from: "node_modules/flickity/dist"
+  to: "pages/assets/js"
+-
+  files: "flickity.min.css"
+  from: "node_modules/flickity/dist"
+  to: "pages/assets/css"
+-
+  files: 
+    - "popper.min.js"
+    - "popper.min.js.map"
+  from: "node_modules/popper.js/dist/umd"
+  to: "pages/assets/js"
+-
+  files: "scrollMonitor.js"
+  from: "node_modules/scrollmonitor"
+  to: "pages/assets/js"
+-
+  files: "socicon.css"
+  from: "node_modules/socicon/css"
+  to: "pages/assets/css"
+-
+  files: "*.*"
+  from: "node_modules/socicon/font"
+  to: "pages/assets/fonts"
+-
+  files: "prism.js"
+  from: "node_modules/prismjs"
+  to: "pages/assets/js"
+-
+  files: "prism.css"
+  from: "node_modules/prismjs/themes"
+  to: "scss/custom/components/plugins"
+-
+  files: "prism-okaidia.css"
+  from: "node_modules/prismjs/themes"
+  to: "scss/custom/components/plugins"
+-  
+  files: "smooth-scroll.polyfills.js"
+  from: "node_modules/smooth-scroll/dist"
+  to: "pages/assets/js"
+-
+  files: "zoom-vanilla.min.js"
+  from: "node_modules/zoom-vanilla.js/dist"
+  to: "pages/assets/js"
+-
+  files: "zoom.css"
+  from: "node_modules/zoom-vanilla.js/dist"
+  to: "scss/custom/components/plugins"

@@ -1,0 +1,198 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Cued-In for Business</title>
+    <meta charset="utf-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A robust suite of app and landing page templates by Medium Rare">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,400i,500" rel="stylesheet">
+    <link href="pages/assets/css/socicon.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="pages/assets/css/entypo.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="pages/assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+
+    <div class="navbar-container">
+      <div class="bg-white navbar-light" data-sticky="top">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="LandingPage.aspx">
+              <img alt="Brilliature" src="pages/assets/img/mini-logo.svg" />
+            </a>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a href="JobPosts.aspx" class="nav-link"><i class="icon-network">&nbsp;</i>Job Opportunities</a>
+                </li>
+                <li class="nav-item">
+                  <a href="Applications.aspx" class="nav-link"><i class="icon-clipboard">&nbsp;</i>Student Applications</a>
+                </li>
+            <li class="nav-item">
+                  <a href="ManageScholarships.aspx" class="nav-link"><i class="icon-graduation-cap">&nbsp;</i>Scholarships</a>
+                </li>
+                   <li class="nav-item">
+                  <a href="CommunityEngagement.aspx" class="nav-link"><i class="icon-users">&nbsp;</i>Community Engagement</a>
+                </li>
+                   <li class="nav-item">
+                  <a href="Insight.aspx" class="nav-link"><i class="icon-sweden">&nbsp;</i>Insights</a>
+                </li>
+              </ul>
+                
+               
+                <div class="nav-item">
+                      <div class="fb-like" data-href="https://www.facebook.com/Brilliature-553779785110661/" data-width="40" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+                  </div>
+                   
+
+
+              <ul class="navbar-nav">
+              <a href="Messaging.aspx"><img alt="Image" src="pages/assets/img/Chat.svg" class="avatar avatar-xs" /></a>
+                  </a>
+                  &nbsp; &nbsp;
+                  <li class="nav-item">
+                   <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow p-lg-0" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img alt="Image" src="pages/assets/img/profile.png" class="avatar avatar-xs" />
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="Settings.aspx">
+                      <span class="h6 mb-0"><i class="icon-user">&nbsp;</i>Profile/Settings</span>
+                    </a>
+ 					<div class="dropdown-divider"></div>
+ 				<a class="dropdown-item" href="Help.aspx">
+                      <span class="h6 mb-0"><i class="icon-help">&nbsp;</i>Help</span>
+                    </a>
+    
+ 					<div class="dropdown-divider"></div>
+					 <a class="dropdown-item" href="#myModal" class="btn btn-success" data-toggle="modal"><i class="icon-export">&nbsp;</i>Log Out</a>                    
+                  </div>
+                </li> 
+              </ul>
+            </div>
+            <!--end nav collapse-->
+          </nav>
+        </div>
+        <!--end of container-->
+      </div>
+    </div>
+      <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Are you sure you want to log out?</h3>
+                </div>
+                <div class="modal-body">
+                   <a href="Website.aspx" class="btn-lg btn-success">Yes</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+
+    <!--Footer-->
+       <footer class="bg-gray text-light footer-long">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <img alt="Image" src="pages/assets/img/W_logo.svg"/>
+              <br>
+              <br>
+              <p>
+                &copy; 2019 Brilliature
+              </p>
+       <a href="https://cued-in.com/" class="footer">powered by Cued-In <img alt="Brilliature" src="pages/assets/img/cuedin.svg" /></a>
+
+            </div>
+            <!--end of col-->
+            <div class="col-12 col-md-9">
+              <div class="row no-gutters">
+                <div class="col-6 col-lg-3">
+                  <h6>Brilliature</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="Website.aspx">About Us</a>
+                    </li>
+                    <li>
+                      <a href="Website.aspx#howitworks">How it Works</a>
+                    </li>
+                    <li>
+                      <a href="Website.aspx#faqs">FAQ's</a>
+                    </li>
+                     <li>
+                      <a href="Website.aspx#pricing">Pricing</a>
+                    </li>
+                    <li>
+                      <a href="Website.aspx#contact">Contact US</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+                <div class="col-6 col-lg-3">
+                  <h6>Dashboard</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="JobPosts.aspx">Manage Job Opportunities</a>
+                    </li>
+                    <li>
+                      <a href="Applications.aspx">View Applications</a>
+                    </li>
+                    <li>
+                      <a href="ManageScholarships.aspx">Post a Scholarship</a>
+                    </li>
+                    <li>
+                      <a href="CommunityEngagement.aspx">Community Engagement</a>
+                    </li>
+                    <li>
+                      <a href="Insight.aspx">Insights</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+                <div class="col-6 col-lg-3">
+                  <h6>User Preferences</h6>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="Settings.aspx">My Profile</a>
+                    </li>
+                    <li>
+                      <a href="Help.aspx">Help</a>
+                    </li>
+                    <li>
+                      <a href="#myModal" data-toggle="modal">Log Out</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--end of col-->
+              </div>
+              <!--end of row-->
+            </div>
+            <!--end of col-->
+          </div>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </footer>
+  
+    <script type="text/javascript" src="pages/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/jquery.smartWizard.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/flickity.pkgd.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/scrollMonitor.js"></script>
+    <script type="text/javascript" src="pages/assets/js/smooth-scroll.polyfills.js"></script>
+    <script type="text/javascript" src="pages/assets/js/prism.js"></script>
+    <script type="text/javascript" src="pages/assets/js/zoom.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="pages/assets/js/theme.js"></script>
+   
+</body>
+</html>

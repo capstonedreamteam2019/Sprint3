@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Wingman Bootstrap Theme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A robust suite of app and landing page templates by Medium Rare">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,400i,500" rel="stylesheet">
+    <link href="assets/css/socicon.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="assets/css/entypo.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+  </head>
+
+  <body>
+
+    <div class="navbar-container">
+      <div class="bg-white navbar-light" data-sticky="top">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="landing-5.html">
+              <img alt="Brilliature" src="assets/img/mini-logo.svg" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="icon-menu h4"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a href="landing-5.html" class="nav-link">Dashboard</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown">My Profile</a>
+                  <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+
+                    <a class="dropdown-item" href="pages-landing.html">
+                      <span class="h6 mb-0">Settings</span>
+                      <p class="text-small text-muted">Showcase your product in style</p>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="pages-app.html">
+                      <span class="h6 mb-0">Preferences</span>
+                      <p class="text-small text-muted">Build detailed, functional web apps</p>
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a class="dropdown-item" href="pages-inner.html">
+                      <span class="h6 mb-0">XXX</span>
+                      <p class="text-small text-muted">Complete your online presence</p>
+                    </a>
+
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="componentsDropdown" role="button" data-toggle="dropdown">Policy</a>
+                  <div class="dropdown-menu" aria-labelledby="componentsDropdown">
+
+                    <a class="dropdown-item" href="components-bootstrap.html">About Us</a>
+
+                    <a class="dropdown-item" href="components-wingman.html">Contact Us</a>
+
+                  </div>
+                </li>
+              </ul>
+
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a href="documentation/changelog.html" class="nav-link">powered by Cued-In <img alt="Brilliature" src="assets/img/cuedin.svg" /></a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                  <a href="app-account-create.html" class="btn btn-success">Log Out</a>
+                </li>
+              </ul>
+
+            </div>
+            <!--end nav collapse-->
+          </nav>
+        </div>
+        <!--end of container-->
+      </div>
+    </div>
+    
+      <section>
+        <div class="container">
+          <form class="row justify-content-around wizard">
+            <ul class="col-12 col-md-auto nav nav-tabs flex-md-column justify-content-between justify-content-md-start">
+              <li><a href="#first" class="step-circle step-circle-sm">1</a>
+              </li>
+              <li><a href="#second" class="step-circle step-circle-sm">2</a>
+              </li>
+              <li><a href="#third" class="step-circle step-circle-sm">3</a>
+              </li>
+            </ul>
+            <!--end of col-->
+            <div class="col col-lg-9 tab-content">
+              <div id="first">
+                <div class="row align-items-center mb-5">
+                  <div class="col-12 col-md-7">
+                    <h6 class="title-decorative">Step One</h6>
+                    <h3 class="h1">Create your account</h3>
+                    <span class="lead">Let's begin by creating your account. You can always change these details later.</span>
+                  </div>
+                  <!--end of col-->
+                  <div class="col-12 col-md-5">
+                    <img alt="Image" src="assets/img/graphic-man-box.svg" class="w-100" />
+                  </div>
+                  <!--end of col-->
+                </div>
+                <!--end of row-->
+                 <div class="form-row form-group">
+                  <div class="col">
+                    <input class="form-control form-control-lg" type="password" id="username" placeholder="Username" />
+                  </div>
+                </div>
+                 <div class="form-row form-group">
+                  <div class="col">
+                    <input class="form-control form-control-lg" type="password" id="password" placeholder="Password" />
+                    <small>Password must be at least 7 characters</small>
+                  </div>
+                </div>
+                 <div class="form-row form-group">
+                  <div class="col">
+                    <input class="form-control form-control-lg" type="password" id="Email Address" placeholder="Email Address" />
+                  </div>
+                </div>
+                <div class="form-row form-group">
+                  <div class="col">
+                    <input class="form-control form-control-lg" type="text" id="company" placeholder="Company Name" />
+                  </div>
+                </div>
+                <div class="form-row form-group">
+                  <div class="col">
+                    <input class="form-control form-control-lg" type="text" id="Industry" placeholder="Industry" />
+                  </div>
+                  <div class="col">
+                    <input class="form-control form-control-lg" type="text" id="website" placeholder="Website URL" />
+                  </div>
+                </div>
+            
+                <button class="btn btn-success sw-btn-next mt-4" type="button">Next Step</button>
+              </div>
+              <div id="second">
+                <div class="row align-items-center mb-5">
+                  <div class="col-12 col-md-7">
+                    <h6 class="title-decorative">Step Two</h6>
+                    <h3 class="h1">Tell us about your company</h3>
+                    <span class="lead">Add some detail to your profile to personalise it and let others know who you are.</span>
+                  </div>
+                  <!--end of col-->
+                  <div class="col-12 col-md-4">
+                    <img alt="Image" src="assets/img/graphic-woman-writing-2.svg" class="w-100" />
+                  </div>
+                  <!--end of col-->
+                </div>
+               <div class="form-group">
+   			 <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Mission Statement" rows="3"></textarea>
+  			</div>
+  			 <div class="form-group">
+   			 <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Values" rows="3"></textarea>
+  			</div>
+  			 <div class="form-group">
+   			 <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="List of Departments" rows="3"></textarea>
+  			</div>
+                <div>
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="box-2">
+                    <label class="custom-control-label" for="box-2">Make profile public</label>
+                  </div>
+                </div>
+                <button class="btn btn-success sw-btn-next mt-4" type="button">Next Step</button>
+              </div>
+              <div id="third">
+                <div class="row align-items-center mb-5">
+                  <div class="col-12 col-md-6">
+                    <h6 class="title-decorative">Step Three</h6>
+                    <h3 class="h1">You're all set</h3>
+                    <span class="lead">We've set up your account and some basic details, now let's move on to your dashboard.</span>
+                    <button type="submit" class="btn-success btn-lg"><a href="landing-5.html" class="btn-success">Go to Dashboard</a></button>
+                  </div>
+                  <!--end of col-->
+                  <div class="col-12 col-md-6">
+                    <img alt="Image" src="assets/img/graphic-woman-writing.svg" class="w-100" />
+                  </div>
+                  <!--end of col-->
+                </div>
+                <!--end of row-->
+              </div>
+            </div>
+            <!--end of col-->
+                
+          </form>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </section>
+      <!--end of section-->
+      <footer class="footer-short">
+        <div class="container">
+          <hr>
+          <nav class="row justify-content-between align-items-center">
+            <div class="col-auto">
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <img alt="Image" src="assets/img/mini-logo.svg" />
+                  </a>
+                </li>
+                 <li class="list-inline-item">
+                  <small>&copy; 2019 Medium Rare All Rights Reserved</small>
+                </li>
+              </ul>
+            </div>
+            <!--end of col-->
+            <div class="col-auto text-sm-right">
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <a href="#"><i class="socicon-twitter"></i></a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#"><i class="socicon-facebook"></i></a>
+                </li>
+              </ul>
+            </div>
+            <!--end of col-->
+          </nav>
+          <!--end of row-->
+        </div>
+        <!--end of container-->
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.smartWizard.min.js"></script>
+    <script type="text/javascript" src="assets/js/flickity.pkgd.min.js"></script>
+    <script type="text/javascript" src="assets/js/scrollMonitor.js"></script>
+    <script type="text/javascript" src="assets/js/smooth-scroll.polyfills.js"></script>
+    <script type="text/javascript" src="assets/js/prism.js"></script>
+    <script type="text/javascript" src="assets/js/zoom.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/theme.js"></script>
+
+  </body>
+
+</html>
