@@ -119,8 +119,7 @@
                                 runat="server"
                                 GridLines="none"
                                 AutoGenerateColumns="False"
-                                ForeColor="#343A40"
-                                SelectedIndexChanged ="Gridview1_SelectedIndexChanged">
+                                ForeColor="#343A40">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
@@ -200,7 +199,7 @@
                                                     <i class="icon-dots-three-horizontal"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
-                                                    <a class="dropdown-item" href="#myModal3" data-toggle="modal">Preview</a>
+                                                    <a class="dropdown-item">Preview</a>
                                                     <a class="dropdown-item" href="#myModal4" data-toggle="modal">Edit</a>
                                                     <a class="dropdown-item" href="#" data-toggle="modal">Share</a>
                                                     <div class="dropdown-divider"></div>
