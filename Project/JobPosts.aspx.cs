@@ -25,13 +25,14 @@ public partial class JobPosts : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            //find min post ID
-            localDB.Open();
-            System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
-            getLow.Connection = localDB;
-            getLow.CommandText = "Select min(PostID) From Post where PostType Like 'Job'";
-            id = getLow.ExecuteScalar().ToString();
-            localDB.Close();
+                
+            ////find min post ID
+            //localDB.Open();
+            //System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
+            //getLow.Connection = localDB;
+            //getLow.CommandText = "Select min(PostID) From Post where PostType Like 'Job'";
+            //id = getLow.ExecuteScalar().ToString();
+            //localDB.Close();
 
 
             //update all textboxes with data from database
@@ -41,9 +42,41 @@ public partial class JobPosts : System.Web.UI.Page
         }
     }
 
-    protected void lbEdit_Click(object sender, EventArgs e)
+    protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+        int index = Convert.ToInt32(e.CommandArgument);
+        GridViewRow selectedRow = GridView1.Rows[index];
+        Label id = selectedRow.FindControl("lblID") as Label;
+
+
+        localDB.Open();
+
+        if (e.CommandName == "Preview")
+        {
+            LoadPreview();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+
+        }
+    }
+
+    //protected void lbEdit_Click(object sender, EventArgs e)
+    //{
+    //    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
+    //}
+
+    protected void setMouseover(object sender, GridViewRowEventArgs e)
+    {
+        
+            if (e.Row.RowIndex > 0)
+            {
+
+                int row = e.Row.RowIndex;
+                GridViewRow selectedRow = GridView1.Rows[row];
+                id = selectedRow.FindControl("lblID").ToString();
+
+            }
+        
     }
 
     //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)

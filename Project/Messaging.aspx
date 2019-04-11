@@ -11,26 +11,26 @@
               <form class="card-header d-none d-lg-block">
                 <input class="form-control form-control-lg" type="search" placeholder="Search chat" />
               </form>
-              <div class="list-group list-group-chat list-group-flush">
+              <div id="sidebar" class="list-group list-group-chat list-group-flush">
 
-                <a href="#r" id="highlight1" runat="server" onserverclick="ChangeBack_OnClick" class="list-group-item list-group-item-action active">
+                <a href="#r" id="sidebarHighlight1" runat="server" onserverclick="ChangeBack_OnClick" class="list-group-item list-group-item-action active">
                   <div class="media">
                     <img alt="Image" src="pages/assets/img/avatar-male-4.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Daniel Cameron
+                        <h6 id="sidebarContactName1" class="mb-0">Daniel Cameron
                           <span class="badge badge-indicator badge-success"></span>
                         </h6>
                         <div>
-                          <small id="DanielSideTime" class="text-muted" runat="server">1 hour ago</small>
+                          <small id="sidebarContactTime1" class="text-muted" runat="server">1 hour ago</small>
                         </div>
                       </div>
-                      <span id="sideMessage" runat="server" class="text-muted text-small col-11 p-0 text-truncate d-block">Let's keep those protoypes 100</span>
+                      <span id="sidebarContactMessage1" runat="server" class="text-muted text-small col-11 p-0 text-truncate d-block">Let's keep those protoypes 100</span>
                     </div>
                   </div>
                 </a>
 
-                <a href="#" id="highlight" class="list-group-item list-group-item-action" runat="server" onserverclick="ChangeMessage_OnClick">
+                <a href="#" id="sidebarHighlight2" class="list-group-item list-group-item-action" runat="server" onserverclick="ChangeMessage_OnClick">
                   <div class="media">
                     <img alt="Image" src="pages/assets/img/avatar-female-3.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
@@ -90,6 +90,51 @@
                   </div>
                 </a>
 
+                <a href="#" class="list-group-item list-group-item-action">
+                  <div class="media">
+                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
+                    <div class="media-body d-none d-lg-block ml-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Vanessa Sampson</h6>
+                        <div>
+                          <small class="text-muted">7 hours ago</small>
+                        </div>
+                      </div>
+                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
+                    </div>
+                  </div>
+                </a>
+
+               <a href="#" class="list-group-item list-group-item-action">
+                  <div class="media">
+                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
+                    <div class="media-body d-none d-lg-block ml-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Vanessa Sampson</h6>
+                        <div>
+                          <small class="text-muted">7 hours ago</small>
+                        </div>
+                      </div>
+                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
+                    </div>
+                  </div>
+                </a>
+
+               <a href="#" class="list-group-item list-group-item-action">
+                  <div class="media">
+                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
+                    <div class="media-body d-none d-lg-block ml-2">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Vanessa Sampson</h6>
+                        <div>
+                          <small class="text-muted">7 hours ago</small>
+                        </div>
+                      </div>
+                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
+                    </div>
+                  </div>
+                </a>
+
               </div>
             </div>
             <!--end of col-->
@@ -99,10 +144,10 @@
                 <div class="media align-items-center">
                   <img id="photoChange" runat="server" alt="Image" src="pages/assets/img/avatar-male-4.jpg" class="avatar avatar-sm" />
                   <div class="media-body">
-                    <h6 id="userName" runat="server" class="mb-0 d-block">Daniel Cameron
-                      <span class="badge badge-indicator badge-success"></span>
+                    <h6 id="mainViewUserName" runat="server" class="mb-0 d-block">Daniel Cameron
                     </h6>
-                    <span class="text-muted text-small">last seen today at 2:15 PM</span>
+                      <span class="badge badge-indicator badge-success"></span>
+                    <span id="mainViewSpeakingWith" runat="server" class="text-muted text-small">last seen today at 2:15 PM</span>
                   </div>
                 </div>
 
@@ -300,7 +345,7 @@
                         </label>
                         <div>
 
-                          <small id="time2" class="opacity-60" runat="server"></small>
+                          <small id="responseMessageTime" class="opacity-60" runat="server"></small>
                         </div>
                       </div>
                     </div>
@@ -340,5 +385,15 @@
       <!--end of section-->
      
 
-</asp:Content>
+    <script type="text/javascript" src="pages/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/jquery.smartWizard.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/flickity.pkgd.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/scrollMonitor.js"></script>
+    <script type="text/javascript" src="pages/assets/js/smooth-scroll.polyfills.js"></script>
+    <script type="text/javascript" src="pages/assets/js/prism.js"></script>
+    <script type="text/javascript" src="pages/assets/js/zoom.min.js"></script>
+    <script type="text/javascript" src="pages/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="pages/assets/js/theme.js"></script>
 
+</asp:Content>

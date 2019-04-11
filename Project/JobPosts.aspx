@@ -120,7 +120,7 @@
                                 GridLines="none"
                                 AutoGenerateColumns="False"
                                 ForeColor="#343A40"
-                                SelectedIndexChanged ="Gridview1_SelectedIndexChanged">
+                                OnRowDataBound="setMouseover">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
