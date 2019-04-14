@@ -84,6 +84,7 @@ public partial class JobPosts : System.Web.UI.Page
         if (e.CommandName == "Preview")
         {
             LoadPreview();
+            
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal1();", true);
 
         }

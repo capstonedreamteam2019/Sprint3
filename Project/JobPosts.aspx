@@ -3,13 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
      <script type="text/javascript">
     function openModal1() {
-        $('#myModal3').modal('show');
+        $('#PreviewModal').modal('show');
         }
     function openModal2() {
-        $('#myModal4').modal('show');
+        $('#EditModal').modal('show');
         }
     function openModal3() {
-        $('#myModal5').modal('show');
+        $('#DeleteModal').modal('show');
         }
     </script>
 
@@ -37,12 +37,12 @@
                 <!--end of col-->
                 <div class="col-auto">
                     <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#myModal2" runat="server" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Job Post</a>
+                    <a href="#CreateModal" runat="server" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Job Post</a>
                 </div>
             </div>
         </div>
         <!-- Create Job Modal HTML -->
-        <div id="myModal2" class="modal fade">
+        <div id="CreateModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -216,10 +216,10 @@
                                                         runat="server"
                                                         CommandName="Preview"
                                                         CommandArgument='<%# Container.DataItemIndex %>' />
-                                                    <a class="dropdown-item" href="#myModal4" data-toggle="modal">Edit</a>
+                                                    <a class="dropdown-item" href="#EditModal" data-toggle="modal">Edit</a>
                                                     <a class="dropdown-item" href="#" data-toggle="modal">Share</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#myModal5" data-toggle="modal">Remove</a>
+                                                    <a class="dropdown-item" href="#DeleteModal" data-toggle="modal">Remove</a>
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -366,7 +366,7 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>         
                                           <div class="dropdown">
-                                                    <a class="btn btn-success" href="#myModal6" data-toggle="modal">Re-Activate</a>
+                                                    <a class="btn btn-success" href="#ReModal" data-toggle="modal">Re-Activate</a>
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -389,7 +389,7 @@
         
 
        <!-- reactivate Modal HTML -->
-        <div id="myModal6" class="modal fade">
+        <div id="ReModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -408,7 +408,7 @@
 
 
             <!-- Preview Modal HTML -->
-            <div id="myModal3" class="modal fade">
+            <div id="PreviewModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -493,7 +493,7 @@
 
 
         <!-- Edit Modal HTML -->
-       <div id="myModal4" class="modal fade">
+       <div id="EditModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -551,7 +551,7 @@
 
 
        <!-- Delete Modal HTML -->
-        <div id="myModal5" class="modal fade">
+        <div id="DeleteModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
