@@ -1,15 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JobPosts.aspx.cs" Inherits="JobPosts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <script type="text/javascript">
-    function openModal() {
+     <script type="text/javascript">
+    function openModal1() {
         $('#myModal3').modal('show');
-    }
-</script>
+        }
+    function openModal2() {
+        $('#myModal4').modal('show');
+        }
+    function openModal3() {
+        $('#myModal5').modal('show');
+        }
+    </script>
 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+   
 <form runat="server">
 
     <section>
@@ -120,7 +128,7 @@
                                 GridLines="none"
                                 AutoGenerateColumns="False"
                                 ForeColor="#343A40"
-                                OnRowDataBound="setMouseover">
+                                OnRowCommand="GridView1_RowCommand">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
@@ -196,11 +204,18 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>         
                                           <div class="dropdown">
-                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="btnDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="btnDropDown" data-toggle="dropdown" onmouseover="mouseOver" aria-haspopup="true" aria-expanded="false">
                                                     <i class="icon-dots-three-horizontal"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
-                                                    <a class="dropdown-item" href="#myModal3" data-toggle="modal">Preview</a>
+                                                    <asp:Button
+                                                        Text="Preview"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="btnPreview"
+                                                        runat="server"
+                                                        CommandName="Preview"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
                                                     <a class="dropdown-item" href="#myModal4" data-toggle="modal">Edit</a>
                                                     <a class="dropdown-item" href="#" data-toggle="modal">Share</a>
                                                     <div class="dropdown-divider"></div>
