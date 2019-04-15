@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using Jint;
+using System.IO;
+using Jint.Runtime;
 
 public partial class JobPosts : System.Web.UI.Page
 {
@@ -17,6 +20,8 @@ public partial class JobPosts : System.Web.UI.Page
     DataTable dt;
     SqlDataAdapter da2;
     DataTable dt2;
+
+
 
     //Declare static id variable
     static Label id;
@@ -84,8 +89,16 @@ public partial class JobPosts : System.Web.UI.Page
         if (e.CommandName == "Preview")
         {
             LoadPreview();
-            
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal1();", true);
+
+            //JintEngine js = new JintEngine();
+
+            //js.Run(new StreamReader("JavaScript.js"));
+
+            var script1 = System.IO.File.ReadAllText("PreviewJS.js");
+            var engine = new Engine().SetValue("log", new Action<object>(Console.WriteLine));
+            engine.Execute(script1);
+
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal1();", true);
 
         }
         if (e.CommandName == "Edit")
