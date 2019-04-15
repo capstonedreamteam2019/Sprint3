@@ -41,14 +41,14 @@ public partial class Messaging : System.Web.UI.Page
         //Select 5 users to be shown on the side in order of messages sent
         System.Data.SqlClient.SqlCommand selectSidebar2 = new System.Data.SqlClient.SqlCommand();
         selectSidebar2.Connection = localDB;
-        selectSidebar2.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID - 1) from messages)";
+        selectSidebar2.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID + 1) from messages)";
         string sidebar2 = selectSidebar2.ExecuteScalar().ToString();
         sidebarContactName2.InnerHtml = sidebar2;
 
         //Select 5 users to be shown on the side in order of messages sent
         System.Data.SqlClient.SqlCommand selectSidebar3 = new System.Data.SqlClient.SqlCommand();
         selectSidebar3.Connection = localDB;
-        selectSidebar3.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID - 2) from messages)";
+        selectSidebar3.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID + 2) from messages where)";
         string sidebar3 = selectSidebar3.ExecuteScalar().ToString();
         sidebarContactName3.InnerHtml = sidebar3;
 
