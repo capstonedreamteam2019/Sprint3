@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using Jint;
+using System.IO;
+using Jint.Runtime;
 
 public partial class JobPosts : System.Web.UI.Page
 {
@@ -18,11 +21,14 @@ public partial class JobPosts : System.Web.UI.Page
     SqlDataAdapter da2;
     DataTable dt2;
 
+
+
     //Declare static id variable
-    static string id;
+    static Label id;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         if (!IsPostBack)
         {
                 
@@ -35,103 +41,14 @@ public partial class JobPosts : System.Web.UI.Page
             //localDB.Close();
 
 
-            //update all textboxes with data from database
+            //update all modals with data from database
             showData();
             LoadPreview();
             LoadEdit();
         }
     }
 
-    protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
-    {
-
-        int index = Convert.ToInt32(e.CommandArgument);
-        GridViewRow selectedRow = GridView1.Rows[index];
-        Label id = selectedRow.FindControl("lblID") as Label;
-
-
-        localDB.Open();
-
-        if (e.CommandName == "Preview")
-        {
-            LoadPreview();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-
-        }
-    }
-
-    //protected void lbEdit_Click(object sender, EventArgs e)
-    //{
-    //    ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-    //}
-
-    protected void setMouseover(object sender, GridViewRowEventArgs e)
-    {
-        
-            if (e.Row.RowIndex > 0)
-            {
-
-                int row = e.Row.RowIndex;
-                GridViewRow selectedRow = GridView1.Rows[row];
-                id = selectedRow.FindControl("lblID").ToString();
-
-            }
-        
-    }
-
-    //protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-    //{
-    //    if (e.Row.RowType == DataControlRowType.DataRow)
-    //    {
-    //        e.Row.Attributes.Add("onmouseover", id = "PostID");
-
-    //    }
-    //}
-
-    //protected void Gridview1_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    foreach (GridViewRow row in GridView1.Rows)
-    //    {
-    //        if (row.RowIndex == GridView1.SelectedIndex)
-    //        {
-    //            id = row.Cells[0].Text;
-    //        }
-    //    }
-    //}
-
-    //private void GridView1_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
-    //{
-    //    Bitmap markingUnderMouse = (Bitmap)dataGridView1.
-    //           Rows[e.RowIndex].
-    //           Cells[e.ColumnIndex].Value;
-
-    //    if (markingUnderMouse == blank)
-    //    {
-    //        GridView1.Cursor = Cursors.Default;
-    //    }
-    //    else if (markingUnderMouse == o || markingUnderMouse == x)
-    //    {
-    //        GridView1.Cursor = Cursors.No;
-    //        ToolTip(e, true);
-    //    }
-    //}
-
-    //protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
-    //{
-    //    int index = Convert.ToInt32(e.CommandArgument);
-    //    GridViewRow selectedRow = GridView1.Rows[index];
-    //    Label idGridview = selectedRow.FindControl("lblID") as Label;
-
-
-    //    localDB.Open();
-
-    //    if (e.CommandName == "Preview")
-    //    {
-    //        id = idGridview.ToString();
-    //    }
-    //}
-
-    ////update gridview
+    //update gridview
     protected void showData()
     {
         //Populate Gridview 1 = Active
@@ -158,6 +75,41 @@ public partial class JobPosts : System.Web.UI.Page
         {
             GridView2.DataSource = dt2;
             GridView2.DataBind();
+        }
+    }
+
+    //find row id
+    protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
+    {
+        int index = Convert.ToInt32(e.CommandArgument);
+        GridViewRow selectedRow = GridView1.Rows[index];
+        id = selectedRow.FindControl("lblID") as Label; 
+
+
+        if (e.CommandName == "Preview")
+        {
+            LoadPreview();
+
+            //JintEngine js = new JintEngine();
+
+            //js.Run(new StreamReader("JavaScript.js"));
+
+            var script1 = System.IO.File.ReadAllText("PreviewJS.js");
+            var engine = new Engine().SetValue("log", new Action<object>(Console.WriteLine));
+            engine.Execute(script1);
+
+            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal1();", true);
+
+        }
+        if (e.CommandName == "Edit")
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal2();", true);
+        }
+        if (e.CommandName == "Delete")
+        {
+            LoadPreview();
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal3();", true);
+
         }
     }
 
@@ -248,61 +200,61 @@ public partial class JobPosts : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
             getTitle.Connection = localDB;
             getTitle.CommandText = "Select Title From Post where PostID = @id";
-            getTitle.Parameters.AddWithValue("id", id);
+            getTitle.Parameters.AddWithValue("id", id.Text);
             Label1.InnerText = getTitle.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDescription = new System.Data.SqlClient.SqlCommand();
             getDescription.Connection = localDB;
             getDescription.CommandText = "Select PostDescription From Post where PostID = @id";
-            getDescription.Parameters.AddWithValue("id", id);
+            getDescription.Parameters.AddWithValue("id", id.Text);
             Label2.InnerText = getDescription.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getResponsibilities = new System.Data.SqlClient.SqlCommand();
             getResponsibilities.Connection = localDB;
             getResponsibilities.CommandText = "Select Responsibilities From Job where PostID = @id";
-            getResponsibilities.Parameters.AddWithValue("id", id);
+            getResponsibilities.Parameters.AddWithValue("id", id.Text);
             Label3.InnerText = getResponsibilities.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getQualifications = new System.Data.SqlClient.SqlCommand();
             getQualifications.Connection = localDB;
             getQualifications.CommandText = "Select Requirements From Job where PostID = @id";
-            getQualifications.Parameters.AddWithValue("id", id);
+            getQualifications.Parameters.AddWithValue("id", id.Text);
             Label4.InnerText = getQualifications.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDepartment = new System.Data.SqlClient.SqlCommand();
             getDepartment.Connection = localDB;
             getDepartment.CommandText = "Select Department From Job where PostID = @id";
-            getDepartment.Parameters.AddWithValue("id", id);
+            getDepartment.Parameters.AddWithValue("id", id.Text);
             Label5.InnerText = getDepartment.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getLocation = new System.Data.SqlClient.SqlCommand();
             getLocation.Connection = localDB;
             getLocation.CommandText = "Select JobAddress From Job where PostID = @id";
-            getLocation.Parameters.AddWithValue("id", id);
+            getLocation.Parameters.AddWithValue("id", id.Text);
             Label6.InnerText = getLocation.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getSalary = new System.Data.SqlClient.SqlCommand();
             getSalary.Connection = localDB;
             getSalary.CommandText = "Select Salary From Job where PostID = @id";
-            getSalary.Parameters.AddWithValue("id", id);
+            getSalary.Parameters.AddWithValue("id", id.Text);
             Label7.InnerText = getSalary.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getPayType = new System.Data.SqlClient.SqlCommand();
             getPayType.Connection = localDB;
             getPayType.CommandText = "Select PayType From Job where PostID = @id";
-            getPayType.Parameters.AddWithValue("id", id);
+            getPayType.Parameters.AddWithValue("id", id.Text);
             Label8.InnerText = getPayType.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDueDate = new System.Data.SqlClient.SqlCommand();
             getDueDate.Connection = localDB;
             getDueDate.CommandText = "Select DueDate From Job where PostID = @id";
-            getDueDate.Parameters.AddWithValue("id", id);
+            getDueDate.Parameters.AddWithValue("id", id.Text);
             Label9.InnerText = getDueDate.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getday = new System.Data.SqlClient.SqlCommand();
             getday.Connection = localDB;
             getday.CommandText = "Select ADayInTheLife From Job where PostID = @id";
-            getday.Parameters.AddWithValue("id", id);
+            getday.Parameters.AddWithValue("id", id.Text);
             Label10.InnerText = getday.ExecuteScalar().ToString();
 
 
@@ -335,56 +287,56 @@ public partial class JobPosts : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
             getTitle.Connection = localDB;
             getTitle.CommandText = "Select Title From Post where PostID = @id";
-            getTitle.Parameters.AddWithValue("id", id);
+            getTitle.Parameters.AddWithValue("id", id.Text);
             txtEditTitle.Value = getTitle.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDescription = new System.Data.SqlClient.SqlCommand();
             getDescription.Connection = localDB;
             getDescription.CommandText = "Select PostDescription From Post where PostID = @id";
-            getDescription.Parameters.AddWithValue("id", id);
+            getDescription.Parameters.AddWithValue("id", id.Text);
             txtEditDescription.Value = getDescription.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getResponsibilities = new System.Data.SqlClient.SqlCommand();
             getResponsibilities.Connection = localDB;
             getResponsibilities.CommandText = "Select Responsibilities From Job where PostID = @id";
-            getResponsibilities.Parameters.AddWithValue("id", id);
+            getResponsibilities.Parameters.AddWithValue("id", id.Text);
             txtEditResponsibilities.Value = getResponsibilities.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getQualifications = new System.Data.SqlClient.SqlCommand();
             getQualifications.Connection = localDB;
             getQualifications.CommandText = "Select Requirements From Job where PostID = @id";
-            getQualifications.Parameters.AddWithValue("id", id);
+            getQualifications.Parameters.AddWithValue("id", id.Text);
             txtEditRequirements.Value = getQualifications.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDepartment = new System.Data.SqlClient.SqlCommand();
             getDepartment.Connection = localDB;
             getDepartment.CommandText = "Select Department From Job where PostID = @id";
-            getDepartment.Parameters.AddWithValue("id", id);
+            getDepartment.Parameters.AddWithValue("id", id.Text);
             txtEditDepartment.Value = getDepartment.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getLocation = new System.Data.SqlClient.SqlCommand();
             getLocation.Connection = localDB;
             getLocation.CommandText = "Select JobAddress From Job where PostID = @id";
-            getLocation.Parameters.AddWithValue("id", id);
+            getLocation.Parameters.AddWithValue("id", id.Text);
             txtEditLocation.Value = getLocation.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getSalary = new System.Data.SqlClient.SqlCommand();
             getSalary.Connection = localDB;
             getSalary.CommandText = "Select Salary From Job where PostID = @id";
-            getSalary.Parameters.AddWithValue("id", id);
+            getSalary.Parameters.AddWithValue("id", id.Text);
 
             txtEditSalary.Value = getSalary.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDueDate = new System.Data.SqlClient.SqlCommand();
             getDueDate.Connection = localDB;
             getDueDate.CommandText = "Select DueDate From Job where PostID = @id";
-            getDueDate.Parameters.AddWithValue("id", id);
+            getDueDate.Parameters.AddWithValue("id", id.Text);
             txtEditDeadline.Value = getDueDate.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getday = new System.Data.SqlClient.SqlCommand();
             getday.Connection = localDB;
             getday.CommandText = "Select ADayInTheLife From Job where PostID = @id";
-            getday.Parameters.AddWithValue("id", id);
+            getday.Parameters.AddWithValue("id", id.Text);
             txtADay.Value = getday.ExecuteScalar().ToString();
 
 
@@ -427,18 +379,18 @@ public partial class JobPosts : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
         editPost.Connection = localDB;
         editPost.CommandText = "Update Post set Title = @title, PostDescription = @description where PostID = @id";
-        editPost.Parameters.AddWithValue("id", id);
+        editPost.Parameters.AddWithValue("id", id.Text);
         editPost.Parameters.AddWithValue("title", posting.getTitle());
         editPost.Parameters.AddWithValue("description", posting.getDescription());
         editPost.ExecuteNonQuery();
 
-        Job job = new Job(id, HttpUtility.HtmlEncode(txtEditDepartment.Value), HttpUtility.HtmlEncode(txtEditRequirements.Value), HttpUtility.HtmlEncode(txtEditDeadline.Value), HttpUtility.HtmlEncode(txtEditSalary.Value), HttpUtility.HtmlEncode(txtEditResponsibilities.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtADay.Value));
+        Job job = new Job(id.Text, HttpUtility.HtmlEncode(txtEditDepartment.Value), HttpUtility.HtmlEncode(txtEditRequirements.Value), HttpUtility.HtmlEncode(txtEditDeadline.Value), HttpUtility.HtmlEncode(txtEditSalary.Value), HttpUtility.HtmlEncode(txtEditResponsibilities.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtADay.Value));
 
 
         System.Data.SqlClient.SqlCommand editjob = new System.Data.SqlClient.SqlCommand();
         editjob.Connection = localDB;
         editjob.CommandText = "Update Job set Department = @department, Requirements = @requirements, responsibilities = @responsibilities, DueDate = @duedate, Salary = @Salary, PayType = @paytype, JobAddress = @location, ADayInTheLife = @ADay where PostID = @id";
-        editjob.Parameters.AddWithValue("id", id);
+        editjob.Parameters.AddWithValue("id", id.Text);
         editjob.Parameters.AddWithValue("department", job.getDepartment());
         editjob.Parameters.AddWithValue("requirements", job.getReqs());
         editjob.Parameters.AddWithValue("responsibilities", job.getResponsibilities());
@@ -465,7 +417,7 @@ public partial class JobPosts : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand deleteApps = new System.Data.SqlClient.SqlCommand();
             deleteApps.Connection = localDB;
             deleteApps.CommandText = "DELETE FROM App where PostID = @id";
-            deleteApps.Parameters.AddWithValue("id", id);
+            deleteApps.Parameters.AddWithValue("id", id.Text);
             deleteApps.ExecuteNonQuery();
 
         }
@@ -477,14 +429,14 @@ public partial class JobPosts : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand deleteJob = new System.Data.SqlClient.SqlCommand();
         deleteJob.Connection = localDB;
         deleteJob.CommandText = "DELETE FROM Job where PostID = @id";
-        deleteJob.Parameters.AddWithValue("id", id);
+        deleteJob.Parameters.AddWithValue("id", id.Text);
         deleteJob.ExecuteNonQuery();
 
 
         System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
         deletePost.Connection = localDB;
         deletePost.CommandText = "DELETE FROM Post where PostID = @id";
-        deletePost.Parameters.AddWithValue("id", id);
+        deletePost.Parameters.AddWithValue("id", id.Text);
         deletePost.ExecuteNonQuery();
 
         localDB.Close();

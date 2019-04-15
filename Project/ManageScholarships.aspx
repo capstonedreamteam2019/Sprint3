@@ -22,19 +22,19 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
     <form runat="server">
-
-        <section>
-
-
             <div class="main-container">
                 <section>
                     <div class="container">
-                        <div class="row">
-                            <div class="col-auto">
-                                <!-- Button HTML (to Trigger Modal) -->
-                                <a href="#CreateModal" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create a Scholarship</a>
-
-
+                    <div class="col order-md-1">
+                        <h2 class="mb-0">Post a Scholarship</h2>
+                        <span>Edit and manage your scholarship posts on this page.</span>
+                         <div class="media align-items-center my-3">
+                        <div class="row">  
+                        <div class="col-auto">  
+                
+                     <!-- Button HTML (to Trigger Modal) -->
+                    <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create a Scholarship</a>
+    
                                 <br>
                                 <br>
                                 <nav class="nav flex-md-column">
@@ -50,10 +50,7 @@
                                 <div class="card card-sm">
                                     <div class="card-header d-flex bg-secondary justify-content-between align-items-center">
                                         <div>
-                                            <h5>Posted Scholarships</h5>
-                                            <span>Click the Create a Scholarship button to add a Scholarship Post to the list.</span>
-                                            <br>
-                                            <span>You can manage, edit, share, view and remove scholarship posts on this page.</span>
+                                            <h5>Posted Scholarships</h5>                                           
                                         </div>
                                     </div>
 
@@ -116,12 +113,6 @@
                                                                         <asp:Label ID="lblRequirements" Text='<%#Eval("Requirements") %>' runat="server"></asp:Label><br />
                                                                         <asp:Label ID="lblLocation" Text='<%#Eval("Reward") %>' runat="server"></asp:Label><br />
                                                                         <a class="badge badge-success badge-pill mb-2" href="#">Active</a><br />
-                                                                        <div class="text-small">
-                                                                            <ul class="list-inline">
-                                                                                <li class="list-inline-item"><i class="icon-eye"></i>221</li>
-                                                                                <li class="list-inline-item"><i class="icon-check"></i>14</li>
-                                                                            </ul>
-                                                                        </div>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField>

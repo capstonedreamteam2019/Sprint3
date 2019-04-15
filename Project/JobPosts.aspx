@@ -1,40 +1,62 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JobPosts.aspx.cs" Inherits="JobPosts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <script type="text/javascript">
-    function openModal() {
-        $('#myModal3').modal('show');
-    }
-</script>
+     <script type="text/javascript" src="JavaScript.js"></script>
+     <script type="text/javascript">
+    function openModal1() {
+        $('#PreviewModal').modal('show');
+        }
+    function openModal2() {
+        $('#EditModal').modal('show');
+        }
+    function openModal3() {
+        $('#DeleteModal').modal('show');
+        }
+    </script>
 
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+   
 <form runat="server">
 
-    <section>
-        <!--Header section-->
+    <section class="space-sm">
         <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col">
-                    <div class="media align-items-center">
-                        <div class="media-body">
-                            <div class="mb-3">
-                                <h1 class="h2 mb-2">Manage Job Opportunities</h1>
-                                <span>Create job opportunities, view and edit them here.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end of col-->
-                <div class="col-auto">
-                    <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#myModal2" runat="server" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Job Post</a>
-                </div>
+          <div class="row justify-content-between">
+            <div class="col-auto order-md-2 mb-4">
+               <div class="row justify-content-center">
+            <div class="col-auto">
             </div>
-        </div>
+            <!--end of col-->
+          </div>
+            </div>
+            <!--end of col-->
+            <div class="col order-md-1">
+              <h2 class="mb-0">Manage your Job Opportunities</h2>
+              <span>Edit and manage your job postings here.</span>
+              <div class="media align-items-center my-3">
+            
+             <div class="dropdown">
+                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Filter Jobs By
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
+                  <a class="dropdown-item" href="#">Most Recent</a>
+                  <a class="dropdown-item" href="#">Alphabetical</a>
+                  <a class="dropdown-item" href="#">Active</a>
+                  <a class="dropdown-item" href="#">Expired</a>
+                </div>
+              </div>
+        
+            <div class="col-auto">        
+        <!-- Button HTML (to Trigger Modal) -->
+    <a href="#CreateModal" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create a Job Post</a>
+
+
         <!-- Create Job Modal HTML -->
-        <div id="myModal2" class="modal fade">
+        <div id="CreateModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -120,7 +142,7 @@
                                 GridLines="none"
                                 AutoGenerateColumns="False"
                                 ForeColor="#343A40"
-                                OnRowDataBound="setMouseover">
+                                OnRowCommand="GridView1_RowCommand">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
@@ -196,15 +218,21 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>         
                                           <div class="dropdown">
-                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="btnDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="btnDropDown" data-toggle="dropdown" onmouseover="mouseOver" aria-haspopup="true" aria-expanded="false">
                                                     <i class="icon-dots-three-horizontal"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
-                                                    <a class="dropdown-item" href="#myModal3" data-toggle="modal">Preview</a>
-                                                    <a class="dropdown-item" href="#myModal4" data-toggle="modal">Edit</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal">Share</a>
+                                                    <asp:Button
+                                                        Text="Preview"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="btnPreview"
+                                                        runat="server"
+                                                        CommandName="Preview"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
+                                                    <a class="dropdown-item" href="#EditModal" data-toggle="modal">Edit</a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#myModal5" data-toggle="modal">Remove</a>
+                                                    <a class="dropdown-item" href="#DeleteModal" data-toggle="modal">Remove</a>
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -218,34 +246,6 @@
             </div>
             <!--end of container-->
 
-            <div class="row justify-content-center">
-                <div class="col-auto">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true"><i class="icon-chevron-left"></i>
-                                    </span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true"><i class="icon-chevron-right"></i>
-                                    </span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
             <br />
             <br />
         <!--End of Girdview-->
@@ -351,7 +351,7 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>         
                                           <div class="dropdown">
-                                                    <a class="btn btn-success" href="#myModal6" data-toggle="modal">Re-Activate</a>
+                                                    <a class="btn btn-success" href="#ReModal" data-toggle="modal">Re-Activate</a>
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -374,7 +374,7 @@
         
 
        <!-- reactivate Modal HTML -->
-        <div id="myModal6" class="modal fade">
+        <div id="ReModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -393,7 +393,7 @@
 
 
             <!-- Preview Modal HTML -->
-            <div id="myModal3" class="modal fade">
+            <div id="PreviewModal" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -478,7 +478,7 @@
 
 
         <!-- Edit Modal HTML -->
-       <div id="myModal4" class="modal fade">
+       <div id="EditModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -536,7 +536,7 @@
 
 
        <!-- Delete Modal HTML -->
-        <div id="myModal5" class="modal fade">
+        <div id="DeleteModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

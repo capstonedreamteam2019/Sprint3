@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -41,12 +42,108 @@
               </ul>
 
               <ul class="navbar-nav">
-              <a href="app-chat.html"><img alt="Image" src="assets/img/Chat.svg" class="avatar avatar-xs" /></a>
-                  </a>
-                  &nbsp; &nbsp;
-                  <li class="nav-item">
-                   <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow p-lg-0" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img alt="Image" src="assets/img/profile.png" class="avatar avatar-xs" />
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                <form class="form-inline mr-auto w-100 navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+
+            <!-- Nav Item - Alerts -->
+            <li class="nav-item dropdown no-arrow">
+               <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <img alt="Image" src="assets/img/bell.svg" class="avatar avatar-xs" />
+                <!-- Counter - Alerts -->
+                <span class="badge badge-info badge-counter">3</span>
+              </a>
+              <!-- Dropdown - Alerts -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Your Notifications 
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="community-engagement.html">
+                  <div class="mr-3">
+                    <div class="badge badge-info badge-counter">
+                      <h6><span class="badge badge-info badge-counter">5</span></h6>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">April 17, 2019</div>
+                   You have 5 new events in your area your business can attend
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="blog-grid.html">
+                  <div class="mr-3">
+                    <div class="badge badge-info badge-counter">
+                      <h6><span class="badge badge-info badge-counter">3</span></h6>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">April 11, 2019</div>
+                   You have 3 new completed applications to view
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="app-collection-list.html">
+                  <div class="mr-3">
+                    <div class="badge badge-info badge-counter">
+                      <h6><span class="badge badge-info badge-counter">4</span></h6>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">April 9, 2019</div>
+                    You have 4 scholarships about to expire
+                  </div>
+                </a>
+              </div>
+            </li>
+
+            <!-- Nav Item - Messages -->
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="app-chat.html" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <img alt="Image" src="assets/img/Chat.svg" class="avatar avatar-xs" />
+                <!-- Counter - Messages -->
+                <span class="badge badge-info badge-counter">2</span>
+              </a>
+              <!-- Dropdown - Messages -->
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                  Your Messages
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="avatar" src="assets/img/avatar-female-1.jpg" alt="Profile Icon">
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate-bold">Hi there! Please call the main office and ask for Emily Fowler and we can talk about the upcoming career fair.</div>
+                    <div class="small text-gray-500">Harrisonburg High School · Emily Fowler, Sicence Teacher · 58m</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="avatar" src="assets/img/avatar-male-2.jpg" alt="Profile Icon">
+                    <div class="status-indicator"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">Thank you, talk soon.</div>
+                    <div class="small text-gray-500">Charlottesville High School · Daniel Thomas, Guidance Counselor · 1d</div>
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="app-chat.html">Read More Messages</a>
+              </div>
+            </li>
+
+     <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <img alt="Image" src="assets/img/profile.png" class="avatar avatar-xs" />
                   </a>
                   <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="app-profile-social.html">
@@ -83,7 +180,10 @@
         </div>
     </div>
     </div>
-    <section class="space-sm">
+    
+    
+    
+     <section class="space-sm">
         <div class="container">
           <div class="row justify-content-between">
             <div class="col-auto order-md-2 mb-4">
@@ -91,9 +191,9 @@
             <div class="col-auto">
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                   <li class="page-item active"><a class="page-link" href="community-engagement.html"><i class="icon-menu"></i></a>
+                  <li class="page-item active"><a class="page-link" href="community-engagement.html"><i class="icon-grid"></i></a>
                   </li>
-                  <li class="page-item "><a class="page-link" href="community-engagement2.html"><i class="icon-grid"></i></a>
+                  <li class="page-item"><a class="page-link" href="community-engagement2.html"><i class="icon-menu"></i></a>
                   </li>
                 </ul>
               </nav>
@@ -105,22 +205,70 @@
             <div class="col order-md-1">
               <h2 class="mb-0">Engage with your Community</h2>
               <span>Create and view events in your local community.</span>
-            <!--end of col-->
-          </div>
-          <!--end of row-->
+              <div class="media align-items-center my-3">
+            
+             <div class="dropdown">
+                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Filter Events By
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
+                  <a class="dropdown-item" href="#">Your Events</a>
+                  <a class="dropdown-item" href="#">Local Events</a>
+                </div>
+              </div>
+        
+            <div class="col-auto">        
+        <!-- Button HTML (to Trigger Modal) -->
+    <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a>
+    
+    <!-- Modal HTML -->
+    <div id="myModal2" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Create an Event</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+    <label for="exampleFormControlInput1">Company Name:</label>
+    <input type="department" class="form-control" id="exampleFormControlInput1" placeholder="ie. ES Marketing Solutions">
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlInput1">Event Title:</label>
+    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="ie. Shadow Day">
+  </div>
+     <div class="form-group">
+    <label for="exampleFormControlInput1">Date of Event:</label>
+    <input type="Job Salary" class="form-control" id="exampleFormControlInput1">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Event Location:</label>
+    <input type="Job Salary" class="form-control" id="exampleFormControlInput1">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Event Description:</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlInput1">Last Updated On:</label>
+    <input type="Last Updated" class="form-control" id="exampleFormControlInput1">
+  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success">Create Event</button>
+                </div>
+            </div>
         </div>
-        <!--end of container-->
+    </div>
+      
       </section>
       <!--end of section-->
-      
-     <section class="flush-with-above">
+      <section class="flush-with-above">
         <div class="container">
           <div class="row">
             <div class="col">
-    <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a>
-			<br>
-			<br>
-            <h5>Your Events</h5>
               <table class="table table-hover align-items-center table-borderless">
                 <thead>
                   <tr>
@@ -142,8 +290,8 @@
                         </div>
                       </div>
                     </th>
-                    <td>04/24/19</td>
-                    <td>Charlottesville, VA</td>
+                    <td>4/24/19</td>
+                    <td>Charlottesville, Virginia</td>
                     <td>
                       <div class="dropdown">
                         <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -151,8 +299,8 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                           <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Share</a>
-    					 <div class="dropdown-divider"></div>
+                               
+     <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Remove</a>
                         </div>
                       </div>
@@ -173,8 +321,8 @@
                         </div>
                       </div>
                     </th>
-                     <td>04/17/19</td>
-                    <td>Charlottesville, VA</td>
+                    <td>4/17/19</td>
+                    <td>Charlottesville, Virginia</td>
                     <td>
                       <div class="dropdown">
                         <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -182,7 +330,6 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                           <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Share</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Remove</a>
                         </div>
@@ -204,8 +351,8 @@
                         </div>
                       </div>
                     </th>
-                      <td>04/05/19</td>
-                    <td>Charlottesville, VA</td>
+                    <td>4/5/19</td>
+                    <td>Charlottesville, Virginia</td>
                     <td>
                       <div class="dropdown">
                         <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -213,7 +360,6 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                           <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Share</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Remove</a>
                         </div>
@@ -224,68 +370,6 @@
                     <th></th>
                     <td></td>
                   </tr>
-                </tbody>
-              </table>
-              
-              
-              
-              <!-- Modal HTML -->
-    <div id="myModal2" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Create an Event</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-    <label for="exampleFormControlInput1">Company Name:</label>
-    <input type="department" class="form-control" id="exampleFormControlInput1" placeholder="ie. Human Resources">
-  </div>
-   <div class="form-group">
-    <label for="exampleFormControlInput1">Event Title:</label>
-    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="ie. Sales Intern">
-  </div>
-     <div class="form-group">
-    <label for="exampleFormControlInput1">Date of Event:</label>
-    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="ie. Richmond, VA">
-  </div>
-     <div class="form-group">
-    <label for="exampleFormControlInput1">Event Location:</label>
-    <input type="Job Salary" class="form-control" id="exampleFormControlInput1">
-  </div>
-  <div class="form-group">
-    <label for="exampleFormControlTextarea1">Event Description:</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  </div>
-   <div class="form-group">
-    <label for="exampleFormControlInput1">Last Updated On:</label>
-    <input type="Last Updated" class="form-control" id="exampleFormControlInput1">
-  </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Create Event</button>
-                </div>
-            </div>
-        </div>
-    </div>
-			</section>
-
-  <section>
-        <div class="container">
-          <div class="row">
-            <div class="col">
-                 <h5>Local Events</h5>
-              <table class="table table-hover align-items-center table-borderless">
-                <thead>
-                  <tr>
-                    <th scope="col">Event</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Location</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody>
 
                   <tr class="bg-white">
                     <th scope="row">
@@ -293,21 +377,21 @@
                         <div class="media-body">
                           <span class="h6 mb-0">Charlottesville Day School Job Fair
                           </span>
-                          <span class="text-muted">Last Updated: 04/01/19</span>
+                          <span class="text-muted">Last Updated: 04/1/19</span>
+                          
                         </div>
                       </div>
                     </th>
-                    <td>04/05/19</td>
-                    <td>Charlottesville, VA</td>
+                    <td>4/5/19</td>
+                    <td>Charlottesville, Virginia</td>
                     <td>
                       <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="icon-dots-three-horizontal"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                           <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Share</a>
-    					 <div class="dropdown-divider"></div>
+                          <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Remove</a>
                         </div>
                       </div>
@@ -328,16 +412,15 @@
                         </div>
                       </div>
                     </th>
-                    <td>04/07/19</td>
-                    <td>Charlottesville, VA</td>
+                    <td>4/7/19</td>
+                    <td>Charlottesville, Virginia</td>
                     <td>
                       <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="icon-dots-three-horizontal"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                           <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Share</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Remove</a>
                         </div>
@@ -353,22 +436,21 @@
                     <th scope="row">
                       <div class="media align-items-center">
                         <div class="media-body">
-                          <span class="h6 mb-0">Waynesboro High School Guest Speaker 
+                          <span class="h6 mb-0">Waynesboro High School Guest Speaker
                           </span>
                           <span class="text-muted">Last Updated: 03/28/19</span>
                         </div>
                       </div>
                     </th>
-                    <td>04/13/19</td>
-                    <td>Charlottesville, VA</td>
+                    <td>4/13/19</td>
+                    <td>Charlottesville, Virginia</td>
                     <td>
                       <div class="dropdown">
-                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-6" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="icon-dots-three-horizontal"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                           <a class="dropdown-item" href="#">Edit</a>
-                          <a class="dropdown-item" href="#">Share</a>
                           <div class="dropdown-divider"></div>
                           <a class="dropdown-item" href="#">Remove</a>
                         </div>
@@ -379,29 +461,60 @@
                     <th></th>
                     <td></td>
                   </tr>
+
                 </tbody>
               </table>
+              <div class="row justify-content-center">
+            <div class="col-auto">
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true"><i class="icon-chevron-left"></i>
+                      </span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">3</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true"><i class="icon-chevron-right"></i>
+                      </span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            </div>
             <!--end of col-->
           </div>
           <!--end of row-->
         </div>
         <!--end of container-->
+    
+    
+                          
+                          
+                         
       </section>
       <!--end of section-->
-      
-     <footer class="bg-gray text-light footer-long">
+    <footer class="bg-gray text-light footer-long">
         <div class="container">
           <div class="row">
-            <div class="col-3 col-md-3">
-              <a href="landing-4.html">
+            <div class="col-12 col-md-3">
               <img alt="Image" src="assets/img/W_logo.svg"/>
-              </a>
               <br>
               <br>
               <p>
                 &copy; 2019 Brilliature
               </p>
-       <a href="https://cued-in.com/" target="_blank" class="footer">powered by Cued-In <img alt="Brilliature" src="assets/img/cuedin.svg" /></a>
+       <a href="documentation/changelog.html" class="footer">powered by Cued-In <img alt="Brilliature" src="assets/img/cuedin.svg" /></a>
 
             </div>
             <!--end of col-->
@@ -411,19 +524,19 @@
                   <h6>Brilliature</h6>
                   <ul class="list-unstyled">
                     <li>
-                      <a href="landing-4.html">About Us</a>
+                      <a href="index.html">About Us</a>
                     </li>
                     <li>
-                      <a href="landing-4.html">How it Works</a>
+                      <a href="pages-landing.html">How it Works</a>
                     </li>
                     <li>
-                      <a href="landing-4.html">Subscriptions</a>
+                      <a href="pages-app.html">Testimonials</a>
                     </li>
                     <li>
-                      <a href="landing-4.html">FAQ's</a>
+                      <a href="pages-inner.html">FAQ's</a>
                     </li>
                     <li>
-                      <a href="landing-4.html">Contact US</a>
+                      <a href="pages-inner.html">Contact US</a>
                     </li>
                   </ul>
                 </div>
@@ -432,19 +545,22 @@
                   <h6>Dashboard</h6>
                   <ul class="list-unstyled">
                     <li>
-                      <a href="landing-5.html">Manage Job Opportunities</a>
+                      <a href="#">Manage Job Opportunities</a>
                     </li>
                     <li>
-                      <a href="blog-grid.html">View Applications</a>
+                      <a href="#">View Applications</a>
                     </li>
                     <li>
-                      <a href="app-collection-list.html">Post a Scholarship</a>
+                      <a href="#">Post a Scholarship</a>
                     </li>
                     <li>
-                      <a href="landing-5.html">Community Engagement</a>
+                      <a href="#">Community Engagement</a>
                     </li>
                     <li>
-                      <a href="landing-5.html">Insights</a>
+                      <a href="#">???</a>
+                    </li>
+                    <li>
+                      <a href="#">Insights</a>
                     </li>
                   </ul>
                 </div>
@@ -489,3 +605,5 @@
   </body>
 
 </html>
+app-collection-people-SH.html
+Displaying app-collection-people-SH.html.

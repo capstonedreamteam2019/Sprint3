@@ -26,7 +26,9 @@
               <img alt="Image" src="pages/assets/img/photo-man-diary.jpg" class="bg-image position-absolute opacity-60" />
               <div class="col-12 col-sm-8 col-lg-9 text-center pt-5 pb-5">
                   <a href="Website.aspx">
-                <img alt="Image" src="pages/assets/img/W_logo.svg" class="mb-4 logo-lg" /></a>
+                    <img alt="Image" src="pages/assets/img/W_logo.svg" class="mb-4 logo-lg" />
+                </a>
+                
                 <span class="h4 mb-5">Creating a brilliant future for all. </span>
 
                 <div class="card text-left">
@@ -60,12 +62,21 @@
                   </div>
                   <div class="form-group">
                     <label for="signup-password">Password</label>
-                    <asp:TextBox class="form-control form-control-lg" ID="txtPassword" placeholder="Password" runat="server"></asp:TextBox>
+                    <asp:TextBox class="form-control form-control-lg" type="password" ID="txtPassword" placeholder="Password" runat="server"></asp:TextBox>
                     <small>Password is case sensitive.</small>
+                      <br />
+                      <!-- Show Password option -->
+                      <asp:CheckBox id="pwcheckbox" runat="server"
+                    AutoPostBack="True"
+                    Text="Show password"
+                    TextAlign="Right"/>
+                      <br />
+                      <asp:Label ID="lblStatus" runat="server" Text='' />
+                      
                   </div>
                   
                   <div class="text-center mt-4">
-                   <button onserverclick="LoginButton_Click" runat="server" class="btn btn-lg btn-success btn btn-lg">Login</button>
+                   <a href="LandingPage.aspx" class="btn btn-lg btn-success btn btn-lg" runat="server" onserverclick="LoginButton_Click">Login</a>
                   </div>
                 </form>
                 <div class="text-center">
@@ -99,3 +110,5 @@
 
 </body>
 </html>
+
+

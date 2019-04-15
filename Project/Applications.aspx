@@ -192,7 +192,7 @@
                                                     <a class="dropdown-item" href="#myModal4" data-toggle="modal">View Application</a>
                                                     <a class="dropdown-item" href="#myModal6" data-toggle="modal">Hire Applicant</a>                  
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#myModal5" data-toggle="modal">Remove</a>
+                                                    <a class="dropdown-item" href="#myModal5" data-toggle="modal">Decline Applicant</a>
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -214,40 +214,7 @@
                    
                         <!--End of Gridview-->
                    
-                <br />
-
-            
-                    <div class="col">
-                <div class="row justify-content-center">
-                    <div class="col-auto">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true"><i class="icon-chevron-left"></i>
-                                        </span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true"><i class="icon-chevron-right"></i>
-                                        </span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        </div>
-                                            </div>
-                        </div>
-              
+                    <br />
                     <br />
                     <!--end of col-->
                
@@ -373,9 +340,9 @@
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                                                             <a class="dropdown-item" href="#myModal4" data-toggle="modal">View Application</a>
-                                                            <a class="dropdown-item" href="Messaging.aspx" >Contact Applicant</a>
+                                                            <a class="dropdown-item" href="Messaging.aspx">Contact Applicant</a>
                                                             <div class="dropdown-divider"></div>
-                                                            <a class="dropdown-item" href="#myModal5" data-toggle="modal">Remove</a>
+                                                            <a class="dropdown-item" href="#myModal5" data-toggle="modal">Decline Applicant</a>
                                                         </div>
                                                     </div>
                                                 </ItemTemplate>
@@ -401,7 +368,7 @@
                         <div id="accordion">
                             <div class="card">
                                 <div class="card-header">
-                                    <a class="card-link show" data-toggle="collapse" href="#collapseOne">Deleted Applications
+                                    <a class="card-link show" data-toggle="collapse" href="#collapseOne">Declined Applications
                                 </a>
                                 </div>
                                 <div id="collapseOne" class="collapse" data-parent="#accordion">
@@ -411,7 +378,7 @@
                                         <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
                                             <asp:GridView
                                                 ID="GridView2"
-                                                EmptyDataText="No Deleted Applications"
+                                                EmptyDataText="No Declined Applications"
                                                 Visible="true"
                                                 runat="server"
                                                 GridLines="none"
@@ -586,12 +553,11 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3>Are you sure you want to delete this App?</h3>
+                            <h3>Are you sure you want to decline this Application?</h3>
                             <br />
-                            <h5>You will not be able to get this Application back once deleted.</h5>
                         </div>
                         <div class="modal-body">
-                            <button type="button" class="btn btn-success" runat="server" onserverclick="DeletedApp_Click">Yes, Delete</button>
+                            <button type="button" class="btn btn-success" runat="server" onserverclick="DeletedApp_Click">Yes, Decline</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
                         </div>
                     </div>
