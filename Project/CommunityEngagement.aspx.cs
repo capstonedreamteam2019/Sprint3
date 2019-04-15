@@ -15,7 +15,8 @@ public partial class CommunityEngagement : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-      
+        
+
 
     }
 
@@ -25,4 +26,19 @@ public partial class CommunityEngagement : System.Web.UI.Page
     }
 
 
+
+    protected void Calendar1_SelectionChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void Calendar1_SelectionChanged1(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void Calendar2_SelectionChanged(object sender, EventArgs e)
+    {
+
+    }
 }

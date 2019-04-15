@@ -18,7 +18,7 @@
                     <img alt="Image" src="pages/assets/img/avatar-male-4.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 id="sidebarContactName1" class="mb-0">Daniel Cameron
+                        <h6 id="sidebarContactName1" runat="server" class="mb-0">Daniel Cameron
                           <span class="badge badge-indicator badge-success"></span>
                         </h6>
                         <div>
@@ -35,12 +35,12 @@
                     <img alt="Image" src="pages/assets/img/avatar-female-3.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Mercy Ketteridge</h6>
+                        <h6 id="sidebarContactName2" runat="server" class="mb-0">Mercy Ketteridge</h6>
                         <div>
-                          <small class="text-muted">1 hour ago</small>
+                          <small id="sidebarContactTime2" runat="server" class="text-muted">1 hour ago</small>
                         </div>
                       </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">How should I go about this issue I'm facing</span>
+                      <span id="sidebarContactMessage2" runat="server" class="text-muted text-small col-11 p-0 text-truncate d-block">How should I go about this issue I'm facing</span>
                     </div>
                   </div>
                 </a>
@@ -50,7 +50,7 @@
                     <img alt="Image" src="pages/assets/img/avatar-male-3.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Sven Lansson</h6>
+                        <h6 id="sidebarContactName3" runat="server" class="mb-0">Sven Lansson</h6>
                         <div>
                           <small class="text-muted">2 hours ago</small>
                         </div>
@@ -65,7 +65,7 @@
                     <img alt="Image" src="pages/assets/img/avatar-male-2.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Bart Van Wissen</h6>
+                        <h6 id="sidebarContactName4" runat="server" class="mb-0">Bart Van Wissen</h6>
                         <div>
                           <small class="text-muted">7 hours ago</small>
                         </div>
@@ -80,52 +80,7 @@
                     <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
-                    </div>
-                  </div>
-                </a>
-
-               <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
-                    </div>
-                  </div>
-                </a>
-
-               <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
+                        <h6 id="sidebarContactName5" runat="server" class="mb-0">Vanessa Sampson</h6>
                         <div>
                           <small class="text-muted">7 hours ago</small>
                         </div>

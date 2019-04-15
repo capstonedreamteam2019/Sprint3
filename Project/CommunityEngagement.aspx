@@ -75,7 +75,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li><h2 class="text-center" id="monthName" runat="server">April 2019</h2></li>
+            <li><h2 class="text-center" id="monthName" runat="server"></h2></li>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          	&nbsp;&nbsp;&nbsp;
            <li> <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a></li>
@@ -114,7 +114,7 @@
   <div class="row border border-right-0 border-bottom-0">
     <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
       <h5 class="row align-items-center">
-        <span class="date col-1">31</span>
+        <span id="row1day1" runat="server" class="date col-1">31</span>
         <small class="col d-sm-none text-center text-muted">Sunday</small>
         <span class="col-1"></span>
       </h5>
@@ -122,7 +122,7 @@
     </div>
     <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
       <h5 class="row align-items-center">
-        <span class="date col-1">1</span>
+        <span id="row1day2" runat="server" class="date col-1">1</span>
         <small class="col d-sm-none text-center text-muted">Monday</small>
         <span class="col-1"></span>
       </h5>
@@ -130,7 +130,7 @@
     </div>
     <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
       <h5 class="row align-items-center">
-        <span class="date col-1">2</span>
+        <span id="row1day3" runat="server" class="date col-1">2</span>
         <small class="col d-sm-none text-center text-muted">Tuesday</small>
         <span class="col-1"></span>
       </h5>
@@ -138,7 +138,7 @@
     </div>
     <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
       <h5 class="row align-items-center">
-        <span class="date col-1">3</span>
+        <span id="row1day4" runat="server" class="date col-1">3</span>
         <small class="col d-sm-none text-center text-muted">Wednesday</small>
         <span class="col-1"></span>
       </h5>
@@ -146,7 +146,7 @@
     </div>
     <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
       <h5 class="row align-items-center">
-        <span class="date col-1">4</span>
+        <span id="row1day5" runat="server" class="date col-1">4</span>
         <small class="col d-sm-none text-center text-muted">Thursday</small>
         <span class="col-1"></span>
       </h5>
@@ -154,7 +154,7 @@
     </div>
     <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
       <h5 class="row align-items-center">
-        <span class="date col-1">5</span>
+        <span id="row1day6" runat="server" class="date col-1">5</span>
         <small class="col d-sm-none text-center text-muted">Friday</small>
         <span class="col-1"></span>
       </h5>
@@ -162,7 +162,7 @@
     </div>
     <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
       <h5 class="row align-items-center">
-        <span class="date col-1">6</span>
+        <span id="row1day7" runat="server" class="date col-1">6</span>
         <small class="col d-sm-none text-center text-muted">Saturday</small>
         <span class="col-1"></span>
       </h5>

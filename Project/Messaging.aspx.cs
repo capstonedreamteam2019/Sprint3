@@ -22,19 +22,51 @@ public partial class Messaging : System.Web.UI.Page
 
         localDB.Open();
 
-        //Select User's school name
+        //Select User's school name for main text area
         System.Data.SqlClient.SqlCommand selectSchoolName = new System.Data.SqlClient.SqlCommand();
         selectSchoolName.Connection = localDB;
         selectSchoolName.CommandText = "select schoolName from school s inner join schoolemployee se on s.schoolID = se.schoolID";
         string schoolName = selectSchoolName.ExecuteScalar().ToString();
         mainViewUserName.InnerHtml = schoolName;
 
-        //Select User's First and Last Name
+        //Select User's First and Last Name for main text area
         System.Data.SqlClient.SqlCommand selectUserName = new System.Data.SqlClient.SqlCommand();
         selectUserName.Connection = localDB;
-        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join message1 on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM message1)";
+        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join messages on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM messages)";
         string userName = selectUserName.ExecuteScalar().ToString();
         mainViewSpeakingWith.InnerHtml = "Speaking with: " + userName;
+
+        sidebarContactName1.InnerHtml = schoolName;
+
+        //Select 5 users to be shown on the side in order of messages sent
+        System.Data.SqlClient.SqlCommand selectSidebar2 = new System.Data.SqlClient.SqlCommand();
+        selectSidebar2.Connection = localDB;
+        selectSidebar2.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID - 1) from messages)";
+        string sidebar2 = selectSidebar2.ExecuteScalar().ToString();
+        sidebarContactName2.InnerHtml = sidebar2;
+
+        //Select 5 users to be shown on the side in order of messages sent
+        System.Data.SqlClient.SqlCommand selectSidebar3 = new System.Data.SqlClient.SqlCommand();
+        selectSidebar3.Connection = localDB;
+        selectSidebar3.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID - 2) from messages)";
+        string sidebar3 = selectSidebar3.ExecuteScalar().ToString();
+        sidebarContactName3.InnerHtml = sidebar3;
+
+        //Select 5 users to be shown on the side in order of messages sent
+        System.Data.SqlClient.SqlCommand selectSidebar4 = new System.Data.SqlClient.SqlCommand();
+        selectSidebar4.Connection = localDB;
+        selectSidebar4.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID - 3) from messages)";
+        string sidebar4 = selectSidebar4.ExecuteScalar().ToString();
+        sidebarContactName4.InnerHtml = sidebar4;
+
+        //Select 5 users to be shown on the side in order of messages sent
+        System.Data.SqlClient.SqlCommand selectSidebar5 = new System.Data.SqlClient.SqlCommand();
+        selectSidebar5.Connection = localDB;
+        selectSidebar5.CommandText = "select schoolName from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages m on u.userID = m.messageToID and messageid = (select max(messageID - 4) from messages)";
+        string sidebar5 = selectSidebar5.ExecuteScalar().ToString();
+        sidebarContactName5.InnerHtml = sidebar5;
+
+
     }
 
     protected void SendButton_OnClick(object sender, EventArgs e)
@@ -59,7 +91,7 @@ public partial class Messaging : System.Web.UI.Page
         Message newMessage = new Message(6, 1, message, DateTime.Now);
 
         //Insert data into database
-        insertMessage.CommandText = "insert into [Message1] ([MessageToID], [MessageFromID], [MessageBody], [LastUpdated])" +
+        insertMessage.CommandText = "insert into [Messages] ([MessageToID], [MessageFromID], [MessageBody], [LastUpdated])" +
             "values (@to, @from, @body, @lastUpdated)";
 
         insertMessage.Parameters.Add(new SqlParameter("to", newMessage.getToID()));
