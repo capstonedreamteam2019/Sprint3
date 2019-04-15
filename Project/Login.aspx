@@ -25,7 +25,10 @@
             <div class="col-12 col-lg-6 fullwidth-split-image bg-dark d-flex justify-content-center align-items-center">
               <img alt="Image" src="pages/assets/img/photo-man-diary.jpg" class="bg-image position-absolute opacity-60" />
               <div class="col-12 col-sm-8 col-lg-9 text-center pt-5 pb-5">
-                <img alt="Image" src="pages/assets/img/W_logo.svg" class="mb-4 logo-lg" />
+                  <a href="Website.aspx">
+                    <img alt="Image" src="pages/assets/img/W_logo.svg" class="mb-4 logo-lg" />
+                </a>
+                
                 <span class="h4 mb-5">Creating a brilliant future for all. </span>
 
                 <div class="card text-left">

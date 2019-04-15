@@ -21,27 +21,40 @@
    
 <form runat="server">
 
-    <section>
-        <!--Header section-->
+    <section class="space-sm">
         <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col">
-                    <div class="media align-items-center">
-                        <div class="media-body">
-                            <div class="mb-3">
-                                <h1 class="h2 mb-2">Manage Job Opportunities</h1>
-                                <span>Create job opportunities, view and edit them here.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end of col-->
-                <div class="col-auto">
-                    <!-- Button HTML (to Trigger Modal) -->
-                    <a href="#CreateModal" runat="server" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Job Post</a>
-                </div>
+          <div class="row justify-content-between">
+            <div class="col-auto order-md-2 mb-4">
+               <div class="row justify-content-center">
+            <div class="col-auto">
             </div>
-        </div>
+            <!--end of col-->
+          </div>
+            </div>
+            <!--end of col-->
+            <div class="col order-md-1">
+              <h2 class="mb-0">Manage your Job Opportunities</h2>
+              <span>Edit and manage your job postings here.</span>
+              <div class="media align-items-center my-3">
+            
+             <div class="dropdown">
+                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Filter Jobs By
+                  <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
+                  <a class="dropdown-item" href="#">Most Recent</a>
+                  <a class="dropdown-item" href="#">Alphabetical</a>
+                  <a class="dropdown-item" href="#">Active</a>
+                  <a class="dropdown-item" href="#">Expired</a>
+                </div>
+              </div>
+        
+            <div class="col-auto">        
+        <!-- Button HTML (to Trigger Modal) -->
+    <a href="#CreateModal" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create a Job Post</a>
+
+
         <!-- Create Job Modal HTML -->
         <div id="CreateModal" class="modal fade">
             <div class="modal-dialog">
@@ -218,7 +231,6 @@
                                                         CommandName="Preview"
                                                         CommandArgument='<%# Container.DataItemIndex %>' />
                                                     <a class="dropdown-item" href="#EditModal" data-toggle="modal">Edit</a>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal">Share</a>
                                                     <div class="dropdown-divider"></div>
                                                     <a class="dropdown-item" href="#DeleteModal" data-toggle="modal">Remove</a>
                                                 </div>
@@ -234,34 +246,6 @@
             </div>
             <!--end of container-->
 
-            <div class="row justify-content-center">
-                <div class="col-auto">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true"><i class="icon-chevron-left"></i>
-                                    </span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true"><i class="icon-chevron-right"></i>
-                                    </span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
             <br />
             <br />
         <!--End of Girdview-->

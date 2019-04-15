@@ -22,7 +22,7 @@
   --secondary: #6c757d;
   --success: #02B875;
   --info: #17a2b8;
-  --warning: #F37821;
+  --warning: #f0ad4e;
   --danger: #d9534f;
   --light: #f8f9fa;
   --dark: #212529;
@@ -1809,31 +1809,27 @@ fieldset:disabled a.btn {
       box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5); }
 
 .btn-warning {
-    color: #fff;
-    background-color: #F37821;
-    border-color: #F37821;
-}
+  color: #212529;
+  background-color: #f0ad4e;
+  border-color: #f0ad4e; }
   .btn-warning:hover {
-    color: #fff;
-    background-color: #aa552b;
-    border-color: #aa552b; }
+    color: #212529;
+    background-color: #ed9d2b;
+    border-color: #ec971f; }
   .btn-warning:focus, .btn-warning.focus {
-    box-shadow: 0 0 0 0.2rem rgba(40, 195, 138, 0.5); }
-    .btn-warning.disabled, .btn-warning:disabled {
-        color: #fff;
-        background-color: #F37821;
-        border-color: #F37821;
-    }
-    .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,
-    .show > .btn-warning.dropdown-toggle {
-        color: #fff;
-        background-color: #018655;
-        border-color: #018655;
-    }
-        .btn-warning:not(:disabled):not(.disabled):active:focus, .btn-warning:not(:disabled):not(.disabled).active:focus,
-        .show > .btn-warning.dropdown-toggle:focus {
-            box-shadow: 0 0 0 0.2rem rgba(40, 195, 138, 0.5);
-        }
+    box-shadow: 0 0 0 0.2rem rgba(209, 153, 72, 0.5); }
+  .btn-warning.disabled, .btn-warning:disabled {
+    color: #212529;
+    background-color: #f0ad4e;
+    border-color: #f0ad4e; }
+  .btn-warning:not(:disabled):not(.disabled):active, .btn-warning:not(:disabled):not(.disabled).active,
+  .show > .btn-warning.dropdown-toggle {
+    color: #212529;
+    background-color: #ec971f;
+    border-color: #ea9214; }
+    .btn-warning:not(:disabled):not(.disabled):active:focus, .btn-warning:not(:disabled):not(.disabled).active:focus,
+    .show > .btn-warning.dropdown-toggle:focus {
+      box-shadow: 0 0 0 0.2rem rgba(209, 153, 72, 0.5); }
 
 .btn-danger {
   color: #fff;
@@ -3602,7 +3598,7 @@ border-color: #F37821 !important;
 
 .badge-success {
   color: #fff;
-  background-color: #02B875; }
+  background-color: #02b875; }
   a.badge-success:hover, a.badge-success:focus {
     color: #fff;
     background-color: #018655; }

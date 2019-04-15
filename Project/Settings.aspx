@@ -38,7 +38,7 @@
                   <div>
                     <span class="h6">Suggested Users</span>
                   </div>
-                  <a href="#">View all &rsaquo;</a>
+                 
                 </div>
                 <div class="card-body">
                   <ul class="list-unstyled list-spacing-sm">
