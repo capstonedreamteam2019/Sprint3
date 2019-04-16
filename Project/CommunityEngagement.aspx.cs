@@ -41,11 +41,11 @@ public partial class CommunityEngagement : System.Web.UI.Page
         //Select the date of the event
         System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
         selectDate.Connection = localDB;
-        selectDate.CommandText = "select startdate from event";
-        string eventDate = selectEvent.ExecuteScalar().ToString();
+        selectDate.CommandText = "select day(startdate) as dayofmonth from event";
+        string eventDate = selectDate.ExecuteScalar().ToString();
 
 
-        using (SqlDataReader reader = selectEvent.ExecuteReader())
+        using (SqlDataReader reader = selectDate.ExecuteReader())
         {
             while (reader.Read())
             {
@@ -53,16 +53,18 @@ public partial class CommunityEngagement : System.Web.UI.Page
                 for (int i = 0; i < reader.FieldCount; i++)
                 { 
 
-                    string title = reader.GetValue(i).ToString();
-                    e.Cell.Controls.Add(new LiteralControl("<p>" + title + "</p>"));
-
-                    using (SqlDataReader reader2 = selectDate.ExecuteReader())
+                    string date = reader.GetValue(i).ToString();
+                    
+                    for (int j = 0; j < 32; j++)
                     {
-                        if (eventDate.Substring(3,1) == e.Day.DayNumberText)
+                        string dayNumber = j.ToString();
+
+                        if (dayNumber == eventDate)
                         {
-                            e.Cell.Controls.Add(new LiteralControl("<p>" + title + "</p>"));
+                            e.Cell.Controls.Add(new LiteralControl("<p>" + eventName + "</p>"));
                         }
                     }
+                    
                 }
                
             }
