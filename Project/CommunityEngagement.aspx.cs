@@ -35,42 +35,38 @@ public partial class CommunityEngagement : System.Web.UI.Page
         //Select the event
         System.Data.SqlClient.SqlCommand selectEvent = new System.Data.SqlClient.SqlCommand();
         selectEvent.Connection = localDB;
-        selectEvent.CommandText = "select title from post where posttype = 'Event'";
+        selectEvent.CommandText = "select startdate, title from event e inner join post p on e.postid = p.postid";
         string eventName = selectEvent.ExecuteScalar().ToString();
 
         //Select the date of the event
         System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
         selectDate.Connection = localDB;
-        selectDate.CommandText = "select day(startdate) as dayofmonth from event";
+        selectDate.CommandText = "select day(max(startdate)) as dayofmonth from event";
         string eventDate = selectDate.ExecuteScalar().ToString();
 
+        if (e.Day.DayNumberText == eventDate)
 
-        using (SqlDataReader reader = selectDate.ExecuteReader())
-        {
-            while (reader.Read())
-            {
-                
-                for (int i = 0; i < reader.FieldCount; i++)
-                { 
+            e.Cell.Controls.Add(new LiteralControl("<p>" + eventDate + "</p>"));
 
-                    string date = reader.GetValue(i).ToString();
-                    
-                    for (int j = 0; j < 32; j++)
-                    {
-                        string dayNumber = j.ToString();
+        //using (SqlDataReader reader = selectDate.ExecuteReader())
+        //{
+        //    while (reader.Read())
+        //    {
 
-                        if (dayNumber == eventDate)
-                        {
-                            e.Cell.Controls.Add(new LiteralControl("<p>" + eventName + "</p>"));
-                        }
-                    }
-                    
-                }
-               
-            }
-        }
+        //        for (int i = 0; i < reader.FieldCount; i++)
+        //        {
+        //            string date = reader.GetValue(i).ToString();
+        //            if (e.Day.Date.ToString() == eventDate)
+        //            {
+        //                e.Cell.Controls.Add(new LiteralControl("<p>" + date + "</p>"));
+        //            }
 
-            if (e.Day.DayNumberText == "22")
+        //        }
+
+        //    }
+        //}
+
+        if (e.Day.DayNumberText == "22")
             {
                 e.Cell.Controls.Add(new LiteralControl("<p><font style='background : teal;'>Your event</font></p>"));
                 e.Cell.Controls.Add(new LiteralControl("<p><font style='background : orange;'>Community event</font></p>"));
