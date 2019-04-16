@@ -6,9 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-using Jint;
-using System.IO;
-using Jint.Runtime;
+using System.Text;
 
 public partial class JobPosts : System.Web.UI.Page
 {
@@ -21,8 +19,6 @@ public partial class JobPosts : System.Web.UI.Page
     SqlDataAdapter da2;
     DataTable dt2;
 
-
-
     //Declare static id variable
     static Label id;
 
@@ -30,21 +26,9 @@ public partial class JobPosts : System.Web.UI.Page
     {
 
         if (!IsPostBack)
-        {
-                
-            ////find min post ID
-            //localDB.Open();
-            //System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
-            //getLow.Connection = localDB;
-            //getLow.CommandText = "Select min(PostID) From Post where PostType Like 'Job'";
-            //id = getLow.ExecuteScalar().ToString();
-            //localDB.Close();
-
-
+        {              
             //update all modals with data from database
             showData();
-            LoadPreview();
-            LoadEdit();
         }
     }
 
@@ -78,39 +62,90 @@ public partial class JobPosts : System.Web.UI.Page
         }
     }
 
-    //find row id
+    //Row commands for gridview 1
     protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
         int index = Convert.ToInt32(e.CommandArgument);
         GridViewRow selectedRow = GridView1.Rows[index];
-        id = selectedRow.FindControl("lblID") as Label; 
+        id = selectedRow.FindControl("lblID") as Label;
 
+        StringBuilder builder = new StringBuilder();
 
         if (e.CommandName == "Preview")
         {
             LoadPreview();
-
-            //JintEngine js = new JintEngine();
-
-            //js.Run(new StreamReader("JavaScript.js"));
-
-            var script1 = System.IO.File.ReadAllText("PreviewJS.js");
-            var engine = new Engine().SetValue("log", new Action<object>(Console.WriteLine));
-            engine.Execute(script1);
-
-            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal1();", true);
+            builder.Append("<script language=JavaScript> ShowPreview(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPreview", builder.ToString());
 
         }
-        if (e.CommandName == "Edit")
+        if (e.CommandName == "Change")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal2();", true);
+            LoadEdit();
+            builder.Append("<script language=JavaScript> ShowEdit(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowEdit", builder.ToString());
         }
-        if (e.CommandName == "Delete")
+        if (e.CommandName == "Remove")
         {
-            LoadPreview();
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal3();", true);
-
+            builder.Append("<script language=JavaScript> ShowDelete(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowDelete", builder.ToString());
         }
+ 
+    }
+
+    //Row commands for gridview 2
+    protected void GridView2_RowCommand(Object sender, GridViewCommandEventArgs e)
+    {
+        int index = Convert.ToInt32(e.CommandArgument);
+        GridViewRow selectedRow = GridView2.Rows[index];
+        id = selectedRow.FindControl("lblID") as Label;
+
+        StringBuilder builder = new StringBuilder();
+
+        if (e.CommandName == "Re")
+        {
+            builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
+        }
+    }
+
+    //Close Create popup
+    protected void CloseCreate(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideCreate(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideCreate", builder.ToString());
+    }
+
+    //Close preview popup
+    protected void ClosePreview(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HidePreview(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePreview", builder.ToString());
+    }
+
+    //close edit popup
+    protected void CloseEdit(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideEdit(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideEdit", builder.ToString());
+    }
+
+    //close delete popup
+    protected void CloseDelete(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideDelete(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideDelete", builder.ToString());
+    }
+
+    //close Rectivate popup
+    protected void CloseRe(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideRe(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideRe", builder.ToString());
     }
 
     //Create New Job Post
@@ -221,42 +256,41 @@ public partial class JobPosts : System.Web.UI.Page
             getQualifications.Parameters.AddWithValue("id", id.Text);
             Label4.InnerText = getQualifications.ExecuteScalar().ToString();
 
+            System.Data.SqlClient.SqlCommand getday = new System.Data.SqlClient.SqlCommand();
+            getday.Connection = localDB;
+            getday.CommandText = "Select ADayInTheLife From Job where PostID = @id";
+            getday.Parameters.AddWithValue("id", id.Text);
+            Label5.InnerText = getday.ExecuteScalar().ToString();
+
             System.Data.SqlClient.SqlCommand getDepartment = new System.Data.SqlClient.SqlCommand();
             getDepartment.Connection = localDB;
             getDepartment.CommandText = "Select Department From Job where PostID = @id";
             getDepartment.Parameters.AddWithValue("id", id.Text);
-            Label5.InnerText = getDepartment.ExecuteScalar().ToString();
+            Label6.InnerText = getDepartment.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getLocation = new System.Data.SqlClient.SqlCommand();
             getLocation.Connection = localDB;
             getLocation.CommandText = "Select JobAddress From Job where PostID = @id";
             getLocation.Parameters.AddWithValue("id", id.Text);
-            Label6.InnerText = getLocation.ExecuteScalar().ToString();
+            Label7.InnerText = getLocation.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getSalary = new System.Data.SqlClient.SqlCommand();
             getSalary.Connection = localDB;
             getSalary.CommandText = "Select Salary From Job where PostID = @id";
             getSalary.Parameters.AddWithValue("id", id.Text);
-            Label7.InnerText = getSalary.ExecuteScalar().ToString();
+            Label8.InnerText = getSalary.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getPayType = new System.Data.SqlClient.SqlCommand();
             getPayType.Connection = localDB;
             getPayType.CommandText = "Select PayType From Job where PostID = @id";
             getPayType.Parameters.AddWithValue("id", id.Text);
-            Label8.InnerText = getPayType.ExecuteScalar().ToString();
+            Label9.InnerText = getPayType.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDueDate = new System.Data.SqlClient.SqlCommand();
             getDueDate.Connection = localDB;
             getDueDate.CommandText = "Select DueDate From Job where PostID = @id";
             getDueDate.Parameters.AddWithValue("id", id.Text);
-            Label9.InnerText = getDueDate.ExecuteScalar().ToString();
-
-            System.Data.SqlClient.SqlCommand getday = new System.Data.SqlClient.SqlCommand();
-            getday.Connection = localDB;
-            getday.CommandText = "Select ADayInTheLife From Job where PostID = @id";
-            getday.Parameters.AddWithValue("id", id.Text);
-            Label10.InnerText = getday.ExecuteScalar().ToString();
-
+            Label10.InnerText = getDueDate.ExecuteScalar().ToString();
 
             localDB.Close();
         }
@@ -447,21 +481,16 @@ public partial class JobPosts : System.Web.UI.Page
     {
         localDB.Open();
 
-        System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
-        getLow.Connection = localDB;
-        getLow.CommandText = "Select min(PostID) From DeletePost where PostType Like 'Job'";
-        String ReactivateID = getLow.ExecuteScalar().ToString();
-
         System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
         deletePost.Connection = localDB;
         deletePost.CommandText = "DELETE FROM DeletePost where PostID = @id";
-        deletePost.Parameters.AddWithValue("id", ReactivateID);
+        deletePost.Parameters.AddWithValue("id", id.Text);
         deletePost.ExecuteNonQuery();
 
         System.Data.SqlClient.SqlCommand deleteJob = new System.Data.SqlClient.SqlCommand();
         deleteJob.Connection = localDB;
         deleteJob.CommandText = "DELETE FROM DeleteJob where PostID = @id";
-        deleteJob.Parameters.AddWithValue("id", ReactivateID);
+        deleteJob.Parameters.AddWithValue("id", id.Text);
         deleteJob.ExecuteNonQuery();
 
         localDB.Close();

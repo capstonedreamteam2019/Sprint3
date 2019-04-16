@@ -1,17 +1,65 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JobPosts.aspx.cs" Inherits="JobPosts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-     <script type="text/javascript" src="JavaScript.js"></script>
-     <script type="text/javascript">
-    function openModal1() {
-        $('#PreviewModal').modal('show');
+    <style type="text/css">      
+        #mask
+        {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            z-index: 4;
+            opacity: 0.4;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* first!*/
+            filter: alpha(opacity=40); /* second!*/
+            background-color: gray;
+            display: none;
+            width: 100%;
+            height: 100%;
         }
-    function openModal2() {
-        $('#EditModal').modal('show');
+    </style>
+    <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        //Preview popups
+        function ShowPreview() {
+            $('#mask').show();
+            $('#<%=PreviewPopup.ClientID %>').show();
         }
-    function openModal3() {
-        $('#DeleteModal').modal('show');
+        function HidePreview() {
+            $('#mask').hide();
+            $('#<%=PreviewPopup.ClientID %>').hide();
         }
+
+        //Edit popups
+        function ShowEdit() {
+            $('#mask').show();
+            $('#<%=EditPopup.ClientID %>').show();
+        }
+        function HideEdit() {
+            $('#mask').hide();
+            $('#<%=EditPopup.ClientID %>').hide();
+        }
+       
+        //Delete popups
+        function ShowDelete() {
+            $('#mask').show();
+            $('#<%=DeletePopup.ClientID %>').show();
+        }
+        function HideDelete() {
+            $('#mask').hide();
+            $('#<%=DeletePopup.ClientID %>').hide();
+        }
+
+        //Reactivate popups
+        function ShowRe() {
+            $('#mask').show();
+            $('#<%=RePopup.ClientID %>').show();
+        }
+        function HideRe() {
+            $('#mask').hide();
+            $('#<%=RePopup.ClientID %>').hide();
+        }
+
     </script>
 
 </asp:Content>
@@ -36,17 +84,17 @@
               <h2 class="mb-0">Manage your Job Opportunities</h2>
               <span>Edit and manage your job postings here.</span>
               <div class="media align-items-center my-3">
-            
+
+
              <div class="dropdown">
                 <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Filter Jobs By
                   <span class="sr-only">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
-                  <a class="dropdown-item" href="#">Most Recent</a>
-                  <a class="dropdown-item" href="#">Alphabetical</a>
-                  <a class="dropdown-item" href="#">Active</a>
-                  <a class="dropdown-item" href="#">Expired</a>
+                  <a class="dropdown-item" href="#">Last Updated</a>
+                  <a class="dropdown-item" href="#">Due Date</a>
+                  <a class="dropdown-item" href="#">Department</a>
                 </div>
               </div>
         
@@ -230,9 +278,23 @@
                                                         runat="server"
                                                         CommandName="Preview"
                                                         CommandArgument='<%# Container.DataItemIndex %>' />
-                                                    <a class="dropdown-item" href="#EditModal" data-toggle="modal">Edit</a>
+                                                    <asp:Button
+                                                        Text="Edit"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="Button1"
+                                                        runat="server"
+                                                        CommandName="Change"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#DeleteModal" data-toggle="modal">Remove</a>
+                                                    <asp:Button
+                                                        Text="Remove"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="Button2"
+                                                        runat="server"
+                                                        CommandName="Remove"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -273,10 +335,16 @@
                                 runat="server"
                                 GridLines="none"
                                 AutoGenerateColumns="False"
-                                ForeColor="#343A40">
+                                ForeColor="#343A40"
+                                OnRowCommand="GridView2_RowCommand">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                              <asp:Label ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -350,10 +418,14 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>         
-                                          <div class="dropdown">
-                                                    <a class="btn btn-success" href="#ReModal" data-toggle="modal">Re-Activate</a>
-                                                </div>
-                                            </div>
+                                          <asp:Button
+                                                        Text="Re-Activate"
+                                                        type="Button"
+                                                        class="btn btn-success"
+                                                        ID="Button2"
+                                                        runat="server"
+                                                        CommandName="Re"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -371,36 +443,15 @@
         </div>
  	 </div>
         </div>
-        
 
-       <!-- reactivate Modal HTML -->
-        <div id="ReModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Are you sure you want to re-activate this Post?</h3>
-                        <br />
-                        <h5>The post will become public for everyone to view and apply to.</h5>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-success" onserverclick="Reactivate_Click" runat="server">Yes, Re-Activate</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
-                    </div>
-                </div>
+            <!--Preview Pannel-->
+            <div id="mask">
             </div>
-        </div>
-        <!--End reactivate modal-->
-
-
-            <!-- Preview Modal HTML -->
-            <div id="PreviewModal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Preview Application</h4>
-                      </div>
-                        <div class="modal-body">
-                          <div class="form-group">
+      <asp:Panel ID="PreviewPopup" runat="server"  BackColor="White" Height="1500px"
+            Width="700px" Style="z-index:111;background-color: White; position: absolute; left: 22%; top: -12%; 
+            border: outset 2px gray;padding:5px;display:none">
+                    <h1>Preview Job Post</h1>
+                <div class="form-group">
                                 <div class="bg-white space-sm">
                                     <div class="container">
                                         <div class="row">
@@ -423,7 +474,7 @@
                                                     <h5>Minimum Qualifications</h5>
                                                     <label ID="Label4" runat="server" text=""></label>
                                                     <h5>A Day In The Life</h5>
-                                                    <label ID="Label10" runat="server" text=""></label>
+                                                    <label ID="Label5" runat="server" text=""></label>
                                                 </article>
                                                 <hr>
                                             </div>
@@ -431,61 +482,52 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--end of col-->
-                                <div class="card full">
+                        <div class="card full">
                                     <ul class="list-group list-group-flush full">
                                         <li class="list-group-item full">
                                             <div class="d-flex justify-content-between full">
                                                 <div><i class="icon-tools mr-1"></i>Department</div>
-                                                <label id="Label5" runat="server" text=""></label>
+                                                <label id="Label6" runat="server" text=""></label>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="d-flex justify-content-between">
                                                 <div><i class="icon-home mr-1"></i>Location</div>
-                                                <label id="Label6" runat="server"></label>
-                                            </div>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="d-flex justify-content-between">
-                                                <div><i class="icon-calculator mr-1"></i>Salary</div>
                                                 <label id="Label7" runat="server"></label>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="d-flex justify-content-between">
-                                                <div><i class="icon-stopwatch mr-1"></i>Basis</div>
+                                                <div><i class="icon-calculator mr-1"></i>Salary</div>
                                                 <label id="Label8" runat="server"></label>
                                             </div>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="d-flex justify-content-between">
-                                                <div><i class="icon-calendar mr-1"></i>Due Date</div>
+                                                <div><i class="icon-stopwatch mr-1"></i>Basis</div>
                                                 <label id="Label9" runat="server"></label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-between">
+                                                <div><i class="icon-calendar mr-1"></i>Due Date</div>
+                                                <label id="Label10" runat="server"></label>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                       <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                </div>
+                              <button type="button" onserverclick="ClosePreview" class="btn btn-success" runat="server">Close</button>              
+                </asp:Panel>
+            <!--End Preview Pannel-->
+
+            <!--Edit Pannel-->
+            <div id="mask">
             </div>
-        </div>
-        <!--End Preview Modal-->
-
-
-        <!-- Edit Modal HTML -->
-       <div id="EditModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                     <h4 class="modal-title">Edit Job Post</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
+            <asp:Panel ID="EditPopup" runat="server"  BackColor="White" Height="950px"
+                Width="700px" Style="z-index:111;background-color: White; position: absolute; left: 22%; top: -20%; 
+                border: outset 2px gray;padding:5px;display:none">
+                    <h1>Edit Job Post</h1>
+                    <div class="form-group">
                             <div>
                                 <div class="container">
                                     <div class="row justify-content-between">
@@ -523,35 +565,41 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--End Body-->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save Changes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-               </div>
+              <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save Changes</button>
+              <button type="button" onserverclick="CloseEdit" class="btn btn-default" runat="server">Close</button>              
+            </asp:Panel>
+            <!--End edit Pannel-->
+
+            <!--Delete pannel-->
+            <div id="mask">
             </div>
-        </div>
-        <!--End edit modal-->
-
-
-       <!-- Delete Modal HTML -->
-        <div id="DeleteModal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
+            <asp:Panel ID="DeletePopup" runat="server"  BackColor="White" Height="250px"
+                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 30%; top: -20%; 
+                border: outset 2px gray;padding:5px;display:none">
                         <h3>Are you sure you want to delete this Post?</h3>
                         <br />
                         <h5>All applications for this post will also be deleted.</h5>
-                    </div>
-                    <div class="modal-body">
+
                         <button type="button" class="btn btn-success" runat="server" onserverclick="DeletePost_Click">Yes, Delete</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
-                    </div>
-                </div>
+                        <button type="button" onserverclick="CloseDelete" class="btn btn-default" runat="server">Close</button>              
+             </asp:Panel>
+            <!--End delete pannel-->
+
+            <!--Reactivate pannel-->
+            <div id="mask">
             </div>
-        </div>
-        <!--End delete modal-->
+            <asp:Panel ID="RePopup" runat="server"  BackColor="White" Height="250px"
+                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 30%; top: -20%; 
+                border: outset 2px gray;padding:5px;display:none">
+                        <h3>Are you sure you want to re-activate this Post?</h3>
+                        <br />
+                        <h5>The post will become public for everyone to view and apply to.</h5>
+
+                        <button type="button" class="btn btn-success" runat="server" onserverclick="Reactivate_Click">Yes, Re-Activate</button>
+                        <button type="button" onserverclick="CloseRe" class="btn btn-default" runat="server">Close</button>              
+             </asp:Panel>
+            <!--End Reactivate pannel-->
+
     </section>
     <!--end Body section-->
 
