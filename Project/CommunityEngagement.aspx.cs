@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,11 +15,26 @@ public partial class CommunityEngagement : System.Web.UI.Page
     SqlConnection localDB = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localDB"].ConnectionString);
     DataTable socialEvents = new DataTable();
 
+    System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
+
+    static string id = "1";
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
         Calendar1.SelectedDate = DateTime.Now;
         BuildSocialEventTable();
+
+        if (!IsPostBack)
+        {
+            localDB.Open();
+            System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
+            getLow.Connection = localDB;
+            getLow.CommandText = "Select min(PostID) From Post where PostType Like 'Event'";
+            id = getLow.ExecuteScalar().ToString();
+            localDB.Close();
+
+        }
 
     }
 
@@ -109,7 +123,7 @@ public partial class CommunityEngagement : System.Web.UI.Page
         insertPost.CommandText = "Execute InsertPost @BusinessID, @PostType, @Title,@PostDate,@PostDescription,@LastUpdatedBy,@LastUpdated";
 
         //Local Event object
-        Post posting = new Post("Event", title.Value, DateTime.Now, HttpUtility.HtmlEncode(eventdescription.Value), 1, "LeaRios", DateTime.Now);
+        Post posting = new Post(1, "Event", title.Value, HttpUtility.HtmlEncode(eventdescription.Value));
 
         insertPost.Parameters.Add("@BusinessID", SqlDbType.Int).Value = posting.getBusID();
         insertPost.Parameters.Add("@PostType", SqlDbType.VarChar, 30).Value = "Event";
@@ -120,15 +134,28 @@ public partial class CommunityEngagement : System.Web.UI.Page
         insertPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(posting.getLastUpdated());
 
         insertPost.ExecuteNonQuery();
+
+
+        System.Data.SqlClient.SqlCommand selectPostID = new System.Data.SqlClient.SqlCommand();
+        selectPostID.Connection = localDB;
+        selectPostID.CommandText = "Execute InsertEvent @PostID, @EventAddress, @StartDate,@EndDate,@StartTime,@EndTime,@LastUpdatedBy,@LastUpdated";
+
+
+        selectPostID.CommandText = "select max(postID) from Post";
+        string postID = selectPostID.ExecuteScalar().ToString();
+        selectPostID.ExecuteNonQuery();
+
+
         //Local Event object
-        Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(startdate.Value), HttpUtility.HtmlEncode(enddate.Value), HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value), "LeaRios", DateTime.Now);
+        DateTime start = DateTime.Parse(startdate.Value);
+        DateTime end = DateTime.Parse(enddate.Value);
+        Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), start, end, HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value), "LeaRios", DateTime.Now);
 
 
         System.Data.SqlClient.SqlCommand insertEvent = new System.Data.SqlClient.SqlCommand();
         insertEvent.Connection = localDB;
-        insertEvent.CommandText = "Execute InsertPost @BusinessID, @PostType, @Title,@PostDate,@PostDescription,@LastUpdatedBy,@LastUpdated";
-
         insertEvent.CommandText = "Execute InsertEvent @PostID, @EventAddress, @StartDate,@EndDate,@StartTime,@EndTime,@LastUpdatedBy,@LastUpdated";
+
 
         insertEvent.Parameters.Add("@PostId", SqlDbType.Int).Value = HttpUtility.HtmlEncode(events.getPostingID());
         insertEvent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = HttpUtility.HtmlEncode(events.getLocation());
@@ -145,4 +172,3 @@ public partial class CommunityEngagement : System.Web.UI.Page
 
 }
 
-}

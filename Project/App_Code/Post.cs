@@ -10,7 +10,7 @@ public class Post
     private string type;
     private string title;
     private string postDate;
-    private string description;   
+    private string description;
     private string lastUpdatedBy;
     private string lastUpdated;
 
@@ -20,7 +20,7 @@ public class Post
         setType(type);
         setTitle(title);
         setPostDate();
-        setDescription(description);      
+        setDescription(description);
         setLastUpdatedBy();
         setLastUpdated();
     }
