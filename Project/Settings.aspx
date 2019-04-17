@@ -120,11 +120,13 @@
                       <br>
                       <div class="form-group">
                     <img alt="Image" src="pages/assets/img/Ed.svg" class="avatar avatar-lg mb-3 mb-md-0" />
+                          <br />
                     <div class="media-body">
+                        <br />
                       <div>
                         <label class="custom-file mb-2" for="file2">
                           <input type="file" id="file2" class="custom-file-input height-0">
-                          <span class="btn btn-primary"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</span>
+                          <span class="btn btn-success"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</span>
                         </label>
                         <div>
                         </div>
@@ -438,7 +440,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <button class="btn btn-success">Add new card</button>
+                    <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Add new card</a>
                   </form>
                 </div>
                 <!--end of col-->
@@ -450,6 +452,45 @@
           </div>
           <br>
           <br>
+        <div id="myModal2" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Payment Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+    <label for="exampleFormControlInput1">Name on Card:</label>
+    <input type="department" class="form-control" id="exampleFormControlInput1">
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlInput1">Card Number:</label>
+    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="**** **** **** ****">
+  </div>
+     <div class="form-group">
+    <label for="exampleFormControlInput1">Expiration Date:</label>
+    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="00/00">
+  </div>
+     <div class="form-group">
+    <label for="exampleFormControlInput1">Security Code:</label>
+    <input type="Job Salary" class="form-control" id="exampleFormControlInput1" placeholder="CVV">
+  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Add card</button>
+                </div>
+            </div>
+        </div>
+    </div>
+          </section>
+          </div>
+          <br>
+          <br>
+
+
+
+    </section>
 </form>
 </asp:Content>
 

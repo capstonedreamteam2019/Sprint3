@@ -62,6 +62,96 @@ public partial class JobPosts : System.Web.UI.Page
         }
     }
 
+    //Alphabetical filter
+    protected void AlphabeticalFilter(object sender, EventArgs e)
+    {
+        //Populate Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID where(PostType like 'Job') ORDER BY title ASC", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populate Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID where(PostType like 'Job') ORDER BY title ASC", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+    }
+
+    //Due Date filter
+    protected void DueDateFilter(object sender, EventArgs e)
+    {
+        //Populate Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID where(PostType like 'Job') ORDER By DueDate", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populate Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID where(PostType like 'Job') ORDER BY DueDate", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+    }
+
+    //last updated
+    protected void LastUpdatedFilter(object sender, EventArgs e)
+    {
+        //Populate Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID where(PostType like 'Job') ORDER By Job.LastUpdated", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populate Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID where(PostType like 'Job') ORDER BY DeleteJob.LastUpdated", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+    }
+
     //Row commands for gridview 1
     protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
@@ -106,6 +196,24 @@ public partial class JobPosts : System.Web.UI.Page
             builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
         }
+    }
+
+    //open Create popup
+    protected void openCreate(object sender, EventArgs e)
+    {
+        title.Value = "";
+        description.Value = "";
+        department.Value = "";
+        reqs.Value = "";
+        deadline.Value = "";
+        salary.Value = "";
+        respons.Value = "";
+        location.Value = "";
+        ADayInTheLife.Value = "";
+
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
     }
 
     //Close Create popup
@@ -233,7 +341,27 @@ public partial class JobPosts : System.Web.UI.Page
 
     }
 
-    
+    //Populate create popup
+    protected void Populate_Click(object sender, EventArgs e)
+    {
+        title.Value = "Marketing Associate";
+        description.Value = "Works in a team to create a marketing plan for a client";
+        department.Value = "Marketing";
+        reqs.Value = "3.0 GPA";
+        deadline.Value = "04/20/2019";
+        salary.Value = "50,000";
+        respons.Value = "Responsible for maintaining a good relationship with the client";
+        yearly.Checked = true;
+        location.Value = "Arlington, Va";
+        ADayInTheLife.Value = "9 to 5 job";
+
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
+
+    }
+
+
     //Load Preview Modal
     protected void LoadPreview()
     {

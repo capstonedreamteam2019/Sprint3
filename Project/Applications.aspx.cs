@@ -76,8 +76,137 @@ public partial class Applications: System.Web.UI.Page
         }
     }
 
-    //Gridview 1 commands
-    protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
+    //Most Recent filter
+    protected void AlphabeticalFilter(object sender, EventArgs e)
+    {
+        //Populates Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY App.LastUpdated", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populates Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT OUTER JOIN Users ON Users.UserID = DeleteApp.UserID LEFT OUTER JOIN Post ON DeleteApp.PostID = Post.PostID ORDER BY DeleteApp.LastUpdated", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+
+        //Populates Gridview 3 = Hired
+        localDB.Open();
+        dt3 = new DataTable();
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY App.LastUpdated", localDB);
+        da3 = new SqlDataAdapter(cmd3);
+        da3.Fill(dt3);
+        localDB.Close();
+        if (dt3.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt3;
+            GridView3.DataBind();
+        }
+    }
+
+    //Last updated filter
+    protected void LastUpdatedFilter(object sender, EventArgs e)
+    {
+        //Populates Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY LastName ASC", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populates Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT OUTER JOIN Users ON Users.UserID = DeleteApp.UserID LEFT OUTER JOIN Post ON DeleteApp.PostID = Post.PostID ORDER BY LastName ASC", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+
+        //Populates Gridview 3 = Hired
+        localDB.Open();
+        dt3 = new DataTable();
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY LastName ASC", localDB);
+        da3 = new SqlDataAdapter(cmd3);
+        da3.Fill(dt3);
+        localDB.Close();
+        if (dt3.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt3;
+            GridView3.DataBind();
+        }
+    }
+
+    //Position filter
+    protected void PositionFilter(object sender, EventArgs e)
+    {
+        //Populates Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY Title", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populates Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT OUTER JOIN Users ON Users.UserID = DeleteApp.UserID LEFT OUTER JOIN Post ON DeleteApp.PostID = Post.PostID ORDER BY Title", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+
+        //Populates Gridview 3 = Hired
+        localDB.Open();
+        dt3 = new DataTable();
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY Title", localDB);
+        da3 = new SqlDataAdapter(cmd3);
+        da3.Fill(dt3);
+        localDB.Close();
+        if (dt3.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt3;
+            GridView3.DataBind();
+        }
+    }
+
+        //Gridview 1 commands
+        protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
         int index = Convert.ToInt32(e.CommandArgument);
         GridViewRow selectedRow = GridView1.Rows[index];
@@ -122,6 +251,7 @@ public partial class Applications: System.Web.UI.Page
         }
         if (e.CommandName == "Re")
         {
+            id = selectedRow.FindControl("lblID") as Label;
             builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
         }      
@@ -290,17 +420,13 @@ public partial class Applications: System.Web.UI.Page
     protected void Reactivate_Click(object sender, EventArgs e)
     {
         try
-        {
-
-        
-        localDB.Open();
-
+        {     
+        localDB.Open();    
         System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
         deletePost.Connection = localDB;
         deletePost.CommandText = "DELETE FROM DeleteApp where AppID = @id";
         deletePost.Parameters.AddWithValue("id", id.Text);
         deletePost.ExecuteNonQuery();       
-
         localDB.Close();
         showData();
         }
@@ -308,6 +434,7 @@ public partial class Applications: System.Web.UI.Page
         {
 
         }
+
     }
 
 

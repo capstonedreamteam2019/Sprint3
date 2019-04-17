@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 public partial class Registration : System.Web.UI.Page
 {
@@ -37,14 +38,16 @@ public partial class Registration : System.Web.UI.Page
                     string password = PasswordHash.HashPassword(HttpUtility.HtmlEncode(txtPassword.Text));
 
                     //Insert into user table
-                    SqlCommand insert = new SqlCommand("Insert INTO Users Values (@UserType, @Email, @UserPassword, @FirstName, @LastName, NULL, NULL, NULL, NULL, @LastUpdatedBy, @LastUpdated)", localDB);
-                    insert.Parameters.Add(new SqlParameter("@UserType", "BusinessEmployee"));
-                    insert.Parameters.Add(new SqlParameter("@Email", HttpUtility.HtmlEncode(txtEmail.Text)));
-                    insert.Parameters.Add(new SqlParameter("@UserPassword",password));
-                    insert.Parameters.Add(new SqlParameter("@FirstName", HttpUtility.HtmlEncode(txtFirstName.Text)));
-                    insert.Parameters.Add(new SqlParameter("@LastName", HttpUtility.HtmlEncode(txtLastName.Text)));
-                    insert.Parameters.Add(new SqlParameter("@LastUpdatedBy", HttpUtility.HtmlEncode(txtFirstName.Text) + " " + HttpUtility.HtmlEncode(txtLastName.Text)));
-                    insert.Parameters.Add(new SqlParameter("@LastUpdated", DateTime.Today));
+                    System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand();
+                    insert.Connection = localDB;
+                    insert.CommandText = "Execute InsertUser @UserType, @Email, @UserPassword, @FirstName, @LastName, NULL, NULL, NULL, NULL, @LastUpdatedBy, @LastUpdated";
+                    insert.Parameters.Add("@UserType", SqlDbType.VarChar, 30).Value = "BusinessEmployee";
+                    insert.Parameters.Add("@Email", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(txtEmail.Text);
+                    insert.Parameters.Add("@UserPassword", SqlDbType.VarChar, 30).Value = password;
+                    insert.Parameters.Add("@FirstName", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(txtFirstName.Text);
+                    insert.Parameters.Add("@LastName", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(txtLastName.Text);
+                    insert.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(txtFirstName.Text) + " " + HttpUtility.HtmlEncode(txtLastName.Text);
+                    insert.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = DateTime.Today;
                     insert.ExecuteNonQuery();
 
 
