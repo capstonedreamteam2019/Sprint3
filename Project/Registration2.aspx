@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Registration.aspx.cs" Inherits="Registration" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Registration2.aspx.cs" Inherits="Registration2" %>
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
 
-  <head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
     <meta charset="utf-8">
     <title>Employee Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,15 +55,14 @@
     height: 6rem;
     line-height: 6rem; }
 
-.active.step-circle2 {
+.active .step-circle2 {
     background: #f37821;
 }
 
     </style>
-  </head>
-
-  <body>
-<form runat="server">
+</head>
+<body>
+    <form runat="server">
     
   <div class="navbar-container">
       <div class="bg-white navbar-light" data-sticky="top">
@@ -88,10 +87,10 @@
             <div class="col-12 col-lg-10">
               <div class="card card-lg">
                 <div class="card-body">
-                    <ul class="nav nav-tab text-center row justify-content-center step-anchor">
+                    <ul class="nav nav-tabs text-center row justify-content-center step-anchor">
                       <li class="col-3 col-md-2 nav-item"><a href="Registration.aspx" class="step-circle2 step-circle2-sm active">1</a>
                       </li>
-                      <li class="col-3 col-md-2 nav-item"><a href="Registration2.aspx" class="step-circle2 step-circle2-sm">2</a>
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration2.aspx" class="step-circle2 step-circle2-sm active">2</a>
                       </li>
                       <li class="col-3 col-md-2 nav-item"><a href="Registration3.aspx" class="step-circle2 step-circle2-sm">3</a>
                       </li>
@@ -99,59 +98,51 @@
                       </li>
                     </ul>
                     <br />
-                    <div class="tab-content">
-                      <div id="Registration2.aspx">
+                      <div id="second">
                         <div class="row justify-content-around align-items-center">
                           <div class="col-8 col-md-6 col-lg-4 mb-4">
-                            <img alt="Image" src="pages/assets/img/ID.svg" class="w-100" />
+                            <img alt="Image" src="pages/assets/img/Complete.svg" class="w-100" />
                           </div>
-
-                              
                           <!--end of col-->
                           <div class="col-12 col-md-6 col-lg-5 mb-4">
                             <div>
-                              <h6 class="title-decorative mb-2">Step 1.</h6>
-                              <h4 class="mb-2">Choose your identification</h4>                              
-    
-                              <div class="form-check">
-  						<asp:RadioButton runat="server" id="RDStudent" value="Student" groupname="RDID" />
- 						 <label class="form-check-label" for="exampleRadios1">Student</label>
-						</div>
-						<div class="form-check">
-                            <asp:RadioButton runat="server" id="RDParent" value="Parent" groupname="RDID" />
- 							 <label class="form-check-label" for="exampleRadios2">Parent</label>
-						</div>
-						<div class="form-check disabled">
-                        <asp:RadioButton runat="server" id="RDTeacher" value="Teacher" groupname="RDID" />
-  							<label class="form-check-label" for="exampleRadios3">Teacher</label>
-							</div>
-							<div class="form-check disabled">
-                        <asp:RadioButton runat="server" id="RDEmployee" value="SchoolEmployee" groupname="RDID" />
-  							<label class="form-check-label" for="exampleRadios3">School</label>
-							</div>
-							<div class="form-check disabled">
-                            <asp:RadioButton runat="server" id="RDEmployer" value="BusinessEmployee" groupname="RDID" />
-  							<label class="form-check-label" for="exampleRadios3">Employer</label>
-							</div>
+                              <h6 class="title-decorative mb-2">Step 2.</h6>
+                             <h4 class="mb-2">Create your account</h4>
+                              <p>Let's begin by creating your account. You can always change these details later.</p>
+          					  <div class="form-group">
+                              <p>Email</p>
+          		              <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" placeholder="Email Address"></asp:TextBox>
+                              <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="group1" ControlToValidate="txtEmail" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>
+                              <p>Password</p> <asp:CheckBox id="pwcheckbox" runat="server" AutoPostBack="True" Text="Show password" TextAlign="Right"/>
+                              <asp:TextBox ID="txtPassword" class="form-control form-control-lg" placeholder="Password" runat="server" type="password" ></asp:TextBox>                                                   
+                              <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="group1" ControlToValidate="txtPassword" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>                             
+                              <p>Confirm Password</p> <asp:CheckBox id="cpwcheckbox" runat="server" AutoPostBack="True" Text="Show password" TextAlign="Right"/> 
+                              <asp:TextBox ID="txtPassword2" type="password" class="form-control form-control-lg" placeholder="Confirm Password" runat="server" ></asp:TextBox>   
+                              <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ValidationGroup="group1" ControlToValidate="txtPassword2" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>
+                              <p>First Name</p>
+                              <asp:TextBox ID="txtFirstName" class="form-control form-control-lg" placeholder="FirstName" runat="server"></asp:TextBox>   
+                              <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="group1" ControlToValidate="txtFirstName" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>
+                              <p>Last Name</p>
+                              <asp:TextBox ID="txtLastName" class="form-control form-control-lg" placeholder="LastName" runat="server"></asp:TextBox>   
+                              <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="group1" ControlToValidate="txtLastName" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>
+                              <p>Company Name</p>
+                              <asp:TextBox ID="txtCompanyName" CssClass="form-control form-control-lg"  placeholder="Company Name" runat="server" />
+                              <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="group1" runat="server" ControlToValidate="txtCompanyName" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>                           
+                                  <asp:Label ID="lblError" runat="server" forecolor="red" Text=""></asp:Label>
+                              </div>
                             </div>
-                              <asp:Button ID="Step1"  class="btn btn-success sw-btn-next" validationgroup="group1" runat="server" onclick="Step1_Click" Text="Next Step" />
-                              <br />
-                              <asp:Label ID="lblError" runat="server" forecolor="red" Text=""></asp:Label>
-
+                              <asp:Button ID="Step2"  class="btn btn-success sw-btn-next" validationgroup="group1" runat="server" onclick="Step2_Click" Text="Next Step" />
                           </div>
                           <!--end of col-->
-                        </div>
+                            </div>
                         <!--end of row-->
-                       </div>
-                     
-                      
-                      
-                       
-        </div>
+                      </div>
+  
+ 
         <!--end of container-->
       </section>
       <!--end of section-->
-    </div>
+
 </form>
 
     <script type="text/javascript" src="pages/assets/js/jquery.min.js"></script>
@@ -167,8 +158,5 @@
 
        <!--End Template-->
 
-
-   
-  </body>
-
+</body>
 </html>
