@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class Community2 : System.Web.UI.Page
+{
 // Declare Connection
     SqlConnection localDB = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localDB"].ConnectionString);
 SqlDataAdapter da;
