@@ -42,7 +42,7 @@
               </form>
               
                 <div id="sidebar" class="list-group list-group-chat list-group-flush">
-                <a href="#r" id="sidebarHighlight1" runat="server" onserverclick="ChangeBack_OnClick" class="list-group-item list-group-item-action active">
+<!--               <a href="#r" id="sidebarHighlight1" runat="server" onserverclick="ChangeBack_OnClick" class="list-group-item list-group-item-action active">
                   <div class="media">
                     <img alt="Image" src="pages/assets/img/avatar-male-4.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
@@ -102,7 +102,81 @@
                       <span class="text-muted text-small col-11 p-0 text-truncate d-block">I'm collecting names for the annual event</span>
                     </div>
                   </div>
-                </a>
+                </a>-->
+
+
+                    <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1">
+                        <AlternatingItemTemplate>
+                            <tr style="">
+                                <td>
+                                    <asp:Label ID="Converations_Label" runat="server" Text='<%# Eval("[Converations:]") %>' />
+                                </td>
+                            </tr>
+                        </AlternatingItemTemplate>
+                        <EditItemTemplate>
+                            <tr style="">
+                                <td>
+                                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
+                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="Converations_TextBox" runat="server" Text='<%# Bind("[Converations:]") %>' />
+                                </td>
+                            </tr>
+                        </EditItemTemplate>
+                        <EmptyDataTemplate>
+                            <table runat="server" style="">
+                                <tr>
+                                    <td>No data was returned.</td>
+                                </tr>
+                            </table>
+                        </EmptyDataTemplate>
+                        <InsertItemTemplate>
+                            <tr style="">
+                                <td>
+                                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
+                                    <asp:Button ID="CancelButton2" runat="server" CommandName="Cancel" Text="Clear" />
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="Converations_TextBox2" runat="server" Text='<%# Bind("[Converations:]") %>' />
+                                </td>
+                            </tr>
+                        </InsertItemTemplate>
+                        <ItemTemplate>
+                            <tr style="">
+                                <td>
+                                    <asp:Label ID="Converations_Label2" runat="server" Text='<%# Eval("[Converations:]") %>' />
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                        <LayoutTemplate>
+                            <table runat="server">
+                                <tr runat="server">
+                                    <td runat="server">
+                                        <table id="itemPlaceholderContainer" runat="server" border="0" style="">
+                                            <tr runat="server" style="">
+                                                <th runat="server">Converations:</th>
+                                            </tr>
+                                            <tr id="itemPlaceholder" runat="server">
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr runat="server">
+                                    <td runat="server" style=""></td>
+                                </tr>
+                            </table>
+                        </LayoutTemplate>
+                        <SelectedItemTemplate>
+                            <tr style="">
+                                <td>
+                                    <asp:Label ID="Converations_Label3" runat="server" Text='<%# Eval("[Converations:]") %>' />
+                                </td>
+                            </tr>
+                        </SelectedItemTemplate>
+                    </asp:ListView>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="select schoolname as 'Converations:' from school s inner join schoolemployee se on s.schoolid = se.schoolid inner join users u on se.userid = u.userid inner join messages m on se.userid = m.messagetoid
+group by schoolname"></asp:SqlDataSource>
 
               </div>
             </div>
@@ -123,15 +197,13 @@
                   <button class="btn btn-outline-secondary" type="button" id="starMessage" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-star"></i>
                   </button>
-                  <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="Button" name="Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-chevron-down"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm" aria-labelledby="Button">
                     <a class="dropdown-item" href="#contactModal" id="contactInfo" data-toggle="modal" runat="server">View Profile</a>
                     <a class="dropdown-item" href="#">Mark as Unread</a>
                     <a class="dropdown-item" href="#">Mute</a>
-                    <a class="dropdown-item" href="#">Active Status</a>
-                	<a class="dropdown-item" href="#">Notifications</a>
                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#" id="clearMessages" runat="server" onserverclick="ClearMessages_OnClick">Clear messages</a>
                     <a class="dropdown-item" href="#" id="deleteMessages" runat="server" onserverclick="DeleteMessages_OnClick">Delete chat</a>

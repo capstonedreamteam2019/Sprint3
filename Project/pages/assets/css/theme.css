@@ -470,14 +470,15 @@ pre {
     .container {
       max-width: 1140px; } }
 
+.cont }
+
 .container-fluid {
   padding-right: 12px;
   padding-left: 12px;
-  margin-right: auto;
-  margin-left: auto; }
+  margin-right: 0px;
+  margin-left: 349px; }
 
-.row {
-  display: flex;
+isplay: flex;
   flex-wrap: wrap;
   margin-right: -12px;
   margin-left: -12px; }

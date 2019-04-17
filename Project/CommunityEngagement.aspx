@@ -103,19 +103,30 @@
           <!--end of row-->
     
       
-  </div>
-         </div>
+
+        
 
 
-            <form runat="server">
-                <asp:Calendar ID="Calendar1" runat="server" CssClass="container-fluid" DayNameFormat="Full" Height="479px" Width="973px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
+            <form cssclass="container-fluid, col-auto" runat="server">
+             
+                      <span aria-hidden="true">
+             
+                <asp:Calendar ID="Calendar1" runat="server" CssClass="container-fluid" DayNameFormat="Full" Height="300px" Width="871px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
                     <DayHeaderStyle CssClass="p-1 text-center, p-1 bg-dark text-white"/>
                     <DayStyle CssClass="date col-1, day col-sm p-2 border border-left-0 border-top-0 text-truncate" />
                     <OtherMonthDayStyle ForeColor="#669999" />
                 </asp:Calendar>
-                <asp:GridView ID="GridView1" runat="server">
+            
+                <asp:GridView ID="GridView1" runat="server" CssClass="flush-with-above" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 </asp:GridView>
+
+    </span>
+
+            <div runat="server" >
+            </div>
             </form>
+                
+
 
 
 
@@ -175,5 +186,7 @@
     <script type="text/javascript" src="assets/js/zoom.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/theme.js"></script>
+
+    </span>
 
     </asp:Content>
