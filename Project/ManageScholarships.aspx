@@ -90,11 +90,9 @@
                                     <br>
                                     <br>
                                     <nav class="nav flex-md-column">
-                                        <a href="#" class="nav-link active">All</a>
-                                        <a href="#" class="nav-link">Most Recent</a>
-                                        <a href="#" class="nav-link">Alphabetical</a>
-                                        <a href="#" class="nav-link">Active</a>
-                                        <a href="#" class="nav-link">Expired</a>
+                                        <a class="dropdown-item" runat="server" onserverclick="DueDateFilter">Due Date</a>
+                                        <a class="dropdown-item" runat="server" onserverclick="RewardFilter">Reward Amount</a>
+                                        <a class="dropdown-item" runat="server" onserverclick="AlphabeticalFilter">Alphabetical</a>
                                     </nav>
                                 </div>
                                 <!--end of col-->
@@ -115,6 +113,7 @@
                                                         <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
                                                             <asp:GridView
                                                                 ID="GridView1"
+                                                                ShowHeader="False"
                                                                 EmptyDataText="No records in database."
                                                                 Visible="true"
                                                                 runat="server"
@@ -122,7 +121,7 @@
                                                                 AutoGenerateColumns="False"
                                                                 ForeColor="#343A40"
                                                                 OnRowCommand="GridView1_RowCommand">
-                                                                <RowStyle CssClass="style" Width="100%" />
+                                                                <RowStyle BorderWidth="1" BorderColor="#D3D3D3" />
                                                                 <Columns>
                                                                     <asp:TemplateField>
                                                                         <ItemTemplate>
@@ -168,7 +167,7 @@
                                                                         <ItemTemplate>
                                                                             <span class="mb-1">
                                                                                 <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span><br />
-                                                                            <asp:Label ID="lblRequirements" Text='<%#Eval("Requirements") %>' runat="server"></asp:Label><br />
+                                                                            Due Date: <asp:Label ID="lblRequirements" Text='<%#Eval("DueDate") %>' runat="server"></asp:Label><br />
                                                                             <asp:Label ID="lblLocation" Text='<%#Eval("Reward") %>' runat="server"></asp:Label><br />
                                                                             <a class="badge badge-success badge-pill mb-2" href="#">Active</a><br />
                                                                         </ItemTemplate>
@@ -269,6 +268,7 @@
                                                                         <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
                                                                             <asp:GridView
                                                                                 ID="GridView2"
+                                                                                ShowHeader="False"
                                                                                 EmptyDataText="No Deleted Posts"
                                                                                 Visible="true"
                                                                                 runat="server"
@@ -287,10 +287,10 @@
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
                                                                                      <asp:TemplateField>
-                                                                        <ItemTemplate>
-                                                                            <asp:Label Visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
-                                                                        </ItemTemplate>
-                                                                    </asp:TemplateField>
+                                                                                        <ItemTemplate>
+                                                                                            <asp:Label Visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
+                                                                                        </ItemTemplate>
+                                                                                    </asp:TemplateField>
                                                                                     <asp:TemplateField>
                                                                                         <ItemTemplate>
                                                                                             <br />
@@ -323,7 +323,7 @@
                                                                                         <ItemTemplate>
                                                                                             <span class="mb-1">
                                                                                                 <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span><br />
-                                                                                            <asp:Label ID="lblRequirements" Text='<%#Eval("Requirements") %>' runat="server"></asp:Label><br />
+                                                                            Due Date: <asp:Label ID="lblRequirements" Text='<%#Eval("DueDate") %>' runat="server"></asp:Label><br />
                                                                                             <asp:Label ID="lblLocation" Text='<%#Eval("Reward") %>' runat="server"></asp:Label><br />
                                                                                             <span class="badge badge-danger badge-pill mb-2">Deleted</span><br />
                                                                                         </ItemTemplate>
@@ -349,32 +349,15 @@
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
                                                                                     <asp:TemplateField>
-                                                                                        <ItemTemplate>
-                                                                                            <div class="dropdown">
-                                                                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="btnDropDown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                                    <i class="icon-dots-three-horizontal"></i>
-                                                                                                </button>
-                                                                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
-                                                                                                    <div class="dropdown">
-                                                                                                        <asp:Button
-                                                                                                            Text="Preview Applicant"
-                                                                                                            type="Button"
-                                                                                                            class="dropdown-item"
-                                                                                                            ID="Button3"
-                                                                                                            runat="server"
-                                                                                                            CommandName="Preview"
-                                                                                                            CommandArgument='<%# Container.DataItemIndex %>' />
+                                                                                        <ItemTemplate>  
                                                                                                         <asp:Button
                                                                                                             Text="Reactivate"
                                                                                                             type="Button"
-                                                                                                            class="dropdown-item"
+                                                                                                            class="btn btn-success"
                                                                                                             ID="btnPreview"
                                                                                                             runat="server"
                                                                                                             CommandName="Re"
                                                                                                             CommandArgument='<%# Container.DataItemIndex %>' />
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
                                                                                 </Columns>
@@ -397,9 +380,9 @@
                                         <!-- Create Modal -->
                                         <div id="mask">
                                 </div>
-                            <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="950px"
-                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 15%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
-                                <h1>Create Scholarship</h1>
+                            <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="600px"
+                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 0%; top: -5%; border: outset 2px gray; padding: 5px; display: none">
+                                <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create Scholarship</h1>
                                                         <div class="form-group">
                                                             <label for="exampleFormControlInput1">Scholarship Title:</label>
                                                             <asp:TextBox ID="txtTitle" class="form-control" placeholder="ie. College Scholarship" runat="server"></asp:TextBox>
@@ -437,9 +420,9 @@
                             <!--Start Preview Popup-->
                              <div id="mask">
                                 </div>
-                            <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="950px"
-                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
-                                <h1>Preview of Scholarship</h1>
+                            <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="600px"
+                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 5%; border: outset 2px gray; padding: 5px; display: none">
+                                <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview of Scholarship</h1>
                                 <div class="form-group">
                                     <section class="bg-white space-sm">
                                         <div class="container">
@@ -458,13 +441,13 @@
                                                 <div class="col-12 col-md-8 col-lg-7">
                                                     <article>
                                                         <h5>Scholarship Description</h5>
-                                                        <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label>
+                                                        <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label><br />
                                                         <h5>Requirements</h5>
-                                                        <asp:Label ID="lblRequirements" runat="server" Text=""></asp:Label>
+                                                        <asp:Label ID="lblRequirements" runat="server" Text=""></asp:Label><br />
                                                         <h5>Reward</h5>
-                                                        <asp:Label ID="lblReward" runat="server" Text=""></asp:Label>
+                                                        <asp:Label ID="lblReward" runat="server" Text=""></asp:Label><br />
                                                         <h5>Due Date</h5>
-                                                        <asp:Label ID="lblScholarshipDueDate" runat="server" Text=""></asp:Label>
+                                                        <asp:Label ID="lblScholarshipDueDate" runat="server" Text=""></asp:Label><br />
                                                     </article>
                                                 </div>
                                             </div>
@@ -479,9 +462,9 @@
                             <!-- Edit popup -->
                             <div id="mask">
                                 </div>
-                            <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="950px"
+                            <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="600px"
                                 Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
-                                <h1>Edit Scholarship</h1>
+                                <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Scholarship</h1>
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Scholarship Title:</label>
                                                 <asp:TextBox ID="txtEditTitle" class="form-control" runat="server"></asp:TextBox>
@@ -512,33 +495,30 @@
                             <!-- Delete popup -->
                             <div id="mask">
                                 </div>
-                            <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="950px"
-                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
-                                <h1>Edit Scholarship</h1>
-                                            <h3>Are you sure you want to delete this Post?</h3>
+<asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="225px"
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: 10%; border: outset 2px gray; padding: 5px; display: none">                                            <h3>Are you sure you want to delete this Post?</h3>
                                             <br />
                                             <h5>All applications for this post will also be deleted.</h5>
                                    
                                             <button type="button" class="btn btn-success" runat="server" onserverclick="DeletePost_Click">Yes, Delete</button>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
+                                            <button type="button" onserverclick="CloseDelete" class="btn btn-default" runat="server">Close</button>
                                    
                              </asp:Panel>
                             <!--End delete popup-->
 
                             <!-- reactivate Modal HTML -->
                             <div id="mask">
-                                </div>
-                            <asp:Panel ID="RePopup" runat="server" BackColor="White" Height="950px"
-                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
-                                <h1>Edit Scholarship</h1>
-                                            <h3>Are you sure you want to re-activate this Scholarship?</h3>
-                                            <br />
-                                            <h5>The Scholarship will become public for everyone to view and apply to.</h5>
-                                                                  
-                    <button type="button" class="btn btn-success" runat="server" onserverclick="Reactivate_Click">Yes, Re-Activate</button>
-                    <button type="button" onserverclick="CloseRe" class="btn btn-default" runat="server">Close</button>
-                             </asp:Panel>
-                            <!--End reactivate modal-->
+                            </div>
+                            <asp:Panel ID="RePopup" runat="server" BackColor="White" Height="250px"
+                                Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: 10%; border: outset 2px gray; padding: 5px; display: none">
+                                <h3 style="font: Helvetica;">Are you sure you want to re-activate this Scholarship?</h3>
+                                <br />
+                                 <h5  style="font: Helvetica;">The post will become public for everyone to view and apply to.</h5>
+
+                            <button type="button" class="btn btn-success" runat="server" onserverclick="Reactivate_Click">Yes, Re-Activate</button>
+                            <button type="button" onserverclick="CloseRe" class="btn btn-default" runat="server">Close</button>
+                        </asp:Panel>
+                        <!--End reactivate modal-->
             </section>
             <!--end of section-->
         </div>

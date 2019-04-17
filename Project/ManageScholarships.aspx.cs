@@ -59,6 +59,94 @@ public partial class ManageScholarships : System.Web.UI.Page
         }
     }
 
+    //Due Date filter
+    protected void DueDateFilter(object sender, EventArgs e)
+    {
+        //Populate Gridview 1 = active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID where(PostType like 'Scholarship') Order By DueDate", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populate gridview 2 = deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteScholarship LEFT JOIN DeletePost ON DeleteScholarship.PostID = DeletePost.PostID where(PostType like 'Scholarship') Order By DueDate", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+    }
+    //Alphabetical filter
+    protected void AlphabeticalFilter(object sender, EventArgs e)
+    {
+        //Populate Gridview 1 = active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID where(PostType like 'Scholarship')  ORDER BY title ASC", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populate gridview 2 = deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteScholarship LEFT JOIN DeletePost ON DeleteScholarship.PostID = DeletePost.PostID where(PostType like 'Scholarship') ORDER BY title ASC", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+    }
+    //Reward filter
+    protected void RewardFilter(object sender, EventArgs e)
+    {
+        //Populate Gridview 1 = active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID where(PostType like 'Scholarship') order by reward ASC", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populate gridview 2 = deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteScholarship LEFT JOIN DeletePost ON DeleteScholarship.PostID = DeletePost.PostID where(PostType like 'Scholarship') order by reward ASC", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+    }
+
     //Row commands for gridview 1
     protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
@@ -106,6 +194,7 @@ public partial class ManageScholarships : System.Web.UI.Page
         }
         if (e.CommandName == "Re")
         {
+            id = selectedRow.FindControl("lblID") as Label;
             builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
         }

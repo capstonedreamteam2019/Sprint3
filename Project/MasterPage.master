@@ -264,9 +264,10 @@
                   </ul>
                 </div>
                 <div class="col-6 col-lg-3">
-                  <img alt="Image" src="pages/assets/img/FB.svg" class="avatar avatar-xs"/>
-                  <img alt="Image" src="pages/assets/img/Insta.svg" class="avatar avatar-xs"/>
-                  <img alt="Image" src="pages/assets/img/Twitter.svg" class="avatar avatar-xs"/>
+                    <a href="https://www.facebook.com/Brilliature-553779785110661/">
+                  <img alt="Image" src="pages/assets/img/FB.svg" class="avatar avatar-xs"/> </a>                     
+                  <a><img alt="Image" src="pages/assets/img/Insta.svg" class="avatar avatar-xs"/></a>
+                  <a><img alt="Image" src="pages/assets/img/Twitter.svg" class="avatar avatar-xs"/></a>
               
                 </div>
                 <!--end of col-->

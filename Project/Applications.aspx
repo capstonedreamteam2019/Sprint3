@@ -95,9 +95,9 @@
                             <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
-                                <a class="dropdown-item" href="#">Most Recent</a>
-                                <a class="dropdown-item" href="#">Position Applied For</a>
-                                <a class="dropdown-item" href="#">Alphabetical</a>
+                                <a class="dropdown-item" runat="server" onserverclick="LastUpdatedFilter">Most Recent</a>
+                                <a class="dropdown-item" runat="server" onserverclick="PositionFilter">Position Applied For</a>
+                                <a class="dropdown-item" runat="server" onserverclick="AlphabeticalFilter">Alphabetical by Last Name</a>
                             </div>
                         </div>
                     </div>
@@ -138,11 +138,24 @@
                                         <ItemTemplate>
                                             <asp:Label  visible="false"  ID="lblUserID" Text='<%#Eval("UserID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    
+                                    </asp:TemplateField>                                   
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar" />
+                                            <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -192,6 +205,13 @@
                                             <br />
                                             <span class="text-muted">Applied For: 
                                             <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -278,7 +298,7 @@
                                                         CommandArgument='<%# Container.DataItemIndex %>' />                 
                                                     <div class="dropdown-divider"></div>
                                                     <asp:Button
-                                                        Text="Decline Application"
+                                                        Text="Decline Applicant"
                                                         type="Button"
                                                         class="dropdown-item"
                                                         ID="Button2"
@@ -338,7 +358,7 @@
                                             </asp:TemplateField>
                                             <asp:TemplateField>
                                                 <ItemTemplate>
-                                                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar" />
+                                                    <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>
@@ -522,7 +542,7 @@
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                            <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar" />
+                                                            <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>
@@ -668,27 +688,27 @@
             <!--Preview Pannel-->
             <div id="mask">
             </div>
-            <asp:Panel ID="PreviewPopup" runat="server"  BackColor="White" Height="700px"
-                Width="700px" Style="z-index:111;background-color: White; position: absolute; left: 22%; top: -12%; 
+            <asp:Panel ID="PreviewPopup" runat="server"  BackColor="White" Height="575px"
+                Width="600px" Style="z-index:111;background-color: White; position: absolute; left: 25%; top: -12%; 
                 border: outset 2px gray;padding:5px;display:none">
-                    <h1>Student Application</h1>
+                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align:"center">Student Application</h1>
                     <div class="container">
                                 <div class="row justify-content-between">
                                     <div class="col-12 col-md-8 col-lg-7">
                                         <article>
-                                            <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar" />
+                                            <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
                                             <h5>Name</h5>
-                                            <label ID="lblTitle1" runat="server" Text=""></label>
+                                            <label ID="lblTitle1" runat="server" Text=""></label><br />
                                             <h5>Email</h5>
-                                            <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label><br />
                                             <h5>Phone Number</h5>
-                                            <asp:Label ID="lblResponsibilities" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblResponsibilities" runat="server" Text=""></asp:Label><br />
                                             <h5>Date Of Birth</h5>
-                                            <asp:Label ID="lblQualifications" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblQualifications" runat="server" Text=""></asp:Label><br />
                                             <h5>School</h5>
-                                            <asp:Label ID="lblDepartment" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblDepartment" runat="server" Text=""></asp:Label><br />
                                             <h5>Year</h5>
-                                            <asp:Label ID="lblLocation" runat="server" Text=""></asp:Label>
+                                            <asp:Label ID="lblLocation" runat="server" Text=""></asp:Label><br /><br />
                                         </article>
                                     </div>
                                 </div>
@@ -700,7 +720,7 @@
             <!-- Delete Pannel -->
             <div id="mask">
             </div>
-            <asp:Panel ID="DeletePopup" runat="server"  BackColor="White" Height="250px"
+            <asp:Panel ID="DeletePopup" runat="server"  BackColor="White" Height="200px"
                 Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 30%; top: -20%; 
                 border: outset 2px gray;padding:5px;display:none">
                         <h3>Are you sure you want to decline this Applicant?</h3>
@@ -728,7 +748,7 @@
             <!--Reactivate pannel-->
             <div id="mask">
             </div>
-            <asp:Panel ID="RePopup" runat="server"  BackColor="White" Height="250px"
+            <asp:Panel ID="RePopup" runat="server"  BackColor="White" Height="200px"
                 Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 30%; top: -20%; 
                 border: outset 2px gray;padding:5px;display:none">
                         <h3>Are you sure you want to re-activate this Applicant?</h3>

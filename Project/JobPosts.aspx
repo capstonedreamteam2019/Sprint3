@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JobPosts.aspx.cs" Inherits="JobPosts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-    <style type="text/css">      
+    <style type="text/css">  
+        .brilliatureFont{
+            font-family:Helvetica;
+        }
         #mask
         {
             position: fixed;
@@ -20,6 +23,16 @@
     <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery-3.3.1.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
+        //Create popups
+        function ShowCreate() {
+            $('#mask').show();
+            $('#<%=CreatePopup.ClientID %>').show();
+        }
+        function HideCreate() {
+            $('#mask').hide();
+            $('#<%=CreatePopup.ClientID %>').hide();
+        }
+
         //Preview popups
         function ShowPreview() {
             $('#mask').show();
@@ -92,86 +105,15 @@
                   <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
-                                    <a class="dropdown-item" href="#">Last Updated</a>
-                                    <a class="dropdown-item" href="#">Due Date</a>
-                                    <a class="dropdown-item" href="#">Department</a>
+                                    <a class="dropdown-item" runat="server" onserverclick="LastUpdatedFilter">Last Updated</a>
+                                    <a class="dropdown-item" runat="server" onserverclick="DueDateFilter">Due Date</a>
+                                    <a class="dropdown-item" runat="server" onserverclick="AlphabeticalFilter">Alphabetical</a>
                                 </div>
                             </div>
 
                             <div class="col-auto">
                                 <!-- Button HTML (to Trigger Modal) -->
-                                <a href="#CreateModal" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create a Job Post</a>
-
-
-                                <!-- Create Job Modal HTML -->
-                                <div id="CreateModal" class="modal fade">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Create a Job Post</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="title">Position Title:</label>
-                                                    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Sales Intern">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="title">Position Description:</label>
-                                                    <input type="text" runat="server" class="form-control" id="description" placeholder="ie. Intern for the summer">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="department">Department:</label>
-                                                    <input type="text" runat="server" class="form-control" id="department" placeholder="ie. Marketing">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="location">Job Location:</label>
-                                                    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. Richmond, VA">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="salary">Salary ($):</label>
-                                                    <input type="text" runat="server" class="form-control" id="salary" placeholder="ie. 10,000">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="payType">Pay Type:</label>
-                                                    <br />
-                                                    <label for="payType">Yearly</label>
-                                                    <input type="radio" runat="server" id="yearly" name="payType" value="yearly">
-
-                                                    <label for="payType">Hourly</label>
-                                                    <input type="radio" runat="server" id="hourly" name="payType" value="hourly">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="deadline">Application Deadline:</label>
-                                                    <input type="text" runat="server" class="form-control" id="deadline" placeholder="3/31/2019">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="respons">Job Responsibilities:</label>
-                                                    <textarea class="form-control" runat="server" id="respons" rows="3"></textarea>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="reqs">Job Requirements:</label>
-                                                    <textarea class="form-control" runat="server" id="reqs" rows="3"></textarea>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="reqs">A Day in the Life:</label>
-                                                    <textarea class="form-control" runat="server" id="ADayInTheLife" rows="3"></textarea>
-                                                </div>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Post</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--end Create Modal-->
+                                <button type="button" class="btn btn-success" runat="server" onserverclick="openCreate"><i class="icon-plus">&nbsp;</i>Create a Job Post</button>                            
         </section>
         <!--end header section-->
 
@@ -443,12 +385,76 @@
                     </div>
                 </div>
 
+                <!-- Create Job Modal HTML -->
+                                <div id="mask">
+                </div>
+                <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="1150px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
+                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create Job Post</h1>
+                                <button type="button" class="btn btn-info" runat="server" onserverclick="Populate_Click">Populate</button>
+                                                <div class="form-group">
+                                                    <label for="title">Position Title:</label>
+                                                    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Sales Intern">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="title">Position Description:</label>
+                                                    <input type="text" runat="server" class="form-control" id="description" placeholder="ie. Intern for the summer">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="department">Department:</label>
+                                                    <input type="text" runat="server" class="form-control" id="department" placeholder="ie. Marketing">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="location">Job Location:</label>
+                                                    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. Richmond, VA">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="salary">Salary ($):</label>
+                                                    <input type="text" runat="server" class="form-control" id="salary" placeholder="ie. 10,000">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="payType">Pay Type:</label>
+                                                    <br />
+                                                    <label for="payType">Yearly</label>
+                                                    <input type="radio" runat="server" id="yearly" name="payType" value="yearly">
+
+                                                    <label for="payType">Hourly</label>
+                                                    <input type="radio" runat="server" id="hourly" name="payType" value="hourly">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="deadline">Application Deadline:</label>
+                                                    <input type="text" runat="server" class="form-control" id="deadline" placeholder="3/31/2019">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="respons">Job Responsibilities:</label>
+                                                    <textarea class="form-control" runat="server" id="respons" rows="3"></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="reqs">Job Requirements:</label>
+                                                    <textarea class="form-control" runat="server" id="reqs" rows="3"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="reqs">A Day in the Life:</label>
+                                                    <textarea class="form-control" runat="server" id="ADayInTheLife" rows="3"></textarea>
+                                                </div>
+
+                                        <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Job</button>
+                                        <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
+                    </asp:Panel>
+                                <!--end Create Modal-->
+
                 <!--Preview Pannel-->
                 <div id="mask">
                 </div>
-                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="1500px"
+                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="800px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -12%; border: outset 2px gray; padding: 5px; display: none">
-                    <h1>Preview Job Post</h1>
+                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Job Post</h1>
                     <div class="form-group">
                         <div class="container">
                             <div class="row">
@@ -475,7 +481,6 @@
                                             <h5>A Day In The Life</h5>
                                             <label id="Label5" runat="server" text=""></label>
                                         </article>
-                                        <hr>
                                     </div>
                                 </div>
                             </div>
@@ -522,9 +527,9 @@
                 <!--Edit Pannel-->
                 <div id="mask">
                 </div>
-                <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="950px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
-                    <h1>Edit Job Post</h1>
+                <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="900px"
+                    Width="600px" Style="z-index: 111; background-color: White; position: absolute; left: 28%; top: -10%; border: outset 2px gray; padding: 5px; display: none">
+                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Job Post</h1>
                     <div class="form-group">
                         <div>
                             <div class="container">
@@ -571,11 +576,11 @@
                 <!--Delete pannel-->
                 <div id="mask">
                 </div>
-                <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="250px"
-                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
-                    <h3>Are you sure you want to delete this Post?</h3>
+                <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="225px"
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -10%; border: outset 2px gray; padding: 5px; display: none">
+                    <h3  style="font: Helvetica;">Are you sure you want to delete this Post?</h3>
                     <br />
-                    <h5>All applications for this post will also be deleted.</h5>
+                    <h5 style="font: Helvetica;">All applications for this post will also be deleted.</h5>
 
                     <button type="button" class="btn btn-success" runat="server" onserverclick="DeletePost_Click">Yes, Delete</button>
                     <button type="button" onserverclick="CloseDelete" class="btn btn-default" runat="server">Close</button>
@@ -586,10 +591,10 @@
                 <div id="mask">
                 </div>
                 <asp:Panel ID="RePopup" runat="server" BackColor="White" Height="250px"
-                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
-                    <h3>Are you sure you want to re-activate this Post?</h3>
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -10%; border: outset 2px gray; padding: 5px; display: none">
+                    <h3 class="brilliatureFont">Are you sure you want to re-activate this Post?</h3>
                     <br />
-                    <h5>The post will become public for everyone to view and apply to.</h5>
+                    <h5 class="brilliatureFont">The post will become public for everyone to view and apply to.</h5>
 
                     <button type="button" class="btn btn-success" runat="server" onserverclick="Reactivate_Click">Yes, Re-Activate</button>
                     <button type="button" onserverclick="CloseRe" class="btn btn-default" runat="server">Close</button>

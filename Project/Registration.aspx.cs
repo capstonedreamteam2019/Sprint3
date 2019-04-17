@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 public partial class Registration : System.Web.UI.Page
 {
@@ -63,6 +64,7 @@ public partial class Registration : System.Web.UI.Page
         if (userType != "")
         {
             localDB.Open();
+
 
 
             System.Data.SqlClient.SqlCommand getUserID = new System.Data.SqlClient.SqlCommand();
