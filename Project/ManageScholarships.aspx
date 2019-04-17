@@ -20,6 +20,16 @@
     <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="Scripts/jquery-3.3.1.js" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
+        //Create popups
+        function ShowCreate() {
+            $('#mask').show();
+            $('#<%=CreatePopup.ClientID %>').show();
+        }
+        function HideCreate() {
+            $('#mask').hide();
+            $('#<%=CreatePopup.ClientID %>').hide();
+        }
+
         //Preview popups
         function ShowPreview() {
             $('#mask').show();
@@ -76,8 +86,7 @@
                                 <div class="col-auto">
 
                                     <!-- Button HTML (to Trigger Modal) -->
-                                    <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create a Scholarship</a>
-
+                                    <button type="button" class="btn btn-success" runat="server" onserverclick="openCreate"><i class="icon-plus">&nbsp;</i>Create a Scholarship</button>
                                     <br>
                                     <br>
                                     <nav class="nav flex-md-column">
@@ -246,8 +255,7 @@
                                         <div id="accordion">
                                             <div class="card">
                                                 <div class="card-header">
-                                                    <a class="card-link show" data-toggle="collapse" href="#collapseOne">Deleted Posts
-      </a>
+                                                    <a class="card-link show" data-toggle="collapse" href="#collapseOne">Deleted Posts</a>
                                                 </div>
                                                 <div id="collapseOne" class="collapse" data-parent="#accordion">
                                                     <div class="card-body">
@@ -387,13 +395,11 @@
 
 
                                         <!-- Create Modal -->
-                                        <div id="CreateModal" class="modal fade">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Create a Scholarship</h4>
-                                                    </div>
-                                                    <div class="modal-body">
+                                        <div id="mask">
+                                </div>
+                            <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="950px"
+                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 15%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
+                                <h1>Create Scholarship</h1>
                                                         <div class="form-group">
                                                             <label for="exampleFormControlInput1">Scholarship Title:</label>
                                                             <asp:TextBox ID="txtTitle" class="form-control" placeholder="ie. College Scholarship" runat="server"></asp:TextBox>
@@ -414,11 +420,10 @@
                                                             <label for="exampleFormControlInput1">Deadline:</label>
                                                             <asp:TextBox ID="txtDeadline" class="form-control" placeholder="ie. 10/12/2019" runat="server"></asp:TextBox>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Scholarship</button>
-                                                    </div>
+                                                        
+                                                        <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Scholarship</button> 
+                                                        <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
+                                     </asp:Panel>
                                                 </div>
                                             </div>
                                         </div>
@@ -433,7 +438,7 @@
                              <div id="mask">
                                 </div>
                             <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="950px"
-                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
+                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
                                 <h1>Preview of Scholarship</h1>
                                 <div class="form-group">
                                     <section class="bg-white space-sm">
@@ -475,7 +480,7 @@
                             <div id="mask">
                                 </div>
                             <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="950px"
-                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
+                                Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
                                 <h1>Edit Scholarship</h1>
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">Scholarship Title:</label>

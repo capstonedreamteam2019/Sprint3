@@ -112,6 +112,14 @@ public partial class ManageScholarships : System.Web.UI.Page
     }
 
     //Close Create popup
+    protected void openCreate(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
+    }
+
+    //Close Create popup
     protected void CloseCreate(object sender, EventArgs e)
     {
         StringBuilder builder = new StringBuilder();
@@ -162,16 +170,15 @@ public partial class ManageScholarships : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand insertPost = new System.Data.SqlClient.SqlCommand();
         insertPost.Connection = localDB;
-        insertPost.CommandText = "insert into [Post] ([BusinessID], [PostType], [Title], [PostDate], [PostDescription], [LastUpdatedBy], [LastUpdated])" +
-            "values (@busId, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated)";
+        insertPost.CommandText = "Execute InsertPost @busId, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated";
 
-        insertPost.Parameters.Add(new SqlParameter("type", post.getType()));
-        insertPost.Parameters.Add(new SqlParameter("title", post.getTitle()));
-        insertPost.Parameters.Add(new SqlParameter("postDate", post.getPostDate()));
-        insertPost.Parameters.Add(new SqlParameter("description", post.getDescription()));
-        insertPost.Parameters.Add(new SqlParameter("busID", post.getBusID()));
-        insertPost.Parameters.Add(new SqlParameter("lastUpdatedBy", post.getLastUpdatedBy()));
-        insertPost.Parameters.Add(new SqlParameter("lastUpdated", post.getLastUpdated()));
+        insertPost.Parameters.Add("@type", SqlDbType.VarChar, 30).Value = post.getType();
+        insertPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = post.getTitle();
+        insertPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = post.getPostDate();
+        insertPost.Parameters.Add("@description", SqlDbType.VarChar, 500).Value = post.getDescription();
+        insertPost.Parameters.Add("@busID", SqlDbType.Int).Value = post.getBusID();
+        insertPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = post.getLastUpdatedBy();
+        insertPost.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = post.getLastUpdated();
 
         insertPost.ExecuteNonQuery();
 
@@ -188,14 +195,14 @@ public partial class ManageScholarships : System.Web.UI.Page
         System.Data.SqlClient.SqlCommand insertScholarship = new System.Data.SqlClient.SqlCommand();
         insertScholarship.Connection = localDB;
 
-        insertScholarship.CommandText = "insert into [Scholarship] values (@postID, @requirements, @reward, @dueDate, @lastUpdatedBy, @lastUpdated)";
+        insertScholarship.CommandText = "Execute InsertScholarship @postID, @requirements, @reward, @dueDate, @lastUpdatedBy, @lastUpdated";
 
-        insertScholarship.Parameters.Add(new SqlParameter("postID", sch.getpostID()));
-        insertScholarship.Parameters.Add(new SqlParameter("requirements", sch.getReqs()));
-        insertScholarship.Parameters.Add(new SqlParameter("reward", sch.getReward()));
-        insertScholarship.Parameters.Add(new SqlParameter("dueDate", sch.getDueDate()));
-        insertScholarship.Parameters.Add(new SqlParameter("lastUpdatedBy", sch.getLastUpdatedBy()));
-        insertScholarship.Parameters.Add(new SqlParameter("lastUpdated", sch.getLastUpdated()));
+        insertScholarship.Parameters.Add("@postID", SqlDbType.Int).Value = sch.getpostID();
+        insertScholarship.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = sch.getReqs();
+        insertScholarship.Parameters.Add("@reward", SqlDbType.VarChar, 30).Value = sch.getReward();
+        insertScholarship.Parameters.Add("@dueDate", SqlDbType.VarChar, 30).Value = sch.getDueDate();
+        insertScholarship.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = sch.getLastUpdatedBy();
+        insertScholarship.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = sch.getLastUpdated();
 
         insertScholarship.ExecuteNonQuery();
 
@@ -305,23 +312,26 @@ public partial class ManageScholarships : System.Web.UI.Page
         localDB.Open();
         System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
         editPost.Connection = localDB;
-        editPost.CommandText = "Update Post set Title = @title, PostDescription = @description where PostID = @id";
-        editPost.Parameters.AddWithValue("id", id.Text);
-        editPost.Parameters.AddWithValue("title", post.getTitle());
-        editPost.Parameters.AddWithValue("description", post.getDescription());
+        editPost.CommandText = "Execute EditPost @id, @title, @PostDate, @description, @lastUpdatedBy, @LastUpdated";
+        editPost.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
+        editPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = post.getTitle();
+        editPost.Parameters.Add("@PostDate", SqlDbType.VarChar, 30).Value = post.getPostDate();
+        editPost.Parameters.Add("@description", SqlDbType.VarChar, 500).Value = post.getDescription();
+        editPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = post.getLastUpdatedBy();
+        editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = post.getLastUpdated();
         editPost.ExecuteNonQuery();
 
         Scholarship sch = new Scholarship(id.Text, HttpUtility.HtmlEncode(txtEditRequirements.Text), HttpUtility.HtmlEncode(txtEditREward.Text), HttpUtility.HtmlEncode(txtEditDueDate.Text));
 
         System.Data.SqlClient.SqlCommand editjob = new System.Data.SqlClient.SqlCommand();
         editjob.Connection = localDB;
-        editjob.CommandText = "Update Scholarship set Requirements = @requirements, Reward = @reward, DueDate = @duedate, LastUpdatedBy = @lastUpdated, LastUpdated = @lastUpdated where PostID = @id";
-        editjob.Parameters.AddWithValue("id", sch.getpostID());
-        editjob.Parameters.AddWithValue("requirements", sch.getReqs());
-        editjob.Parameters.AddWithValue("reward", sch.getReward());
-        editjob.Parameters.AddWithValue("duedate", sch.getDueDate());
-        editjob.Parameters.AddWithValue("lastUpdatedBy", sch.getLastUpdatedBy());
-        editjob.Parameters.AddWithValue("lastUpdated", sch.getLastUpdated());
+        editjob.CommandText = "Execute EditScholarship @id, @requirements, @reward, @duedate, @lastUpdatedBy, @lastUpdated";
+        editjob.Parameters.Add("@id", SqlDbType.Int).Value = sch.getpostID();
+        editjob.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = sch.getReqs();
+        editjob.Parameters.Add("@reward", SqlDbType.VarChar, 30).Value = sch.getReward();
+        editjob.Parameters.Add("@duedate", SqlDbType.VarChar, 30).Value = sch.getDueDate();
+        editjob.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = sch.getLastUpdatedBy();
+        editjob.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = sch.getLastUpdated();
         editjob.ExecuteNonQuery();
 
         localDB.Close();
