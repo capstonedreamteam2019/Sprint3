@@ -27,7 +27,7 @@ public partial class JobPosts : System.Web.UI.Page
 
         if (!IsPostBack)
         {              
-            //update all modals with data from database
+            //update all the gridviews
             showData();
         }
     }

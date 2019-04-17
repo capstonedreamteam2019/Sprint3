@@ -88,7 +88,7 @@
                                                                 <asp:TemplateField>
                                                                     <ItemTemplate>
                                                                         <a href="#" class="mr-4">
-                                                                            <img alt="Image" src="pages/assets/img/Scholarship Logo.jpg" class="rounded avatar avatar-lg" />
+                                                                            <img alt="Image" src="pages/assets/img/ScholarshioLogo.png" class="rounded avatar avatar-lg" />
                                                                         </a>
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>

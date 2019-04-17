@@ -196,7 +196,7 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                              <asp:Label ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
+                                              <asp:Label visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Title">
@@ -251,16 +251,16 @@
                                             <br />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Description">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblDescription" Text='<%#Eval("PostDescription") %>' runat="server"></asp:Label>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
                                              <h1>     </h1>
                                             <br />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Career Cluster">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCluster" Text='<%#Eval("CareerCluster") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -342,7 +342,7 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                              <asp:Label ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
+                                              <asp:Label visible="false" ID ="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -452,7 +452,6 @@
             border: outset 2px gray;padding:5px;display:none">
                     <h1>Preview Job Post</h1>
                 <div class="form-group">
-                                <div class="bg-white space-sm">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col">
@@ -460,7 +459,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                
                                 <!--end of section-->
                                 <div>
                                     <div class="container">
@@ -482,10 +481,10 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="card full">
-                                    <ul class="list-group list-group-flush full">
-                                        <li class="list-group-item full">
-                                            <div class="d-flex justify-content-between full">
+                        <div class="card">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <div class="d-flex justify-content-between">
                                                 <div><i class="icon-tools mr-1"></i>Department</div>
                                                 <label id="Label6" runat="server" text=""></label>
                                             </div>
