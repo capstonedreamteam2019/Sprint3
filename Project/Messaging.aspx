@@ -109,7 +109,7 @@
                         <AlternatingItemTemplate>
                             <tr style="">
                                 <td>
-                                    <asp:Label ID="Converations_Label" runat="server" Text='<%# Eval("[Converations:]") %>' />
+                                    <asp:Label ID="Converations_Label" runat="server" onserverclick="myListBoxk_Click" Text='<%# Eval("[Converations:]") %>' />
                                 </td>
                             </tr>
                         </AlternatingItemTemplate>

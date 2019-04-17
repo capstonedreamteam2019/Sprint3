@@ -107,17 +107,19 @@
         
 
 
-            <form cssclass="container-fluid, col-auto" runat="server">
+            <form cssclass="container-fluid" runat="server">
              
                       <span aria-hidden="true">
              
-                <asp:Calendar ID="Calendar1" runat="server" CssClass="container-fluid" DayNameFormat="Full" Height="300px" Width="871px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
+                <asp:Calendar ID="Calendar1" runat="server" CssClass="col-auto" DayNameFormat="Full" Height="300px" Width="871px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
                     <DayHeaderStyle CssClass="p-1 text-center, p-1 bg-dark text-white"/>
                     <DayStyle CssClass="date col-1, day col-sm p-2 border border-left-0 border-top-0 text-truncate" />
                     <OtherMonthDayStyle ForeColor="#669999" />
+
+<TodayDayStyle BackColor="#B7FBF4" BorderStyle="Solid"></TodayDayStyle>
                 </asp:Calendar>
             
-                <asp:GridView ID="GridView1" runat="server" CssClass="flush-with-above" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                <asp:GridView ID="GridView1" runat="server" CssClass="form-group" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 </asp:GridView>
 
     </span>
@@ -140,33 +142,38 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-    <label for="exampleFormControlInput1">Company Name:</label>
-    <input type="department" class="form-control" id="exampleFormControlInput1" placeholder="ie. Human Resources">
+    <label for="title">Event Title:</label>
+    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
   </div>
    <div class="form-group">
-    <label for="exampleFormControlInput1">Event Title:</label>
-    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="ie. Sales Intern">
+    <label for="startdate">Start Date:</label>
+    <input type="text" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
   </div>
      <div class="form-group">
-    <label for="exampleFormControlInput1">Date of Event:</label>
-    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="ie. Richmond, VA">
+    <label for="enddate">End Date:</label>
+    <input type="text" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
   </div>
      <div class="form-group">
-    <label for="exampleFormControlInput1">Event Location:</label>
-    <input type="Job Salary" class="form-control" id="exampleFormControlInput1">
+    <label for="starttime">Start Time:</label>
+    <input type="text" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
+  </div>
+     <div class="form-group">
+    <label for="endtime">End Time:</label>
+    <input type="text" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
+  </div>
+     <div class="form-group">
+    <label for="location">Event Location:</label>
+    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Event Description:</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="eventdescription">Event Description:</label>
+    <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
   </div>
-   <div class="form-group">
-    <label for="exampleFormControlInput1">Last Updated On:</label>
-    <input type="Last Updated" class="form-control" id="exampleFormControlInput1">
-  </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Create Event</button>
+                    <button type="button" class="btn btn-success" runat="server" onserverclick="EventButton_Click">Create Event</button>
                 </div>
             </div>
         </div>

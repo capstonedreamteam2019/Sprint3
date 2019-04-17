@@ -28,7 +28,7 @@ public partial class CommunityEngagement : System.Web.UI.Page
     {
         
         localDB.Open();
-        SqlDataAdapter sda = new SqlDataAdapter("select StartDate, Title FROM Event e inner join post p on e.postid = p.postid", localDB);
+        SqlDataAdapter sda = new SqlDataAdapter("SELECT startdate, enddate, concat(ltrim(right(convert(varchar(25), starttime, 100), 7)), ' - ', ltrim(right(convert(varchar(25), endtime, 100), 7))) as 'Event Time:', Eventaddress as 'Address:', Title as 'Event Title:', postDescription as 'Event Description:' from event e inner join post p on e.postid=p.postid", localDB);
         DataSet ds = new DataSet();
         sda.Fill(ds);
         socialEvents = ds.Tables[0];
@@ -40,7 +40,7 @@ public partial class CommunityEngagement : System.Web.UI.Page
     {
         System.Data.DataView view = socialEvents.DefaultView;
         view.RowFilter = String.Format(
-                        "StartDate >= #{0}# AND StartDate < #{1}#",
+                        "startdate >= #{0}# AND startdate< #{1}#",
                          Calendar1.SelectedDate.ToShortDateString(),
                           Calendar1.SelectedDate.AddDays(1).ToShortDateString()
                        );
@@ -59,18 +59,10 @@ public partial class CommunityEngagement : System.Web.UI.Page
 
     protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
     {
-        //localDB.Open();
 
-        ////Select the event
-        //System.Data.SqlClient.SqlCommand selectEvent = new System.Data.SqlClient.SqlCommand();
-        //selectEvent.Connection = localDB;
-        //selectEvent.CommandText = "select startdate from event e inner join post p on e.postid = p.postid";
-        //string eventStart = selectEvent.ExecuteScalar().ToString();
-
-        
         DataRow[] rows = socialEvents.Select(
                   String.Format(
-                   "StartDate >= #{0}# AND StartDate < #{1}#",
+                   "startdate >= #{0}# AND startdate < #{1}#",
                      e.Day.Date.ToShortDateString(),
                      e.Day.Date.AddDays(1).ToShortDateString()
                   )
@@ -78,39 +70,13 @@ public partial class CommunityEngagement : System.Web.UI.Page
 
         foreach (DataRow row in rows)
         {
+            
             System.Web.UI.WebControls.Image image;
             image = new System.Web.UI.WebControls.Image();
-            image.ToolTip = row["Title"].ToString();
+            image.ToolTip = row["Event Title:"].ToString();
             e.Cell.BackColor = Color.Wheat;
+            
         }
-
-        ////Select the date of the event
-        //System.Data.SqlClient.SqlCommand selectDate = new System.Data.SqlClient.SqlCommand();
-        //selectDate.Connection = localDB;
-        //selectDate.CommandText = "select day(max(startdate)) as dayofmonth from event";
-        //string eventDate = selectDate.ExecuteScalar().ToString();
-
-        //if (e.Day.DayNumberText == eventDate)
-
-        //    e.Cell.Controls.Add(new LiteralControl("<p>" + eventDate + "</p>"));
-
-        //using (SqlDataReader reader = selectDate.ExecuteReader())
-        //{
-        //    while (reader.Read())
-        //    {
-
-        //        for (int i = 0; i < reader.FieldCount; i++)
-        //        {
-        //            string date = reader.GetValue(i).ToString();
-        //            if (e.Day.Date.ToString() == eventDate)
-        //            {
-        //                e.Cell.Controls.Add(new LiteralControl("<p>" + date + "</p>"));
-        //            }
-
-        //        }
-
-        //    }
-        //}
 
     }
 
@@ -132,4 +98,51 @@ public partial class CommunityEngagement : System.Web.UI.Page
         this.Load += new System.EventHandler(this.Page_Load);
 
     }
+
+
+    protected void EventButton_Click(object sender, EventArgs e)
+    {
+        localDB.Open();
+
+        System.Data.SqlClient.SqlCommand insertPost = new System.Data.SqlClient.SqlCommand();
+        insertPost.Connection = localDB;
+        insertPost.CommandText = "Execute InsertPost @BusinessID, @PostType, @Title,@PostDate,@PostDescription,@LastUpdatedBy,@LastUpdated";
+
+        //Local Event object
+        Post posting = new Post("Event", title.Value, DateTime.Now, HttpUtility.HtmlEncode(eventdescription.Value), 1, "LeaRios", DateTime.Now);
+
+        insertPost.Parameters.Add("@BusinessID", SqlDbType.Int).Value = posting.getBusID();
+        insertPost.Parameters.Add("@PostType", SqlDbType.VarChar, 30).Value = "Event";
+        insertPost.Parameters.Add("@Title", SqlDbType.VarChar, 100).Value = HttpUtility.HtmlEncode(posting.getTitle());
+        insertPost.Parameters.Add("@PostDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(posting.getPostDate());
+        insertPost.Parameters.Add("@PostDescription", SqlDbType.VarChar, 500).Value = HttpUtility.HtmlEncode(posting.getDescription());
+        insertPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 50).Value = HttpUtility.HtmlEncode(posting.getLastUpdatedBy());
+        insertPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(posting.getLastUpdated());
+
+        insertPost.ExecuteNonQuery();
+        //Local Event object
+        Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(startdate.Value), HttpUtility.HtmlEncode(enddate.Value), HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value), "LeaRios", DateTime.Now);
+
+
+        System.Data.SqlClient.SqlCommand insertEvent = new System.Data.SqlClient.SqlCommand();
+        insertEvent.Connection = localDB;
+        insertEvent.CommandText = "Execute InsertPost @BusinessID, @PostType, @Title,@PostDate,@PostDescription,@LastUpdatedBy,@LastUpdated";
+
+        insertEvent.CommandText = "Execute InsertEvent @PostID, @EventAddress, @StartDate,@EndDate,@StartTime,@EndTime,@LastUpdatedBy,@LastUpdated";
+
+        insertEvent.Parameters.Add("@PostId", SqlDbType.Int).Value = HttpUtility.HtmlEncode(events.getPostingID());
+        insertEvent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = HttpUtility.HtmlEncode(events.getLocation());
+        insertEvent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartDate());
+        insertEvent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndDate());
+        insertEvent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartTime());
+        insertEvent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndTime());
+        insertEvent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 50).Value = HttpUtility.HtmlEncode(events.getLastUpdatedBy());
+        insertEvent.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getLastUpdated());
+        insertEvent.ExecuteNonQuery();
+
+        localDB.Close();
+    }
+
+}
+
 }

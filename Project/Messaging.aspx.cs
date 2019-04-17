@@ -35,11 +35,6 @@ public partial class Messaging : System.Web.UI.Page
         string userName = selectUserName.ExecuteScalar().ToString();
         mainViewSpeakingWith.InnerHtml = "Speaking with: " + userName;
 
-        foreach (ListViewItem li in ListView1.Items)
-        {
-            Panel lipp = (Panel)li.FindControl("Panel8");
-            lipp.CssClass = "list-group list-group-chat list-group-flush";
-        }
 
     }
 
@@ -207,5 +202,14 @@ public partial class Messaging : System.Web.UI.Page
     protected void ListView2_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+
+    private void myListBox_Click(object sender, EventArgs e)
+    {
+        ListBox lb = sender as ListBox;
+        if (lb != null)
+        {
+            sidebarContactMessage1.InnerText = ListView1.SelectedValue.ToString();
+        }
     }
 }
