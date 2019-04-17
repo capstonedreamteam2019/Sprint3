@@ -6,9 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-using Jint;
-using System.IO;
-using Jint.Runtime;
+using System.Text;
 
 public partial class JobPosts : System.Web.UI.Page
 {
@@ -21,8 +19,6 @@ public partial class JobPosts : System.Web.UI.Page
     SqlDataAdapter da2;
     DataTable dt2;
 
-
-
     //Declare static id variable
     static Label id;
 
@@ -30,21 +26,9 @@ public partial class JobPosts : System.Web.UI.Page
     {
 
         if (!IsPostBack)
-        {
-                
-            ////find min post ID
-            //localDB.Open();
-            //System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
-            //getLow.Connection = localDB;
-            //getLow.CommandText = "Select min(PostID) From Post where PostType Like 'Job'";
-            //id = getLow.ExecuteScalar().ToString();
-            //localDB.Close();
-
-
-            //update all modals with data from database
+        {              
+            //update all the gridviews
             showData();
-            LoadPreview();
-            LoadEdit();
         }
     }
 
@@ -78,39 +62,90 @@ public partial class JobPosts : System.Web.UI.Page
         }
     }
 
-    //find row id
+    //Row commands for gridview 1
     protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
         int index = Convert.ToInt32(e.CommandArgument);
         GridViewRow selectedRow = GridView1.Rows[index];
-        id = selectedRow.FindControl("lblID") as Label; 
+        id = selectedRow.FindControl("lblID") as Label;
 
+        StringBuilder builder = new StringBuilder();
 
         if (e.CommandName == "Preview")
         {
             LoadPreview();
-
-            //JintEngine js = new JintEngine();
-
-            //js.Run(new StreamReader("JavaScript.js"));
-
-            var script1 = System.IO.File.ReadAllText("PreviewJS.js");
-            var engine = new Engine().SetValue("log", new Action<object>(Console.WriteLine));
-            engine.Execute(script1);
-
-            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal1();", true);
+            builder.Append("<script language=JavaScript> ShowPreview(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPreview", builder.ToString());
 
         }
-        if (e.CommandName == "Edit")
+        if (e.CommandName == "Change")
         {
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal2();", true);
+            LoadEdit();
+            builder.Append("<script language=JavaScript> ShowEdit(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowEdit", builder.ToString());
         }
-        if (e.CommandName == "Delete")
+        if (e.CommandName == "Remove")
         {
-            LoadPreview();
-            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "pop", "openModal3();", true);
-
+            builder.Append("<script language=JavaScript> ShowDelete(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowDelete", builder.ToString());
         }
+ 
+    }
+
+    //Row commands for gridview 2
+    protected void GridView2_RowCommand(Object sender, GridViewCommandEventArgs e)
+    {
+        int index = Convert.ToInt32(e.CommandArgument);
+        GridViewRow selectedRow = GridView2.Rows[index];
+        id = selectedRow.FindControl("lblID") as Label;
+
+        StringBuilder builder = new StringBuilder();
+
+        if (e.CommandName == "Re")
+        {
+            builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
+        }
+    }
+
+    //Close Create popup
+    protected void CloseCreate(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideCreate(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideCreate", builder.ToString());
+    }
+
+    //Close preview popup
+    protected void ClosePreview(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HidePreview(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HidePreview", builder.ToString());
+    }
+
+    //close edit popup
+    protected void CloseEdit(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideEdit(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideEdit", builder.ToString());
+    }
+
+    //close delete popup
+    protected void CloseDelete(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideDelete(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideDelete", builder.ToString());
+    }
+
+    //close Rectivate popup
+    protected void CloseRe(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideRe(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideRe", builder.ToString());
     }
 
     //Create New Job Post
@@ -133,16 +168,15 @@ public partial class JobPosts : System.Web.UI.Page
         Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(description.Value));
 
         //Insert data into database
-        insertPost.CommandText = "insert into [Post] ([BusinessID],[PostType], [Title], [PostDate], [PostDescription], [LastUpdatedBy], [LastUpdated])" +
-            "values (@busID, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated)";
+        insertPost.CommandText = "Execute InsertPost @busID, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated";
 
-        insertPost.Parameters.Add(new SqlParameter("busID", posting.getBusID()));
-        insertPost.Parameters.Add(new SqlParameter("type", posting.getType()));
-        insertPost.Parameters.Add(new SqlParameter("title", posting.getTitle()));
-        insertPost.Parameters.Add(new SqlParameter("postDate", posting.getPostDate()));
-        insertPost.Parameters.Add(new SqlParameter("description", posting.getDescription()));        
-        insertPost.Parameters.Add(new SqlParameter("lastUpdatedBy", posting.getLastUpdatedBy()));
-        insertPost.Parameters.Add(new SqlParameter("lastUpdated", posting.getLastUpdated()));
+        insertPost.Parameters.Add("@busID", SqlDbType.Int).Value = posting.getBusID();
+        insertPost.Parameters.Add("@type", SqlDbType.VarChar, 30).Value = posting.getType();
+        insertPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+        insertPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+        insertPost.Parameters.Add("@description", SqlDbType.VarChar, 500).Value = posting.getDescription();        
+        insertPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+        insertPost.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
 
         insertPost.ExecuteNonQuery();
 
@@ -166,25 +200,36 @@ public partial class JobPosts : System.Web.UI.Page
         //Create Job object
         Job job = new Job(postID, HttpUtility.HtmlEncode(department.Value), HttpUtility.HtmlEncode(reqs.Value), HttpUtility.HtmlEncode(deadline.Value), HttpUtility.HtmlEncode(salary.Value), HttpUtility.HtmlEncode(respons.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(ADayInTheLife.Value));
 
-        insertJob.CommandText = "insert into [Job] values (@postID, @department, @requirements, @dueDate, @salary, @resp, @payType, @location, @ADayInTheLife, @lastUpdatedBy, @lastUpdated)";
+        insertJob.CommandText = "Execute InsertJob @postID, @department, @requirements, @dueDate, @salary, @resp, @payType, @location, @ADayInTheLife, @lastUpdatedBy, @lastUpdated";
 
-        insertJob.Parameters.Add(new SqlParameter("postID", job.getpostID()));
-        insertJob.Parameters.Add(new SqlParameter("department", job.getDepartment()));
-        insertJob.Parameters.Add(new SqlParameter("requirements", job.getReqs()));
-        insertJob.Parameters.Add(new SqlParameter("dueDate", job.getDueDate()));
-        insertJob.Parameters.Add(new SqlParameter("salary", job.getSalary()));
-        insertJob.Parameters.Add(new SqlParameter("resp", job.getResponsibilities()));
-        insertJob.Parameters.Add(new SqlParameter("payType", job.getPayType()));
-        insertJob.Parameters.Add(new SqlParameter("location", job.getLocation()));
-        insertJob.Parameters.Add(new SqlParameter("ADayInTheLife", job.getADay()));
-        insertJob.Parameters.Add(new SqlParameter("lastUpdatedBy", job.getLastUpdatedBy()));
-        insertJob.Parameters.Add(new SqlParameter("lastUpdated", job.getLastUpdated()));
+        insertJob.Parameters.Add("@postID", SqlDbType.Int).Value = job.getpostID();
+        insertJob.Parameters.Add("@department", SqlDbType.VarChar, 30).Value = job.getDepartment();
+        insertJob.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = job.getReqs();
+        insertJob.Parameters.Add("@dueDate", SqlDbType.VarChar, 30).Value = job.getDueDate();
+        insertJob.Parameters.Add("@salary", SqlDbType.VarChar, 30).Value = job.getSalary();
+        insertJob.Parameters.Add("@resp", SqlDbType.VarChar, 50).Value = job.getResponsibilities();
+        insertJob.Parameters.Add("@payType", SqlDbType.VarChar, 6).Value = job.getPayType();
+        insertJob.Parameters.Add("@location", SqlDbType.VarChar, 50).Value = job.getLocation();
+        insertJob.Parameters.Add("@aDayInTheLife", SqlDbType.VarChar, 150).Value = job.getADay();
+        insertJob.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = job.getLastUpdatedBy();
+        insertJob.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = job.getLastUpdated();
 
         insertJob.ExecuteNonQuery();
 
         localDB.Close();
 
         showData();
+
+        title.Value = "";
+        description.Value = "";
+        department.Value = "";
+        reqs.Value = "";
+        deadline.Value = "";
+        salary.Value = "";
+        respons.Value = "";
+        location.Value = "";
+        ADayInTheLife.Value = "";
+
 
     }
 
@@ -221,42 +266,41 @@ public partial class JobPosts : System.Web.UI.Page
             getQualifications.Parameters.AddWithValue("id", id.Text);
             Label4.InnerText = getQualifications.ExecuteScalar().ToString();
 
+            System.Data.SqlClient.SqlCommand getday = new System.Data.SqlClient.SqlCommand();
+            getday.Connection = localDB;
+            getday.CommandText = "Select ADayInTheLife From Job where PostID = @id";
+            getday.Parameters.AddWithValue("id", id.Text);
+            Label5.InnerText = getday.ExecuteScalar().ToString();
+
             System.Data.SqlClient.SqlCommand getDepartment = new System.Data.SqlClient.SqlCommand();
             getDepartment.Connection = localDB;
             getDepartment.CommandText = "Select Department From Job where PostID = @id";
             getDepartment.Parameters.AddWithValue("id", id.Text);
-            Label5.InnerText = getDepartment.ExecuteScalar().ToString();
+            Label6.InnerText = getDepartment.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getLocation = new System.Data.SqlClient.SqlCommand();
             getLocation.Connection = localDB;
             getLocation.CommandText = "Select JobAddress From Job where PostID = @id";
             getLocation.Parameters.AddWithValue("id", id.Text);
-            Label6.InnerText = getLocation.ExecuteScalar().ToString();
+            Label7.InnerText = getLocation.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getSalary = new System.Data.SqlClient.SqlCommand();
             getSalary.Connection = localDB;
             getSalary.CommandText = "Select Salary From Job where PostID = @id";
             getSalary.Parameters.AddWithValue("id", id.Text);
-            Label7.InnerText = getSalary.ExecuteScalar().ToString();
+            Label8.InnerText = getSalary.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getPayType = new System.Data.SqlClient.SqlCommand();
             getPayType.Connection = localDB;
             getPayType.CommandText = "Select PayType From Job where PostID = @id";
             getPayType.Parameters.AddWithValue("id", id.Text);
-            Label8.InnerText = getPayType.ExecuteScalar().ToString();
+            Label9.InnerText = getPayType.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDueDate = new System.Data.SqlClient.SqlCommand();
             getDueDate.Connection = localDB;
             getDueDate.CommandText = "Select DueDate From Job where PostID = @id";
             getDueDate.Parameters.AddWithValue("id", id.Text);
-            Label9.InnerText = getDueDate.ExecuteScalar().ToString();
-
-            System.Data.SqlClient.SqlCommand getday = new System.Data.SqlClient.SqlCommand();
-            getday.Connection = localDB;
-            getday.CommandText = "Select ADayInTheLife From Job where PostID = @id";
-            getday.Parameters.AddWithValue("id", id.Text);
-            Label10.InnerText = getday.ExecuteScalar().ToString();
-
+            Label10.InnerText = getDueDate.ExecuteScalar().ToString();
 
             localDB.Close();
         }
@@ -378,10 +422,13 @@ public partial class JobPosts : System.Web.UI.Page
         localDB.Open();
         System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
         editPost.Connection = localDB;
-        editPost.CommandText = "Update Post set Title = @title, PostDescription = @description where PostID = @id";
-        editPost.Parameters.AddWithValue("id", id.Text);
-        editPost.Parameters.AddWithValue("title", posting.getTitle());
-        editPost.Parameters.AddWithValue("description", posting.getDescription());
+        editPost.CommandText = "Execute EditPost @id, @title, @postDate, @description, @LastUpdatedBy, @LastUpdated";
+        editPost.Parameters.Add("@id", SqlDbType.Int).Value =  id.Text;
+        editPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+        editPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+        editPost.Parameters.Add("@description", SqlDbType.VarChar, 100).Value = posting.getDescription();
+        editPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+        editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
         editPost.ExecuteNonQuery();
 
         Job job = new Job(id.Text, HttpUtility.HtmlEncode(txtEditDepartment.Value), HttpUtility.HtmlEncode(txtEditRequirements.Value), HttpUtility.HtmlEncode(txtEditDeadline.Value), HttpUtility.HtmlEncode(txtEditSalary.Value), HttpUtility.HtmlEncode(txtEditResponsibilities.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtADay.Value));
@@ -389,16 +436,18 @@ public partial class JobPosts : System.Web.UI.Page
 
         System.Data.SqlClient.SqlCommand editjob = new System.Data.SqlClient.SqlCommand();
         editjob.Connection = localDB;
-        editjob.CommandText = "Update Job set Department = @department, Requirements = @requirements, responsibilities = @responsibilities, DueDate = @duedate, Salary = @Salary, PayType = @paytype, JobAddress = @location, ADayInTheLife = @ADay where PostID = @id";
-        editjob.Parameters.AddWithValue("id", id.Text);
-        editjob.Parameters.AddWithValue("department", job.getDepartment());
-        editjob.Parameters.AddWithValue("requirements", job.getReqs());
-        editjob.Parameters.AddWithValue("responsibilities", job.getResponsibilities());
-        editjob.Parameters.AddWithValue("duedate", job.getDueDate());
-        editjob.Parameters.AddWithValue("salary", job.getSalary());
-        editjob.Parameters.AddWithValue("paytype", job.getPayType());
-        editjob.Parameters.AddWithValue("location", job.getLocation());
-        editjob.Parameters.AddWithValue("ADay", job.getADay());
+        editjob.CommandText = "Execute EditJob @id, @department, @requirements, @duedate, @salary, @responsibilities, @paytype, @location, @ADay, @LastUpdatedBy, @LastUpdated";
+        editjob.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
+        editjob.Parameters.Add("@department", SqlDbType.VarChar, 30).Value = job.getDepartment();
+        editjob.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = job.getReqs();
+        editjob.Parameters.Add("@responsibilities", SqlDbType.VarChar, 50).Value = job.getResponsibilities();
+        editjob.Parameters.Add("@duedate", SqlDbType.VarChar, 30).Value = job.getDueDate();
+        editjob.Parameters.Add("@salary", SqlDbType.VarChar, 40).Value = job.getSalary();
+        editjob.Parameters.Add("@paytype", SqlDbType.VarChar, 6).Value = job.getPayType();
+        editjob.Parameters.Add("@location", SqlDbType.VarChar, 50).Value = job.getLocation();
+        editjob.Parameters.Add("@ADay", SqlDbType.VarChar, 150).Value = job.getADay();
+        editjob.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = job.getLastUpdatedBy();
+        editjob.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = job.getLastUpdated();
 
         editjob.ExecuteNonQuery();
 
@@ -447,21 +496,16 @@ public partial class JobPosts : System.Web.UI.Page
     {
         localDB.Open();
 
-        System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
-        getLow.Connection = localDB;
-        getLow.CommandText = "Select min(PostID) From DeletePost where PostType Like 'Job'";
-        String ReactivateID = getLow.ExecuteScalar().ToString();
-
         System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
         deletePost.Connection = localDB;
         deletePost.CommandText = "DELETE FROM DeletePost where PostID = @id";
-        deletePost.Parameters.AddWithValue("id", ReactivateID);
+        deletePost.Parameters.AddWithValue("id", id.Text);
         deletePost.ExecuteNonQuery();
 
         System.Data.SqlClient.SqlCommand deleteJob = new System.Data.SqlClient.SqlCommand();
         deleteJob.Connection = localDB;
         deleteJob.CommandText = "DELETE FROM DeleteJob where PostID = @id";
-        deleteJob.Parameters.AddWithValue("id", ReactivateID);
+        deleteJob.Parameters.AddWithValue("id", id.Text);
         deleteJob.ExecuteNonQuery();
 
         localDB.Close();
