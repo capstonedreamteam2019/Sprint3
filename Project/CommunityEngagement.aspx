@@ -75,7 +75,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li><h2 class="text-center" id="monthName" runat="server">April 2019</h2></li>
+            <li><h2 class="text-center" id="monthName" runat="server"></h2></li>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          	&nbsp;&nbsp;&nbsp;
            <li> <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a></li>
@@ -101,313 +101,37 @@
           </div>
     
           <!--end of row-->
-    <div class="row d-none d-sm-flex p-1 bg-dark text-white">
-      <h5 class="col-sm p-1 text-center">Sunday</h5>
-      <h5 class="col-sm p-1 text-center">Monday</h5>
-      <h5 class="col-sm p-1 text-center">Tuesday</h5>
-      <h5 class="col-sm p-1 text-center">Wednesday</h5>
-      <h5 class="col-sm p-1 text-center">Thursday</h5>
-      <h5 class="col-sm p-1 text-center">Friday</h5>
-      <h5 class="col-sm p-1 text-center">Saturday</h5>
-    </div>
-  </header>
-  <div class="row border border-right-0 border-bottom-0">
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
-      <h5 class="row align-items-center">
-        <span class="date col-1">31</span>
-        <small class="col d-sm-none text-center text-muted">Sunday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
-      <h5 class="row align-items-center">
-        <span class="date col-1">1</span>
-        <small class="col d-sm-none text-center text-muted">Monday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
-      <h5 class="row align-items-center">
-        <span class="date col-1">2</span>
-        <small class="col d-sm-none text-center text-muted">Tuesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">3</span>
-        <small class="col d-sm-none text-center text-muted">Wednesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">4</span>
-        <small class="col d-sm-none text-center text-muted">Thursday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">5</span>
-        <small class="col d-sm-none text-center text-muted">Friday</small>
-        <span class="col-1"></span>
-      </h5>
-      <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="Job Fair">ES Job Fair</a>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">6</span>
-        <small class="col d-sm-none text-center text-muted">Saturday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="w-100"></div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">7</span>
-        <small class="col d-sm-none text-center text-muted">Sunday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">8</span>
-        <small class="col d-sm-none text-center text-muted">Monday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">9</span>
-        <small class="col d-sm-none text-center text-muted">Tuesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-warning text-white" title="Charlottesville Career Day">Charlottesville Career Day</a>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">10</span>
-        <small class="col d-sm-none text-center text-muted">Wednesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-warning text-white" title="Charlottesville Job Fair">Charlottesville Job Fair </a>
-      <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="Career Day">ES Shadow Day</a>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">11</span>
-        <small class="col d-sm-none text-center text-muted">Thursday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">12</span>
-        <small class="col d-sm-none text-center text-muted">Friday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">13</span>
-        <small class="col d-sm-none text-center text-muted">Saturday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="w-100"></div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">14</span>
-        <small class="col d-sm-none text-center text-muted">Sunday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">15</span>
-        <small class="col d-sm-none text-center text-muted">Monday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">16</span>
-        <small class="col d-sm-none text-center text-muted">Tuesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">17</span>
-        <small class="col d-sm-none text-center text-muted">Wednesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">18</span>
-        <small class="col d-sm-none text-center text-muted">Thursday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">19</span>
-        <small class="col d-sm-none text-center text-muted">Friday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">20</span>
-        <small class="col d-sm-none text-center text-muted">Saturday</small>
-        <span class="col-1"></span>
-      </h5>
-      <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-info text-white" title="ES Field Trip ">ES Field Trip</a>
-    </div>
-    <div class="w-100"></div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">21</span>
-        <small class="col d-sm-none text-center text-muted">Sunday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">22</span>
-        <small class="col d-sm-none text-center text-muted">Monday</small>
-        <span class="col-1"></span>
-      </h5>
-      <a class="event d-block p-1 pl-2 pr-2 mb-1 rounded text-truncate small bg-warning text-white" title="Waynesboro Guest Speaker">Waynesboro Guest Speaker</a>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">23</span>
-        <small class="col d-sm-none text-center text-muted">Tuesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">24</span>
-        <small class="col d-sm-none text-center text-muted">Wednesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">25</span>
-        <small class="col d-sm-none text-center text-muted">Thursday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">26</span>
-        <small class="col d-sm-none text-center text-muted">Friday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">27</span>
-        <small class="col d-sm-none text-center text-muted">Saturday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="w-100"></div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">28</span>
-        <small class="col d-sm-none text-center text-muted">Sunday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">29</span>
-        <small class="col d-sm-none text-center text-muted">Monday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">30</span>
-        <small class="col d-sm-none text-center text-muted">Tuesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">1</span>
-        <small class="col d-sm-none text-center text-muted">Wednesday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate ">
-      <h5 class="row align-items-center">
-        <span class="date col-1">2</span>
-        <small class="col d-sm-none text-center text-muted">Thursday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
-      <h5 class="row align-items-center">
-        <span class="date col-1">3</span>
-        <small class="col d-sm-none text-center text-muted">Friday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-    <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
-      <h5 class="row align-items-center">
-        <span class="date col-1">4</span>
-        <small class="col d-sm-none text-center text-muted">Saturday</small>
-        <span class="col-1"></span>
-      </h5>
-      <p class="d-sm-none">No events</p>
-    </div>
-      
-  </div>
-</div>    
-             
-            </div>
-            <!--end of col-->
-          </div>
-          <!--end of row-->
-         <!--end of row-->
     
-        </div>
+      
+
+        
+
+
+            <form cssclass="container-fluid" runat="server">
+             
+                      <span aria-hidden="true">
+             
+                <asp:Calendar ID="Calendar1" runat="server" CssClass="col-auto" DayNameFormat="Full" Height="300px" Width="871px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
+                    <DayHeaderStyle CssClass="p-1 text-center, p-1 bg-dark text-white"/>
+                    <DayStyle CssClass="date col-1, day col-sm p-2 border border-left-0 border-top-0 text-truncate" />
+                    <OtherMonthDayStyle ForeColor="#669999" />
+
+<TodayDayStyle BackColor="#B7FBF4" BorderStyle="Solid"></TodayDayStyle>
+                </asp:Calendar>
+            
+                <asp:GridView ID="GridView1" runat="server" CssClass="form-group" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                </asp:GridView>
+
+    </span>
+
+            <div runat="server" >
+            </div>
+            </form>
+                
+
+
+
+
         <!--end of container-->
        <!-- Modal HTML -->
       <div id="myModal2" class="modal fade">
@@ -418,33 +142,38 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-    <label for="exampleFormControlInput1">Company Name:</label>
-    <input type="department" class="form-control" id="exampleFormControlInput1" placeholder="ie. Human Resources">
+    <label for="title">Event Title:</label>
+    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
   </div>
    <div class="form-group">
-    <label for="exampleFormControlInput1">Event Title:</label>
-    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="ie. Sales Intern">
+    <label for="startdate">Start Date:</label>
+    <input type="text" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
   </div>
      <div class="form-group">
-    <label for="exampleFormControlInput1">Date of Event:</label>
-    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="ie. Richmond, VA">
+    <label for="enddate">End Date:</label>
+    <input type="text" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
   </div>
      <div class="form-group">
-    <label for="exampleFormControlInput1">Event Location:</label>
-    <input type="Job Salary" class="form-control" id="exampleFormControlInput1">
+    <label for="starttime">Start Time:</label>
+    <input type="text" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
+  </div>
+     <div class="form-group">
+    <label for="endtime">End Time:</label>
+    <input type="text" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
+  </div>
+     <div class="form-group">
+    <label for="location">Event Location:</label>
+    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Event Description:</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="eventdescription">Event Description:</label>
+    <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
   </div>
-   <div class="form-group">
-    <label for="exampleFormControlInput1">Last Updated On:</label>
-    <input type="Last Updated" class="form-control" id="exampleFormControlInput1">
-  </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success">Create Event</button>
+                    <button type="button" class="btn btn-success" runat="server" onserverclick="EventButton_Click">Create Event</button>
                 </div>
             </div>
         </div>
@@ -464,5 +193,7 @@
     <script type="text/javascript" src="assets/js/zoom.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/theme.js"></script>
+
+    </span>
 
     </asp:Content>
