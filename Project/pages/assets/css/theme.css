@@ -68,7 +68,7 @@ hr {
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
-  margin-bottom: 1.5rem; }
+  margin-bottom: 0rem; }
 
 p {
   margin-top: 0;
@@ -3598,7 +3598,7 @@ border-color: #F37821 !important;
 
 .badge-success {
   color: #fff;
-  background-color: #02B875; }
+  background-color: #02b875; }
   a.badge-success:hover, a.badge-success:focus {
     color: #fff;
     background-color: #018655; }
@@ -7927,9 +7927,9 @@ article p + p, article p + ul, article ul + p {
   margin-top: 1.5rem; }
 
 article h4, article h5 {
-  margin-bottom: 1.5rem; }
+  margin-bottom: 0rem; }
   article h4:not(:first-child), article h5:not(:first-child) {
-    margin-top: 3rem; }
+    margin-top: 0rem; }
 
 article .blockquote {
   margin: 3rem 0; }

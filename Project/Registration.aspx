@@ -13,6 +13,53 @@
     <link href="pages/assets/css/entypo.css" rel="stylesheet" type="text/css" media="all" />
     <link href="pages/assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
 
+      <style>
+       
+        .step-circle2 {
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    line-height: 3rem;
+    border-radius: 50% !important;
+    background: #dee2e6;
+    color: #fff;
+    text-align: center;
+    font-size: 1.75rem;
+    transition: background-color .35s ease;
+    padding: 0 !important;
+    border-bottom: none !important;
+}
+
+    .step-circle2.active {
+        background: #f37821;
+    }
+
+    .step-circle2.step-circle2-sm.active {
+        width: 2.25rem;
+        height: 2.25rem;
+        line-height: 2.25rem;
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: #f37821;
+    }
+    .step-circle2.step-circle2-sm {
+        width: 2.25rem;
+        height: 2.25rem;
+        line-height: 2.25rem;
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: #dee2e6;
+    }
+  .step-circle2.step-circle2-lg {
+    width: 6rem;
+    height: 6rem;
+    line-height: 6rem; }
+
+.active.step-circle2 {
+    background: #f37821;
+}
+
+    </style>
   </head>
 
   <body>
@@ -22,7 +69,7 @@
       <div class="bg-white navbar-light" data-sticky="top">
         <div class="container">
           <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="pages/WebsiteHome.html">
+            <a class="navbar-brand" href="Website.aspx">
               <img alt="Brilliature" src="pages/assets/img/mini-logo.svg" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,22 +88,25 @@
             <div class="col-12 col-lg-10">
               <div class="card card-lg">
                 <div class="card-body">
-                    <ul class="nav nav-tabs text-center row justify-content-center">
-                      <li class="col-3 col-md-2"><a href="#first" class="step-circle step-circle-sm">1</a>
+                    <ul class="nav nav-tab text-center row justify-content-center step-anchor">
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration.aspx" class="step-circle2 step-circle2-sm active">1</a>
                       </li>
-                      <li class="col-3 col-md-2"><a href="#second" class="step-circle step-circle-sm">2</a>
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration2.aspx" class="step-circle2 step-circle2-sm">2</a>
                       </li>
-                      <li class="col-3 col-md-2"><a href="#third" class="step-circle step-circle-sm">3</a>
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration3.aspx" class="step-circle2 step-circle2-sm">3</a>
                       </li>
-                      <li class="col-3 col-md-2"><a href="#fourth" class="step-circle step-circle-sm">4</a>
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration4.aspx" class="step-circle2 step-circle2-sm">4</a>
                       </li>
                     </ul>
-                   
-                      <div id="first">
+                    <br />
+                    <div class="tab-content">
+                      <div id="Registration2.aspx">
                         <div class="row justify-content-around align-items-center">
                           <div class="col-8 col-md-6 col-lg-4 mb-4">
                             <img alt="Image" src="pages/assets/img/ID.svg" class="w-100" />
                           </div>
+
+                              
                           <!--end of col-->
                           <div class="col-12 col-md-6 col-lg-5 mb-4">
                             <div>
@@ -64,162 +114,39 @@
                               <h4 class="mb-2">Choose your identification</h4>                              
     
                               <div class="form-check">
-  						<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+  						<asp:RadioButton runat="server" id="RDStudent" value="Student" groupname="RDID" />
  						 <label class="form-check-label" for="exampleRadios1">Student</label>
 						</div>
 						<div class="form-check">
-						  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <asp:RadioButton runat="server" id="RDParent" value="Parent" groupname="RDID" />
  							 <label class="form-check-label" for="exampleRadios2">Parent</label>
 						</div>
 						<div class="form-check disabled">
- 						 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                        <asp:RadioButton runat="server" id="RDTeacher" value="Teacher" groupname="RDID" />
   							<label class="form-check-label" for="exampleRadios3">Teacher</label>
 							</div>
 							<div class="form-check disabled">
- 						 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                        <asp:RadioButton runat="server" id="RDEmployee" value="SchoolEmployee" groupname="RDID" />
   							<label class="form-check-label" for="exampleRadios3">School</label>
 							</div>
 							<div class="form-check disabled">
- 						 <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                            <asp:RadioButton runat="server" id="RDEmployer" value="BusinessEmployee" groupname="RDID" />
   							<label class="form-check-label" for="exampleRadios3">Employer</label>
 							</div>
                             </div>
+                              <asp:Button ID="Step1"  class="btn btn-success sw-btn-next" validationgroup="group1" runat="server" onclick="Step1_Click" Text="Next Step" />
+                              <br />
+                              <asp:Label ID="lblError" runat="server" forecolor="red" Text=""></asp:Label>
+
                           </div>
                           <!--end of col-->
                         </div>
                         <!--end of row-->
-                      </div>
-                      <div id="second">
-                        <div class="row justify-content-around align-items-center">
-                          <div class="col-8 col-md-6 col-lg-4 mb-4">
-                            <img alt="Image" src="pages/assets/img/Complete.svg" class="w-100" />
-                          </div>
-                          <!--end of col-->
-                          <div class="col-12 col-md-6 col-lg-5 mb-4">
-                            <div>
-                              <h6 class="title-decorative mb-2">Step 2.</h6>
-                             <h4 class="mb-2">Create your account</h4>
-                              <p>Let's begin by creating your account. You can always change these details later.</p>
-          					  <div class="form-group">
-                              <p>Email</p>
-          		              <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" placeholder="Email Address"></asp:TextBox>
-                              <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="group1" ControlToValidate="txtEmail" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>
-                              <p>Password</p>
-                              <asp:TextBox ID="txtPassword" class="form-control form-control-lg" placeholder="Password" runat="server"></asp:TextBox>                                                   
-                              <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ValidationGroup="group1" ControlToValidate="txtPassword" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>                             
-                              <p>First Name</p>
-                              <asp:TextBox ID="txtFirstName" class="form-control form-control-lg" placeholder="FirstName" runat="server"></asp:TextBox>   
-                              <asp:RequiredFieldValidator ID="RequiredFieldValidator4" ValidationGroup="group1" ControlToValidate="txtFirstName" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>
-                              <p>Last Name</p>
-                              <asp:TextBox ID="txtLastName" class="form-control form-control-lg" placeholder="LastName" runat="server"></asp:TextBox>   
-                              <asp:RequiredFieldValidator ID="RequiredFieldValidator5" ValidationGroup="group1" ControlToValidate="txtLastName" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>
-                              <p>Company Name</p>
-                              <asp:TextBox ID="txtCompanyName" CssClass="form-control form-control-lg"  placeholder="Company Name" runat="server" />
-                              <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ValidationGroup="group1" runat="server" ControlToValidate="txtCompanyName" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>                           
-                                  <asp:Label ID="lblError" runat="server" forecoloe="red" Text=""></asp:Label>
-                              </div>
-                            </div>
-                          </div>
-                          <!--end of col-->
-                        </div>
-                        <!--end of row-->
-                      </div>
+                       </div>
+                     
                       
                       
-                        <div id="third">
-                          <div class="col-12 mb-4">
-                            <div>
-                              <h6 class="title-decorative mb-2">Step 3.</h6>
-                             <h4 class="mb-2">Select your subscription</h4>
-                              <p>You can change or upgrade your subscription later under settings.</p>
-          					<div class="row">
-       <div class="col-md-6 col-lg-4">
-                  <div class="card pricing card-lg">
-                    <div class="card-body">
-                      <h5>Free One Month Trial</h5>
-                      <span class="display-3">$0</span>
-                      <span class="h6">Includes:</span>
-                      <ul class="list-unstyled">
-                        <small>
-                        <li>
-                          Access to all features
-                        </li>
-                        <li>
-                          Fully functional Profile
-                        </li>
-                        <li>
-                          Option to upgrade after one month
-                        </li>
-                        </small>
-                          <br />
-                      </ul>
-                      <button class="btn btn-success sw-btn-next" type="button">Select</button>
-                    </div>
-                  </div>
-                  <!--end card-->
-                </div>
-                <!--end of col-->
-                <div class="col-md-6 col-lg-4">
-                  <div class="card pricing card-lg">
-                    <div class="card-body">
-                      <h5>Pay per <br>Post</h5>
-                      <span class="display-3">$3</span>
-                      <span class="h6">Includes:</span>
-                      <ul class="list-unstyled">
-                        <small>
-                        <li>
-                          Limited access to features
-                        </li>
-                        <li>
-                          Create events and connect                       
-                        </li>
-                        <li>
-                          Option to upgrade at any <br>time
-                        </li>
-                        </small>
-                      </ul>
-                      <button class="btn btn-success sw-btn-next" type="button">Select</button>
-                    </div>
-                  </div>
-                  <!--end card-->
-                </div>
-                <!--end of col-->
-                <div class="col-md-6 col-lg-4">
-                  <div class="card pricing card-lg">
-                    <div class="card-body">
-                      <h5>Monthly Subscription</h5>
-                        <br />
-                      <span class="display-3">$50</span>
-                      <span class="h6">Includes:</span>
-                      <ul class="list-unstyled">
-                        <small>
-                        <li>
-                          All unlimited access to all features
-                        </li>
-                        <li>
-                          Customizable profile
-                        </li>
-                        <li>
-                          Option to downgrade plan at any time
-                        </li>
-                        </small>
-                      </ul>
-                      <button class="btn btn-success sw-btn-next" type="button">Select</button>
-                    </div>
-                  </div>
-                  <!--end card-->
-                    </div>
-	
-                            </div>
-                          </div>
-                          <!--end of col-->
-                        </div>
-                        <!--end of row-->
-                      </div>
-                      <asp:Button ID="btnSubmit"  class="btn btn-success" validationgroup="group1" runat="server" onclick="btnSubmit_Click" Text="Submit" />
-                
-              
-                      
+                       
         </div>
         <!--end of container-->
       </section>
@@ -239,7 +166,6 @@
     <script type="text/javascript" src="pages/assets/js/theme.js"></script>
 
        <!--End Template-->
-
 
 
    

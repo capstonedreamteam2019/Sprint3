@@ -6,53 +6,118 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Data;
 
 public partial class Registration : System.Web.UI.Page
 {
-    string userType;
     SqlConnection localDB = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localDB"].ConnectionString);
 
     protected void Page_Load(object sender, EventArgs e)
     {
 
+
     }
 
-    protected void btnSubmit_Click(object sender, EventArgs e)
-    {
-        //clear error label
-        lblError.Text = "";
 
-        //double check validation
-        if (txtFirstName.Text != "" && txtLastName.Text != "" && txtCompanyName.Text != "" && txtEmail.Text != "" && txtPassword.Text != "" )
+
+    protected void Step1_Click(object sender, EventArgs e)
+    {
+        string userType = "";
+
+        if (RDStudent.Checked == false)
         {
-            
-                if (txtPassword.Text.Length < 7)
+            if (RDParent.Checked == false)
+            {
+                if (RDTeacher.Checked == false)
                 {
-                    lblError.Text = "Password needs to have at least 7 characters";
+                    if (RDEmployee.Checked == false)
+                    {
+                        if (RDEmployer.Checked == false)
+                        {
+                            lblError.Text = "Must select identification.";
+                        }
+                        else
+                        {
+                            userType = "BusinessEmployee";
+                        }
+                    }
+                    else
+                    {
+                        userType = "SchoolEmployee";
+                    }
                 }
                 else
                 {
-                    localDB.Open();
-
-                    string password = PasswordHash.HashPassword(HttpUtility.HtmlEncode(txtPassword.Text));
-
-                    //Insert into user table
-                    SqlCommand insert = new SqlCommand("Insert INTO Users Values (@UserType, @Email, @UserPassword, @FirstName, @LastName, NULL, NULL, NULL, NULL, @LastUpdatedBy, @LastUpdated)", localDB);
-                    insert.Parameters.Add(new SqlParameter("@UserType", "BusinessEmployee"));
-                    insert.Parameters.Add(new SqlParameter("@Email", HttpUtility.HtmlEncode(txtEmail.Text)));
-                    insert.Parameters.Add(new SqlParameter("@UserPassword",password));
-                    insert.Parameters.Add(new SqlParameter("@FirstName", HttpUtility.HtmlEncode(txtFirstName.Text)));
-                    insert.Parameters.Add(new SqlParameter("@LastName", HttpUtility.HtmlEncode(txtLastName.Text)));
-                    insert.Parameters.Add(new SqlParameter("@LastUpdatedBy", HttpUtility.HtmlEncode(txtFirstName.Text) + " " + HttpUtility.HtmlEncode(txtLastName.Text)));
-                    insert.Parameters.Add(new SqlParameter("@LastUpdated", DateTime.Today));
-                    insert.ExecuteNonQuery();
-
-
-                    localDB.Close();
-                    Response.Redirect("LandingPage.aspx");
+                    userType = "Teacher";
                 }
-            
+            }
+            else
+            {
+                userType = "Parent";
+            }
+        }
+        else
+        {
+            userType = "Student";
+        }
+
+        if (userType != "")
+        {
+            localDB.Open();
+
+
+
+            System.Data.SqlClient.SqlCommand getUserID = new System.Data.SqlClient.SqlCommand();
+            getUserID.Connection = localDB;
+
+            //Find UserID for most recently entered User
+            getUserID.CommandText = "select MAX(UserID) from USERS";
+            string returnID = getUserID.ExecuteScalar().ToString();
+            int idUser = Int32.Parse(returnID);
+            getUserID.ExecuteNonQuery();
+
+            System.Data.SqlClient.SqlCommand getLastUpdatedBy = new System.Data.SqlClient.SqlCommand();
+            getLastUpdatedBy.Connection = localDB;
+            getLastUpdatedBy.Parameters.Add(new SqlParameter("@MaxID", idUser));
+
+
+            //Find LastUpdatedBy for most recently entered User
+            getLastUpdatedBy.CommandText = "select LastUpdatedBy from USERS WHERE UserID=@MaxID";
+            string LastUpdatedBy = getLastUpdatedBy.ExecuteScalar().ToString();
+            getLastUpdatedBy.ExecuteNonQuery();
+
+
+            if (LastUpdatedBy == "Lindsey Blanchetti")
+            {
+                //Update user table
+                SqlCommand update = new SqlCommand("Update Users SET UserType=@UserType WHERE UserId=@MaxID;", localDB);
+                update.Parameters.Add(new SqlParameter("@UserType", userType));
+                update.Parameters.Add(new SqlParameter("@MaxID", idUser));
+                update.ExecuteNonQuery();
+            }
+
+            else
+            {
+                //Insert into user table
+                SqlCommand insert = new SqlCommand("Insert INTO Users Values (@UserType, @Email, @UserPassword, @FirstName, @LastName, NULL, NULL, NULL, NULL, NULL, @LastUpdatedBy, @LastUpdated)", localDB);
+                insert.Parameters.Add(new SqlParameter("@UserType", userType));
+                insert.Parameters.Add(new SqlParameter("@Email", "EdwardSmith@gmail.com"));
+                insert.Parameters.Add(new SqlParameter("@UserPassword", "password"));
+                insert.Parameters.Add(new SqlParameter("@FirstName", "Edward"));
+                insert.Parameters.Add(new SqlParameter("@LastName", "Smith"));
+                insert.Parameters.Add(new SqlParameter("@LastUpdatedBy", "Lindsey Blanchetti"));
+                insert.Parameters.Add(new SqlParameter("@LastUpdated", DateTime.Today));
+                insert.ExecuteNonQuery();
+            }
+
+
+            localDB.Close();
+            Response.Redirect("Registration2.aspx");
+        }
+        else
+        {
+            lblError.Text = "Must select identification.";
         }
     }
- 
+
 }

@@ -13,14 +13,44 @@
     <link href="pages/assets/css/entypo.css" rel="stylesheet" type="text/css" media="all" />
     <link href="pages/assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
     <link href="bootstrap.min.css" rel="stylesheet" />
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .btn-brilliature {
+            background-color: #F37821;
+            color: #fff;
+        }
+        .btn-brilliature:hover {
+            background-color:#aa552b;
+            color: #fff;
+        }
+        .btn-outline-brilliature {
+            color: #F37821;
+            border-color: #ffffff;
+        }
+        .btn-outline-brilliature:hover {
+            color: #fff;
+            background-color: #F37821;
+            border-color: #F37821;
+        }
+        .btn-outline-brilliature:focus, .btn-outline-brilliature.focus {
+            box-shadow: 0 0 0 0.2rem rgba(2, 184, 117, 0.5); }
+        .btn-outline-brilliature.disabled, .btn-outline-brilliature:disabled {
+            color: #F37821;
+            background-color: transparent; }
+        .btn-outline-brilliature:not(:disabled):not(.disabled):active, .btn-outline-brilliature:not(:disabled):not(.disabled).active,
+        .show > .btn-outline-brilliature.dropdown-toggle {
+            color: #fff;
+            background-color: #F37821;
+            border-color: #F37821; }
+        .btn-outline-brilliature:not(:disabled):not(.disabled):active:focus, .btn-outline-brilliature:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-outline-brilliature.dropdown-toggle:focus {
+            box-shadow: 0 0 0 0.2rem rgba(2, 184, 117, 0.5); }
+    </style>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="css/scrolling-nav.css" rel="stylesheet">
+ 
     </head>
 
     <body id="page-top">
@@ -83,7 +113,7 @@
                                     <br>
                                     <br>
                                     <p class="lead">Creating a Brilliant future for all. </p>
-                                    <a href="Registration.aspx" class="btn btn-success">Get Started</a>
+                                    <a href="Registration.aspx" class="btn btn-brilliature">Get Started</a>
                                 </div>
                                 <!--end of col-->
                             </div>
@@ -95,7 +125,7 @@
                                     <h1 class="text-white display-5">
                                         Already a business owner using Brilliature?
                                     </h1>
-                                    <a href="Login.aspx" class="btn btn-success">Login</a>
+                                    <a href="Login.aspx" class="btn btn-brilliature">Login</a>
                                 </div>
                                 <!--end of col-->
                             </div>
@@ -107,7 +137,7 @@
                                     <h1 class="text-white display-5">
                                         Student, School or Teacher using Brilliature?
                                     </h1>
-                                    <a href="Registration.aspx" class="btn btn-success">Get Started</a>
+                                    <a href="Registration.aspx" class="btn btn-brilliature">Get Started</a>
                                 </div>
                                 <!--end of col-->
                             </div>
@@ -339,8 +369,8 @@
                     <div class="row justify-content-center mb-5">
                         <div class="col-auto">
                             <nav class="nav btn-group">
-                                <a href="#pricing-monthly" class="btn btn-lg btn-outline-success active" id="pricing-monthly-tab" data-toggle="tab" aria-controls="pricing-monthly">School Pricing</a>
-                                <a href="#pricing-yearly" class="btn btn-lg btn-outline-success" id="pricing-yearly-tab" data-toggle="tab" aria-controls="pricing-yearly">Business Pricing</a>
+                                <a href="#pricing-monthly" class="btn btn-lg btn-outline-brilliature active" id="pricing-monthly-tab" data-toggle="tab" aria-controls="pricing-monthly">School Pricing</a>
+                                <a href="#pricing-yearly" class="btn btn-lg btn-outline-brilliature" id="pricing-yearly-tab" data-toggle="tab" aria-controls="pricing-yearly">Business Pricing</a>
                             </nav>
                         </div>
                         <!--end of col-->
@@ -366,7 +396,7 @@
                                                     Option to upgrade after one month
                                                 </li>
                                             </ul>
-                                            <a href="Registration.aspx" class="btn btn-lg btn-success">Sign up now</a>
+                                            <a href="Registration.aspx" class="btn btn-lg btn-brilliature">Sign up now</a>
                                         </div>
                                     </div>
                                     <!--end card-->
@@ -389,7 +419,7 @@
                                                     Option to upgrade at any time
                                                 </li>
                                             </ul>
-                                            <a href="Registration.aspx" class="btn btn-lg btn-success">Sign up now</a>
+                                            <a href="Registration.aspx" class="btn btn-lg btn-brilliature">Sign up now</a>
                                         </div>
                                     </div>
                                     <!--end card-->
@@ -412,7 +442,7 @@
                                                     Option to downgrade plan at any time
                                                 </li>
                                             </ul>
-                                            <a href="Registration.aspx" class="btn btn-lg btn-success">Sign up now</a>
+                                            <a href="Registration.aspx" class="btn btn-lg btn-brilliature">Sign up now</a>
                                         </div>
                                     </div>
                                     <!--end card-->
@@ -440,7 +470,7 @@
                                                     Option to upgrade after one month
                                                 </li>
                                             </ul>
-                                            <a href="Registration.aspx" class="btn btn-lg btn-success">Sign up now</a>
+                                            <a href="Registration.aspx" class="btn btn-lg btn-brilliature">Sign up now</a>
                                         </div>
                                     </div>
                                     <!--end card-->
@@ -463,7 +493,7 @@
                                                     Option to upgrade at any time
                                                 </li>
                                             </ul>
-                                            <a href="Registration.aspx" class="btn btn-lg btn-success">Sign up now</a>
+                                            <a href="Registration.aspx" class="btn btn-lg btn-brilliature">Sign up now</a>
                                         </div>
                                     </div>
                                     <!--end card-->
@@ -486,7 +516,7 @@
                                                     Option to downgrade plan at any time
                                                 </li>
                                             </ul>
-                                            <a href="Registration.aspx" class="btn btn-lg btn-success">Sign up now</a>
+                                            <a href="Registration.aspx" class="btn btn-lg btn-brilliature">Sign up now</a>
                                         </div>
                                     </div>
                                     <!--end card-->
@@ -532,7 +562,7 @@
                                                     <div class="custom-control custom-checkbox">
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="btn btn-lg btn-success">Submit</button>
+                                                <button type="submit" class="btn btn-lg btn-brilliature">Submit</button>
                                             </form>
                                         </div>
                                     </div>
