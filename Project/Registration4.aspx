@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Registration.aspx.cs" Inherits="Registration" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Registration4.aspx.cs" Inherits="Registration4" %>
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
 
-  <head>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
     <meta charset="utf-8">
     <title>Employee Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
     <link href="pages/assets/css/entypo.css" rel="stylesheet" type="text/css" media="all" />
     <link href="pages/assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
 
-      <style>
+    <style>
        
         .step-circle2 {
     display: inline-block;
@@ -55,15 +55,14 @@
     height: 6rem;
     line-height: 6rem; }
 
-.active.step-circle2 {
+.active .step-circle2 {
     background: #f37821;
 }
 
     </style>
-  </head>
-
-  <body>
-<form runat="server">
+</head>
+<body>
+    <form runat="server">
     
   <div class="navbar-container">
       <div class="bg-white navbar-light" data-sticky="top">
@@ -88,65 +87,40 @@
             <div class="col-12 col-lg-10">
               <div class="card card-lg">
                 <div class="card-body">
-                    <ul class="nav nav-tab text-center row justify-content-center step-anchor">
+                    <ul class="nav nav-tabs text-center row justify-content-center">
                       <li class="col-3 col-md-2 nav-item"><a href="Registration.aspx" class="step-circle2 step-circle2-sm active">1</a>
                       </li>
-                      <li class="col-3 col-md-2 nav-item"><a href="Registration2.aspx" class="step-circle2 step-circle2-sm">2</a>
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration2.aspx" class="step-circle2 step-circle2-sm active">2</a>
                       </li>
-                      <li class="col-3 col-md-2 nav-item"><a href="Registration3.aspx" class="step-circle2 step-circle2-sm">3</a>
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration3.aspx" class="step-circle2 step-circle2-sm active">3</a>
                       </li>
-                      <li class="col-3 col-md-2 nav-item"><a href="Registration4.aspx" class="step-circle2 step-circle2-sm">4</a>
+                      <li class="col-3 col-md-2 nav-item"><a href="Registration4.aspx" class="step-circle2 step-circle2-sm active">4</a>
                       </li>
                     </ul>
-                    <br />
-                    <div class="tab-content">
-                      <div id="Registration2.aspx">
+            
+                      <br />
+                             <div id="fourth">
                         <div class="row justify-content-around align-items-center">
                           <div class="col-8 col-md-6 col-lg-4 mb-4">
-                            <img alt="Image" src="pages/assets/img/ID.svg" class="w-100" />
+                            <img alt="Image" src="pages/assets/img/Done.svg" class="w-100" />
                           </div>
-
-                              
                           <!--end of col-->
                           <div class="col-12 col-md-6 col-lg-5 mb-4">
                             <div>
-                              <h6 class="title-decorative mb-2">Step 1.</h6>
-                              <h4 class="mb-2">Choose your identification</h4>                              
-    
-                              <div class="form-check">
-  						<asp:RadioButton runat="server" id="RDStudent" value="Student" groupname="RDID" />
- 						 <label class="form-check-label" for="exampleRadios1">Student</label>
-						</div>
-						<div class="form-check">
-                            <asp:RadioButton runat="server" id="RDParent" value="Parent" groupname="RDID" />
- 							 <label class="form-check-label" for="exampleRadios2">Parent</label>
-						</div>
-						<div class="form-check disabled">
-                        <asp:RadioButton runat="server" id="RDTeacher" value="Teacher" groupname="RDID" />
-  							<label class="form-check-label" for="exampleRadios3">Teacher</label>
-							</div>
-							<div class="form-check disabled">
-                        <asp:RadioButton runat="server" id="RDEmployee" value="SchoolEmployee" groupname="RDID" />
-  							<label class="form-check-label" for="exampleRadios3">School</label>
-							</div>
-							<div class="form-check disabled">
-                            <asp:RadioButton runat="server" id="RDEmployer" value="BusinessEmployee" groupname="RDID" />
-  							<label class="form-check-label" for="exampleRadios3">Employer</label>
-							</div>
+                              <h6 class="title-decorative mb-2">Step 4.</h6>
+                              <h4 class="mb-2">You're all set</h4>
+                  <p>We've set up your account and some basic details, now let's move on to your dashboard.</p>
                             </div>
-                              <asp:Button ID="Step1"  class="btn btn-success sw-btn-next" validationgroup="group1" runat="server" onclick="Step1_Click" Text="Next Step" />
-                              <br />
-                              <asp:Label ID="lblError" runat="server" forecolor="red" Text=""></asp:Label>
-
+                            <br>
+                    <a href="LandingPage.aspx" class="btn-lg btn-success">Go to Dashboard</a>
+                          </div>
+               				 </div>
+                            </div>
                           </div>
                           <!--end of col-->
                         </div>
                         <!--end of row-->
-                       </div>
-                     
-                      
-                      
-                       
+                      </div>
         </div>
         <!--end of container-->
       </section>
@@ -166,9 +140,5 @@
     <script type="text/javascript" src="pages/assets/js/theme.js"></script>
 
        <!--End Template-->
-
-
-   
-  </body>
-
+</body>
 </html>
