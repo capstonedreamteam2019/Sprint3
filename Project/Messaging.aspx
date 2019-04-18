@@ -8,17 +8,47 @@
         <div class="container">
           <div class="row card flex-row">
             <div class="col-auto">
+               <form class="card-header d-none d-lg-block">
+            	<h5> Brilliature Messaging</h5>
+                <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>New Message</a>
+                <br>
+                <br>
+            	  <input class="form-control form-control-lg" type="search" placeholder="Search..." />
+            	 <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#" role="tab" aria-selected="true"><i class="icon-mail">&nbsp;</i>Inbox</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="billing-tab" data-toggle="tab" href="#" role="tab" aria-selected="false"><i class="icon-star">&nbsp;</i>Starred</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="security-tab" data-toggle="tab" href="#" role="tab" aria-selected="false"><i class="icon-trash">&nbsp;</i>Trash</a>
+                  </li>
+                </ul>
+            <!--end nav collapse-->
+            	</form>
               <form class="card-header d-none d-lg-block">
-                <input class="form-control form-control-lg" type="search" placeholder="Search chat" />
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#" role="tab" aria-selected="true">All</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="billing-tab" data-toggle="tab" href="#" role="tab" aria-selected="false">School</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="security-tab" data-toggle="tab" href="#" role="tab" aria-selected="false">Teacher</a>
+                  </li>
+                </ul>
               </form>
-              <div id="sidebar" class="list-group list-group-chat list-group-flush">
+              
+                <div id="sidebar" class="list-group list-group-chat list-group-flush">
 
                 <a href="#r" id="sidebarHighlight1" runat="server" onserverclick="ChangeBack_OnClick" class="list-group-item list-group-item-action active">
                   <div class="media">
                     <img alt="Image" src="pages/assets/img/avatar-male-4.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 id="sidebarContactName1" class="mb-0">Daniel Cameron
+                        <h6 id="sidebarContactName1" runat="server" class="mb-0">Daniel Cameron
                           <span class="badge badge-indicator badge-success"></span>
                         </h6>
                         <div>
@@ -35,7 +65,7 @@
                     <img alt="Image" src="pages/assets/img/avatar-female-3.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Mercy Ketteridge</h6>
+                        <h6 id="sidebarContactName2" runat="server" class="mb-0">Harrisonburg High School</h6>
                         <div>
                           <small class="text-muted">1 hour ago</small>
                         </div>
@@ -50,7 +80,7 @@
                     <img alt="Image" src="pages/assets/img/avatar-male-3.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Sven Lansson</h6>
+                        <h6 id="sidebarContactName3" runat="server" class="mb-0">Arlington High School</h6>
                         <div>
                           <small class="text-muted">2 hours ago</small>
                         </div>
@@ -65,7 +95,7 @@
                     <img alt="Image" src="pages/assets/img/avatar-male-2.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Bart Van Wissen</h6>
+                        <h6 id="sidebarContactName4" runat="server" class="mb-0">Newport News High School</h6>
                         <div>
                           <small class="text-muted">7 hours ago</small>
                         </div>
@@ -74,67 +104,6 @@
                     </div>
                   </div>
                 </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
-                    </div>
-                  </div>
-                </a>
-
-               <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
-                    </div>
-                  </div>
-                </a>
-
-               <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="pages/assets/img/avatar-female-1.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Vanessa Sampson</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Are we all remembering to stay agile?</span>
-                    </div>
-                  </div>
-                </a>
-
               </div>
             </div>
             <!--end of col-->
@@ -151,49 +120,27 @@
                   </div>
                 </div>
 
-                <div class="dropdown">
+                <div>    
+                <button class="btn btn-outline-secondary" type="button" id="Button" aria-haspopup="true" aria-expanded="false">
+                    <i class="icon-star"></i>
+                  </button>
                   <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-chevron-down"></i>
                   </button>
                   <div class="dropdown-menu dropdown-menu-right dropdown-menu-sm" aria-labelledby="Button">
-                    <a class="dropdown-item" href="#contactModal" id="contactInfo" data-toggle="modal" runat="server">Contact info</a>
+                    <a class="dropdown-item" href="#">View Profile</a>
+                    <a class="dropdown-item" href="#">Mark as Unread</a>
                     <a class="dropdown-item" href="#">Mute</a>
-                    <a class="dropdown-item" href="#" id="clearMessages" runat="server" onserverclick="ClearMessages_OnClick">Clear messages</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#" id="deleteMessages" runat="server" onserverclick="DeleteMessages_OnClick">Delete chat</a>
+                    <a class="dropdown-item" href="#">Active Status</a>
+                	<a class="dropdown-item" href="#">Notifications</a>
+                   <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Delete chat</a>
                   </div>
+                  
                 </div>
               </div>
               <!--end card header-->
-    
-    <!-- Modal HTML -->
-    <div id="contactModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Contact Information</h4>
-                </div>
-                <div class="modal-body">
-  <div class="form-group">
-    <label for="title">Daniel Cameron</label>
-  </div>
-
-  <div class="form-group">
-    <label for="descr">Email: danielCameron@gmail.com</label>
-  </div>
-                
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-      
-     
-<!--end Create Modal-->
-
-
+  
               
                 <label id="noMessagesAlert" runat="server">All messages cleared</label>
               
@@ -381,6 +328,30 @@
           <!--end of row-->
         </div>
         <!--end of container-->
+
+           <!-- Modal HTML -->
+    <div id="myModal2" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">New Message:</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                	  <input class="form-control form-control-lg" type="search" placeholder="To:" />
+                	 <input class="form-control form-control-lg" type="search" placeholder="Subject" />
+
+    <label for="exampleFormControlTextarea1"></label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+  </div>
+   
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
       </section>
       <!--end of section-->
      

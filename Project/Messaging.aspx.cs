@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -29,12 +28,19 @@ public partial class Messaging : System.Web.UI.Page
         string schoolName = selectSchoolName.ExecuteScalar().ToString();
         mainViewUserName.InnerHtml = schoolName;
 
+        sidebarContactName1.InnerText = schoolName;
+
         //Select User's First and Last Name
         System.Data.SqlClient.SqlCommand selectUserName = new System.Data.SqlClient.SqlCommand();
         selectUserName.Connection = localDB;
-        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join message1 on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM message1)";
+        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join messages on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM messages)";
         string userName = selectUserName.ExecuteScalar().ToString();
         mainViewSpeakingWith.InnerHtml = "Speaking with: " + userName;
+
+        //Display sidebar users
+
+
+
     }
 
     protected void SendButton_OnClick(object sender, EventArgs e)
@@ -49,7 +55,6 @@ public partial class Messaging : System.Web.UI.Page
         sendHide.Visible = true;
         messageBox.Value = "";
 
-        localDB.Open();
 
         //Creates a new sql insert command
         System.Data.SqlClient.SqlCommand insertMessage = new System.Data.SqlClient.SqlCommand();
@@ -59,7 +64,7 @@ public partial class Messaging : System.Web.UI.Page
         Message newMessage = new Message(6, 1, message, DateTime.Now);
 
         //Insert data into database
-        insertMessage.CommandText = "insert into [Message1] ([MessageToID], [MessageFromID], [MessageBody], [LastUpdated])" +
+        insertMessage.CommandText = "insert into [Messages] ([MessageToID], [MessageFromID], [MessageBody], [LastUpdated])" +
             "values (@to, @from, @body, @lastUpdated)";
 
         insertMessage.Parameters.Add(new SqlParameter("to", newMessage.getToID()));
@@ -81,7 +86,7 @@ public partial class Messaging : System.Web.UI.Page
         selectUserName.Connection = localDB;
 
         //Select User's First and Last Name
-        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join message1 on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM message1)";
+        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join messages on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM messages)";
         string userName = selectUserName.ExecuteScalar().ToString();
 
 
@@ -153,14 +158,9 @@ public partial class Messaging : System.Web.UI.Page
         seventhMess.InnerText = "seven";
         sidebarHighlight2.Attributes["class"] = "list-group-item list-group-item-action active";
         sidebarHighlight1.Attributes["class"] = "list-group-item list-group-item-action";
-        mainViewUserName.InnerText = "Mercy Ketteridge";
+        mainViewUserName.InnerText = "Harrisonburg High School";
+        mainViewSpeakingWith.InnerText = "Alex Cole";
         photoChange.Attributes["src"] = "pages/assets/img/avatar-female-3.jpg";
-
-        //Insert
-
-        //selectPostID.CommandText = "select max(postID) from Post";
-        //string postID = selectPostID.ExecuteScalar().ToString();
-        //selectPostID.ExecuteNonQuery();
     }
 
     protected void ChangeBack_OnClick(object sender, EventArgs e)
@@ -172,7 +172,8 @@ public partial class Messaging : System.Web.UI.Page
         fifthMess.InnerText = "Of course, I'm not a fool!";
         sixthMess.InnerText = "Awesome, did you make it with Wingman?";
         seventhMess.InnerText = "Yes, all synced to the drive for you guys &#x1F44D;";
-        mainViewUserName.InnerText = "Daniel Cameron";
+        mainViewUserName.InnerText = "Great Bridge High School";
+        mainViewSpeakingWith.InnerText = "Mary Daily";
         photoChange.Attributes["src"] = "pages/assets/img/avatar-male-4.jpg";
         sidebarHighlight1.Attributes["class"] = "list-group-item list-group-item-action active";
         sidebarHighlight2.Attributes["class"] = "list-group-item list-group-item-action";
@@ -191,7 +192,7 @@ public partial class Messaging : System.Web.UI.Page
         seventhMess.InnerText = "seven";
 
         sidebarHighlight2.Visible = false;
-        mainViewUserName.InnerText = "Mercy Ketteridge";
+        mainViewUserName.InnerText = "Harrisonburg High School";
 
         photoChange.Attributes["src"] = "pages/assets/img/avatar-female-3.jpg";
         sidebarHighlight1.Attributes["class"] = "list-group-item list-group-item-action active";
