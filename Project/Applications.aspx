@@ -688,7 +688,7 @@
             <!--Preview Pannel-->
             <div id="mask">
             </div>
-            <asp:Panel ID="PreviewPopup" runat="server"  BackColor="White" Height="100%"
+            <asp:Panel ID="PreviewPopup" runat="server"  BackColor="White" Height="1000px"
                 Width="600px" Style="z-index:111;background-color: White; position: absolute; left: 25%; top: -12%; 
                 border: outset 2px gray;padding:5px;display:none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align:"center">Student Application</h1>

@@ -114,39 +114,43 @@
         <!-- Create Event Modal HTML -->
         <div id="mask">
                 </div>
-        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="900px"
+        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="850px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
-                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
-   <div class="form-group">
-    <label for="title">Event Title:</label>
-    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
-  </div>
-   <div class="form-group">
-    <label for="startdate">Start Date:</label>
-    <input type="text" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
-  </div>
-     <div class="form-group">
-    <label for="enddate">End Date:</label>
-    <input type="text" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
-  </div>
-     <div class="form-group">
-    <label for="starttime">Start Time:</label>
-    <input type="text" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
-  </div>
-     <div class="form-group">
-    <label for="endtime">End Time:</label>
-    <input type="text" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
-  </div>
-     <div class="form-group">
-    <label for="location">Event Location:</label>
-    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
-  </div>
-  <div class="form-group">
-    <label for="eventdescription">Event Description:</label>
-    <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
-  </div>
-
-              <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Event</button>
+            <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="title">Event Title:</label>
+                <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" validationgroup="group1" controltovalidate="title" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="startdate">Start Date:</label>
+                <input type="Date" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" validationgroup="group1" controltovalidate="startdate" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <label for="enddate">End Date:</label>
+                <input type="date" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="starttime">Start Time:</label>
+                <input type="time" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" validationgroup="group1" controltovalidate="starttime" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <label for="endtime">End Time:</label>
+                <input type="time" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="location">Event Location:</label>
+                <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" validationgroup="group1" controltovalidate="location" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
+            </div>
+            <div class="form-group">
+                <label for="eventdescription">Event Description:</label>
+                <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
+            </div>
+            <br />
+              <button type="button" class="btn btn-success" runat="server" validationgroup="group1" onserverclick="SubmitButton_Click">Create Event</button>
               <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
 
     </asp:Panel>
@@ -621,7 +625,7 @@
         <!-- Edit Modal HTML -->
          <div id="mask">
                 </div>
-                                 <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="680px"
+                    <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="800px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:-1900%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Event</h1>
                         <div class="form-group">
@@ -630,31 +634,33 @@
                                     <div class="row justify-content-between">
                                         <div class="col-12 col-md-8 col-lg-7">
                                             <article>
-
-                                                <label>Event Title</label>
+                                                <label style="color: red">*</label><label>Event Title</label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditTitle">
-                                                <label>Start Date</label>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" validationgroup="group1" controltovalidate="txtEditTitle" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator><br />
+                                                <label style="color: red">*</label><label>Start Date</label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditStartDate">
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" validationgroup="group1" controltovalidate="txtEditStartDate" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator><br />
                                                 <label>End Date</label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditEndDate">
-                                                <label>Start Time </label>
+                                                <label style="color: red">*</label><label>Start Time </label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditStartTime">
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator7" validationgroup="group1" controltovalidate="txtEditStartTime" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator><br />
                                                 <label>End Time</label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditEndTime">
-                                                <label>Event Location</label>
+                                                <label style="color: red">*</label><label>Event Location</label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditLocation">
-                               <!--                 <label>Event Description</label>   -->
-                                 <!--               <input class="form-control" runat="server" type="text" ID="txtEditDescription" rows="3"> -->
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator8" validationgroup="group1" controltovalidate="txtEditLocation" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator><br />
                                                 <label for="eventdescription">Event Description:</label>
-                                                <textarea class="form-control" runat="server" id="textEditDescriptionText" rows="3"></textarea>
+                                                <textarea class="form-control" runat="server" id="txtEditDescription" rows="3"></textarea>
                                             </article>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <br>
 
-                    <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save Changes</button>
+                    <button type="button" class="btn btn-success" runat="server" validationgroup="group1" onserverclick="SaveEdit_Click">Save Changes</button>
                     <button type="button" onserverclick="CloseEdit" class="btn btn-default" runat="server">Close</button>
 
         </asp:Panel>

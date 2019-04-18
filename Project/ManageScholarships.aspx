@@ -384,8 +384,9 @@
                                 Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 0%; top: -5%; border: outset 2px gray; padding: 5px; display: none">
                                 <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create Scholarship</h1>
                                                         <div class="form-group">
-                                                            <label for="exampleFormControlInput1">Scholarship Title:</label>
+                                                            <label style="color:red">*</label><label for="exampleFormControlInput1">Scholarship Title:</label>
                                                             <asp:TextBox ID="txtTitle" class="form-control" placeholder="ie. College Scholarship" runat="server"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" validationgroup="group1" controltovalidate="txtTitle" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>                                   
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleFormControlInput1">Scholarship Description:</label>
@@ -396,15 +397,17 @@
                                                             <asp:TextBox ID="txtRequirements" class="form-control" runat="server"></asp:TextBox>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exampleFormControlInput1">Amount:</label>
+                                                            <label style="color:red">*</label><label for="exampleFormControlInput1">Amount:</label>
                                                             <asp:TextBox ID="txtAmount" class="form-control" placeholder="ie. $5,000" runat="server"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" validationgroup="group1" controltovalidate="txtAmount" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>                                   
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleFormControlInput1">Deadline:</label>
-                                                            <asp:TextBox ID="txtDeadline" class="form-control" placeholder="ie. 10/12/2019" runat="server"></asp:TextBox>
+                                                            <input type="date" ID="txtDeadline" class="form-control" placeholder="ie. 10/12/2019" runat="server" />
+<%--                                                            <asp:TextBox ID="txtDeadline" class="form-control" placeholder="ie. 10/12/2019" runat="server"></asp:TextBox>--%>
                                                         </div>
-                                                        
-                                                        <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Scholarship</button> 
+                                                        <br />
+                                                        <button type="button" class="btn btn-success" validationgroup="group1" runat="server" onserverclick="SubmitButton_Click">Create Scholarship</button> 
                                                         <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
                                      </asp:Panel>
                                                 </div>
@@ -466,8 +469,9 @@
                                 Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
                                 <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Scholarship</h1>
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput1">Scholarship Title:</label>
+                                                <label style="color:red">*</label><label for="exampleFormControlInput1">Scholarship Title:</label>
                                                 <asp:TextBox ID="txtEditTitle" class="form-control" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" validationgroup="group1" controltovalidate="txtEditTitle" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleFormControlTextarea1">Scholarship Description:</label>
@@ -478,14 +482,16 @@
                                                 <asp:TextBox ID="txtEditRequirements" multiline="true" class="form-control" runat="server"></asp:TextBox>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleFormControlInput1">Reward:</label>
+                                                <label style="color:red">*</label><label for="exampleFormControlInput1">Reward:</label>
                                                 <asp:TextBox ID="txtEditREward" class="form-control" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" validationgroup="group1" controltovalidate="txtEditReward" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleFormControlInput1">DueDate:</label>
                                                 <asp:TextBox ID="txtEditDueDate" class="form-control" runat="server"></asp:TextBox>
                                             </div> 
-                                  <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save Changes</button>
+                                    <br />
+                                  <button type="button" class="btn btn-success" runat="server" validationgroup="group1" onserverclick="SaveEdit_Click">Save Changes</button>
                                   <button type="button" onserverclick="CloseEdit" class="btn btn-default" runat="server">Close</button>
 
                               </asp:Panel>

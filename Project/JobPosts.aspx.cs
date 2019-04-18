@@ -201,14 +201,14 @@ public partial class JobPosts : System.Web.UI.Page
     //open Create popup
     protected void openCreate(object sender, EventArgs e)
     {
-        title.Value = "";
-        description.Value = "";
-        department.Value = "";
+        positionTitle.Text = "";
+        description.Text = "";
+        department.Text = "";
         reqs.Value = "";
-        deadline.Value = "";
-        salary.Value = "";
+        deadline.Text = "";
+        salary.Text = "";
         respons.Value = "";
-        location.Value = "";
+        location.Text = "";
         ADayInTheLife.Value = "";
 
         StringBuilder builder = new StringBuilder();
@@ -273,7 +273,7 @@ public partial class JobPosts : System.Web.UI.Page
         insertJob.Connection = localDB;
 
         //Create Post object
-        Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(description.Value));
+        Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(positionTitle.Text), HttpUtility.HtmlEncode(description.Text));
 
         //Insert data into database
         insertPost.CommandText = "Execute InsertPost @busID, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated";
@@ -296,17 +296,17 @@ public partial class JobPosts : System.Web.UI.Page
         string selected;
         if (yearly.Checked == true)
         {
-            selected = yearly.Value;
+            selected = "yearly";
         }
 
         else
         {
-            selected = hourly.Value;
+            selected = "hourly";
         }
 
 
         //Create Job object
-        Job job = new Job(postID, HttpUtility.HtmlEncode(department.Value), HttpUtility.HtmlEncode(reqs.Value), HttpUtility.HtmlEncode(deadline.Value), HttpUtility.HtmlEncode(salary.Value), HttpUtility.HtmlEncode(respons.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(ADayInTheLife.Value));
+        Job job = new Job(postID, HttpUtility.HtmlEncode(department.Text), HttpUtility.HtmlEncode(reqs.Value), HttpUtility.HtmlEncode(deadline.Text), HttpUtility.HtmlEncode(salary.Text), HttpUtility.HtmlEncode(respons.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(location.Text), HttpUtility.HtmlEncode(ADayInTheLife.Value));
 
         insertJob.CommandText = "Execute InsertJob @postID, @department, @requirements, @dueDate, @salary, @resp, @payType, @location, @ADayInTheLife, @lastUpdatedBy, @lastUpdated";
 
@@ -328,14 +328,14 @@ public partial class JobPosts : System.Web.UI.Page
 
         showData();
 
-        title.Value = "";
-        description.Value = "";
-        department.Value = "";
+        positionTitle.Text = "";
+        description.Text = "";
+        department.Text = "";
         reqs.Value = "";
-        deadline.Value = "";
-        salary.Value = "";
+        deadline.Text = "";
+        salary.Text = "";
         respons.Value = "";
-        location.Value = "";
+        location.Text = "";
         ADayInTheLife.Value = "";
 
 
@@ -344,15 +344,15 @@ public partial class JobPosts : System.Web.UI.Page
     //Populate create popup
     protected void Populate_Click(object sender, EventArgs e)
     {
-        title.Value = "Marketing Associate";
-        description.Value = "Works in a team to create a marketing plan for a client";
-        department.Value = "Marketing";
+        positionTitle.Text = "Marketing Associate";
+        description.Text = "Works in a team to create a marketing plan for a client";
+        department.Text = "Marketing";
         reqs.Value = "3.0 GPA";
-        deadline.Value = "04/20/2019";
-        salary.Value = "50,000";
+        deadline.Text = "04/20/2019";
+        salary.Text = "50,000";
         respons.Value = "Responsible for maintaining a good relationship with the client";
         yearly.Checked = true;
-        location.Value = "Arlington, Va";
+        location.Text = "Arlington, Va";
         ADayInTheLife.Value = "9 to 5 job";
 
         StringBuilder builder = new StringBuilder();
@@ -460,13 +460,13 @@ public partial class JobPosts : System.Web.UI.Page
             getTitle.Connection = localDB;
             getTitle.CommandText = "Select Title From Post where PostID = @id";
             getTitle.Parameters.AddWithValue("id", id.Text);
-            txtEditTitle.Value = getTitle.ExecuteScalar().ToString();
+            txtEditTitle.Text = getTitle.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDescription = new System.Data.SqlClient.SqlCommand();
             getDescription.Connection = localDB;
             getDescription.CommandText = "Select PostDescription From Post where PostID = @id";
             getDescription.Parameters.AddWithValue("id", id.Text);
-            txtEditDescription.Value = getDescription.ExecuteScalar().ToString();
+            txtEditDescription.Text = getDescription.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getResponsibilities = new System.Data.SqlClient.SqlCommand();
             getResponsibilities.Connection = localDB;
@@ -516,8 +516,8 @@ public partial class JobPosts : System.Web.UI.Page
         }
         catch
         {
-            txtEditTitle.Value = "";
-            txtEditDescription.Value = "";
+            txtEditTitle.Text = "";
+            txtEditDescription.Text = "";
             txtEditDepartment.Value = "";
             txtEditDeadline.Value = "";
             txtEditLocation.Value = "";
@@ -535,16 +535,16 @@ public partial class JobPosts : System.Web.UI.Page
         string selected;
         if (yearly.Checked == true)
         {
-            selected = yearly.Value;
+            selected = "yearly";
         }
 
         else
         {
-            selected = hourly.Value;
+            selected = "hourly";
         }
 
         //create post object
-        Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(txtEditTitle.Value), HttpUtility.HtmlEncode(txtEditDescription.Value));
+        Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(txtEditTitle.Text), HttpUtility.HtmlEncode(txtEditDescription.Text));
 
         //insert into database
         localDB.Open();

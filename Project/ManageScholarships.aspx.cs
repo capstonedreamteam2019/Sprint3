@@ -279,7 +279,7 @@ public partial class ManageScholarships : System.Web.UI.Page
         selectPostID.ExecuteNonQuery();
 
         //create scholarship object 
-        Scholarship sch = new Scholarship(postID, HttpUtility.HtmlEncode(txtRequirements.Text), HttpUtility.HtmlEncode(txtAmount.Text), HttpUtility.HtmlEncode(txtDeadline.Text));
+        Scholarship sch = new Scholarship(postID, HttpUtility.HtmlEncode(txtRequirements.Text), HttpUtility.HtmlEncode(txtAmount.Text), HttpUtility.HtmlEncode(txtDeadline.Value));
 
         System.Data.SqlClient.SqlCommand insertScholarship = new System.Data.SqlClient.SqlCommand();
         insertScholarship.Connection = localDB;
