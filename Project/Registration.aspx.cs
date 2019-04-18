@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
@@ -85,7 +86,7 @@ public partial class Registration : System.Web.UI.Page
             getLastUpdatedBy.ExecuteNonQuery();
 
 
-            if (LastUpdatedBy == "Lindsey Blanchetti")
+            if (LastUpdatedBy == "Incomplete")
             {
                 //Update user table
                 SqlCommand update = new SqlCommand("Update Users SET UserType=@UserType WHERE UserId=@MaxID;", localDB);
@@ -96,26 +97,31 @@ public partial class Registration : System.Web.UI.Page
 
             else
             {
-                //Insert into user table
-                SqlCommand insert = new SqlCommand("Insert INTO Users Values (@UserType, @Email, @UserPassword, @FirstName, @LastName, NULL, NULL, NULL, NULL, NULL, @LastUpdatedBy, @LastUpdated)", localDB);
+                System.Data.SqlClient.SqlCommand insert = new System.Data.SqlClient.SqlCommand("InsertUser", localDB);
+                insert.Connection = localDB;
+
+                //Define command type as stored procedure 
+                insert.CommandType = CommandType.StoredProcedure;
+
+                //Pass values to command parameters 
                 insert.Parameters.Add(new SqlParameter("@UserType", userType));
                 insert.Parameters.Add(new SqlParameter("@Email", "EdwardSmith@gmail.com"));
                 insert.Parameters.Add(new SqlParameter("@UserPassword", "password"));
                 insert.Parameters.Add(new SqlParameter("@FirstName", "Edward"));
                 insert.Parameters.Add(new SqlParameter("@LastName", "Smith"));
-                insert.Parameters.Add(new SqlParameter("@LastUpdatedBy", "Lindsey Blanchetti"));
+                insert.Parameters.Add(new SqlParameter("@LastUpdatedBy", "Incomplete"));
                 insert.Parameters.Add(new SqlParameter("@LastUpdated", DateTime.Today));
                 insert.ExecuteNonQuery();
             }
 
-
             localDB.Close();
             Response.Redirect("Registration2.aspx");
-        }
+             }
+
         else
         {
             lblError.Text = "Must select identification.";
         }
-    }
+            }
 
 }
