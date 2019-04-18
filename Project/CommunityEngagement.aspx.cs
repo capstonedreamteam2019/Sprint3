@@ -23,6 +23,7 @@ public partial class CommunityEngagement : System.Web.UI.Page
     {
 
         Calendar1.SelectedDate = DateTime.Now;
+        OnInit(e);
         BuildSocialEventTable();
 
         if (!IsPostBack)
@@ -33,6 +34,7 @@ public partial class CommunityEngagement : System.Web.UI.Page
             getLow.CommandText = "Select min(PostID) From Post where PostType Like 'Event'";
             id = getLow.ExecuteScalar().ToString();
             localDB.Close();
+            BuildSocialEventTable();
 
         }
 
@@ -89,8 +91,10 @@ public partial class CommunityEngagement : System.Web.UI.Page
             image = new System.Web.UI.WebControls.Image();
             image.ToolTip = row["Event Title:"].ToString();
             e.Cell.BackColor = Color.Wheat;
-
+            break;
+            
         }
+        
 
     }
 
@@ -165,6 +169,7 @@ public partial class CommunityEngagement : System.Web.UI.Page
         insertEvent.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getLastUpdated());
         insertEvent.ExecuteNonQuery();
 
+        
         localDB.Close();
     }
 
