@@ -68,8 +68,6 @@
 
                         <h6 id="sidebarContactName2" runat="server" class="mb-0">Harrisonburg High School</h6>
 
-                        <h6 id="sidebarContactName2" runat="server" class="mb-0">Mercy Ketteridge</h6>
-
                         <div>
                           <small class="text-muted">1 hour ago</small>
                         </div>
@@ -87,7 +85,6 @@
 
                         <h6 id="sidebarContactName3" runat="server" class="mb-0">Arlington High School</h6>
 
-                        <h6 id="sidebarContactName3" runat="server" class="mb-0">Sven Lansson</h6>
 
                         <div>
                           <small class="text-muted">2 hours ago</small>
@@ -105,8 +102,6 @@
                       <div class="d-flex justify-content-between align-items-center">
 
                         <h6 id="sidebarContactName4" runat="server" class="mb-0">Newport News High School</h6>
-=======
-                        <h6 id="sidebarContactName4" runat="server" class="mb-0">Bart Van Wissen</h6>
 
                         <div>
                           <small class="text-muted">7 hours ago</small>

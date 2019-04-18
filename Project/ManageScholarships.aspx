@@ -420,7 +420,7 @@
                             <!--Start Preview Popup-->
                              <div id="mask">
                                 </div>
-                            <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="600px"
+                            <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="800px"
                                 Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 5%; border: outset 2px gray; padding: 5px; display: none">
                                 <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview of Scholarship</h1>
                                 <div class="form-group">
