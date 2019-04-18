@@ -1,24 +1,73 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Community2.aspx.cs" Inherits="Community2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style>
+    #mask
+        {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            z-index: 4;
+            opacity: 0.4;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* first!*/
+            filter: alpha(opacity=40); /* second!*/
+            background-color: gray;
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        //Create popups
+        function ShowCreate() {
+            $('#mask').show();
+            $('#<%=CreatePopup.ClientID %>').show();
+        }
+        function HideCreate() {
+            $('#mask').hide();
+            $('#<%=CreatePopup.ClientID %>').hide();
+        }
+
+      //Preview popups
+        function ShowPreview() {
+            $('#mask').show();
+            $('#<%=PreviewPopup.ClientID %>').show();
+        }
+        function HidePreview() {
+            $('#mask').hide();
+            $('#<%=PreviewPopup.ClientID %>').hide();
+        }
+         
+
+        //Edit popups
+        function ShowEdit() {
+            $('#mask').show();
+            $('#<%=EditPopup.ClientID %>').show();
+        }
+        function HideEdit() {
+            $('#mask').hide();
+            $('#<%=EditPopup.ClientID %>').hide();
+        }
+
+        //Delete popups
+        function ShowDelete() {
+            $('#mask').show();
+            $('#<%=DeletePopup.ClientID %>').show();
+        }
+        function HideDelete() {
+            $('#mask').hide();
+            $('#<%=DeletePopup.ClientID %>').hide();
+        }
+    </script>
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
 <form runat="server">
 
-    <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Are you sure you want to log out?</h3>
-                </div>
-                <div class="modal-body">
-                   <a href="landing-4.html" class="btn-lg btn-success">Yes</a>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
-                </div>
-            </div>
-        </div>
-    </div>
    
     <section class="space-sm">
         <div class="container">
@@ -59,17 +108,15 @@
 
                         <div class="col-auto">
                             <!-- Button HTML (to Trigger Modal) -->
-                            <a href="#createEvent1" class="btn btn-success" data-toggle="modal" runat="server"><i class="icon-plus">&nbsp;</i>Create an Event</a>
-                 
+                           <button type="button" class="btn btn-success" runat="server" onserverclick="openCreate"><i class="icon-plus">&nbsp;</i>Create an Event</button>                            
+                
                            
         <!-- Create Event Modal HTML -->
-        <div id="createEvent1" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Create an Event</h4>
+        <div id="mask">
                 </div>
-                <div class="modal-body">
+        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="900px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
+                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
    <div class="form-group">
     <label for="title">Event Title:</label>
     <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
@@ -99,17 +146,10 @@
     <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
   </div>
 
+              <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Event</button>
+              <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" runat="server" onserverclick="EventButton_Click">Create Post</button>
-                        
-                    </div>
-
-                </div>
-            </div>
-        </div>
+    </asp:Panel>
         <!--end Create Modal-->
     </section>
     <!--end header section-->
@@ -131,14 +171,15 @@
                                 runat="server"
                                 GridLines="none"
                                 AutoGenerateColumns="False"
-                                ForeColor="#343A40">
+                                ForeColor="#343A40"
+                                OnRowCommand="GridView1_RowCommand">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <span visible="false">
-                                                <asp:Label ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label></span>
+                                                <asp:Label visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -171,39 +212,7 @@
                                              <h1>     </h1>
                                             <br />
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                   
 
                                     <asp:TemplateField>
                                         <ItemTemplate>
@@ -257,6 +266,29 @@
                                             <br />
                                         </ItemTemplate>
                                     </asp:TemplateField>
+
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Location">
                                         <ItemTemplate>
                                             <asp:Label ID="lblLocation" Text='<%#Eval("eventaddress") %>' runat="server"></asp:Label>
@@ -285,10 +317,31 @@
                                                     <i class="icon-dots-three-horizontal"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
-                                                    <a class="dropdown-item" href="#myModal3" data-toggle="modal">Preview</a>
-                                                    <a class="dropdown-item" href="#myModal4" data-toggle="modal">Edit</a>
+                                                    <asp:Button
+                                                        Text="Preview"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="btnPreview"
+                                                        runat="server"
+                                                        CommandName="Preview"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
+                                                    <asp:Button
+                                                        Text="Edit"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="Button1"
+                                                        runat="server"
+                                                        CommandName="Change"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#myModal5" data-toggle="modal">Remove</a>
+                                                    <asp:Button
+                                                        Text="Remove"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="Button2"
+                                                        runat="server"
+                                                        CommandName="Remove"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
                                                 </div>
                                             </div>
                                         </ItemTemplate>
@@ -319,14 +372,15 @@
                                 runat="server"
                                 GridLines="none"
                                 AutoGenerateColumns="False"
-                                ForeColor="#343A40">
+                                ForeColor="#343A40"
+                                OnRowCommand="GridView2_RowCommand">
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <span visible="false">
-                                                <asp:Label ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label></span>
+                                                <asp:Label visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label></span>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -454,12 +508,14 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>         
                                           <div class="dropdown">
-                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="icon-dots-three-horizontal"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
-                                                    <a class="dropdown-item" href="#myModal3" data-toggle="modal">Preview</a>
-                                                </div>
+                                               <asp:Button
+                                                Text="Preview"
+                                                        type="Button"
+                                                        class="btn btn-success"
+                                                        ID="btnPreview"
+                                                        runat="server"
+                                                        CommandName="Preview"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -485,27 +541,19 @@
          </div> <!--lines 233 and 234 were messing up the footer-->
         </section> <!--lines 233 and 234 were messing up the footer-->
 
-            <div class="row justify-content-center">
-                <div class="col-auto">
-                    <nav aria-label="Page navigation example">
-                    </nav>
-                </div>
-            </div>
-        <!--End of Gridview-->
     <br /><br />
 
-     
+     <section>
 
            
 
             <!-- Preview Modal HTML -->
-            <div id="myModal3" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Preview Event</h4>
-                      </div>
-                        <div class="modal-body">
+             <div id="mask">
+                </div>
+                           <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="660px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -2100%; border: outset 2px gray; padding: 5px; display: none">
+                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Event</h1>
+
                           <div class="form-group">
                                 <div class="bg-white space-sm">
                                     <div class="container">
@@ -525,7 +573,6 @@
                                                     <h5>Event Description</h5>
                                                     <label ID="Label11" runat="server" text=""></label>
                                                 </article>
-                                                <hr>
                                             </div>
                                         </div>
                                     </div>
@@ -566,25 +613,17 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
-                       <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--End Preview Modal-->
+                    <button type="button" onserverclick="ClosePreview" class="btn btn-success" runat="server">Close</button>
+                </asp:Panel>
+                <!--End Preview Pannel-->
 
 
         <!-- Edit Modal HTML -->
-       <div id="myModal4" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                     <h4 class="modal-title">Edit Event Post</h4>
-                    </div>
-                    <div class="modal-body">
+         <div id="mask">
+                </div>
+                                 <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="680px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -2100%%; border: outset 2px gray; padding: 5px; display: none">
+                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Event</h1>
                         <div class="form-group">
                             <div>
                                 <div class="container">
@@ -614,37 +653,27 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!--End Body-->
-                    <div class="modal-footer">
-                 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save</button>
-                    </div>
-               </div>
-            </div>
-        </div>
+
+                    <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save Changes</button>
+                    <button type="button" onserverclick="CloseEdit" class="btn btn-default" runat="server">Close</button>
+
+        </asp:Panel>
         <!--End edit modal-->
 
-
-       <!-- Delete Modal HTML -->
-        <div id="myModal5" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>Are you sure you want to delete this Post?</h3>
-                        <br />
-
-                    </div>
-                    <div class="modal-body">
-
-                        <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
-                         <button type="button" class="btn btn-success" runat="server" onserverclick="DeletePost_Click">Yes, Delete Event</button>
-                    </div>
+         <!--Delete pannel-->
+                <div id="mask">
                 </div>
-            </div>
-        </div>
-        <!--End delete modal-->
+                <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="225px"
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -1800%; border: outset 2px gray; padding: 5px; display: none">
+                    <h3  style="font: Helvetica;">Are you sure you want to delete this Post?</h3>
+                    <br />
+                    <h5 style="font: Helvetica;">All applications for this post will also be deleted.</h5>
+
+                    <button type="button" class="btn btn-success" runat="server" onserverclick="DeletePost_Click">Yes, Delete</button>
+                    <button type="button" onserverclick="CloseDelete" class="btn btn-default" runat="server">Close</button>
+                </asp:Panel>
+                <!--End delete pannel-->
+
     </section>
     <!--end Body section-->
 
