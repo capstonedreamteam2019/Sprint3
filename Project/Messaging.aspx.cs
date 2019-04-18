@@ -158,14 +158,9 @@ public partial class Messaging : System.Web.UI.Page
         seventhMess.InnerText = "seven";
         sidebarHighlight2.Attributes["class"] = "list-group-item list-group-item-action active";
         sidebarHighlight1.Attributes["class"] = "list-group-item list-group-item-action";
-        mainViewUserName.InnerText = "Mercy Ketteridge";
+        mainViewUserName.InnerText = "Harrisonburg High School";
+        mainViewSpeakingWith.InnerText = "Alex Cole";
         photoChange.Attributes["src"] = "pages/assets/img/avatar-female-3.jpg";
-
-        //Insert
-
-        //selectPostID.CommandText = "select max(postID) from Post";
-        //string postID = selectPostID.ExecuteScalar().ToString();
-        //selectPostID.ExecuteNonQuery();
     }
 
     protected void ChangeBack_OnClick(object sender, EventArgs e)
@@ -177,7 +172,8 @@ public partial class Messaging : System.Web.UI.Page
         fifthMess.InnerText = "Of course, I'm not a fool!";
         sixthMess.InnerText = "Awesome, did you make it with Wingman?";
         seventhMess.InnerText = "Yes, all synced to the drive for you guys &#x1F44D;";
-        mainViewUserName.InnerText = "Daniel Cameron";
+        mainViewUserName.InnerText = "Great Bridge High School";
+        mainViewSpeakingWith.InnerText = "Mary Daily";
         photoChange.Attributes["src"] = "pages/assets/img/avatar-male-4.jpg";
         sidebarHighlight1.Attributes["class"] = "list-group-item list-group-item-action active";
         sidebarHighlight2.Attributes["class"] = "list-group-item list-group-item-action";
@@ -196,7 +192,7 @@ public partial class Messaging : System.Web.UI.Page
         seventhMess.InnerText = "seven";
 
         sidebarHighlight2.Visible = false;
-        mainViewUserName.InnerText = "Mercy Ketteridge";
+        mainViewUserName.InnerText = "Harrisonburg High School";
 
         photoChange.Attributes["src"] = "pages/assets/img/avatar-female-3.jpg";
         sidebarHighlight1.Attributes["class"] = "list-group-item list-group-item-action active";

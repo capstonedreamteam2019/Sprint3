@@ -65,7 +65,11 @@
                     <img alt="Image" src="pages/assets/img/avatar-female-3.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
+
+                        <h6 id="sidebarContactName2" runat="server" class="mb-0">Harrisonburg High School</h6>
+
                         <h6 id="sidebarContactName2" runat="server" class="mb-0">Mercy Ketteridge</h6>
+
                         <div>
                           <small class="text-muted">1 hour ago</small>
                         </div>
@@ -80,7 +84,11 @@
                     <img alt="Image" src="pages/assets/img/avatar-male-3.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
+
+                        <h6 id="sidebarContactName3" runat="server" class="mb-0">Arlington High School</h6>
+
                         <h6 id="sidebarContactName3" runat="server" class="mb-0">Sven Lansson</h6>
+
                         <div>
                           <small class="text-muted">2 hours ago</small>
                         </div>
@@ -95,7 +103,11 @@
                     <img alt="Image" src="pages/assets/img/avatar-male-2.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
                       <div class="d-flex justify-content-between align-items-center">
+
+                        <h6 id="sidebarContactName4" runat="server" class="mb-0">Newport News High School</h6>
+=======
                         <h6 id="sidebarContactName4" runat="server" class="mb-0">Bart Van Wissen</h6>
+
                         <div>
                           <small class="text-muted">7 hours ago</small>
                         </div>

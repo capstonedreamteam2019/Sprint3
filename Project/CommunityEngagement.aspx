@@ -82,6 +82,15 @@
         <div class="container">
             <div class="row">
                 <div class="col">
+
+                    <div class="table table-hover table-borderless bg-white media align-items-center media-body">
+          
+                <span class="container align-items-center" aria-hidden="true">
+             
+                <asp:Calendar ID="Calendar1" runat="server"  DayNameFormat="Full"  Width="100%" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
+                    <DayHeaderStyle CssClass="p-1 text-center, p-1 bg-dark text-white"/>
+                    <DayStyle CssClass="date col-1, day col-sm p-1 border border-left-0 border-top-0 text-truncate" />
+
                     <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
           
                 <span class="container" aria-hidden="true">
@@ -89,6 +98,7 @@
                 <asp:Calendar ID="Calendar1" runat="server" CssClass="row" DayNameFormat="Full" Height="300px" Width="1100px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
                     <DayHeaderStyle CssClass="p-1 text-center, p-1 bg-dark text-white"/>
                     <DayStyle CssClass="date col-1, day col-sm p-2 border border-left-0 border-top-0 text-truncate" />
+
                     <OtherMonthDayStyle ForeColor="#669999" />
 
                     <TodayDayStyle BackColor="#B7FBF4" BorderStyle="Solid"></TodayDayStyle>
@@ -106,7 +116,11 @@
       </div>
             <!--end of container-->
          
+
+     
+
          </div>      
+
 
        <section class="flush-with-above">
         <!--Body section-->
@@ -186,11 +200,19 @@
      <div class="form-group">
     <label for="location">Event Location:</label>
     <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
+
   </div>
   <div class="form-group">
     <label for="eventdescription">Event Description:</label>
     <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
   </div>
+
+  </div>
+  <div class="form-group">
+    <label for="eventdescription">Event Description:</label>
+    <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
+  </div>
+
 
                 </div>
                 <div class="modal-footer">
@@ -219,4 +241,8 @@
     </span>
       </form>
 
+
+    </section>
+
     </asp:Content>
+
