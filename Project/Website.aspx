@@ -529,8 +529,9 @@
                     <!--end of tab content-->
                 </div>
                 <!--end of container-->
-                <section id="contact">
-                    <section class="bg-dark space-lg">
+                </section>
+                
+                    <section class="bg-dark space-lg" id="contact">
                         <div class="container">
                             <div class="row align-items-center justify-content-between">
                                 <div class="col-12 col-md-6 col-lg-5 section-intro">

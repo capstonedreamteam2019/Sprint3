@@ -199,4 +199,18 @@ public partial class Messaging : System.Web.UI.Page
 
     }
 
+
+    protected void ListView2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    //private void myListBox_Click(object sender, EventArgs e)
+    //{
+    //    ListBox lb = sender as ListBox;
+    //    if (lb != null)
+    //    {
+    //        sidebarContactMessage1.InnerText = ListView1.SelectedValue.ToString();
+    //    }
+    //}
 }

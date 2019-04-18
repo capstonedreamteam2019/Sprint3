@@ -10,14 +10,14 @@ public class Event
 {
     private string postingID;
     private string location;
-    private DateTime startDate;
-    private DateTime endDate;
+    private string startDate;
+    private string endDate;
     private string startTime;
     private string endTime;
     private string lastUpdatedBy;
-    private DateTime lastUpdated;
+    private string lastUpdated;
 
-    public Event(string postingID, string location, DateTime startDate, DateTime endDate, string startTime, string endTime, string lastUpdatedBy, DateTime lastUpdated)
+    public Event(string postingID, string location, string startDate, string endDate, string startTime, string endTime)
     {
         setPostingID(postingID);
         setLocation(location);
@@ -25,8 +25,8 @@ public class Event
         setEndDate(endDate);
         setStartTime(startTime);
         setEndTime(endTime);
-        setLastUpdatedBy(lastUpdatedBy);
-        setLastUpdated(lastUpdated);
+        setLastUpdatedBy();
+        setLastUpdated();
     }
 
     public string getPostingID()
@@ -49,23 +49,23 @@ public class Event
         this.location = location;
     }
 
-    public DateTime getStartDate()
+    public string getStartDate()
     {
         return startDate;
     }
 
-    public void setStartDate(DateTime startDate)
+    public void setStartDate(string startDate)
     {
         this.startDate = startDate;
     }
 
 
-    public DateTime getEndDate()
+    public string getEndDate()
     {
         return endDate;
     }
 
-    public void setEndDate(DateTime endDate)
+    public void setEndDate(string endDate)
     {
         this.endDate = endDate;
     }
@@ -96,19 +96,19 @@ public class Event
         return lastUpdatedBy;
     }
 
-    public void setLastUpdatedBy(string lastUpdatedBy)
+    public void setLastUpdatedBy()
     {
-        this.lastUpdatedBy = lastUpdatedBy;
+        this.lastUpdatedBy = Environment.UserName;
     }
 
-    public DateTime getLastUpdated()
+    public string getLastUpdated()
     {
         return lastUpdated;
     }
 
-    public void setLastUpdated(DateTime lastUpdated)
+    public void setLastUpdated()
     {
-        this.lastUpdated = lastUpdated;
+        this.lastUpdated = DateTime.Today.ToString();
     }
 
 
