@@ -120,11 +120,13 @@
                       <br>
                       <div class="form-group">
                     <img alt="Image" src="pages/assets/img/Ed.svg" class="avatar avatar-lg mb-3 mb-md-0" />
+                          <br />
                     <div class="media-body">
+                        <br />
                       <div>
                         <label class="custom-file mb-2" for="file2">
                           <input type="file" id="file2" class="custom-file-input height-0">
-                          <span class="btn btn-primary"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</span>
+                          <span class="btn btn-success"><i class="icon-upload-to-cloud">&nbsp;</i>Upload</span>
                         </label>
                         <div>
                         </div>
@@ -288,7 +290,7 @@
                           <input type="checkbox" class="custom-control-input" id="customSwitch1">
                           <label class="custom-control-label" for="customSwitch1">Make profile public</label>
                         </div>
-                        <button class="btn btn-sm btn-success">Update Profile</button>
+                            <asp:Button ID="btnUpdateProfile"  class="btn btn-sm btn-success" runat="server" onclick="btnUpdate_Click" Text="Update Profile" />
                       </div>
                     </div>
                   </div>
@@ -324,7 +326,7 @@
                           Option to upgrade after one month
                         </li>
                       </ul>
-                      <a href="app-wizard-onboarding.html" class="btn btn-lg btn-success">Select</a>
+                        <asp:Button ID="btnOneMonthTrial"  class="btn btn-lg btn-success" validationgroup="group1" runat="server" onclick="btnOneMonthTrial_Click" Text="Select" />
                     </div>
                   </div>
                   <!--end card-->
@@ -347,7 +349,7 @@
                           Option to upgrade at any time
                         </li>
                       </ul>
-                      <a href="app-wizard-onboarding.html" class="btn btn-lg btn-success">Select</a>
+                        <asp:Button ID="btnPayPerPost"  class="btn btn-lg btn-success" validationgroup="group1" runat="server" onclick="btnPayPerPost_Click" Text="Select" />
                     </div>
                   </div>
                   <!--end card-->
@@ -370,7 +372,7 @@
                           Option to downgrade plan at any time
                         </li>
                       </ul>
-                      <a href="app-wizard-onboarding.html" class="btn btn-lg btn-success">Select</a>
+                        <asp:Button ID="btnMonthlySub"  class="btn btn-lg btn-success" validationgroup="group1" runat="server" onclick="btnMonthlySub_Click" Text="Select" />
                     </div>
                   </div>
                   <!--end card-->
@@ -438,7 +440,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <button class="btn btn-success">Add new card</button>
+                    <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Add new card</a>
                   </form>
                 </div>
                 <!--end of col-->
@@ -450,6 +452,45 @@
           </div>
           <br>
           <br>
+        <div id="myModal2" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Payment Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+    <label for="exampleFormControlInput1">Name on Card:</label>
+    <input type="department" class="form-control" id="exampleFormControlInput1">
+  </div>
+   <div class="form-group">
+    <label for="exampleFormControlInput1">Card Number:</label>
+    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="**** **** **** ****">
+  </div>
+     <div class="form-group">
+    <label for="exampleFormControlInput1">Expiration Date:</label>
+    <input type="Position Title" class="form-control" id="exampleFormControlInput1" placeholder="00/00">
+  </div>
+     <div class="form-group">
+    <label for="exampleFormControlInput1">Security Code:</label>
+    <input type="Job Salary" class="form-control" id="exampleFormControlInput1" placeholder="CVV">
+  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Add card</button>
+                </div>
+            </div>
+        </div>
+    </div>
+          </section>
+          </div>
+          <br>
+          <br>
+
+
+
+    </section>
 </form>
 </asp:Content>
 
