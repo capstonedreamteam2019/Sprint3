@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -32,9 +31,11 @@ public partial class Messaging : System.Web.UI.Page
         //Select User's First and Last Name
         System.Data.SqlClient.SqlCommand selectUserName = new System.Data.SqlClient.SqlCommand();
         selectUserName.Connection = localDB;
-        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join message1 on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM message1)";
+        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join messages on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM messages)";
         string userName = selectUserName.ExecuteScalar().ToString();
         mainViewSpeakingWith.InnerHtml = "Speaking with: " + userName;
+
+
     }
 
     protected void SendButton_OnClick(object sender, EventArgs e)
@@ -49,7 +50,6 @@ public partial class Messaging : System.Web.UI.Page
         sendHide.Visible = true;
         messageBox.Value = "";
 
-        localDB.Open();
 
         //Creates a new sql insert command
         System.Data.SqlClient.SqlCommand insertMessage = new System.Data.SqlClient.SqlCommand();
@@ -59,7 +59,7 @@ public partial class Messaging : System.Web.UI.Page
         Message newMessage = new Message(6, 1, message, DateTime.Now);
 
         //Insert data into database
-        insertMessage.CommandText = "insert into [Message1] ([MessageToID], [MessageFromID], [MessageBody], [LastUpdated])" +
+        insertMessage.CommandText = "insert into [Messages] ([MessageToID], [MessageFromID], [MessageBody], [LastUpdated])" +
             "values (@to, @from, @body, @lastUpdated)";
 
         insertMessage.Parameters.Add(new SqlParameter("to", newMessage.getToID()));
@@ -81,7 +81,7 @@ public partial class Messaging : System.Web.UI.Page
         selectUserName.Connection = localDB;
 
         //Select User's First and Last Name
-        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join message1 on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM message1)";
+        selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join messages on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM messages)";
         string userName = selectUserName.ExecuteScalar().ToString();
 
 
@@ -198,4 +198,18 @@ public partial class Messaging : System.Web.UI.Page
 
     }
 
+
+    protected void ListView2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void myListBox_Click(object sender, EventArgs e)
+    {
+        ListBox lb = sender as ListBox;
+        if (lb != null)
+        {
+            sidebarContactMessage1.InnerText = ListView1.SelectedValue.ToString();
+        }
+    }
 }
