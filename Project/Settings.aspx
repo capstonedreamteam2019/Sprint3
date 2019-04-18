@@ -290,7 +290,7 @@
                           <input type="checkbox" class="custom-control-input" id="customSwitch1">
                           <label class="custom-control-label" for="customSwitch1">Make profile public</label>
                         </div>
-                        <button class="btn btn-sm btn-success">Update Profile</button>
+                            <asp:Button ID="btnUpdateProfile"  class="btn btn-sm btn-success" runat="server" onclick="btnUpdate_Click" Text="Update Profile" />
                       </div>
                     </div>
                   </div>
@@ -326,7 +326,7 @@
                           Option to upgrade after one month
                         </li>
                       </ul>
-                      <a href="app-wizard-onboarding.html" class="btn btn-lg btn-success">Select</a>
+                        <asp:Button ID="btnOneMonthTrial"  class="btn btn-lg btn-success" validationgroup="group1" runat="server" onclick="btnOneMonthTrial_Click" Text="Select" />
                     </div>
                   </div>
                   <!--end card-->
@@ -349,7 +349,7 @@
                           Option to upgrade at any time
                         </li>
                       </ul>
-                      <a href="app-wizard-onboarding.html" class="btn btn-lg btn-success">Select</a>
+                        <asp:Button ID="btnPayPerPost"  class="btn btn-lg btn-success" validationgroup="group1" runat="server" onclick="btnPayPerPost_Click" Text="Select" />
                     </div>
                   </div>
                   <!--end card-->
@@ -372,7 +372,7 @@
                           Option to downgrade plan at any time
                         </li>
                       </ul>
-                      <a href="app-wizard-onboarding.html" class="btn btn-lg btn-success">Select</a>
+                        <asp:Button ID="btnMonthlySub"  class="btn btn-lg btn-success" validationgroup="group1" runat="server" onclick="btnMonthlySub_Click" Text="Select" />
                     </div>
                   </div>
                   <!--end card-->
