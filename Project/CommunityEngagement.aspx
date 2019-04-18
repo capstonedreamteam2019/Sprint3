@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    
+    <form cssclass="container-fluid" runat="server">  
       <div id="myModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -61,16 +61,6 @@
               <nav aria-label="Page navigation example">
                 <ul class="pagination">
                 <li>
-                <div class="dropdown">
-                <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Filter Applications By
-                  <span class="sr-only">Toggle Dropdown</span>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
-                  <a class="dropdown-item" href="#">Your Events</a>
-                  <a class="dropdown-item" href="#">Local Events</a>
-                </div>
-              </div>
             </li>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -80,21 +70,76 @@
          	&nbsp;&nbsp;&nbsp;
            <li> <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a></li>
    		    &nbsp;&nbsp;&nbsp;&nbsp;
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true"><i class="icon-chevron-left"></i>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true"><i class="icon-chevron-right"></i>
-                      </span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
+
                 </ul>
-                
+             </nav>
+            </div>
+            <!--end of col-->
+          </div>
+ </div>
+  <section class="flush-with-above">  
+    <!--Body section-->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
+          
+                <span class="container" aria-hidden="true">
+             
+                <asp:Calendar ID="Calendar1" runat="server" CssClass="row" DayNameFormat="Full" Height="300px" Width="1100px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
+                    <DayHeaderStyle CssClass="p-1 text-center, p-1 bg-dark text-white"/>
+                    <DayStyle CssClass="date col-1, day col-sm p-2 border border-left-0 border-top-0 text-truncate" />
+                    <OtherMonthDayStyle ForeColor="#669999" />
+
+                    <TodayDayStyle BackColor="#B7FBF4" BorderStyle="Solid"></TodayDayStyle>
+                </asp:Calendar>
+            
+                <%--<asp:GridView ID="GridView1" runat="server" CssClass="form-group" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                </asp:GridView>--%>
+
+                </span>
+                    </div>
+                    <!--end of col-->
+                </div>
+                <!--end of row-->
+            </div>
+      </div>
+            <!--end of container-->
+         
+         </div>      
+
+       <section class="flush-with-above">
+        <!--Body section-->
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
+                      <asp:GridView
+                                ID="GridView1"
+                                runat="server"
+                                GridLines="none"
+                                ForeColor="#343A40"
+                                OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                                <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
+                                <RowStyle CssClass="style" Width="100%" />
+                                </asp:GridView> 
+<%--                                <asp:GridView ID="GridView3" runat="server" CssClass="form-group" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+                                    </asp:GridView>--%>
+                                               
+                    </div>
+                    <!--end of col-->
+                </div>
+                <!--end of row-->
+            </div>
+        </div>
+            <!--end of container-->
+            </section>
+
+
+
+
+
+
               </nav>
             </div>
             <!--end of col-->
@@ -104,29 +149,6 @@
     
       
 
-        
-
-
-            <form cssclass="container-fluid" runat="server">
-             
-                      <span aria-hidden="true">
-             
-                <asp:Calendar ID="Calendar1" runat="server" CssClass="col-auto" DayNameFormat="Full" Height="300px" Width="871px" OnSelectionChanged="Calendar1_SelectionChanged1" OnDayRender="Calendar1_DayRender" TodayDayStyle-BackColor="#FFE2C6">
-                    <DayHeaderStyle CssClass="p-1 text-center, p-1 bg-dark text-white"/>
-                    <DayStyle CssClass="date col-1, day col-sm p-2 border border-left-0 border-top-0 text-truncate" />
-                    <OtherMonthDayStyle ForeColor="#669999" />
-
-<TodayDayStyle BackColor="#B7FBF4" BorderStyle="Solid"></TodayDayStyle>
-                </asp:Calendar>
-            
-                <asp:GridView ID="GridView1" runat="server" CssClass="form-group" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                </asp:GridView>
-
-    </span>
-
-            <div runat="server" >
-            </div>
-            </form>
                 
 
 
@@ -195,5 +217,6 @@
     <script type="text/javascript" src="assets/js/theme.js"></script>
 
     </span>
+      </form>
 
     </asp:Content>

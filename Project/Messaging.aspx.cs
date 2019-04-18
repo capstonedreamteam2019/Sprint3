@@ -28,12 +28,17 @@ public partial class Messaging : System.Web.UI.Page
         string schoolName = selectSchoolName.ExecuteScalar().ToString();
         mainViewUserName.InnerHtml = schoolName;
 
+        sidebarContactName1.InnerText = schoolName;
+
         //Select User's First and Last Name
         System.Data.SqlClient.SqlCommand selectUserName = new System.Data.SqlClient.SqlCommand();
         selectUserName.Connection = localDB;
         selectUserName.CommandText = "select concat(firstname, ' ', lastname) as userName from users inner join messages on userID = messagetoid AND messageid = (SELECT MAX(messageID) FROM messages)";
         string userName = selectUserName.ExecuteScalar().ToString();
         mainViewSpeakingWith.InnerHtml = "Speaking with: " + userName;
+
+        //Display sidebar users
+
 
 
     }
@@ -204,12 +209,12 @@ public partial class Messaging : System.Web.UI.Page
 
     }
 
-    private void myListBox_Click(object sender, EventArgs e)
-    {
-        ListBox lb = sender as ListBox;
-        if (lb != null)
-        {
-            sidebarContactMessage1.InnerText = ListView1.SelectedValue.ToString();
-        }
-    }
+    //private void myListBox_Click(object sender, EventArgs e)
+    //{
+    //    ListBox lb = sender as ListBox;
+    //    if (lb != null)
+    //    {
+    //        sidebarContactMessage1.InnerText = ListView1.SelectedValue.ToString();
+    //    }
+    //}
 }
