@@ -167,6 +167,7 @@ public partial class Community2 : System.Web.UI.Page
     //open Create popup
     protected void openCreate(object sender, EventArgs e)
     {
+        lblError.Text = "";
         StringBuilder builder = new StringBuilder();
         builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
         Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
@@ -229,6 +230,7 @@ public partial class Community2 : System.Web.UI.Page
 
             System.Data.SqlClient.SqlCommand insertEvent = new System.Data.SqlClient.SqlCommand();
             insertEvent.Connection = localDB;
+          
 
             //Create Post object
             Post posting = new Post(1, "Event", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(eventdescription.Value));
@@ -249,6 +251,20 @@ public partial class Community2 : System.Web.UI.Page
             //Find post ID just created
             selectPostID.CommandText = "select max(postID) from Post";
             string postID = selectPostID.ExecuteScalar().ToString();
+
+            try
+            {
+
+                DateTime start = DateTime.Parse(startdate.Value);
+                startdate.Value = start.ToString("MM/DD/YYYY");
+
+                DateTime end = DateTime.Parse(enddate.Value);
+                enddate.Value = end.ToString("MM/DD/YYYY");
+            }
+            catch
+            {
+
+            }
 
             //Local Event object
             Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(startdate.Value), HttpUtility.HtmlEncode(enddate.Value), HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value));
@@ -306,13 +322,20 @@ public partial class Community2 : System.Web.UI.Page
             getResponsibilities.Connection = localDB;
             getResponsibilities.CommandText = "Select startdate From Event where PostID = @id";
             getResponsibilities.Parameters.AddWithValue("id", id.Text);
-            Label7.InnerText = getResponsibilities.ExecuteScalar().ToString();
+            string str = getResponsibilities.ExecuteScalar().ToString();
+            DateTime dt = new DateTime();
+            dt = Convert.ToDateTime(str);
+            Label7.InnerText = dt.ToString("MM-DD-YYYY");
+             
 
             System.Data.SqlClient.SqlCommand getQualifications = new System.Data.SqlClient.SqlCommand();
             getQualifications.Connection = localDB;
             getQualifications.CommandText = "Select enddate From event where PostID = @id";
             getQualifications.Parameters.AddWithValue("id", id.Text);
-            Label8.InnerText = getQualifications.ExecuteScalar().ToString();
+            string str2 = getQualifications.ExecuteScalar().ToString();
+            DateTime dt2 = new DateTime();
+            dt2 = Convert.ToDateTime(str2);
+            Label8.InnerText = dt.ToString("MM-DD-YYYY");
 
             System.Data.SqlClient.SqlCommand getDepartment = new System.Data.SqlClient.SqlCommand();
             getDepartment.Connection = localDB;
@@ -362,13 +385,21 @@ public partial class Community2 : System.Web.UI.Page
         getstartdate.Connection = localDB;
         getstartdate.CommandText = "Select startdate From Event where PostID = @id";
         getstartdate.Parameters.AddWithValue("id", id.Text);
-        txtEditStartDate.Value = getstartdate.ExecuteScalar().ToString();
+        string str = getstartdate.ExecuteScalar().ToString();
+        DateTime dt = new DateTime();
+        dt = Convert.ToDateTime(str);
+        txtEditStartDate.Value = dt.ToString("yyyy-MM-dd");
+         
 
         System.Data.SqlClient.SqlCommand getenddate = new System.Data.SqlClient.SqlCommand();
         getenddate.Connection = localDB;
         getenddate.CommandText = "Select enddate From Event where PostID = @id";
         getenddate.Parameters.AddWithValue("id", id.Text);
-        txtEditEndDate.Value = getenddate.ExecuteScalar().ToString();
+        string str2 = getenddate.ExecuteScalar().ToString();
+        DateTime dt2 = new DateTime();
+        dt2 = Convert.ToDateTime(str2);
+        txtEditEndDate.Value = dt.ToString("yyyy-MM-dd");
+        
 
         System.Data.SqlClient.SqlCommand getstarttime = new System.Data.SqlClient.SqlCommand();
         getstarttime.Connection = localDB;
@@ -407,38 +438,55 @@ public partial class Community2 : System.Web.UI.Page
         }
         else
         {
+            //create post object
+            Post posting = new Post(1, "Event", HttpUtility.HtmlEncode(txtEditTitle.Value), HttpUtility.HtmlEncode(txtEditDescription.Value));
+
+            //insert into database
             localDB.Open();
             System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
             editPost.Connection = localDB;
-
-            editPost.CommandText = "Execute EditPost @PostID, @BusinessID, @PostType,@Title, @PostDate,@PostDescription,@LastUpdatedBy,@LastUpdated;";
-            editPost.Parameters.Add("@PostID", SqlDbType.Int).Value = id.Text;
-            editPost.Parameters.Add("@BusinessID", SqlDbType.Int).Value = 1;
-            editPost.Parameters.Add("@PostType", SqlDbType.VarChar, 30).Value = "Event";
-            editPost.Parameters.Add("@Title", SqlDbType.VarChar, 100).Value = (txtEditTitle.Value);
-            editPost.Parameters.Add("@PostDate", SqlDbType.VarChar, 30).Value = "may2";
-            editPost.Parameters.Add("@PostDescription", SqlDbType.VarChar, 500).Value = (txtEditDescription.Value);
-            editPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = "LeaRios";
-            editPost.Parameters.Add("@LastUpdated", SqlDbType.Date).Value = DateTime.Today;
+            editPost.CommandText = "Execute EditPost @id, @title, @postDate, @description, @LastUpdatedBy, @LastUpdated";
+            editPost.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
+            editPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+            editPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+            editPost.Parameters.Add("@description", SqlDbType.VarChar, 100).Value = posting.getDescription();
+            editPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+            editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
             editPost.ExecuteNonQuery();
 
+            try
+            {
+                DateTime start = DateTime.Parse(txtEditStartDate.Value);
+                startdate.Value = start.ToString("MM/DD/YYYY");
+
+                DateTime end = DateTime.Parse(txtEditEndDate.Value);
+                enddate.Value = end.ToString("MM/DD/YYYY");
+            }
+            catch
+            {
+
+            }
+
+            Event events = new Event(id.Text, HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtEditStartDate.Value), HttpUtility.HtmlEncode(txtEditEndDate.Value), HttpUtility.HtmlEncode(txtEditStartTime.Value), HttpUtility.HtmlEncode(txtEditEndTime.Value));
 
             System.Data.SqlClient.SqlCommand editevent = new System.Data.SqlClient.SqlCommand();
             editevent.Connection = localDB;
             editevent.CommandText = "Execute EditEvent @PostID,@EventAddress, @StartDate, @EndDate, @StartTime, @EndTime,@LastUpdatedBy,@LastUpdated";
-            editevent.Parameters.Add("@PostID", SqlDbType.Int).Value = id.Text;
-            editevent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = (txtEditLocation.Value);
-            editevent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = (txtEditStartDate.Value);
-            editevent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = (txtEditEndDate.Value);
-            editevent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = (txtEditStartTime.Value);
-            editevent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = (txtEditEndTime.Value);
-            editevent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = "LeaRios";
-            editevent.Parameters.Add("@LastUpdated", SqlDbType.Date).Value = DateTime.Today;
+            editevent.Parameters.Add("@PostID", SqlDbType.Int).Value = events.getPostingID();
+            editevent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = events.getLocation();
+            editevent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = events.getStartDate();
+            editevent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = events.getEndDate();
+            editevent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = events.getStartTime();
+            editevent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = events.getEndTime();
+            editevent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = events.getLastUpdatedBy();
+            editevent.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = events.getLastUpdated();
             editevent.ExecuteNonQuery();
 
             localDB.Close();
 
             showData();
+
+            lblEditError.Text = "";
         }
     }
 
