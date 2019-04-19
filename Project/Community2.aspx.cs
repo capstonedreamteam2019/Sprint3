@@ -38,28 +38,36 @@ public partial class Community2 : System.Web.UI.Page
     ////update gridview
     protected void showData()
     {
-        localDB.Open();
-        dt = new DataTable(); 
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where(PostType like 'Event') and BusinessID = 1", localDB);
-        da = new SqlDataAdapter(cmd);
-        da.Fill(dt);
-        localDB.Close();
-        if (dt.Rows.Count > 0)
+        try
         {
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
 
+
+            localDB.Open();
+            dt = new DataTable();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where(PostType like 'Event') and BusinessID = 1", localDB);
+            da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+
+            }
+
+            dt2 = new DataTable();
+            SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1", localDB);
+            da2 = new SqlDataAdapter(cmd2);
+            da2.Fill(dt2);
+            localDB.Close();
+            if (dt2.Rows.Count > 0)
+            {
+                GridView2.DataSource = dt2;
+                GridView2.DataBind();
+            }
         }
-
-        dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1", localDB);
-        da2 = new SqlDataAdapter(cmd2);
-        da2.Fill(dt2);
-        localDB.Close();
-        if (dt2.Rows.Count > 0)
+        catch
         {
-            GridView2.DataSource = dt2;
-            GridView2.DataBind();
+
         }
     }
 
@@ -208,20 +216,34 @@ public partial class Community2 : System.Web.UI.Page
     //Create New Event Post
     protected void SubmitButton_Click(object sender, EventArgs e)
     {
-
+        
+        
         //Convert Date Formats
         DateTime start = DateTime.Parse(startdate.Value);
         startdate.Value = start.ToString("MM/dd/yyyy");
 
-        DateTime end = DateTime.Parse(enddate.Value);
-        enddate.Value = start.ToString("MM/dd/yyyy");
+        try
+        {
+            DateTime end = DateTime.Parse(enddate.Value);
+            enddate.Value = start.ToString("MM/dd/yyyy");
+        }
+        catch
+        {
+
+        }
 
         DateTime timeStart = DateTime.Parse(starttime.Value);
         starttime.Value = timeStart.ToString("hh:mm tt");
 
-        DateTime timeEnd = DateTime.Parse(endtime.Value);
+        try
+        {
+            DateTime timeEnd = DateTime.Parse(endtime.Value);
         endtime.Value = timeEnd.ToString("hh:mm tt");
+        }
+        catch
+        {
 
+        }
 
         if ((title.Value == "") || (startdate.Value == "") || (starttime.Value == "") || (location.Value == ""))
         {
@@ -401,15 +423,18 @@ public partial class Community2 : System.Web.UI.Page
         dt = Convert.ToDateTime(str);
         txtEditStartDate.Value = dt.ToString("yyyy-MM-dd");
        
-
+        
         System.Data.SqlClient.SqlCommand getenddate = new System.Data.SqlClient.SqlCommand();
         getenddate.Connection = localDB;
         getenddate.CommandText = "Select enddate From Event where PostID = @id";
         getenddate.Parameters.AddWithValue("id", id.Text);
         string str2 = getenddate.ExecuteScalar().ToString();
-        DateTime dt2 = new DateTime();
-        dt2 = Convert.ToDateTime(str2);
-        txtEditEndDate.Value = dt2.ToString("yyyy-MM-dd");
+        if (str2 != "")
+        {
+            DateTime dt2 = new DateTime();
+            dt2 = Convert.ToDateTime(str2);
+            txtEditEndDate.Value = dt2.ToString("yyyy-MM-dd");
+        }
 
 
         System.Data.SqlClient.SqlCommand getstarttime = new System.Data.SqlClient.SqlCommand();
@@ -426,9 +451,12 @@ public partial class Community2 : System.Web.UI.Page
         getendtime.CommandText = "Select endtime From Event where PostID = @id";
         getendtime.Parameters.AddWithValue("id", id.Text);
         string str4 = getendtime.ExecuteScalar().ToString();
-        DateTime dt4 = new DateTime();
-        dt4 = Convert.ToDateTime(str4);
-        txtEditEndTime.Value = dt4.ToString("hh:mm");
+        if (str2 != "")
+        {
+            DateTime dt4 = new DateTime();
+            dt4 = Convert.ToDateTime(str4);
+            txtEditEndTime.Value = dt4.ToString("hh:mm");
+        }
 
         System.Data.SqlClient.SqlCommand getlocation = new System.Data.SqlClient.SqlCommand();
         getlocation.Connection = localDB;

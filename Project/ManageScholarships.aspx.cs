@@ -396,7 +396,14 @@ public partial class ManageScholarships : System.Web.UI.Page
             getDepartment.Connection = localDB;
             getDepartment.CommandText = "Select DueDate From Scholarship where PostID = @id";
             getDepartment.Parameters.AddWithValue("id", id.Text);
-            txtEditDueDate.Value = getDepartment.ExecuteScalar().ToString();
+            string str2 = getDepartment.ExecuteScalar().ToString();
+            if (str2 != "")
+            {
+                DateTime dt2 = new DateTime();
+                dt2 = Convert.ToDateTime(str2);
+                txtEditDueDate.Value = dt2.ToString("yyyy-MM-dd");
+            }
+            
 
             localDB.Close();
         }

@@ -164,7 +164,7 @@
                                                                             <span class="mb-1">
                                                                                 <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span><br />
                                                                             Due Date: <asp:Label ID="lblRequirements" Text='<%#Eval("DueDate") %>' runat="server"></asp:Label><br />
-                                                                            <asp:Label ID="lblLocation" Text='<%#Eval("Reward") %>' runat="server"></asp:Label><br />
+                                                                            $<asp:Label ID="lblLocation" Text='<%#Eval("Reward") %>' runat="server"></asp:Label><br />
                                                                             <a class="badge badge-success badge-pill mb-2" href="#">Active</a><br />
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
@@ -320,7 +320,7 @@
                                                                                             <span class="mb-1">
                                                                                                 <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span><br />
                                                                             Due Date: <asp:Label ID="lblRequirements" Text='<%#Eval("DueDate") %>' runat="server"></asp:Label><br />
-                                                                                            <asp:Label ID="lblLocation" Text='<%#Eval("Reward") %>' runat="server"></asp:Label><br />
+                                                                                            $<asp:Label ID="lblLocation" Text='<%#Eval("Reward") %>' runat="server"></asp:Label><br />
                                                                                             <span class="badge badge-danger badge-pill mb-2">Deleted</span><br />
                                                                                         </ItemTemplate>
                                                                                     </asp:TemplateField>
