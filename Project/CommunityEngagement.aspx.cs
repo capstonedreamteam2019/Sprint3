@@ -12,6 +12,8 @@ using System.Drawing;
 
 public partial class CommunityEngagement : System.Web.UI.Page
 {
+
+    //New connection
     SqlConnection localDB = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localDB"].ConnectionString);
     DataTable socialEvents = new DataTable();
 
@@ -148,6 +150,19 @@ public partial class CommunityEngagement : System.Web.UI.Page
         selectPostID.CommandText = "select max(postID) from Post";
         string postID = selectPostID.ExecuteScalar().ToString();
         selectPostID.ExecuteNonQuery();
+
+        //Convert Date Formats
+        DateTime start = DateTime.Parse(startdate.Value);
+        startdate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime end = DateTime.Parse(enddate.Value);
+        enddate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime timeStart = DateTime.Parse(starttime.Value);
+        starttime.Value = timeStart.ToString("hh:mm tt");
+
+        DateTime timeEnd = DateTime.Parse(endtime.Value);
+        endtime.Value = timeEnd.ToString("hh:mm tt");
 
 
         //Local Event object

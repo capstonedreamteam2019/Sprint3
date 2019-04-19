@@ -208,6 +208,21 @@ public partial class Community2 : System.Web.UI.Page
     //Create New Event Post
     protected void SubmitButton_Click(object sender, EventArgs e)
     {
+
+        //Convert Date Formats
+        DateTime start = DateTime.Parse(startdate.Value);
+        startdate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime end = DateTime.Parse(enddate.Value);
+        enddate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime timeStart = DateTime.Parse(starttime.Value);
+        starttime.Value = timeStart.ToString("hh:mm tt");
+
+        DateTime timeEnd = DateTime.Parse(endtime.Value);
+        endtime.Value = timeEnd.ToString("hh:mm tt");
+
+
         if ((title.Value == "") || (startdate.Value == "") || (starttime.Value == "") || (location.Value == ""))
         {
             StringBuilder builder = new StringBuilder();
@@ -252,19 +267,19 @@ public partial class Community2 : System.Web.UI.Page
             selectPostID.CommandText = "select max(postID) from Post";
             string postID = selectPostID.ExecuteScalar().ToString();
 
-            try
-            {
+            //try
+            //{
 
-                DateTime start = DateTime.Parse(startdate.Value);
-                startdate.Value = start.ToString("MM/DD/YYYY");
+            //    DateTime start = DateTime.Parse(startdate.Value);
+            //    startdate.Value = start.ToString("MM/DD/YYYY");
 
-                DateTime end = DateTime.Parse(enddate.Value);
-                enddate.Value = end.ToString("MM/DD/YYYY");
-            }
-            catch
-            {
+            //    DateTime end = DateTime.Parse(enddate.Value);
+            //    enddate.Value = end.ToString("MM/DD/YYYY");
+            //}
+            //catch
+            //{
 
-            }
+            //}
 
             //Local Event object
             Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(startdate.Value), HttpUtility.HtmlEncode(enddate.Value), HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value));
@@ -322,20 +337,14 @@ public partial class Community2 : System.Web.UI.Page
             getResponsibilities.Connection = localDB;
             getResponsibilities.CommandText = "Select startdate From Event where PostID = @id";
             getResponsibilities.Parameters.AddWithValue("id", id.Text);
-            string str = getResponsibilities.ExecuteScalar().ToString();
-            DateTime dt = new DateTime();
-            dt = Convert.ToDateTime(str);
-            Label7.InnerText = dt.ToString("MM-DD-YYYY");
-             
+            Label7.InnerText = getResponsibilities.ExecuteScalar().ToString();
+
 
             System.Data.SqlClient.SqlCommand getQualifications = new System.Data.SqlClient.SqlCommand();
             getQualifications.Connection = localDB;
             getQualifications.CommandText = "Select enddate From event where PostID = @id";
             getQualifications.Parameters.AddWithValue("id", id.Text);
-            string str2 = getQualifications.ExecuteScalar().ToString();
-            DateTime dt2 = new DateTime();
-            dt2 = Convert.ToDateTime(str2);
-            Label8.InnerText = dt.ToString("MM-DD-YYYY");
+            Label8.InnerText = getQualifications.ExecuteScalar().ToString();
 
             System.Data.SqlClient.SqlCommand getDepartment = new System.Data.SqlClient.SqlCommand();
             getDepartment.Connection = localDB;
@@ -367,6 +376,8 @@ public partial class Community2 : System.Web.UI.Page
     //Load Edit Modal
     protected void LoadEdit()
     {
+
+
         localDB.Open();
 
         System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
@@ -389,7 +400,7 @@ public partial class Community2 : System.Web.UI.Page
         DateTime dt = new DateTime();
         dt = Convert.ToDateTime(str);
         txtEditStartDate.Value = dt.ToString("yyyy-MM-dd");
-         
+       
 
         System.Data.SqlClient.SqlCommand getenddate = new System.Data.SqlClient.SqlCommand();
         getenddate.Connection = localDB;
@@ -398,20 +409,26 @@ public partial class Community2 : System.Web.UI.Page
         string str2 = getenddate.ExecuteScalar().ToString();
         DateTime dt2 = new DateTime();
         dt2 = Convert.ToDateTime(str2);
-        txtEditEndDate.Value = dt.ToString("yyyy-MM-dd");
-        
+        txtEditEndDate.Value = dt2.ToString("yyyy-MM-dd");
+
 
         System.Data.SqlClient.SqlCommand getstarttime = new System.Data.SqlClient.SqlCommand();
         getstarttime.Connection = localDB;
         getstarttime.CommandText = "Select starttime From Event where PostID = @id";
         getstarttime.Parameters.AddWithValue("id", id.Text);
-        txtEditStartTime.Value = getstarttime.ExecuteScalar().ToString();
+        string str3 = getstarttime.ExecuteScalar().ToString();
+        DateTime dt3 = new DateTime();
+        dt3 = Convert.ToDateTime(str3);
+        txtEditStartTime.Value = dt3.ToString("hh:mm");
 
         System.Data.SqlClient.SqlCommand getendtime = new System.Data.SqlClient.SqlCommand();
         getendtime.Connection = localDB;
         getendtime.CommandText = "Select endtime From Event where PostID = @id";
         getendtime.Parameters.AddWithValue("id", id.Text);
-        txtEditEndTime.Value = getendtime.ExecuteScalar().ToString();
+        string str4 = getendtime.ExecuteScalar().ToString();
+        DateTime dt4 = new DateTime();
+        dt4 = Convert.ToDateTime(str4);
+        txtEditEndTime.Value = dt4.ToString("hh:mm");
 
         System.Data.SqlClient.SqlCommand getlocation = new System.Data.SqlClient.SqlCommand();
         getlocation.Connection = localDB;
@@ -427,6 +444,19 @@ public partial class Community2 : System.Web.UI.Page
     protected void SaveEdit_Click(object sender, EventArgs e)
     {
 
+
+        //Convert Date Formats
+        DateTime start = DateTime.Parse(txtEditStartDate.Value);
+        txtEditStartDate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime end = DateTime.Parse(txtEditEndDate.Value);
+        txtEditEndDate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime timeStart = DateTime.Parse(txtEditStartTime.Value);
+        txtEditStartTime.Value = timeStart.ToString("hh:mm tt");
+
+        DateTime timeEnd = DateTime.Parse(txtEditEndTime.Value);
+        txtEditEndTime.Value = timeEnd.ToString("hh:mm tt");
 
         if ((txtEditTitle.Value == "") || (txtEditStartDate.Value == "") || (txtEditStartTime.Value == "") || (txtEditLocation.Value == ""))
         {
@@ -454,18 +484,18 @@ public partial class Community2 : System.Web.UI.Page
             editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
             editPost.ExecuteNonQuery();
 
-            try
-            {
-                DateTime start = DateTime.Parse(txtEditStartDate.Value);
-                startdate.Value = start.ToString("MM/DD/YYYY");
+            //try
+            //{
+            //    DateTime start = DateTime.Parse(txtEditStartDate.Value);
+            //    startdate.Value = start.ToString("MM/DD/YYYY");
 
-                DateTime end = DateTime.Parse(txtEditEndDate.Value);
-                enddate.Value = end.ToString("MM/DD/YYYY");
-            }
-            catch
-            {
+            //    DateTime end = DateTime.Parse(txtEditEndDate.Value);
+            //    enddate.Value = end.ToString("MM/DD/YYYY");
+            //}
+            //catch
+            //{
 
-            }
+            //}
 
             Event events = new Event(id.Text, HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtEditStartDate.Value), HttpUtility.HtmlEncode(txtEditEndDate.Value), HttpUtility.HtmlEncode(txtEditStartTime.Value), HttpUtility.HtmlEncode(txtEditEndTime.Value));
 

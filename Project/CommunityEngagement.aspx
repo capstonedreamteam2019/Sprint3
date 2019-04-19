@@ -136,10 +136,6 @@
             </section>
 
 
-
-
-
-
               </nav>
             </div>
             <!--end of col-->
@@ -147,12 +143,6 @@
     
           <!--end of row-->
     
-      
-
-                
-
-
-
 
         <!--end of container-->
        <!-- Modal HTML -->
@@ -169,19 +159,19 @@
   </div>
    <div class="form-group">
     <label for="startdate">Start Date:</label>
-    <input type="text" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
+    <input type="date" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
   </div>
      <div class="form-group">
     <label for="enddate">End Date:</label>
-    <input type="text" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
+    <input type="date" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
   </div>
      <div class="form-group">
     <label for="starttime">Start Time:</label>
-    <input type="text" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
+    <input type="time" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
   </div>
      <div class="form-group">
     <label for="endtime">End Time:</label>
-    <input type="text" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
+    <input type="time" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
   </div>
      <div class="form-group">
     <label for="location">Event Location:</label>
