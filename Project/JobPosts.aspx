@@ -32,7 +32,6 @@
             $('#mask').hide();
             $('#<%=CreatePopup.ClientID %>').hide();
         }
-
         //Preview popups
         function ShowPreview() {
             $('#mask').show();
@@ -42,7 +41,6 @@
             $('#mask').hide();
             $('#<%=PreviewPopup.ClientID %>').hide();
         }
-
         //Edit popups
         function ShowEdit() {
             $('#mask').show();
@@ -62,7 +60,6 @@
             $('#mask').hide();
             $('#<%=DeletePopup.ClientID %>').hide();
         }
-
         //Reactivate popups
         function ShowRe() {
             $('#mask').show();
@@ -72,7 +69,6 @@
             $('#mask').hide();
             $('#<%=RePopup.ClientID %>').hide();
         }
-
     </script>
 
 </asp:Content>
@@ -388,50 +384,48 @@
                 <!-- Create Job Modal HTML -->
                                 <div id="mask">
                 </div>
-                <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="1100px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -15%; border: outset 2px gray; padding: 5px; display: none">
+                <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="1150px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create Job Post</h1>
                                 <button type="button" class="btn btn-info" runat="server" onserverclick="Populate_Click">Populate</button>
                                                 <div class="form-group">
-                                                    <label style="color:red ">*</label><label for="title">Position Title:</label>
-                                                    <asp:TextBox class="form-control" ID="positionTitle" placeholder="ie. Sales Intern" runat="server"></asp:TextBox> 
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" validationgroup="group1" controltovalidate="positionTitle" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>                                   
+                                                    <asp:Label runat="server" forecolor="Red" Text="*"></asp:Label><label for="title">Position Title:</label>
+                                                    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Sales Intern">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label style="color:red ">*</label><label for="title">Position Description:</label>
-                                                    <asp:TextBox class="form-control" ID="description" placeholder="ie. Intern for the summer" runat="server"></asp:TextBox>
-                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" validationgroup="group1" controltovalidate="description" runat="server" forecolor="Red"  ErrorMessage="Required"></asp:RequiredFieldValidator>
+                                                    <asp:Label runat="server" forecolor="Red" Text="*"></asp:Label><label for="title">Position Description:</label>
+                                                    <input type="text" runat="server" class="form-control" id="description" placeholder="ie. Intern for the summer">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="department">Department:</label>
-                                                    <asp:TextBox class="form-control" ID="department" placeholder="ie. Marketing" runat="server"></asp:TextBox>
+                                                    <input type="text" runat="server" class="form-control" id="department" placeholder="ie. Marketing">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="location">Job Location:</label>
-                                                    <asp:TextBox class="form-control" ID="location" placeholder="ie. Richmond, VA" runat="server"></asp:TextBox>
+                                                    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. Richmond, VA">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="salary">Salary ($):</label>
-                                                    <asp:TextBox  class="form-control" ID="salary" placeholder="ie. 10,000" runat="server"></asp:TextBox>
+                                                    <input type="number" runat="server" class="form-control" id="salary" placeholder="ie. 10,000">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="payType">Pay Type:</label>
                                                     <br />
                                                     <label for="payType">Yearly</label>
-                                                    <asp:RadioButton ID="yearly" name="payType" value="yearly" runat="server" />
+                                                    <input type="radio" runat="server" id="yearly" name="payType" value="yearly">
 
                                                     <label for="payType">Hourly</label>
-                                                    <asp:RadioButton  ID="hourly" name="payType" value="hourly" runat="server" />
+                                                    <input type="radio" runat="server" id="hourly" name="payType" value="hourly">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="deadline">Application Deadline:</label>
-                                                    <asp:TextBox runat="server" class="form-control" ID="deadline" placeholder="3/31/2019"></asp:TextBox>
+                                                    <input type="date" runat="server" class="form-control" id="deadline" placeholder="3/31/2019">
                                                 </div>
-                    
+
                                                 <div class="form-group">
                                                     <label for="respons">Job Responsibilities:</label>
                                                     <textarea class="form-control" runat="server" id="respons" rows="3"></textarea>
@@ -445,8 +439,8 @@
                                                     <label for="reqs">A Day in the Life:</label>
                                                     <textarea class="form-control" runat="server" id="ADayInTheLife" rows="3"></textarea>
                                                 </div>
-                                                <br />
-                                        <button type="button" validationgroup="group1" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Job</button>
+                                        <asp:Label ID="lblError" runat="server" forecolor="Red" Text=""></asp:Label><br />
+                                        <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Job</button>
                                         <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
                     </asp:Panel>
                                 <!--end Create Modal-->
@@ -454,7 +448,7 @@
                 <!--Preview Pannel-->
                 <div id="mask">
                 </div>
-                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="1000px"
+                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="1100px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -12%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Job Post</h1>
                     <div class="form-group">
@@ -538,12 +532,10 @@
                                 <div class="row justify-content-between">
                                     <div class="col-12 col-md-8 col-lg-7">
                                         <article>
-                                            <label style="color:red ">*</label><label>Job Title</label>
-                                            <asp:TextBox class="form-control" runat="server" type="text" id="txtEditTitle"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator3" validationgroup="group1" controltovalidate="txtEditTitle" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>
-                                            <br />
-                                            <label style="color:red ">*</label><label>Role Description</label>
-                                            <asp:TextBox class="form-control" runat="server" type="text" id="txtEditDescription"></asp:TextBox><asp:RequiredFieldValidator ID="RequiredFieldValidator4" validationgroup="group1" controltovalidate="txtEditDescription" runat="server" forecolor="Red" ErrorMessage="Required"></asp:RequiredFieldValidator>                                   
-                                            <br />
+                                            <asp:Label runat="server" forecolor="Red" Text="*"></asp:Label><label>Job Title</label>
+                                            <input class="form-control" runat="server" type="text" id="txtEditTitle">
+                                            <asp:Label runat="server" forecolor="Red" Text="*"></asp:Label><label>Role Description</label>
+                                            <input class="form-control" runat="server" type="text" id="txtEditDescription">
                                             <label>Responsibilities</label>
                                             <input class="form-control" runat="server" type="text" id="txtEditResponsibilities">
                                             <label>Minimum Qualifications</label>
@@ -553,7 +545,7 @@
                                             <label>Location</label>
                                             <input class="form-control" runat="server" type="text" id="txtEditLocation">
                                             <label>Salary</label>
-                                            <input class="form-control" runat="server" type="text" id="txtEditSalary">
+                                            <input class="form-control" runat="server" type="number" id="txtEditSalary">
                                             <label>Basis</label>
                                             <div class="form-group">
                                                 <label for="payType">Yearly</label>
@@ -563,7 +555,7 @@
                                                 <input type="radio" runat="server" id="Radio2" name="payType" value="hourly">
                                             </div>
                                             <label>Due Date</label>
-                                            <input class="form-control" runat="server" type="text" id="txtEditDeadline">
+                                            <input class="form-control" runat="server" type="date" id="txtEditDeadline">
                                             <label>A Day In The Life</label>
                                             <input class="form-control" runat="server" type="text" id="txtADay">
                                             <br />
@@ -573,8 +565,8 @@
                             </div>
                         </div>
                     </div>
-
-                    <button type="button" class="btn btn-success" runat="server" validationgroup="group1" onserverclick="SaveEdit_Click">Save Changes</button>
+                    <asp:Label ID="lblEditError" runat="server" forecolor="Red" Text=""></asp:Label><br />
+                    <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save Changes</button>
                     <button type="button" onserverclick="CloseEdit" class="btn btn-default" runat="server">Close</button>
                 </asp:Panel>
                 <!--End edit Pannel-->

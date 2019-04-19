@@ -721,7 +721,7 @@
             <div id="mask">
             </div>
             <asp:Panel ID="DeletePopup" runat="server"  BackColor="White" Height="200px"
-                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 30%; top: -20%; 
+                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 400px; top: -20px; 
                 border: outset 2px gray;padding:5px;display:none">
                         <h3>Are you sure you want to decline this Applicant?</h3>
                         <br />
@@ -734,7 +734,7 @@
              <div id="mask">
             </div>
             <asp:Panel ID="HirePopup" runat="server"  BackColor="White" Height="250px"
-                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 30%; top: -20%; 
+                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 400px; top: -20px; 
                 border: outset 2px gray;padding:5px;display:none">
                             <h3>Are you sure you want to hire this applicant?</h3>
                             <br />
@@ -749,7 +749,7 @@
             <div id="mask">
             </div>
             <asp:Panel ID="RePopup" runat="server"  BackColor="White" Height="200px"
-                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 30%; top: -20%; 
+                Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 400px; top: -20px;
                 border: outset 2px gray;padding:5px;display:none">
                         <h3>Are you sure you want to re-activate this Applicant?</h3>
                         <br />

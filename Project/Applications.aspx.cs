@@ -434,6 +434,7 @@ public partial class Applications: System.Web.UI.Page
         {
 
         }
+        showData();
 
     }
 
