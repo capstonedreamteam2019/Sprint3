@@ -8,7 +8,7 @@
         <div class="container">
           <div class="row card flex-row">
             <div class="col-auto">
-               <form class="card-header d-none d-lg-block">
+               <form runat="server" class="card-header d-none d-lg-block">
             	<h5> Brilliature Messaging</h5>
                 <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>New Message</a>
                 <br>
@@ -26,8 +26,7 @@
                   </li>
                 </ul>
             <!--end nav collapse-->
-            	</form>
-              <form class="card-header d-none d-lg-block">
+            	
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
                     <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#" role="tab" aria-selected="true">All</a>
@@ -39,16 +38,16 @@
                     <a class="nav-link" id="security-tab" data-toggle="tab" href="#" role="tab" aria-selected="false">Teacher</a>
                   </li>
                 </ul>
-              </form>
               
-                <div id="sidebar" class="list-group list-group-chat list-group-flush">
-
+              
+               <div id="sidebar" class="list-group list-group-chat list-group-flush">
                 <a href="#r" id="sidebarHighlight1" runat="server" onserverclick="ChangeBack_OnClick" class="list-group-item list-group-item-action active">
+
                   <div class="media">
                     <img alt="Image" src="pages/assets/img/avatar-male-4.jpg" class="avatar avatar-sm m-0" />
                     <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 id="sidebarContactName1" runat="server" class="mb-0">Daniel Cameron
+                  <div class="d-flex justify-content-between align-items-center">
+                          <h6 id="sidebarContactName1" runat="server" class="mb-0">Daniel Cameron
                           <span class="badge badge-indicator badge-success"></span>
                         </h6>
                         <div>
@@ -116,7 +115,6 @@
             <!--end of col-->
             <div class="col">
               <div class="card-header d-flex justify-content-between align-items-center">
-
                 <div class="media align-items-center">
                   <img id="photoChange" runat="server" alt="Image" src="pages/assets/img/avatar-male-4.jpg" class="avatar avatar-sm" />
                   <div class="media-body">
@@ -128,7 +126,7 @@
                 </div>
 
                 <div>    
-                <button class="btn btn-outline-secondary" type="button" id="Button" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-outline-secondary" type="button" id="star" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-star"></i>
                   </button>
                   <button class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="Button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -314,7 +312,6 @@
                 </div>
               </div>
               <div class="card-footer bg-secondary">
-                <form class="d-flex align-items-center" runat="server">
                   <div class="input-group input-group-lg">
                     <div class="input-group-prepend">
                       <button class="btn btn-secondary" type="button">
@@ -327,8 +324,85 @@
                   <button class="btn btn-link pr-0">
                     <span class="h3">&#x1F600;</span>
                   </button>
-                </form>
-              </div>
+
+                    
+               <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
+                  <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="ListView1_SelectedIndexChanged">
+
+                      <AlternatingItemTemplate>
+                          <tr style="background-color:#FAFAD2; color: #284775;">
+                              <RowStyle CssClass="table table-hover align-items-center table-borderless bg-white media align-items-center media-body" Width="100%" />
+                              <td>
+                                  <asp:Label ID="SchoolNameLabel" runat="server" Text='<%# Eval("SchoolName") %>' />
+                              </td>
+                          </tr>
+                      </AlternatingItemTemplate>
+                      <EditItemTemplate>
+                          <tr style="background-color:#FFCC66; color: #000080;">
+                              <td>
+                                  <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
+                                  <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+                              </td>
+                              <td>
+                                  <asp:TextBox ID="SchoolNameTextBox" runat="server" Text='<%# Bind("SchoolName") %>' />
+                              </td>
+                          </tr>
+                      </EditItemTemplate>
+                      <EmptyDataTemplate>
+                          <table runat="server" style="background-color: #FFFFFF;border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;">
+                              <tr>
+                                  <td>No data was returned.</td>
+                              </tr>
+                          </table>
+                      </EmptyDataTemplate>
+                      <InsertItemTemplate>
+                          <tr style="">
+                              <td>
+                                  <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
+                                  <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
+                              </td>
+                              <td>
+                                  <asp:TextBox ID="SchoolNameTextBox" runat="server" Text='<%# Bind("SchoolName") %>' />
+                              </td>
+                          </tr>
+                      </InsertItemTemplate>
+                      <ItemTemplate>
+                          <tr style="background-color:#FFFBD6; color: #333333;">
+                              <td>
+                                  <asp:Label ID="SchoolNameLabel" runat="server" Text='<%# Eval("SchoolName") %>' />
+                              </td>
+                          </tr>
+                      </ItemTemplate>
+                      <LayoutTemplate>
+                          <table runat="server">
+                              <tr runat="server">
+                                  <td runat="server">
+                                      <table id="itemPlaceholderContainer" runat="server" border="1" style="background-color: #FFFFFF; border-collapse: collapse;border-color: #999999;border-style:none;border-width:1px;font-family: Verdana, Arial, Helvetica, sans-serif;">
+                                          <tr runat="server" style="background-color:#FFFBD6; color: #333333;">
+                                              <th runat="server">SchoolName</th>
+                                          </tr>
+                                          <tr id="itemPlaceholder" runat="server">
+                                          </tr>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <tr runat="server">
+                                  <td runat="server" style="text-align: center;background-color: #FFCC66; font-family: Verdana, Arial, Helvetica, sans-serif;color: #333333;">
+                                  </td>
+                              </tr>
+                          </table>
+                      </LayoutTemplate>
+                      <SelectedItemTemplate>
+                          <tr style="background-color:#FFCC66; font-weight: bold;color: #000080;">
+                              <td>
+                                  <asp:Label ID="SchoolNameLabel" runat="server" Text='<%# Eval("SchoolName") %>' />
+                              </td>
+                          </tr>
+                      </SelectedItemTemplate>
+                  </asp:ListView>
+                  <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [SchoolName] FROM [School]"></asp:SqlDataSource>
+             </div>
+             
             </div>
             <!--end of col-->
           </div>
@@ -345,7 +419,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                	  <input class="form-control form-control-lg" type="search" placeholder="To:" />
+                	  <input class="form-control form-control-lg" type="dropdown" />
                 	 <input class="form-control form-control-lg" type="search" placeholder="Subject" />
 
     <label for="exampleFormControlTextarea1"></label>
@@ -361,7 +435,7 @@
     </div>
       </section>
       <!--end of section-->
-     
+</form>
 
     <script type="text/javascript" src="pages/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="pages/assets/js/popper.min.js"></script>
