@@ -4,11 +4,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
  
+    <form class="card-header d-none d-lg-block" runat="server">
       <section>
         <div class="container">
           <div class="row card flex-row">
             <div class="col-auto">
-              <form class="card-header d-none d-lg-block">
             	<h5> Brilliature Messaging</h5>
             <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>New Message</a>
             <br>
@@ -26,8 +26,6 @@
                   </li>
                 </ul>
             <!--end nav collapse-->
-            	</form>
-            	 <form class="card-header d-none d-lg-block">
             	  <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item">
                     <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#" role="tab" aria-selected="true">All</a>
@@ -39,70 +37,19 @@
                     <a class="nav-link" id="security-tab" data-toggle="tab" href="#" role="tab" aria-selected="false">Teacher</a>
                   </li>
                 </ul>
-            	 </form>
               
               <div class="list-group list-group-chat list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action active">
-                  <div class="media">
-                    <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Daniel Cameron
-                          <span class="badge badge-indicator badge-success"></span>
-                        </h6>
-                        <div>
-                          <small class="text-muted">1 hour ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Let's keep those protoypes 100</span>
+                    <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
+                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" pagesize="6" GridLines="none" ForeColor="#343A40" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                          <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
+                          <RowStyle CssClass="style" Width="30%" />
+                          <Columns>
+                              <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName" />
+                              <asp:BoundField DataField="LastUpdated" HeaderText="LastUpdated" SortExpression="LastUpdated" />
+                          </Columns>
+                      </asp:GridView>
+                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [SchoolName], [LastUpdated] FROM [School]"></asp:SqlDataSource>
                     </div>
-                  </div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="assets/img/avatar-female-3.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Mercy Ketteridge</h6>
-                        <div>
-                          <small class="text-muted">1 hour ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">How should I go about this issue I'm facing</span>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="assets/img/avatar-male-3.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Sven Lansson</h6>
-                        <div>
-                          <small class="text-muted">2 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">Can you send through the logo files?</span>
-                    </div>
-                  </div>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action">
-                  <div class="media">
-                    <img alt="Image" src="assets/img/avatar-male-2.jpg" class="avatar avatar-sm m-0" />
-                    <div class="media-body d-none d-lg-block ml-2">
-                      <div class="d-flex justify-content-between align-items-center">
-                        <h6 class="mb-0">Bart Van Wissen</h6>
-                        <div>
-                          <small class="text-muted">7 hours ago</small>
-                        </div>
-                      </div>
-                      <span class="text-muted text-small col-11 p-0 text-truncate d-block">I'm collecting names for the annual event</span>
-                    </div>
-                  </div>
-                </a>
 
               </div>
             </div>
@@ -322,7 +269,22 @@
                     <div class="form-group">
                 	  <input class="form-control form-control-lg" type="search" placeholder="To:" />
                 	 <input class="form-control form-control-lg" type="search" placeholder="Subject" />
+                                      <div class="list-group list-group-chat list-group-flush">
+                    <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
+                     <asp:GridView ID="GridView2" runat="server" AllowPaging="True" pagesize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                          <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
+                          <RowStyle CssClass="style" Width="30%" />
+                          <Columns>
+                              <asp:CommandField ShowSelectButton="True" />
+                              <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName" />
+                              <asp:BoundField DataField="LastUpdated" HeaderText="LastUpdated" SortExpression="LastUpdated" />
+                          </Columns>
+                         
+                      </asp:GridView>
+                      <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [SchoolName], [LastUpdated] FROM [School]"></asp:SqlDataSource>
+                    </div>
 
+              </div>
     <label for="exampleFormControlTextarea1"></label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
   </div>
@@ -335,6 +297,7 @@
         </div>
     </div>
       </section>
+    </form>
       <!--end of section-->
 
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
@@ -347,5 +310,7 @@
     <script type="text/javascript" src="assets/js/zoom.min.js"></script>
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/theme.js"></script>
+
+    </div>
 
     </asp:Content>

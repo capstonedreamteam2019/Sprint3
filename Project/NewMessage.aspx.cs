@@ -11,4 +11,14 @@ public partial class NewMessage : System.Web.UI.Page
     {
 
     }
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+       
+    }
+
+    protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
