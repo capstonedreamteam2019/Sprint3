@@ -27,6 +27,10 @@ public partial class ManageScholarships : System.Web.UI.Page
         {
             showData();
         }
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 
     //update gridview

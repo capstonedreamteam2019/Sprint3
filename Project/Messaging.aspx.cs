@@ -15,6 +15,11 @@ public partial class Messaging : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
         sendHide.Visible = false;
         responseHide.Visible = false;
         noMessagesAlert.Visible = false;

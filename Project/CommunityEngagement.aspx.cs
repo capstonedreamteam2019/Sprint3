@@ -39,6 +39,10 @@ public partial class CommunityEngagement : System.Web.UI.Page
             BuildSocialEventTable();
 
         }
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
 
     }
 

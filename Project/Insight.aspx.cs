@@ -9,6 +9,9 @@ public partial class Insight : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 }

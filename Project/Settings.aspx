@@ -165,7 +165,7 @@
                     <div class="col-6">
                       <div class="form-group">
                         <label for="last-name">Middle Name:</label>
-                          <asp:TextBox ID="txtMiddleName"  class="form-control form-control-lg" runat="server"></asp:TextBox>
+                          <asp:TextBox ID="txtMiddleName"  class="form-control form-control-lg" runat="server"></asp:TextBox>                          
                       </div>
                     </div>
                     <div class="col-12">
@@ -174,7 +174,7 @@
                           <span class="text-red">*</span>
                         </label>
                           <asp:TextBox ID="txtEmail"  class="form-control form-control-lg" runat="server"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="txtFirstNameValidator" runat="server" forecolor="red" controltovalidate="txtEmail" ErrorMessage="Email Address Required"></asp:RequiredFieldValidator>
+                          <asp:RequiredFieldValidator ID="txtFirstNameValidator" runat="server" forecolor="red" controltovalidate="txtEmail" ErrorMessage="Email Address Required"></asp:RequiredFieldValidator>
                           <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" forecolor="Red" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format"></asp:RegularExpressionValidator>
                         <small>Used to log in to your account</small>
                       </div>
@@ -182,7 +182,7 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="emailaddress">Phone Number:
-                          <span class="text-red">*</span>
+                          
                         </label>
                           <asp:TextBox ID="txtPhone"  class="form-control form-control-lg" runat="server"></asp:TextBox>
                       </div>
@@ -190,17 +190,19 @@
                     <div class="col-12">
                       <div class="form-group">
                         <label for="emailaddress">Date of Birth:
-                          <span class="text-red">*</span>
+                          
                         </label>
                           <asp:TextBox ID="txtDOB"  class="form-control form-control-lg" runat="server"></asp:TextBox>
+                          
                       </div>
                     </div>
                     <div class="col-12">
                       <div class="form-group">
                         <label for="emailaddress">Address:
-                          <span class="text-red">*</span>
+                          
                         </label>
                           <asp:TextBox ID="txtAddress"  class="form-control form-control-lg" runat="server"></asp:TextBox>
+                          
                       </div>
                     </div>
                     <div class="col-12">
@@ -232,7 +234,7 @@
                              <span class="text-red">*</span>
                         </label>
                         <asp:TextBox ID="txtCompanyName"  class="form-control form-control-lg" runat="server"></asp:TextBox>
-                           <asp:RequiredFieldValidator ID="ReqCompanyName" runat="server" Forecolor="red" controltovalidate="txtCompanyName" ErrorMessage="Company Name is Required"></asp:RequiredFieldValidator>
+                          <asp:RequiredFieldValidator ID="ReqCompanyName" runat="server" Forecolor="red" controltovalidate="txtCompanyName" ErrorMessage="Company Name is Required"></asp:RequiredFieldValidator>
                         <small>This will be displayed on your public profile</small>
                       </div>
                       <div class="form-group">
@@ -295,7 +297,8 @@
                           <input type="checkbox" class="custom-control-input" id="customSwitch1">
                           <label class="custom-control-label" for="customSwitch1">Make profile public</label>
                         </div>
-                        <asp:Button ID="btnUpdateProfile"  class="btn btn-sm btn-success" runat="server" onclick="btnUpdate_Click" Text="Update Profile" />                      </div>
+                            <asp:Button ID="btnUpdateProfile"  class="btn btn-sm btn-success" runat="server" onclick="btnUpdate_Click" Text="Update Profile" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -307,7 +310,7 @@
           </div>
           <!--end of row-->
   
-      </section>
+     
     
        <div class="container">
           <div class="tab-content">
@@ -340,7 +343,7 @@
                   <div class="card pricing card-lg">
                     <div class="card-body">
                       <h5>Pay per Post</h5>
-                      <span class="display-3">$3</span>
+                      <span class="display-3">$199</span>
                       <span class="h6">Includes:</span>
                       <ul class="list-unstyled">
                       <li>
@@ -363,7 +366,7 @@
                   <div class="card pricing card-lg">
                     <div class="card-body">
                       <h5>Monthly Subscription</h5>
-                      <span class="display-3">$50</span>
+                      <span class="display-3">$299</span>
                       <span class="h6">Includes:</span>
                       <ul class="list-unstyled">
                         <li>
@@ -386,7 +389,7 @@
               <!--end of row-->
             </div>
       </section>
-              <div class="row mb-4">
+             <%-- <div class="row mb-4">
                 <div class="col">
                   <h5>Payment Methods</h5>
                 </div>
@@ -494,7 +497,7 @@
 
 
 
-    </section>
+    </section>--%>
 </form>
 </asp:Content>
 

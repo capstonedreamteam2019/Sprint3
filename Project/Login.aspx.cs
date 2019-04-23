@@ -26,8 +26,11 @@ public partial class Login : System.Web.UI.Page
                 txtPassword.Attributes.Add("Type", "password");
             }
         }
+        Session["UserName"] = txtEmail.Text;
 
-    }
+        
+
+        }
 
     protected void LoginButton_Click(object sender, EventArgs e)
     {

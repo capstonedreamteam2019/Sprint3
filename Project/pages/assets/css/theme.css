@@ -11668,7 +11668,7 @@ article h4, article h5 {
 }
 
     article h4:not(:first-child), article h5:not(:first-child) {
-        margin-top: 3rem;
+        margin-top: 0rem;
     }
 
 article .blockquote {

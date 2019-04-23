@@ -98,6 +98,7 @@
                                 <a class="dropdown-item" runat="server" onserverclick="LastUpdatedFilter">Most Recent</a>
                                 <a class="dropdown-item" runat="server" onserverclick="PositionFilter">Position Applied For</a>
                                 <a class="dropdown-item" runat="server" onserverclick="AlphabeticalFilter">Alphabetical by Last Name</a>
+                                <a class="dropdown-item" runat="server" onserverclick="BestFitFilter">Best Fit Score</a>
                             </div>
                         </div>
                     </div>
@@ -143,21 +144,7 @@
                                         <ItemTemplate>
                                             <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                   
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -176,21 +163,7 @@
                                              <h1>     </h1>
                                             <br />
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                     <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                     <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                     
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -245,25 +218,9 @@
                                             <br />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Best Fit Score">
                                         <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                     <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
+                                            <asp:Label ID="lblScore" Text='<%#Eval("Score") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                      <asp:TemplateField>
@@ -287,6 +244,14 @@
                                                         ID="btnPreview"
                                                         runat="server"
                                                         CommandName="Preview"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />
+                                                    <asp:Button
+                                                        Text="View Resume"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="Button4"
+                                                        runat="server"
+                                                        CommandName="Resume"
                                                         CommandArgument='<%# Container.DataItemIndex %>' />
                                                     <asp:Button
                                                         Text="Hire Applicant"
@@ -379,21 +344,7 @@
                                                     <h1></h1>
                                                     <br />
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <br />
-                                                    <h1></h1>
-                                                    <br />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <br />
-                                                    <h1></h1>
-                                                    <br />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>                                            
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <br />
@@ -441,27 +392,18 @@
                                                     <br />
                                                 </ItemTemplate>
                                             </asp:TemplateField>
+                                            <asp:TemplateField HeaderText="Best Fit Score">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblScore" Text='<%#Eval("Score") %>' runat="server"></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <br />
                                                     <h1></h1>
                                                     <br />
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                            <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                            </asp:TemplateField>                                            
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <br />
@@ -483,6 +425,14 @@
                                                                 ID="btnPreview"
                                                                 runat="server"
                                                                 CommandName="Preview"
+                                                                CommandArgument='<%# Container.DataItemIndex %>' />
+                                                            <asp:Button
+                                                                Text="View Resume"
+                                                                type="Button"
+                                                                class="dropdown-item"
+                                                                ID="Button4"
+                                                                runat="server"
+                                                                CommandName="Resume"
                                                                 CommandArgument='<%# Container.DataItemIndex %>' />
                                                             <a class="dropdown-item" href="Messaging.aspx">Contact Applicant</a>
                                                         </div>
@@ -632,6 +582,11 @@
                                                             <br />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Best Fit Score">
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblScore" Text='<%#Eval("Score") %>' runat="server"></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
                                                             <br />
@@ -648,13 +603,21 @@
                                                         <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
                                                             <div class="dropdown">
                                                                 <asp:Button
-                                                                Text="Preview Applicant"
-                                                                type="Button"
-                                                                class="dropdown-item"
-                                                                ID="Button3"
-                                                                runat="server"
-                                                                CommandName="Preview"
-                                                                CommandArgument='<%# Container.DataItemIndex %>' />
+                                                                    Text="Preview Applicant"
+                                                                    type="Button"
+                                                                    class="dropdown-item"
+                                                                    ID="Button3"
+                                                                    runat="server"
+                                                                    CommandName="Preview"
+                                                                    CommandArgument='<%# Container.DataItemIndex %>' />
+                                                                <asp:Button
+                                                                    Text="View Resume"
+                                                                    type="Button"
+                                                                    class="dropdown-item"
+                                                                    ID="Button4"
+                                                                    runat="server"
+                                                                    CommandName="Resume"
+                                                                    CommandArgument='<%# Container.DataItemIndex %>' />
                                                                 <asp:Button
                                                                     Text="Reactivate"
                                                                     type="Button"
@@ -688,28 +651,34 @@
             <!--Preview Pannel-->
             <div id="mask">
             </div>
-            <asp:Panel ID="PreviewPopup" runat="server"  BackColor="White" Height="1000px"
+            <asp:Panel ID="PreviewPopup" runat="server"  BackColor="White" Height="1050px"
                 Width="600px" Style="z-index:111;background-color: White; position: absolute; left: 25%; top: -12%; 
                 border: outset 2px gray;padding:5px;display:none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align:"center">Student Application</h1>
                     <div class="container">
                                 <div class="row justify-content-between">
                                     <div class="col-12 col-md-8 col-lg-7">
-                                        <article>
+                                  
                                             <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
                                             <h5>Name</h5>
-                                            <label ID="lblTitle1" runat="server" Text=""></label><br />
+                                            <label ID="lblTitle1" runat="server" Text=""></label><br /><br />
                                             <h5>Email</h5>
-                                            <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label><br />
+                                            <asp:Label ID="lblDescription" runat="server" Text=""></asp:Label><br /><br />
                                             <h5>Phone Number</h5>
-                                            <asp:Label ID="lblResponsibilities" runat="server" Text=""></asp:Label><br />
+                                            <asp:Label ID="lblResponsibilities" runat="server" Text=""></asp:Label><br /><br />
                                             <h5>Date Of Birth</h5>
-                                            <asp:Label ID="lblQualifications" runat="server" Text=""></asp:Label><br />
+                                            <asp:Label ID="lblQualifications" runat="server" Text=""></asp:Label><br /><br />
                                             <h5>School</h5>
-                                            <asp:Label ID="lblDepartment" runat="server" Text=""></asp:Label><br />
+                                            <asp:Label ID="lblDepartment" runat="server" Text=""></asp:Label><br /><br />
                                             <h5>Year</h5>
                                             <asp:Label ID="lblLocation" runat="server" Text=""></asp:Label><br /><br />
-                                        </article>
+                                            <h5>GPA</h5>
+                                            <asp:Label ID="lblGPA" runat="server" Text=""></asp:Label><br /><br />
+                                            <h5>SAT</h5>
+                                            <asp:Label ID="lblSAT" runat="server" Text=""></asp:Label><br /><br />
+                                            <h5>Industry Interest</h5>
+                                            <asp:Label ID="lblInterest" runat="server" Text=""></asp:Label><br /><br />
+                                       
                                     </div>
                                 </div>
                             </div>

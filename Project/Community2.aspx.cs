@@ -31,6 +31,10 @@ public partial class Community2 : System.Web.UI.Page
             //update all the gridviews
             showData();
         }
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 
 

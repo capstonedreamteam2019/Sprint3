@@ -31,6 +31,11 @@ public partial class Applications: System.Web.UI.Page
             //Updates the Gridviews
             showData();
         }
+
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 
     //update gridview
@@ -38,8 +43,8 @@ public partial class Applications: System.Web.UI.Page
     {
         //Populates Gridview 1 = Active
         localDB.Open();
-        dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open'", localDB);
+        dt = new DataTable(); 
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open'", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -52,7 +57,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT OUTER JOIN Users ON Users.UserID = DeleteApp.UserID LEFT OUTER JOIN Post ON DeleteApp.PostID = Post.PostID", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT JOIN Users ON Users.UserID = DeleteApp.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN DeletePost ON DeleteApp.PostID = DeletePost.PostID", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -65,7 +70,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 3 = Hired
         localDB.Open();
         dt3 = new DataTable();
-        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired'", localDB);
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired'", localDB);
         da3 = new SqlDataAdapter(cmd3);
         da3.Fill(dt3);
         localDB.Close();
@@ -82,7 +87,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 1 = Active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY App.LastUpdated", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY App.LastUpdated", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -95,7 +100,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT OUTER JOIN Users ON Users.UserID = DeleteApp.UserID LEFT OUTER JOIN Post ON DeleteApp.PostID = Post.PostID ORDER BY DeleteApp.LastUpdated", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT JOIN Users ON Users.UserID = DeleteApp.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN DeletePost ON DeleteApp.PostID = DeletePost.PostID ORDER BY DeleteApp.LastUpdated", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -108,7 +113,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 3 = Hired
         localDB.Open();
         dt3 = new DataTable();
-        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY App.LastUpdated", localDB);
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY App.LastUpdated", localDB);
         da3 = new SqlDataAdapter(cmd3);
         da3.Fill(dt3);
         localDB.Close();
@@ -125,7 +130,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 1 = Active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY LastName ASC", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY LastName ASC", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -138,7 +143,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT OUTER JOIN Users ON Users.UserID = DeleteApp.UserID LEFT OUTER JOIN Post ON DeleteApp.PostID = Post.PostID ORDER BY LastName ASC", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT JOIN Users ON Users.UserID = DeleteApp.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN DeletePost ON DeleteApp.PostID = DeletePost.PostID ORDER BY LastName ASC", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -151,7 +156,50 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 3 = Hired
         localDB.Open();
         dt3 = new DataTable();
-        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY LastName ASC", localDB);
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY LastName ASC", localDB);
+        da3 = new SqlDataAdapter(cmd3);
+        da3.Fill(dt3);
+        localDB.Close();
+        if (dt3.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt3;
+            GridView3.DataBind();
+        }
+    }
+
+    //best fit filter
+    protected void BestFitFilter(object sender, EventArgs e)
+    {
+        //Populates Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY Score DESC", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populates Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT JOIN Users ON Users.UserID = DeleteApp.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN DeletePost ON DeleteApp.PostID = DeletePost.PostID ORDER BY Score DESC", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+
+        //Populates Gridview 3 = Hired
+        localDB.Open();
+        dt3 = new DataTable();
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY Score DESC", localDB);
         da3 = new SqlDataAdapter(cmd3);
         da3.Fill(dt3);
         localDB.Close();
@@ -168,7 +216,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 1 = Active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY Title", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open' ORDER BY Title", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -181,7 +229,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT OUTER JOIN Users ON Users.UserID = DeleteApp.UserID LEFT OUTER JOIN Post ON DeleteApp.PostID = Post.PostID ORDER BY Title", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteApp LEFT JOIN Users ON Users.UserID = DeleteApp.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN DeletePost ON DeleteApp.PostID = DeletePost.PostID ORDER BY Title", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -194,7 +242,7 @@ public partial class Applications: System.Web.UI.Page
         //Populates Gridview 3 = Hired
         localDB.Open();
         dt3 = new DataTable();
-        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT OUTER JOIN Users ON Users.UserID = App.UserID LEFT OUTER JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY Title", localDB);
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Hired' ORDER BY Title", localDB);
         da3 = new SqlDataAdapter(cmd3);
         da3.Fill(dt3);
         localDB.Close();
@@ -374,6 +422,24 @@ public partial class Applications: System.Web.UI.Page
             getLocation.Parameters.AddWithValue("id", id.Text);
             lblLocation.Text = getLocation.ExecuteScalar().ToString();
 
+            System.Data.SqlClient.SqlCommand getGPA = new System.Data.SqlClient.SqlCommand();
+            getGPA.Connection = localDB;
+            getGPA.CommandText = "Select GPA From Student where UserID = @id";
+            getGPA.Parameters.AddWithValue("id", id.Text);
+            lblGPA.Text = getGPA.ExecuteScalar().ToString();
+
+            System.Data.SqlClient.SqlCommand getSAT = new System.Data.SqlClient.SqlCommand();
+            getSAT.Connection = localDB;
+            getSAT.CommandText = "Select SAT From Student where UserID = @id";
+            getSAT.Parameters.AddWithValue("id", id.Text);
+            lblSAT.Text = getSAT.ExecuteScalar().ToString();
+
+            System.Data.SqlClient.SqlCommand getInterest = new System.Data.SqlClient.SqlCommand();
+            getInterest.Connection = localDB;
+            getInterest.CommandText = "Select IndustryInterests From Student where UserID = @id";
+            getInterest.Parameters.AddWithValue("id", id.Text);
+            lblInterest.Text = getInterest.ExecuteScalar().ToString();
+
             localDB.Close();
         }
         catch
@@ -404,17 +470,25 @@ public partial class Applications: System.Web.UI.Page
 
     protected void Hire_Click(object sender, EventArgs e)
     {
-        localDB.Open();
+        try
+        {
 
-        System.Data.SqlClient.SqlCommand HireApp = new System.Data.SqlClient.SqlCommand();
-        HireApp.Connection = localDB;
-        HireApp.CommandText = "Update App set Hired = @hired where AppID = @id";
-        HireApp.Parameters.AddWithValue("hired", "Hired");
-        HireApp.Parameters.AddWithValue("id", id.Text);
-        HireApp.ExecuteNonQuery();
+            localDB.Open();
 
-        localDB.Close();
-        showData();
+            System.Data.SqlClient.SqlCommand HireApp = new System.Data.SqlClient.SqlCommand();
+            HireApp.Connection = localDB;
+            HireApp.CommandText = "Update App set Hired = @hired where AppID = @id";
+            HireApp.Parameters.AddWithValue("hired", "Hired");
+            HireApp.Parameters.AddWithValue("id", id.Text);
+            HireApp.ExecuteNonQuery();
+
+            localDB.Close();
+            showData();
+        }
+        catch
+        {
+
+        }
     }
 
     protected void Reactivate_Click(object sender, EventArgs e)
@@ -438,5 +512,43 @@ public partial class Applications: System.Web.UI.Page
 
     }
 
+    protected void openApp(object sender, EventArgs e)
+    {
+        //try
+        //{
+        //    System.Data.SqlClient.SqlCommand openPic = new System.Data.SqlClient.SqlCommand();
+        //    openPic.Connection = localDB;
+        //    openPic.CommandText = "SELECT Document FROM files WHERE UserID = @id";
+        //    openPic.Parameters.AddWithValue("id", id.Text);
+        //    if (localDB.State != ConnectionState.Open)
+        //        localDB.Open();
+        //    GridView1_RowCommand = new SqlCommand(sql, localDB);
+        //    SqlDataReader reader = GridView1_RowCommand.ExecuteReader();
+        //    reader.Read();
+        //    if (reader.HasRows)
+        //    {
+        //        byte[] img = (byte[])(reader[0]);
+        //        if (img == null)
+        //            picEmp.Image = null;
+        //        else
+        //        {
+        //            MemoryStream ms = new MemoryStream(img);
+        //            picEmp.Image = BadImageFormatException.FromStream(ms);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("This does not exist.");
+        //    }
+        //    localDB.Close();
+        //}
+        //catch
+        //{
+        //    localDB.Close();
+        //}
+
+        //string ToSaveFileTo = Server.MapPath("~\\File\\Report.pdf");
+
+    }
 
 }

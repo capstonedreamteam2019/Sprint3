@@ -13,6 +13,8 @@ public partial class Registration2 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
+        Session["UserName"] = txtEmail.Text;
         if (IsPostBack == true)
         {
             if (pwcheckbox.Checked == true)
