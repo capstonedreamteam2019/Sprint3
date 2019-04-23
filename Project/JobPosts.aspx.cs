@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Globalization;
 
 public partial class JobPosts : System.Web.UI.Page
 {
@@ -26,9 +27,13 @@ public partial class JobPosts : System.Web.UI.Page
     {
 
         if (!IsPostBack)
-        {              
+        {
             //update all the gridviews
             showData();
+        }
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
         }
     }
 
@@ -179,7 +184,7 @@ public partial class JobPosts : System.Web.UI.Page
             builder.Append("<script language=JavaScript> ShowDelete(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowDelete", builder.ToString());
         }
- 
+
     }
 
     //Row commands for gridview 2
@@ -259,85 +264,97 @@ public partial class JobPosts : System.Web.UI.Page
     //Create New Job Post
     protected void SubmitButton_Click(object sender, EventArgs e)
     {
-
-        localDB.Open();
-
-        //Creates a new sql insert command
-        System.Data.SqlClient.SqlCommand insertPost = new System.Data.SqlClient.SqlCommand();
-        insertPost.Connection = localDB;
-
-        System.Data.SqlClient.SqlCommand selectPostID = new System.Data.SqlClient.SqlCommand();
-        selectPostID.Connection = localDB;
-
-        System.Data.SqlClient.SqlCommand insertJob = new System.Data.SqlClient.SqlCommand();
-        insertJob.Connection = localDB;
-
-        //Create Post object
-        Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(description.Value));
-
-        //Insert data into database
-        insertPost.CommandText = "Execute InsertPost @busID, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated";
-
-        insertPost.Parameters.Add("@busID", SqlDbType.Int).Value = posting.getBusID();
-        insertPost.Parameters.Add("@type", SqlDbType.VarChar, 30).Value = posting.getType();
-        insertPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
-        insertPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
-        insertPost.Parameters.Add("@description", SqlDbType.VarChar, 500).Value = posting.getDescription();        
-        insertPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
-        insertPost.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
-
-        insertPost.ExecuteNonQuery();
-
-        //Find post ID just created
-        selectPostID.CommandText = "select max(postID) from Post";
-        string postID = selectPostID.ExecuteScalar().ToString();
-
-        //Find basis value
-        string selected;
-        if (yearly.Checked == true)
+        if ((title.Value == "") || (description.Value == ""))
         {
-            selected = yearly.Value;
-        }
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
+            lblError.Text = "Please enter all required values.";
 
+        }
         else
         {
-            selected = hourly.Value;
+
+
+
+            localDB.Open();
+
+            //Creates a new sql insert command
+            System.Data.SqlClient.SqlCommand insertPost = new System.Data.SqlClient.SqlCommand();
+            insertPost.Connection = localDB;
+
+            System.Data.SqlClient.SqlCommand selectPostID = new System.Data.SqlClient.SqlCommand();
+            selectPostID.Connection = localDB;
+
+            System.Data.SqlClient.SqlCommand insertJob = new System.Data.SqlClient.SqlCommand();
+            insertJob.Connection = localDB;
+
+            //Create Post object
+            Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(description.Value));
+
+            //Insert data into database
+            insertPost.CommandText = "Execute InsertPost @busID, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated";
+
+            insertPost.Parameters.Add("@busID", SqlDbType.Int).Value = posting.getBusID();
+            insertPost.Parameters.Add("@type", SqlDbType.VarChar, 30).Value = posting.getType();
+            insertPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+            insertPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+            insertPost.Parameters.Add("@description", SqlDbType.VarChar, 500).Value = posting.getDescription();
+            insertPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+            insertPost.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
+
+            insertPost.ExecuteNonQuery();
+
+            //Find post ID just created
+            selectPostID.CommandText = "select max(postID) from Post";
+            string postID = selectPostID.ExecuteScalar().ToString();
+
+            //Find basis value
+            string selected;
+            if (yearly.Checked == true)
+            {
+                selected = yearly.Value;
+            }
+
+            else
+            {
+                selected = hourly.Value;
+            }
+
+
+            //Create Job object
+            Job job = new Job(postID, HttpUtility.HtmlEncode(department.Value), HttpUtility.HtmlEncode(reqs.Value), HttpUtility.HtmlEncode(deadline.Value), HttpUtility.HtmlEncode(salary.Value), HttpUtility.HtmlEncode(respons.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(ADayInTheLife.Value));
+
+            insertJob.CommandText = "Execute InsertJob @postID, @department, @requirements, @dueDate, @salary, @resp, @payType, @location, @ADayInTheLife, @lastUpdatedBy, @lastUpdated";
+
+            insertJob.Parameters.Add("@postID", SqlDbType.Int).Value = job.getpostID();
+            insertJob.Parameters.Add("@department", SqlDbType.VarChar, 30).Value = job.getDepartment();
+            insertJob.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = job.getReqs();
+            insertJob.Parameters.Add("@dueDate", SqlDbType.VarChar, 30).Value = job.getDueDate();
+            insertJob.Parameters.Add("@salary", SqlDbType.VarChar, 30).Value = job.getSalary();
+            insertJob.Parameters.Add("@resp", SqlDbType.VarChar, 50).Value = job.getResponsibilities();
+            insertJob.Parameters.Add("@payType", SqlDbType.VarChar, 6).Value = job.getPayType();
+            insertJob.Parameters.Add("@location", SqlDbType.VarChar, 50).Value = job.getLocation();
+            insertJob.Parameters.Add("@aDayInTheLife", SqlDbType.VarChar, 150).Value = job.getADay();
+            insertJob.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = job.getLastUpdatedBy();
+            insertJob.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = job.getLastUpdated();
+
+            insertJob.ExecuteNonQuery();
+
+            localDB.Close();
+
+            showData();
+
+            title.Value = "";
+            description.Value = "";
+            department.Value = "";
+            reqs.Value = "";
+            deadline.Value = "";
+            salary.Value = "";
+            respons.Value = "";
+            location.Value = "";
+            ADayInTheLife.Value = "";
         }
-
-
-        //Create Job object
-        Job job = new Job(postID, HttpUtility.HtmlEncode(department.Value), HttpUtility.HtmlEncode(reqs.Value), HttpUtility.HtmlEncode(deadline.Value), HttpUtility.HtmlEncode(salary.Value), HttpUtility.HtmlEncode(respons.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(ADayInTheLife.Value));
-
-        insertJob.CommandText = "Execute InsertJob @postID, @department, @requirements, @dueDate, @salary, @resp, @payType, @location, @ADayInTheLife, @lastUpdatedBy, @lastUpdated";
-
-        insertJob.Parameters.Add("@postID", SqlDbType.Int).Value = job.getpostID();
-        insertJob.Parameters.Add("@department", SqlDbType.VarChar, 30).Value = job.getDepartment();
-        insertJob.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = job.getReqs();
-        insertJob.Parameters.Add("@dueDate", SqlDbType.VarChar, 30).Value = job.getDueDate();
-        insertJob.Parameters.Add("@salary", SqlDbType.VarChar, 30).Value = job.getSalary();
-        insertJob.Parameters.Add("@resp", SqlDbType.VarChar, 50).Value = job.getResponsibilities();
-        insertJob.Parameters.Add("@payType", SqlDbType.VarChar, 6).Value = job.getPayType();
-        insertJob.Parameters.Add("@location", SqlDbType.VarChar, 50).Value = job.getLocation();
-        insertJob.Parameters.Add("@aDayInTheLife", SqlDbType.VarChar, 150).Value = job.getADay();
-        insertJob.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = job.getLastUpdatedBy();
-        insertJob.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = job.getLastUpdated();
-
-        insertJob.ExecuteNonQuery();
-
-        localDB.Close();
-
-        showData();
-
-        title.Value = "";
-        description.Value = "";
-        department.Value = "";
-        reqs.Value = "";
-        deadline.Value = "";
-        salary.Value = "";
-        respons.Value = "";
-        location.Value = "";
-        ADayInTheLife.Value = "";
-
 
     }
 
@@ -348,8 +365,8 @@ public partial class JobPosts : System.Web.UI.Page
         description.Value = "Works in a team to create a marketing plan for a client";
         department.Value = "Marketing";
         reqs.Value = "3.0 GPA";
-        deadline.Value = "04/20/2019";
-        salary.Value = "50,000";
+        deadline.Value = "2019-02-04";
+        salary.Value = "50000";
         respons.Value = "Responsible for maintaining a good relationship with the client";
         yearly.Checked = true;
         location.Value = "Arlington, Va";
@@ -453,7 +470,7 @@ public partial class JobPosts : System.Web.UI.Page
     {
         try
         {
-
+            lblEditError.Text = "";
             localDB.Open();
 
             System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
@@ -503,7 +520,10 @@ public partial class JobPosts : System.Web.UI.Page
             getDueDate.Connection = localDB;
             getDueDate.CommandText = "Select DueDate From Job where PostID = @id";
             getDueDate.Parameters.AddWithValue("id", id.Text);
-            txtEditDeadline.Value = getDueDate.ExecuteScalar().ToString();
+            string str = getDueDate.ExecuteScalar().ToString();
+            DateTime dt = new DateTime();
+            dt = Convert.ToDateTime(str);
+            txtEditDeadline.Value = dt.ToString("yyyy-MM-dd");
 
             System.Data.SqlClient.SqlCommand getday = new System.Data.SqlClient.SqlCommand();
             getday.Connection = localDB;
@@ -532,56 +552,70 @@ public partial class JobPosts : System.Web.UI.Page
     //save edits to post
     protected void SaveEdit_Click(object sender, EventArgs e)
     {
-        string selected;
-        if (yearly.Checked == true)
-        {
-            selected = yearly.Value;
-        }
 
+        if ((txtEditTitle.Value == "") || (txtEditDescription.Value == ""))
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<script language=JavaScript> ShowEdit(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowEdit", builder.ToString());
+            lblEditError.Text = "Please enter all required values.";
+
+        }
         else
         {
-            selected = hourly.Value;
+            string selected;
+            if (yearly.Checked == true)
+            {
+                selected = yearly.Value;
+            }
+
+            else
+            {
+                selected = hourly.Value;
+            }
+
+            //create post object
+            Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(txtEditTitle.Value), HttpUtility.HtmlEncode(txtEditDescription.Value));
+
+            //insert into database
+            localDB.Open();
+            System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
+            editPost.Connection = localDB;
+            editPost.CommandText = "Execute EditPost @id, @title, @postDate, @description, @LastUpdatedBy, @LastUpdated";
+            editPost.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
+            editPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+            editPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+            editPost.Parameters.Add("@description", SqlDbType.VarChar, 100).Value = posting.getDescription();
+            editPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+            editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
+            editPost.ExecuteNonQuery();
+
+            Job job = new Job(id.Text, HttpUtility.HtmlEncode(txtEditDepartment.Value), HttpUtility.HtmlEncode(txtEditRequirements.Value), HttpUtility.HtmlEncode(txtEditDeadline.Value), HttpUtility.HtmlEncode(txtEditSalary.Value), HttpUtility.HtmlEncode(txtEditResponsibilities.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtADay.Value));
+
+
+            System.Data.SqlClient.SqlCommand editjob = new System.Data.SqlClient.SqlCommand();
+            editjob.Connection = localDB;
+            editjob.CommandText = "Execute EditJob @id, @department, @requirements, @duedate, @salary, @responsibilities, @paytype, @location, @ADay, @LastUpdatedBy, @LastUpdated";
+            editjob.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
+            editjob.Parameters.Add("@department", SqlDbType.VarChar, 30).Value = job.getDepartment();
+            editjob.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = job.getReqs();
+            editjob.Parameters.Add("@responsibilities", SqlDbType.VarChar, 50).Value = job.getResponsibilities();
+            editjob.Parameters.Add("@duedate", SqlDbType.VarChar, 30).Value = job.getDueDate();
+            editjob.Parameters.Add("@salary", SqlDbType.VarChar, 40).Value = job.getSalary();
+            editjob.Parameters.Add("@paytype", SqlDbType.VarChar, 6).Value = job.getPayType();
+            editjob.Parameters.Add("@location", SqlDbType.VarChar, 50).Value = job.getLocation();
+            editjob.Parameters.Add("@ADay", SqlDbType.VarChar, 150).Value = job.getADay();
+            editjob.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = job.getLastUpdatedBy();
+            editjob.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = job.getLastUpdated();
+
+            editjob.ExecuteNonQuery();
+
+            localDB.Close();
+
+            showData();
+
+            lblEditError.Text = "";
         }
-
-        //create post object
-        Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(txtEditTitle.Value), HttpUtility.HtmlEncode(txtEditDescription.Value));
-
-        //insert into database
-        localDB.Open();
-        System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
-        editPost.Connection = localDB;
-        editPost.CommandText = "Execute EditPost @id, @title, @postDate, @description, @LastUpdatedBy, @LastUpdated";
-        editPost.Parameters.Add("@id", SqlDbType.Int).Value =  id.Text;
-        editPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
-        editPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
-        editPost.Parameters.Add("@description", SqlDbType.VarChar, 100).Value = posting.getDescription();
-        editPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
-        editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
-        editPost.ExecuteNonQuery();
-
-        Job job = new Job(id.Text, HttpUtility.HtmlEncode(txtEditDepartment.Value), HttpUtility.HtmlEncode(txtEditRequirements.Value), HttpUtility.HtmlEncode(txtEditDeadline.Value), HttpUtility.HtmlEncode(txtEditSalary.Value), HttpUtility.HtmlEncode(txtEditResponsibilities.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtADay.Value));
-
-
-        System.Data.SqlClient.SqlCommand editjob = new System.Data.SqlClient.SqlCommand();
-        editjob.Connection = localDB;
-        editjob.CommandText = "Execute EditJob @id, @department, @requirements, @duedate, @salary, @responsibilities, @paytype, @location, @ADay, @LastUpdatedBy, @LastUpdated";
-        editjob.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
-        editjob.Parameters.Add("@department", SqlDbType.VarChar, 30).Value = job.getDepartment();
-        editjob.Parameters.Add("@requirements", SqlDbType.VarChar, 100).Value = job.getReqs();
-        editjob.Parameters.Add("@responsibilities", SqlDbType.VarChar, 50).Value = job.getResponsibilities();
-        editjob.Parameters.Add("@duedate", SqlDbType.VarChar, 30).Value = job.getDueDate();
-        editjob.Parameters.Add("@salary", SqlDbType.VarChar, 40).Value = job.getSalary();
-        editjob.Parameters.Add("@paytype", SqlDbType.VarChar, 6).Value = job.getPayType();
-        editjob.Parameters.Add("@location", SqlDbType.VarChar, 50).Value = job.getLocation();
-        editjob.Parameters.Add("@ADay", SqlDbType.VarChar, 150).Value = job.getADay();
-        editjob.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = job.getLastUpdatedBy();
-        editjob.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = job.getLastUpdated();
-
-        editjob.ExecuteNonQuery();
-
-        localDB.Close();
-
-        showData();
     }
 
     //delete post

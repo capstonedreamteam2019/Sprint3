@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 public partial class Community2 : System.Web.UI.Page
 {
-// Declare Connection
+    // Declare Connection
     SqlConnection localDB = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localDB"].ConnectionString);
     //create gridview datatables
     SqlDataAdapter da;
@@ -31,16 +31,55 @@ public partial class Community2 : System.Web.UI.Page
             //update all the gridviews
             showData();
         }
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 
 
 
     ////update gridview
     protected void showData()
-{
-        localDB.Open();
+    {
+        try
+        {
+
+
+            localDB.Open();
+            dt = new DataTable();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where(PostType like 'Event') and BusinessID = 1", localDB);
+            da = new SqlDataAdapter(cmd);
+            da.Fill(dt);
+            if (dt.Rows.Count > 0)
+            {
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+
+            }
+
+            dt2 = new DataTable();
+            SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1", localDB);
+            da2 = new SqlDataAdapter(cmd2);
+            da2.Fill(dt2);
+            localDB.Close();
+            if (dt2.Rows.Count > 0)
+            {
+                GridView2.DataSource = dt2;
+                GridView2.DataBind();
+            }
+        }
+        catch
+        {
+
+        }
+    }
+
+    //filter by date
+    protected void filterByDate(object sender, EventArgs e)
+    {
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where(PostType like 'Event') and BusinessID = 1", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID = 1 ORDER BY startdate", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -48,11 +87,10 @@ public partial class Community2 : System.Web.UI.Page
         {
             GridView1.DataSource = dt;
             GridView1.DataBind();
-
         }
 
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1 ORDER BY startdate", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -63,104 +101,33 @@ public partial class Community2 : System.Web.UI.Page
         }
     }
 
-//show your events gridview (first grid view)
-protected void showFirstGridview()
-{
-    localDB.Open();
-    dt = new DataTable();
-    SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where(PostType like 'Event') and BusinessID = 1", localDB);
-    da = new SqlDataAdapter(cmd);
-    da.Fill(dt);
-    localDB.Close();
-    if (dt.Rows.Count > 0)
-    {
-        GridView1.DataSource = dt;
-        GridView1.DataBind();
 
-    }
-}
-
-//show local events grid view (second grid view)
-protected void showSecondGridviewData()
-{
-    dt = new DataTable();
-    SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1", localDB);
-    da = new SqlDataAdapter(cmd);
-    da.Fill(dt);
-    localDB.Close();
-    if (dt.Rows.Count > 0)
+    //filter alphabetically
+    protected void filterAlphabetically(object sender, EventArgs e)
     {
-        GridView2.DataSource = dt;
-        GridView2.DataBind();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID = 1 ORDER BY title", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1 ORDER BY title", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt2.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
     }
 
-}
-
-//filter by date local events
-protected void filterByDateSecondGridview(object sender, EventArgs e)
-{
-    dt = new DataTable();
-    SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1 ORDER BY startdate", localDB);
-    da = new SqlDataAdapter(cmd);
-    da.Fill(dt);
-    localDB.Close();
-    if (dt.Rows.Count > 0)
-    {
-        GridView2.DataSource = dt;
-        GridView2.DataBind();
-    }
-
-    filterByDateFirstGridview();
-
-}
-
-//filter by date your events
-protected void filterByDateFirstGridview()
-{
-    dt = new DataTable();
-    SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID = 1 ORDER BY startdate", localDB);
-    da = new SqlDataAdapter(cmd);
-    da.Fill(dt);
-    localDB.Close();
-    if (dt.Rows.Count > 0)
-    {
-        GridView1.DataSource = dt;
-        GridView1.DataBind();
-    }
-}
-
-//filter alphabetically local events
-protected void filterAlphabeticallySecondGridview(object sender, EventArgs e)
-{
-    dt = new DataTable();
-    SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1 ORDER BY title", localDB);
-    da = new SqlDataAdapter(cmd);
-    da.Fill(dt);
-    localDB.Close();
-    if (dt.Rows.Count > 0)
-    {
-        GridView2.DataSource = dt;
-        GridView2.DataBind();
-    }
-
-    filterAlphabeticallyFirstGridview();
-
-}
-
-//filter alphabetically your events
-protected void filterAlphabeticallyFirstGridview()
-{
-    dt = new DataTable();
-    SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID = 1 ORDER BY title", localDB);
-    da = new SqlDataAdapter(cmd);
-    da.Fill(dt);
-    localDB.Close();
-    if (dt.Rows.Count > 0)
-    {
-        GridView1.DataSource = dt;
-        GridView1.DataBind();
-    }
-}
 
     //Row commands for gridview 1
     protected void GridView1_RowCommand(Object sender, GridViewCommandEventArgs e)
@@ -212,6 +179,7 @@ protected void filterAlphabeticallyFirstGridview()
     //open Create popup
     protected void openCreate(object sender, EventArgs e)
     {
+        lblError.Text = "";
         StringBuilder builder = new StringBuilder();
         builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
         Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
@@ -252,59 +220,128 @@ protected void filterAlphabeticallyFirstGridview()
     //Create New Event Post
     protected void SubmitButton_Click(object sender, EventArgs e)
     {
-        //Insert
-        localDB.Open();
-        //Creates a new sql insert command
-        System.Data.SqlClient.SqlCommand insertPost = new System.Data.SqlClient.SqlCommand();
-        insertPost.Connection = localDB;
+        
+        
+        //Convert Date Formats
+        DateTime start = DateTime.Parse(startdate.Value);
+        startdate.Value = start.ToString("MM/dd/yyyy");
 
-        System.Data.SqlClient.SqlCommand selectPostID = new System.Data.SqlClient.SqlCommand();
-        selectPostID.Connection = localDB;
+        try
+        {
+            DateTime end = DateTime.Parse(enddate.Value);
+            enddate.Value = start.ToString("MM/dd/yyyy");
+        }
+        catch
+        {
 
-        System.Data.SqlClient.SqlCommand insertEvent = new System.Data.SqlClient.SqlCommand();
-        insertEvent.Connection = localDB;
+        }
 
-        //Local Event object
-        Post posting = new Post(1, "Event", title.Value, HttpUtility.HtmlEncode(eventdescription.Value));
+        DateTime timeStart = DateTime.Parse(starttime.Value);
+        starttime.Value = timeStart.ToString("hh:mm tt");
 
-        insertPost.CommandText = "Execute InsertPost @BusinessID, @PostType, @Title,@PostDate,@PostDescription,@LastUpdatedBy,@LastUpdated";
-        insertPost.Parameters.Add("@BusinessID", SqlDbType.Int).Value = posting.getBusID();
-        insertPost.Parameters.Add("@PostType", SqlDbType.VarChar, 30).Value = "Event";
-        insertPost.Parameters.Add("@Title", SqlDbType.VarChar, 100).Value = HttpUtility.HtmlEncode(posting.getTitle());
-        insertPost.Parameters.Add("@PostDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(posting.getPostDate());
-        insertPost.Parameters.Add("@PostDescription", SqlDbType.VarChar, 500).Value = HttpUtility.HtmlEncode(posting.getDescription());
-        insertPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 50).Value = HttpUtility.HtmlEncode(posting.getLastUpdatedBy());
-        insertPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(posting.getLastUpdated());
-        insertPost.ExecuteNonQuery();
+        try
+        {
+            DateTime timeEnd = DateTime.Parse(endtime.Value);
+        endtime.Value = timeEnd.ToString("hh:mm tt");
+        }
+        catch
+        {
 
-        selectPostID.CommandText = "select max(postID) from Post";
-        string postID = selectPostID.ExecuteScalar().ToString();
+        }
 
-        //Local Event object
-        Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(startdate.Value), HttpUtility.HtmlEncode(enddate.Value), HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value));
+        if ((title.Value == "") || (startdate.Value == "") || (starttime.Value == "") || (location.Value == ""))
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
+            lblError.Text = "Please enter all required values.";
 
-        insertEvent.CommandText = "Execute InsertEvent @PostID, @EventAddress, @StartDate,@EndDate,@StartTime,@EndTime,@LastUpdatedBy,@LastUpdated";
+        }
+        else
+        {
 
-        insertEvent.Parameters.Add("@PostId", SqlDbType.Int).Value = HttpUtility.HtmlEncode(events.getPostingID());
-        insertEvent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = HttpUtility.HtmlEncode(events.getLocation());
-        insertEvent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartDate());
-        insertEvent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndDate());
-        insertEvent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartTime());
-        insertEvent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndTime());
-        insertEvent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 50).Value = HttpUtility.HtmlEncode(events.getLastUpdatedBy());
-        insertEvent.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getLastUpdated());
-        insertEvent.ExecuteNonQuery();
+            localDB.Open();
 
-        localDB.Close();
-        showData();
+            //Creates a new sql insert command
+            System.Data.SqlClient.SqlCommand insertPost = new System.Data.SqlClient.SqlCommand();
+            insertPost.Connection = localDB;
+
+            System.Data.SqlClient.SqlCommand selectPostID = new System.Data.SqlClient.SqlCommand();
+            selectPostID.Connection = localDB;
+
+            System.Data.SqlClient.SqlCommand insertEvent = new System.Data.SqlClient.SqlCommand();
+            insertEvent.Connection = localDB;
+          
+
+            //Create Post object
+            Post posting = new Post(1, "Event", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(eventdescription.Value));
+
+            //Insert data into database
+            insertPost.CommandText = "Execute InsertPost @busID, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated";
+
+            insertPost.Parameters.Add("@busID", SqlDbType.Int).Value = posting.getBusID();
+            insertPost.Parameters.Add("@type", SqlDbType.VarChar, 30).Value = posting.getType();
+            insertPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+            insertPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+            insertPost.Parameters.Add("@description", SqlDbType.VarChar, 500).Value = posting.getDescription();
+            insertPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+            insertPost.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
+
+            insertPost.ExecuteNonQuery();
+
+            //Find post ID just created
+            selectPostID.CommandText = "select max(postID) from Post";
+            string postID = selectPostID.ExecuteScalar().ToString();
+
+            //try
+            //{
+
+            //    DateTime start = DateTime.Parse(startdate.Value);
+            //    startdate.Value = start.ToString("MM/DD/YYYY");
+
+            //    DateTime end = DateTime.Parse(enddate.Value);
+            //    enddate.Value = end.ToString("MM/DD/YYYY");
+            //}
+            //catch
+            //{
+
+            //}
+
+            //Local Event object
+            Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(startdate.Value), HttpUtility.HtmlEncode(enddate.Value), HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value));
+
+            insertEvent.CommandText = "Execute InsertEvent @PostID, @EventAddress, @StartDate, @EndDate, @StartTime, @EndTime, @LastUpdatedBy, @LastUpdated";
+
+            insertEvent.Parameters.Add("@PostID", SqlDbType.Int).Value = HttpUtility.HtmlEncode(events.getPostingID());
+            insertEvent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = HttpUtility.HtmlEncode(events.getLocation());
+            insertEvent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartDate());
+            insertEvent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndDate());
+            insertEvent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartTime());
+            insertEvent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndTime());
+            insertEvent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 50).Value = HttpUtility.HtmlEncode(events.getLastUpdatedBy());
+            insertEvent.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getLastUpdated());
+            insertEvent.ExecuteNonQuery();
+
+            localDB.Close();
+
+            showData();
+
+            title.Value = "";
+            eventdescription.Value = "";
+            location.Value = "";
+            starttime.Value = "";
+            endtime.Value = "";
+            startdate.Value = "";
+            enddate.Value = "";          
+        }
     }
 
 
 
 
-//Load Preview Modal
-protected void LoadPreview()
-{
+    //Load Preview Modal
+    protected void LoadPreview()
+    {
         try
         {
 
@@ -327,6 +364,7 @@ protected void LoadPreview()
             getResponsibilities.CommandText = "Select startdate From Event where PostID = @id";
             getResponsibilities.Parameters.AddWithValue("id", id.Text);
             Label7.InnerText = getResponsibilities.ExecuteScalar().ToString();
+
 
             System.Data.SqlClient.SqlCommand getQualifications = new System.Data.SqlClient.SqlCommand();
             getQualifications.Connection = localDB;
@@ -359,116 +397,181 @@ protected void LoadPreview()
 
         }
 
-}
+    }
 
-//Load Edit Modal
-protected void LoadEdit()
-{
-    localDB.Open();
-
-    System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
-    getTitle.Connection = localDB;
-    getTitle.CommandText = "Select Title From Post where PostID = @id";
-    getTitle.Parameters.AddWithValue("id", id.Text);
-    txtEditTitle.Value = getTitle.ExecuteScalar().ToString();
-
-    System.Data.SqlClient.SqlCommand getDescription = new System.Data.SqlClient.SqlCommand();
-    getDescription.Connection = localDB;
-    getDescription.CommandText = "Select PostDescription From Post where PostID = @id";
-    getDescription.Parameters.AddWithValue("id", id.Text);
-    txtEditDescription.Value = getDescription.ExecuteScalar().ToString();
-
-    System.Data.SqlClient.SqlCommand getstartdate = new System.Data.SqlClient.SqlCommand();
-    getstartdate.Connection = localDB;
-    getstartdate.CommandText = "Select startdate From Event where PostID = @id";
-    getstartdate.Parameters.AddWithValue("id", id.Text);
-    txtEditStartDate.Value = getstartdate.ExecuteScalar().ToString();
-
-    System.Data.SqlClient.SqlCommand getenddate = new System.Data.SqlClient.SqlCommand();
-    getenddate.Connection = localDB;
-    getenddate.CommandText = "Select enddate From Event where PostID = @id";
-    getenddate.Parameters.AddWithValue("id", id.Text);
-    txtEditEndDate.Value = getenddate.ExecuteScalar().ToString();
-
-    System.Data.SqlClient.SqlCommand getstarttime = new System.Data.SqlClient.SqlCommand();
-    getstarttime.Connection = localDB;
-    getstarttime.CommandText = "Select starttime From Event where PostID = @id";
-    getstarttime.Parameters.AddWithValue("id", id.Text);
-    txtEditStartTime.Value = getstarttime.ExecuteScalar().ToString();
-
-    System.Data.SqlClient.SqlCommand getendtime = new System.Data.SqlClient.SqlCommand();
-    getendtime.Connection = localDB;
-    getendtime.CommandText = "Select endtime From Event where PostID = @id";
-    getendtime.Parameters.AddWithValue("id", id.Text);
-    txtEditEndTime.Value = getendtime.ExecuteScalar().ToString();
-
-    System.Data.SqlClient.SqlCommand getlocation = new System.Data.SqlClient.SqlCommand();
-    getlocation.Connection = localDB;
-    getlocation.CommandText = "Select eventaddress From Event where PostID = @id";
-    getlocation.Parameters.AddWithValue("id", id.Text);
-    txtEditLocation.Value = getlocation.ExecuteScalar().ToString();
-
-    localDB.Close();
-
-}
-
-//save edits to post
-protected void SaveEdit_Click(object sender, EventArgs e)
-{
-    localDB.Open();
-    System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
-    editPost.Connection = localDB;
-
-    editPost.CommandText = "Execute EditPost @PostID, @BusinessID, @PostType,@Title, @PostDate,@PostDescription,@LastUpdatedBy,@LastUpdated;";
-    editPost.Parameters.Add("@PostID", SqlDbType.Int).Value = id.Text;
-    editPost.Parameters.Add("@BusinessID", SqlDbType.Int).Value = 1;
-    editPost.Parameters.Add("@PostType", SqlDbType.VarChar, 30).Value = "Event";
-    editPost.Parameters.Add("@Title", SqlDbType.VarChar, 100).Value = (txtEditTitle.Value);
-    editPost.Parameters.Add("@PostDate", SqlDbType.VarChar, 30).Value = "may2";
-    editPost.Parameters.Add("@PostDescription", SqlDbType.VarChar, 500).Value = (txtEditDescription.Value);
-    editPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = "LeaRios";
-    editPost.Parameters.Add("@LastUpdated", SqlDbType.Date).Value = DateTime.Today;
-    editPost.ExecuteNonQuery();
-
-
-    System.Data.SqlClient.SqlCommand editevent = new System.Data.SqlClient.SqlCommand();
-    editevent.Connection = localDB;
-    editevent.CommandText = "Execute EditEvent @PostID,@EventAddress, @StartDate, @EndDate, @StartTime, @EndTime,@LastUpdatedBy,@LastUpdated";
-    editevent.Parameters.Add("@PostID", SqlDbType.Int).Value = id.Text;
-    editevent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = (txtEditLocation.Value);
-    editevent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = (txtEditStartDate.Value);
-    editevent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = (txtEditEndDate.Value);
-    editevent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = (txtEditStartTime.Value);
-    editevent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = (txtEditEndTime.Value);
-    editevent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = "LeaRios";
-    editevent.Parameters.Add("@LastUpdated", SqlDbType.Date).Value = DateTime.Today;
-    editevent.ExecuteNonQuery();
-
-    localDB.Close();
-
-        showData();
-}
-
-//delete post
-protected void DeletePost_Click(object sender, EventArgs e)
-{
-    localDB.Open();
-
-    try
+    //Load Edit Modal
+    protected void LoadEdit()
     {
-        System.Data.SqlClient.SqlCommand deleteEvents = new System.Data.SqlClient.SqlCommand();
-        deleteEvents.Connection = localDB;
-        deleteEvents.CommandText = "DELETE FROM Event where PostID = @id";
-        deleteEvents.Parameters.AddWithValue("id", id.Text);
-        deleteEvents.ExecuteNonQuery();
 
-    System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
-    deletePost.Connection = localDB;
-    deletePost.CommandText = "DELETE FROM Post where PostID = @id";
-    deletePost.Parameters.AddWithValue("id", id.Text);
-    deletePost.ExecuteNonQuery();
 
-    localDB.Close();
+        localDB.Open();
+
+        System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
+        getTitle.Connection = localDB;
+        getTitle.CommandText = "Select Title From Post where PostID = @id";
+        getTitle.Parameters.AddWithValue("id", id.Text);
+        txtEditTitle.Value = getTitle.ExecuteScalar().ToString();
+
+        System.Data.SqlClient.SqlCommand getDescription = new System.Data.SqlClient.SqlCommand();
+        getDescription.Connection = localDB;
+        getDescription.CommandText = "Select PostDescription From Post where PostID = @id";
+        getDescription.Parameters.AddWithValue("id", id.Text);
+        txtEditDescription.Value = getDescription.ExecuteScalar().ToString();
+
+        System.Data.SqlClient.SqlCommand getstartdate = new System.Data.SqlClient.SqlCommand();
+        getstartdate.Connection = localDB;
+        getstartdate.CommandText = "Select startdate From Event where PostID = @id";
+        getstartdate.Parameters.AddWithValue("id", id.Text);
+        string str = getstartdate.ExecuteScalar().ToString();
+        DateTime dt = new DateTime();
+        dt = Convert.ToDateTime(str);
+        txtEditStartDate.Value = dt.ToString("yyyy-MM-dd");
+       
+        
+        System.Data.SqlClient.SqlCommand getenddate = new System.Data.SqlClient.SqlCommand();
+        getenddate.Connection = localDB;
+        getenddate.CommandText = "Select enddate From Event where PostID = @id";
+        getenddate.Parameters.AddWithValue("id", id.Text);
+        string str2 = getenddate.ExecuteScalar().ToString();
+        if (str2 != "")
+        {
+            DateTime dt2 = new DateTime();
+            dt2 = Convert.ToDateTime(str2);
+            txtEditEndDate.Value = dt2.ToString("yyyy-MM-dd");
+        }
+
+
+        System.Data.SqlClient.SqlCommand getstarttime = new System.Data.SqlClient.SqlCommand();
+        getstarttime.Connection = localDB;
+        getstarttime.CommandText = "Select starttime From Event where PostID = @id";
+        getstarttime.Parameters.AddWithValue("id", id.Text);
+        string str3 = getstarttime.ExecuteScalar().ToString();
+        DateTime dt3 = new DateTime();
+        dt3 = Convert.ToDateTime(str3);
+        txtEditStartTime.Value = dt3.ToString("hh:mm");
+
+        System.Data.SqlClient.SqlCommand getendtime = new System.Data.SqlClient.SqlCommand();
+        getendtime.Connection = localDB;
+        getendtime.CommandText = "Select endtime From Event where PostID = @id";
+        getendtime.Parameters.AddWithValue("id", id.Text);
+        string str4 = getendtime.ExecuteScalar().ToString();
+        if (str2 != "")
+        {
+            DateTime dt4 = new DateTime();
+            dt4 = Convert.ToDateTime(str4);
+            txtEditEndTime.Value = dt4.ToString("hh:mm");
+        }
+
+        System.Data.SqlClient.SqlCommand getlocation = new System.Data.SqlClient.SqlCommand();
+        getlocation.Connection = localDB;
+        getlocation.CommandText = "Select eventaddress From Event where PostID = @id";
+        getlocation.Parameters.AddWithValue("id", id.Text);
+        txtEditLocation.Value = getlocation.ExecuteScalar().ToString();
+
+        localDB.Close();
+
+    }
+
+    //save edits to post
+    protected void SaveEdit_Click(object sender, EventArgs e)
+    {
+
+
+        //Convert Date Formats
+        DateTime start = DateTime.Parse(txtEditStartDate.Value);
+        txtEditStartDate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime end = DateTime.Parse(txtEditEndDate.Value);
+        txtEditEndDate.Value = start.ToString("MM/dd/yyyy");
+
+        DateTime timeStart = DateTime.Parse(txtEditStartTime.Value);
+        txtEditStartTime.Value = timeStart.ToString("hh:mm tt");
+
+        DateTime timeEnd = DateTime.Parse(txtEditEndTime.Value);
+        txtEditEndTime.Value = timeEnd.ToString("hh:mm tt");
+
+        if ((txtEditTitle.Value == "") || (txtEditStartDate.Value == "") || (txtEditStartTime.Value == "") || (txtEditLocation.Value == ""))
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<script language=JavaScript> ShowEdit(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowEdit", builder.ToString());
+            lblEditError.Text = "Please enter all required values.";
+
+        }
+        else
+        {
+            //create post object
+            Post posting = new Post(1, "Event", HttpUtility.HtmlEncode(txtEditTitle.Value), HttpUtility.HtmlEncode(txtEditDescription.Value));
+
+            //insert into database
+            localDB.Open();
+            System.Data.SqlClient.SqlCommand editPost = new System.Data.SqlClient.SqlCommand();
+            editPost.Connection = localDB;
+            editPost.CommandText = "Execute EditPost @id, @title, @postDate, @description, @LastUpdatedBy, @LastUpdated";
+            editPost.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
+            editPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+            editPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+            editPost.Parameters.Add("@description", SqlDbType.VarChar, 100).Value = posting.getDescription();
+            editPost.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+            editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
+            editPost.ExecuteNonQuery();
+
+            //try
+            //{
+            //    DateTime start = DateTime.Parse(txtEditStartDate.Value);
+            //    startdate.Value = start.ToString("MM/DD/YYYY");
+
+            //    DateTime end = DateTime.Parse(txtEditEndDate.Value);
+            //    enddate.Value = end.ToString("MM/DD/YYYY");
+            //}
+            //catch
+            //{
+
+            //}
+
+            Event events = new Event(id.Text, HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtEditStartDate.Value), HttpUtility.HtmlEncode(txtEditEndDate.Value), HttpUtility.HtmlEncode(txtEditStartTime.Value), HttpUtility.HtmlEncode(txtEditEndTime.Value));
+
+            System.Data.SqlClient.SqlCommand editevent = new System.Data.SqlClient.SqlCommand();
+            editevent.Connection = localDB;
+            editevent.CommandText = "Execute EditEvent @PostID,@EventAddress, @StartDate, @EndDate, @StartTime, @EndTime,@LastUpdatedBy,@LastUpdated";
+            editevent.Parameters.Add("@PostID", SqlDbType.Int).Value = events.getPostingID();
+            editevent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = events.getLocation();
+            editevent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = events.getStartDate();
+            editevent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = events.getEndDate();
+            editevent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = events.getStartTime();
+            editevent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = events.getEndTime();
+            editevent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 30).Value = events.getLastUpdatedBy();
+            editevent.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = events.getLastUpdated();
+            editevent.ExecuteNonQuery();
+
+            localDB.Close();
+
+            showData();
+
+            lblEditError.Text = "";
+        }
+    }
+
+    //delete post
+    protected void DeletePost_Click(object sender, EventArgs e)
+    {
+        localDB.Open();
+
+        try
+        {
+            System.Data.SqlClient.SqlCommand deleteEvents = new System.Data.SqlClient.SqlCommand();
+            deleteEvents.Connection = localDB;
+            deleteEvents.CommandText = "DELETE FROM Event where PostID = @id";
+            deleteEvents.Parameters.AddWithValue("id", id.Text);
+            deleteEvents.ExecuteNonQuery();
+
+            System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
+            deletePost.Connection = localDB;
+            deletePost.CommandText = "DELETE FROM Post where PostID = @id";
+            deletePost.Parameters.AddWithValue("id", id.Text);
+            deletePost.ExecuteNonQuery();
+
+            localDB.Close();
 
         }
         catch

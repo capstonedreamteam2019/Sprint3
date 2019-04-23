@@ -18,6 +18,10 @@ public partial class Settings : System.Web.UI.Page
         {
             showData();
         }
+        if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
 
     //update gridview
@@ -107,7 +111,7 @@ public partial class Settings : System.Web.UI.Page
         localDB.Close();
     }
 
-    protected void btnSave_Click(object sender, EventArgs e)
+    protected void btnUpdate_Click(object sender, EventArgs e)
     {
         localDB.Open();
         System.Data.SqlClient.SqlCommand editUser = new System.Data.SqlClient.SqlCommand();
@@ -148,4 +152,56 @@ public partial class Settings : System.Web.UI.Page
         localDB.Close();
     }
 
+
+    protected void btnPayPerPost_Click(object sender, EventArgs e)
+    {
+
+        string subscription = "Pay Per Post";
+
+        localDB.Open();
+
+        //Update user table
+        SqlCommand update = new SqlCommand("Update Users SET Subscription=@Subscription WHERE UserId=@ID;", localDB);
+        update.Parameters.Add(new SqlParameter("@Subscription", subscription));
+        update.Parameters.Add(new SqlParameter("@ID", 7));
+        update.ExecuteNonQuery();
+
+
+        localDB.Close();
+
+    }
+
+    protected void btnMonthlySub_Click(object sender, EventArgs e)
+    {
+
+        string subscription = "Monthly Subscription";
+
+        localDB.Open();
+
+        //Update user table
+        SqlCommand update = new SqlCommand("Update Users SET Subscription=@Subscription WHERE UserId=@ID;", localDB);
+        update.Parameters.Add(new SqlParameter("@Subscription", subscription));
+        update.Parameters.Add(new SqlParameter("@ID", 7));
+        update.ExecuteNonQuery();
+
+
+        localDB.Close();
+    }
+
+    protected void btnOneMonthTrial_Click(object sender, EventArgs e)
+    {
+        string subscription = "One Month Trial";
+
+        localDB.Open();
+
+
+        //Update user table
+        SqlCommand update = new SqlCommand("Update Users SET Subscription=@Subscription WHERE UserId=@ID;", localDB);
+        update.Parameters.Add(new SqlParameter("@Subscription", subscription));
+        update.Parameters.Add(new SqlParameter("@ID", 7));
+        update.ExecuteNonQuery();
+
+
+        localDB.Close();
+    }
 }

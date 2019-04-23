@@ -101,8 +101,8 @@
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
-                                <a class="dropdown-item" href="#" runat="server" onserverclick="filterAlphabeticallySecondGridview">Alphabetically</a>
-                                <a class="dropdown-item" href="#" runat="server" onserverclick="filterByDateSecondGridview" >Date</a>
+                                <a class="dropdown-item" href="#" runat="server" onserverclick="filterAlphabetically">Alphabetically</a>
+                                <a class="dropdown-item" href="#" runat="server" onserverclick="filterByDate">Date</a>
                             </div>
                         </div>
 
@@ -114,39 +114,40 @@
         <!-- Create Event Modal HTML -->
         <div id="mask">
                 </div>
-        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="900px"
+        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="850px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
-                    <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
-   <div class="form-group">
-    <label for="title">Event Title:</label>
-    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
-  </div>
-   <div class="form-group">
-    <label for="startdate">Start Date:</label>
-    <input type="text" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
-  </div>
-     <div class="form-group">
-    <label for="enddate">End Date:</label>
-    <input type="text" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
-  </div>
-     <div class="form-group">
-    <label for="starttime">Start Time:</label>
-    <input type="text" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
-  </div>
-     <div class="form-group">
-    <label for="endtime">End Time:</label>
-    <input type="text" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
-  </div>
-     <div class="form-group">
-    <label for="location">Event Location:</label>
-    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
-  </div>
-  <div class="form-group">
-    <label for="eventdescription">Event Description:</label>
-    <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
-  </div>
-
-              <button type="button" class="btn btn-success" runat="server" onserverclick="SubmitButton_Click">Create Event</button>
+            <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="title">Event Title:</label>
+                <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="startdate">Start Date:</label>
+                <input type="Date" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
+            </div>
+            <div class="form-group">
+                <label for="enddate">End Date:</label>
+                <input type="date" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="starttime">Start Time:</label>
+                <input type="time" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
+            </div>
+            <div class="form-group">
+                <label for="endtime">End Time:</label>
+                <input type="time" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="location">Event Location:</label>
+                <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
+            </div>
+            <div class="form-group">
+                <label for="eventdescription">Event Description:</label>
+                <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
+            </div>
+            <br />
+                <asp:Label ID="lblError" runat="server" forecolor="Red" Text=""></asp:Label><br />
+              <button type="button" class="btn btn-success" runat="server" validationgroup="group1" onserverclick="SubmitButton_Click">Create Event</button>
               <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
 
     </asp:Panel>
@@ -548,10 +549,10 @@
            
 
             <!-- Preview Modal HTML -->
-             <div id="mask">
+           <div id="mask">
                 </div>
-                           <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="660px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -2100%; border: outset 2px gray; padding: 5px; display: none">
+                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="800px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -1900%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Event</h1>
 
                           <div class="form-group">
@@ -621,8 +622,8 @@
         <!-- Edit Modal HTML -->
          <div id="mask">
                 </div>
-                                 <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="680px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -2100%%; border: outset 2px gray; padding: 5px; display: none">
+                    <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="800px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:-1900%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Event</h1>
                         <div class="form-group">
                             <div>
@@ -630,31 +631,29 @@
                                     <div class="row justify-content-between">
                                         <div class="col-12 col-md-8 col-lg-7">
                                             <article>
-
-                                                <label>Event Title</label>
+                                                <label style="color: red">*</label><label>Event Title</label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditTitle">
-                                                <label>Start Date</label>
-                                                <input class="form-control" runat="server" type="text" ID="txtEditStartDate">
+                                                <label style="color: red">*</label><label>Start Date</label>
+                                                <input class="form-control" runat="server" type="date" ID="txtEditStartDate">
                                                 <label>End Date</label>
-                                                <input class="form-control" runat="server" type="text" ID="txtEditEndDate">
-                                                <label>Start Time </label>
-                                                <input class="form-control" runat="server" type="text" ID="txtEditStartTime">
+                                                <input class="form-control" runat="server" type="date" ID="txtEditEndDate">
+                                                <label style="color: red">*</label><label>Start Time </label>
+                                                <input class="form-control" runat="server" type="time" ID="txtEditStartTime">
                                                 <label>End Time</label>
-                                                <input class="form-control" runat="server" type="text" ID="txtEditEndTime">
-                                                <label>Event Location</label>
+                                                <input class="form-control" runat="server" type="time" ID="txtEditEndTime">
+                                                <label style="color: red">*</label><label>Event Location</label>
                                                 <input class="form-control" runat="server" type="text" ID="txtEditLocation">
-                               <!--                 <label>Event Description</label>   -->
-                                 <!--               <input class="form-control" runat="server" type="text" ID="txtEditDescription" rows="3"> -->
                                                 <label for="eventdescription">Event Description:</label>
-                                                <textarea class="form-control" runat="server" id="textEditDescriptionText" rows="3"></textarea>
+                                                <textarea class="form-control" runat="server" id="txtEditDescription" rows="3"></textarea>
                                             </article>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                    <button type="button" class="btn btn-success" runat="server" onserverclick="SaveEdit_Click">Save Changes</button>
+                        <br>
+                    <asp:Label ID="lblEditError" runat="server" forecolor="Red" Text=""></asp:Label><br />
+                    <button type="button" class="btn btn-success" runat="server" validationgroup="group1" onserverclick="SaveEdit_Click">Save Changes</button>
                     <button type="button" onserverclick="CloseEdit" class="btn btn-default" runat="server">Close</button>
 
         </asp:Panel>
