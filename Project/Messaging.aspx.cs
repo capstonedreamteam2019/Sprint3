@@ -218,4 +218,9 @@ public partial class Messaging : System.Web.UI.Page
     //        sidebarContactMessage1.InnerText = ListView1.SelectedValue.ToString();
     //    }
     //}
+
+    protected void ListView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
