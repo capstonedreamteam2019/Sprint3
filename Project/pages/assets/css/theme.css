@@ -11195,7 +11195,7 @@ ul:last-child, dl:last-child, ol:last-child {
 
 @media (min-width: 992px) {
     .container-fluid {
-        padding-left: 3rem;
+        padding-left: 0rem;
         padding-right: 3rem;
     }
 }

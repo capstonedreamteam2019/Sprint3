@@ -55,6 +55,7 @@
                   <h1 class="h2 mb-2">Login Here</h1>
                   <span>Let's get connected.</span>
                 </div>
+               <button type="button" class="btn btn-info" runat="server" onserverclick="Populate_Click">Populate</button>
                 <form class="mb-4">
                   <div class="form-group">
                     <label for="signup-email">Email Address</label>

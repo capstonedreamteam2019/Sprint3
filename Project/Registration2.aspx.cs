@@ -40,6 +40,18 @@ public partial class Registration2 : System.Web.UI.Page
 
     }
 
+    //Populate create popup
+    protected void Populate_Click(object sender, EventArgs e)
+    {
+        txtEmail.Text = "EdwardSmith@gmail.com";
+        txtPassword.Text = "123456789";
+        txtPassword2.Text = "123456789";
+        txtFirstName.Text = "Edward";
+        txtLastName.Text = "Smith";
+        txtCompanyName.Text = "Marketing Solutions";
+        
+    }
+
     protected void Step2_Click(object sender, EventArgs e)
     {
         localDB.Open();

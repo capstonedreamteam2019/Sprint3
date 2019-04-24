@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Summary description for BusinessEmployee
 /// </summary>
-public class BusinessEmployee: Users 
+public class BusinessEmployee
 {
     private int UserID;
     private int BusinessID;

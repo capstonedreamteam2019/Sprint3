@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Summary description for Scholarship
 /// </summary>
-public class Scholarship: Post
+public class Scholarship
 {
     private string postID;
     private string reqs;

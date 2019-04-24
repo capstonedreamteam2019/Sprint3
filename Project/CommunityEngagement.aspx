@@ -59,18 +59,8 @@
           <div class="row justify-content">
             <div class="col-auto">
               <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                <li>
-            </li>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li><h2 class="text-center" id="monthName" runat="server"></h2></li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         	&nbsp;&nbsp;&nbsp;
-           <li> <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a></li>
-   		    &nbsp;&nbsp;&nbsp;&nbsp;
-
+                <ul class="pagination">                
+                <li> <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a></li>  		   
                 </ul>
              </nav>
             </div>

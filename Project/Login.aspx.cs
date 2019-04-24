@@ -32,6 +32,13 @@ public partial class Login : System.Web.UI.Page
 
         }
 
+    //Populate create popup
+    protected void Populate_Click(object sender, EventArgs e)
+    {
+        txtEmail.Text = "EdwardSmith@gmail.com";
+        txtPassword.Text = "123456789";
+    }
+
     protected void LoginButton_Click(object sender, EventArgs e)
     {
         //connect to database to retrieve stored password string

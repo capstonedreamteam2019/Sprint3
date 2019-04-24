@@ -134,6 +134,8 @@
                         </li>
                         </small>
                           <br />
+                          <br />
+                          <br />
                       </ul>
                         <asp:Button ID="btnSelect1"  class="btn btn-success sw-btn-next" validationgroup="group1" runat="server" onclick="btnSelect1_Click" Text="Select" />
                         <br />
@@ -146,7 +148,7 @@
                   <div class="card pricing card-lg">
                     <div class="card-body">
                       <h5>Pay per <br>Post</h5>
-                      <span class="display-3">$199</span>
+                      <span class="display-3">$299</span>
                       <span class="h6">Includes:</span>
                       <ul class="list-unstyled">
                         <small>
@@ -160,6 +162,8 @@
                           Option to upgrade at any <br>time
                         </li>
                         </small>
+                          <br />
+                          <br />                          
                       </ul>
                         <asp:Button ID="btnSelect2"  class="btn btn-success sw-btn-next" validationgroup="group1" runat="server" onclick="btnSelect2_Click" Text="Select" />
                         <br />
@@ -173,7 +177,7 @@
                     <div class="card-body">
                       <h5>Monthly Subscription</h5>
                         <br />
-                      <span class="display-3">$299</span>
+                      <span class="display-3">$199</span>
                       <span class="h6">Includes:</span>
                       <ul class="list-unstyled">
                         <small>
@@ -188,9 +192,10 @@
                         </li>
                         </small>
                       </ul>
+              
+                        <br />
                         <asp:Button ID="btnSelect3"  class="btn btn-success sw-btn-next" validationgroup="group1" runat="server" onclick="btnSelect3_Click" Text="Select" />
-                        <br />
-                        <br />
+                        
                         <asp:Label ID="lblError" runat="server" forecoloe="red" Text=""></asp:Label>
                     </div>
                   </div>

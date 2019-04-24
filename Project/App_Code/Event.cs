@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Summary description for Event
 /// </summary>
-public class Event: Post
+public class Event
 {
     private string postingID;
     private string location;

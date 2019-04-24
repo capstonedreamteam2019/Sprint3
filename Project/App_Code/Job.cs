@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// Summary description for Job
 /// </summary>
-public class Job: Post
+public class Job
 {
     private string postID;
     private string department;

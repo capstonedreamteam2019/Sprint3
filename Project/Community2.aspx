@@ -78,10 +78,10 @@
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">
                                     <li class="page-item active">
-                                        <a class="page-link" href="Community2.aspx"><i class="icon-grid"></i></a>
+                                        <a class="page-link" href="Community2.aspx"><i class="icon-menu"></i></a>
                                     </li>
                                     <li class="page-item">
-                                        <a class="page-link" href="CommunityEngagement.aspx"><i class="icon-menu"></i></a>
+                                        <a class="page-link" href="CommunityEngagement.aspx"><i class="icon-grid"></i></a>
                                     </li>
                                 </ul>
                             </nav>

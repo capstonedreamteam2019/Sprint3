@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 
 public partial class Settings : System.Web.UI.Page
 {
+    static int id = 11;
     //Declare connection
     SqlConnection localDB = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localDB"].ConnectionString);
 
@@ -29,21 +30,21 @@ public partial class Settings : System.Web.UI.Page
     {
         localDB.Open();
         SqlCommand cmd = new SqlCommand("SELECT FirstName FROM Users WHERE UserID = @id", localDB);
-        cmd.Parameters.AddWithValue("id", 7);
+        cmd.Parameters.AddWithValue("id", id);
         txtFirstName.Text = cmd.ExecuteScalar().ToString();
 
         SqlCommand cmd2 = new SqlCommand("SELECT LastName FROM Users WHERE UserID = @id", localDB);
-        cmd2.Parameters.AddWithValue("id", 7);
+        cmd2.Parameters.AddWithValue("id", id);
         txtLastName.Text = cmd2.ExecuteScalar().ToString();
 
         SqlCommand cmd0 = new SqlCommand("SELECT MiddleName FROM Users WHERE UserID = @id", localDB);
-        cmd0.Parameters.AddWithValue("id", 7);
+        cmd0.Parameters.AddWithValue("id", id);
         txtMiddleName.Text = cmd0.ExecuteScalar().ToString();
 
         lblName1.Text = cmd.ExecuteScalar().ToString() + " " + cmd2.ExecuteScalar().ToString();
 
         SqlCommand cmd3 = new SqlCommand("SELECT BusinessID FROM BusinessEmployee WHERE UserID = @id", localDB);
-        cmd3.Parameters.AddWithValue("id", 7);
+        cmd3.Parameters.AddWithValue("id", id);
         SqlCommand cmd4 = new SqlCommand("SELECT CompanyName FROM Business WHERE BusinessID = @id", localDB);
         cmd4.Parameters.AddWithValue("id", cmd3.ExecuteScalar().ToString());
         lblBusiness.Text = cmd4.ExecuteScalar().ToString();
@@ -53,23 +54,23 @@ public partial class Settings : System.Web.UI.Page
         lblLocation.Text = cmd5.ExecuteScalar().ToString();
 
         SqlCommand cmd6 = new SqlCommand("SELECT Email FROM Users WHERE UserID = @id", localDB);
-        cmd6.Parameters.AddWithValue("id", 7);
+        cmd6.Parameters.AddWithValue("id", id);
         txtEmail.Text = cmd6.ExecuteScalar().ToString();
 
         SqlCommand cmd7 = new SqlCommand("SELECT PhoneNumber FROM Users WHERE UserID = @id", localDB);
-        cmd7.Parameters.AddWithValue("id", 7);
+        cmd7.Parameters.AddWithValue("id", id);
         txtPhone.Text = cmd7.ExecuteScalar().ToString();
 
         SqlCommand cmd8 = new SqlCommand("SELECT DateOfBirth FROM Users WHERE UserID = @id", localDB);
-        cmd8.Parameters.AddWithValue("id", 7);
+        cmd8.Parameters.AddWithValue("id", id);
         txtDOB.Text = cmd8.ExecuteScalar().ToString();
 
         SqlCommand cmd9 = new SqlCommand("SELECT Address FROM Users WHERE UserID = @id", localDB);
-        cmd9.Parameters.AddWithValue("id", 7);
+        cmd9.Parameters.AddWithValue("id", id);
         txtAddress.Text = cmd9.ExecuteScalar().ToString();
 
         SqlCommand cmd10 = new SqlCommand("SELECT Testimonial FROM BusinessEmployee WHERE UserID = @id", localDB);
-        cmd10.Parameters.AddWithValue("id", 7);
+        cmd10.Parameters.AddWithValue("id", id);
         txtTestimonial.Text = cmd10.ExecuteScalar().ToString();
 
         SqlCommand cmd11 = new SqlCommand("SELECT CompanyName FROM Business WHERE BusinessID = @id", localDB);
@@ -163,7 +164,7 @@ public partial class Settings : System.Web.UI.Page
         //Update user table
         SqlCommand update = new SqlCommand("Update Users SET Subscription=@Subscription WHERE UserId=@ID;", localDB);
         update.Parameters.Add(new SqlParameter("@Subscription", subscription));
-        update.Parameters.Add(new SqlParameter("@ID", 7));
+        update.Parameters.Add(new SqlParameter("@ID", id));
         update.ExecuteNonQuery();
 
 
@@ -181,7 +182,7 @@ public partial class Settings : System.Web.UI.Page
         //Update user table
         SqlCommand update = new SqlCommand("Update Users SET Subscription=@Subscription WHERE UserId=@ID;", localDB);
         update.Parameters.Add(new SqlParameter("@Subscription", subscription));
-        update.Parameters.Add(new SqlParameter("@ID", 7));
+        update.Parameters.Add(new SqlParameter("@ID", id));
         update.ExecuteNonQuery();
 
 
@@ -198,7 +199,7 @@ public partial class Settings : System.Web.UI.Page
         //Update user table
         SqlCommand update = new SqlCommand("Update Users SET Subscription=@Subscription WHERE UserId=@ID;", localDB);
         update.Parameters.Add(new SqlParameter("@Subscription", subscription));
-        update.Parameters.Add(new SqlParameter("@ID", 7));
+        update.Parameters.Add(new SqlParameter("@ID", id));
         update.ExecuteNonQuery();
 
 

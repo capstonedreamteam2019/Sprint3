@@ -110,6 +110,8 @@
                              <h4 class="mb-2">Create your account</h4>
                               <p>Let's begin by creating your account. You can always change these details later.</p>
           					  <div class="form-group">
+                              <button type="button" class="btn btn-info" runat="server" onserverclick="Populate_Click">Populate</button>
+                              <br />
                               <p>Email</p>
           		              <asp:TextBox ID="txtEmail" runat="server" class="form-control form-control-lg" placeholder="Email Address"></asp:TextBox>
                               <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ValidationGroup="group1" ControlToValidate="txtEmail" runat="server" ErrorMessage="Required" ForeColor="red"></asp:RequiredFieldValidator>

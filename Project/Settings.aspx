@@ -116,7 +116,7 @@
                 <div class="card-body">
                   <div class="media">
                     <div class="media-body">
-                      <span class="h5 mb-0">Create Profile</span>
+                      <span class="h5 mb-0">Edit Profile</span>
                       <br>
                       <div class="form-group">
                     <img alt="Image" src="pages/assets/img/Ed.svg" class="avatar avatar-lg mb-3 mb-md-0" />
@@ -283,9 +283,10 @@
                       <div class="form-group">
                         <label for="about-me">Company Head Quarters Address:</label>
                         <asp:TextBox ID="txtHQ"  class="form-control form-control-lg" runat="server"></asp:TextBox>
+                          <br />  
                       </div>
                     </div>
-
+                      
 
 
 
@@ -343,7 +344,7 @@
                   <div class="card pricing card-lg">
                     <div class="card-body">
                       <h5>Pay per Post</h5>
-                      <span class="display-3">$199</span>
+                      <span class="display-3">$299</span>
                       <span class="h6">Includes:</span>
                       <ul class="list-unstyled">
                       <li>
@@ -366,7 +367,7 @@
                   <div class="card pricing card-lg">
                     <div class="card-body">
                       <h5>Monthly Subscription</h5>
-                      <span class="display-3">$299</span>
+                      <span class="display-3">$199</span>
                       <span class="h6">Includes:</span>
                       <ul class="list-unstyled">
                         <li>

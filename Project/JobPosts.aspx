@@ -181,21 +181,7 @@
                                         <ItemTemplate>
                                             <asp:Label ID="lblLocation" Text='<%#Eval("JobAddress") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                            <h1></h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                            <h1></h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                                                       
                                     <asp:TemplateField HeaderText="Career Cluster">
                                         <ItemTemplate>
                                             <asp:Label ID="lblCluster" Text='<%#Eval("CareerCluster") %>' runat="server"></asp:Label>
@@ -384,8 +370,8 @@
                 <!-- Create Job Modal HTML -->
                                 <div id="mask">
                 </div>
-                <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="1150px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
+                <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="1030px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -16%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create Job Post</h1>
                                 <button type="button" class="btn btn-info" runat="server" onserverclick="Populate_Click">Populate</button>
                                                 <div class="form-group">
@@ -448,7 +434,7 @@
                 <!--Preview Pannel-->
                 <div id="mask">
                 </div>
-                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="1100px"
+                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="900px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -12%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Job Post</h1>
                     <div class="form-group">

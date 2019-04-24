@@ -406,7 +406,7 @@
                                     <div class="card pricing card-lg">
                                         <div class="card-body">
                                             <h5>Pay for Post</h5>
-                                            <span class="display-3">$1</span>
+                                            <span class="display-3">$299</span>
                                             <span class="h6">Includes:</span>
                                             <ul class="list-unstyled">
                                                 <li>
@@ -429,7 +429,7 @@
                                     <div class="card pricing card-lg">
                                         <div class="card-body">
                                             <h5>Monthly Subscription</h5>
-                                            <span class="display-3">$29</span>
+                                            <span class="display-3">$199</span>
                                             <span class="h6">Includes:</span>
                                             <ul class="list-unstyled">
                                                 <li>
