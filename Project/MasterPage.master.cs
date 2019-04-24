@@ -16,23 +16,25 @@ public partial class MasterPage : System.Web.UI.MasterPage
         System.Data.SqlClient.SqlCommand getApplicants = new System.Data.SqlClient.SqlCommand();
         getApplicants.Connection = localDB;
         getApplicants.CommandText = "Select count(AppID) From App where(Opened like '*')";
-        lblapps.Text = getApplicants.ExecuteScalar().ToString();
-        lblApplicants.Text = getApplicants.ExecuteScalar().ToString();
+        string app = getApplicants.ExecuteScalar().ToString();
+        lblapps.Text = app;
+        lblApplicants.Text = app;
 
         System.Data.SqlClient.SqlCommand getSch = new System.Data.SqlClient.SqlCommand();
         getSch.Connection = localDB;
         getSch.CommandText = "Select count(PostID) From Scholarship where(Opened like '*')";
         lblsch.Text = getSch.ExecuteScalar().ToString();
-        lblScholarship.Text = getSch.ExecuteScalar().ToString();
+        string sch = getSch.ExecuteScalar().ToString();
+        lblScholarship.Text = sch;
 
         System.Data.SqlClient.SqlCommand getEvents = new System.Data.SqlClient.SqlCommand();
         getEvents.Connection = localDB;
-        getEvents.CommandText = "Select count(PostID) From Events where(Opened like '*')";
-        lblEvents.Text = getEvents.ExecuteScalar().ToString();
-        lblEv.Text = getEvents.ExecuteScalar().ToString();
+        getEvents.CommandText = "Select count(PostID) From Event where(Opened like '*')";
+        string even = getEvents.ExecuteScalar().ToString();
+        lblEvents.Text = even;
+        lblEv.Text = even;
 
-
-        int not = Convert.ToInt32(getApplicants.ExecuteScalar().ToString()) + Convert.ToInt32(getSch.ExecuteScalar().ToString()) + Convert.ToInt32(getEvents.ExecuteScalar().ToString());
+        int not = Convert.ToInt32(app) + Convert.ToInt32(sch) + Convert.ToInt32(even);
         if (not == 0)
         {
             lblNotification.Text = "";
@@ -42,5 +44,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
             lblNotification.Text = not.ToString();
         }
         localDB.Close();
+
     }
 }

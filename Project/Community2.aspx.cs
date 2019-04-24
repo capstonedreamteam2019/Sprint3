@@ -174,6 +174,18 @@ public partial class Community2 : System.Web.UI.Page
             builder.Append("<script language=JavaScript> ShowPreview(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPreview", builder.ToString());
         }
+        if (e.CommandName == "Read")
+        {
+            localDB.Open();
+            System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
+            getTitle.Connection = localDB;
+            getTitle.CommandText = "Update Event set Opened = ' ' where PostID = @id";
+            getTitle.Parameters.AddWithValue("id", id.Text);
+            getTitle.ExecuteNonQuery();     
+            localDB.Close();
+            showData();
+            Response.Redirect(Request.RawUrl);
+        }
     }
 
     //open Create popup

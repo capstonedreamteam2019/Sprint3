@@ -85,7 +85,7 @@
                 <h6 class="dropdown-header">
                   Your Notifications 
                 </h6>
-                <a class="dropdown-item d-flex align-items-center" href="CommunityEngagement.aspx">
+                <a class="dropdown-item d-flex align-items-center" href="Community2.aspx">
                   <div class="mr-3">
                     <div class="badge badge-info badge-counter">
                       <h6><asp:Label id="lblEvents" class="badge badge-info badge-counter" runat="server"></asp:Label></h6>
@@ -96,7 +96,7 @@
                    You have <asp:Label id="lblEv" runat="server"></asp:Label> new events in your area your business can attend
                   </div>
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="Applications.aspx">
+                <a id="application" class="dropdown-item d-flex align-items-center" href="Applications.aspx">
                   <div class="mr-3">
                     <div class="badge badge-info badge-counter">
                       <h6><asp:Label id="lblapps" runat="server" class="badge badge-info badge-counter"></asp:Label></h6>

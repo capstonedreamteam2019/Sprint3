@@ -189,6 +189,8 @@ public partial class ManageScholarships : System.Web.UI.Page
             getTitle.ExecuteNonQuery();
             showData();
             localDB.Close();
+            showData();
+            Response.Redirect(Request.RawUrl);
         }
 
     }

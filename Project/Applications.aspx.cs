@@ -296,9 +296,10 @@ public partial class Applications: System.Web.UI.Page
             getTitle.Connection = localDB;
             getTitle.CommandText = "Update App set Opened = ' ' where AppID = @id";
             getTitle.Parameters.AddWithValue("id", id.Text);
-            getTitle.ExecuteNonQuery();
-            showData();
+            getTitle.ExecuteNonQuery();           
             localDB.Close();
+            showData();
+            Response.Redirect(Request.RawUrl);
         }
 
 
