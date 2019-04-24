@@ -82,12 +82,12 @@
                         <div class="row justify-content-center">
                             <div class="col-auto">
                                 <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
+                                    <%--<ul class="pagination">
                                         <li class="page-item "><a class="page-link" href="ViewApplications.aspx"><i class="icon-grid"></i></a>
                                         </li>
                                         <li class="page-item active"><a class="page-link" href="Applications.aspx"><i class="icon-menu"></i></a>
                                         </li>
-                                    </ul>
+                                    </ul>--%>
                                 </nav>
                             </div>
                             <!--end of col-->
@@ -142,7 +142,8 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                           <asp:Label ID="lblID" visible="false" Text='<%#Eval("AppID") %>' runat="server"></asp:Label>
+                                            <asp:Label ID="lblRead" Visible="false" ForeColor="Red" Text="*" runat="server"></asp:Label>
+                                            <asp:Label ID="lblID" visible="false" Text='<%#Eval("AppID") %>' runat="server"></asp:Label>
                                             <asp:Label  visible="false"  ID="lblUserID" Text='<%#Eval("UserID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>                                                                     
@@ -183,7 +184,14 @@
                                         <ItemTemplate>
                                             <asp:Label ID="lblEmail" Text='<%#Eval("Email") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>                                    
+                                    </asp:TemplateField> 
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Phone Number">
                                         <ItemTemplate>
                                             <asp:Label ID="lblPhone" Text='<%#Eval("PhoneNumber") %>' runat="server"></asp:Label>
@@ -304,7 +312,14 @@
                                                 <ItemTemplate>
                                                     <span class="badge badge-success"><asp:Label ID="lblStatus" Text='<%#Eval("Hired") %>' runat="server"></asp:Label></span>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>                                            
+                                            </asp:TemplateField> 
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <br />
+                                                    <h1></h1>
+                                                    <br />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblName" Text='<%#Eval("FirstName") %>' runat="server"></asp:Label>
@@ -639,11 +654,10 @@
             <!--Resume pannel-->
             <div id="mask">
             </div>
-            <asp:Panel ID="ResumePopup"  runat="server"  BackColor="White" Height="1050px"
+            <asp:Panel ID="ResumePopup"  runat="server"  BackColor="White" Height="600px"
                 Width="600px" Style="z-index:111;background-color: White; position: absolute; left: 25%; top: -12%; 
                 border: outset 2px gray;padding:5px;display:none">
-                <%--<asp:Image ID="imgResume" runat="server" />--%>
-                <img ID="imgResume" alt="resume" src="pages/assets/img/resume1.jpg" />
+                <asp:Image ID="imgResume" runat="server" Height="550px" src="pages/assets/img/resume1.jpg" /><br />
                 <button type="button" onserverclick="CloseResume" class="btn btn-default" runat="server">Close</button>              
              </asp:Panel>
             <!--End Resume pannel-->

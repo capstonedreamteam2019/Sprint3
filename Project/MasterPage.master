@@ -67,7 +67,7 @@
                <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <img alt="Image" src="pages/assets/img/bell.svg" class="avatar avatar-xs" />
                 <!-- Counter - Alerts -->
-                <span class="badge badge-info badge-counter">3</span>
+                <asp:Label id="lblNotification" runat="server" class="badge badge-info badge-counter"></asp:Label>
               </a>
               <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
@@ -81,30 +81,30 @@
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">April 17, 2019</div>
+                    <div class="small text-gray-500">April 27, 2019</div>
                    You have 5 new events in your area your business can attend
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="Applications.aspx">
                   <div class="mr-3">
                     <div class="badge badge-info badge-counter">
-                      <h6><span class="badge badge-info badge-counter">3</span></h6>
+                      <h6><asp:Label id="lblapps" runat="server" class="badge badge-info badge-counter"></asp:Label></h6>
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">April 11, 2019</div>
-                   You have 3 new completed applications to view
+                    <div class="small text-gray-500">April 27, 2019</div>
+                   You have <asp:Label id="lblApplicants" runat="server"></asp:Label> new applications to view
                   </div>
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="ManageScholarships.aspx">
                   <div class="mr-3">
                     <div class="badge badge-info badge-counter">
-                      <h6><span class="badge badge-info badge-counter">4</span></h6>
+                        <h6><asp:Label id="lblsch" class="badge badge-info badge-counter" runat="server"></asp:Label></h6>
                     </div>
                   </div>
                   <div>
-                    <div class="small text-gray-500">April 9, 2019</div>
-                    You have 4 scholarships about to expire
+                    <div class="small text-gray-500">April 27, 2019</div>
+                    You have <asp:Label id="lblScholarship" runat="server"></asp:Label> scholarships about to expire
                   </div>
                 </a>
               </div>

@@ -283,6 +283,8 @@ public partial class Applications: System.Web.UI.Page
         }
         if (e.CommandName == "Resume")
         {
+            id = selectedRow.FindControl("lblUserID") as Label;
+            openApp();
             builder.Append("<script language=JavaScript> ShowResume(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowResume", builder.ToString());
         }
@@ -537,12 +539,39 @@ public partial class Applications: System.Web.UI.Page
 
     }
 
-    protected void openApp(object sender, EventArgs e)
-    {
-    //    if (id.Text == 1.ToString())
-    //    {
-    //        imgResume.    "pages/assets/resume1.jpg";
-    //    }
+    protected void openApp()
+    {   //cole
+        if (id.Text == 1.ToString()) 
+        {
+            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume5.jpg");
+        }
+        //wang
+        if (id.Text == 2.ToString())
+        {
+            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume1.jpg");
+        }
+        //barlow
+        if (id.Text == 3.ToString())
+        {
+            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume2.jpg");
+        }
+        //shelly
+        if (id.Text == 4.ToString())
+        {
+            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume3.png");
+        }
+        //seth
+        if (id.Text == 5.ToString())
+        {
+            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume4.jpg");
+        }
+        //becky
+        if (id.Text == 6.ToString())
+        {
+            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume6.jpg");
+        }
+        
+        
 
 
 
@@ -568,7 +597,7 @@ public partial class Applications: System.Web.UI.Page
         //            imgResume.Image = BadImageFormatException.ReferenceEquals(ms);
         //        }
         //    }
-            
+
         //    localDB.Close();
         //}
         //catch
