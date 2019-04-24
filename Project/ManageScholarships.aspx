@@ -121,6 +121,7 @@
                                                                 <Columns>
                                                                     <asp:TemplateField>
                                                                         <ItemTemplate>
+                                                                            <h1><asp:Label  ID="lblOpened" ForeColor="#f37821" Text='<%#Eval("Opened") %>' runat="server"></asp:Label></h1>
                                                                             <asp:Label Visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
@@ -210,6 +211,14 @@
                                                                                         ID="Button1"
                                                                                         runat="server"
                                                                                         CommandName="Change"
+                                                                                        CommandArgument='<%# Container.DataItemIndex %>' />
+                                                                                    <asp:Button
+                                                                                        Text="Mark as Read"
+                                                                                        type="Button"
+                                                                                        class="dropdown-item"
+                                                                                        ID="Button3"
+                                                                                        runat="server"
+                                                                                        CommandName="Read"
                                                                                         CommandArgument='<%# Container.DataItemIndex %>' />
                                                                                     <div class="dropdown-divider"></div>
                                                                                     <asp:Button

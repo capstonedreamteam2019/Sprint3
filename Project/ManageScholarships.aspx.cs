@@ -37,7 +37,8 @@ public partial class ManageScholarships : System.Web.UI.Page
     protected void showData()
     {
         //Populate Gridview 1 = active
-        localDB.Open();
+        if (localDB.State != ConnectionState.Open)
+            localDB.Open();
         dt = new DataTable();
         SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID where(PostType like 'Scholarship')", localDB);
         da = new SqlDataAdapter(cmd);
@@ -177,6 +178,17 @@ public partial class ManageScholarships : System.Web.UI.Page
         {
             builder.Append("<script language=JavaScript> ShowDelete(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowDelete", builder.ToString());
+        }
+        if (e.CommandName == "Read")
+        {
+            localDB.Open();
+            System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
+            getTitle.Connection = localDB;
+            getTitle.CommandText = "Update Scholarship set Opened = ' ' where PostID = @id";
+            getTitle.Parameters.AddWithValue("id", id.Text);
+            getTitle.ExecuteNonQuery();
+            showData();
+            localDB.Close();
         }
 
     }

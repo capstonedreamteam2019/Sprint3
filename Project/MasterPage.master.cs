@@ -15,20 +15,32 @@ public partial class MasterPage : System.Web.UI.MasterPage
         localDB.Open();
         System.Data.SqlClient.SqlCommand getApplicants = new System.Data.SqlClient.SqlCommand();
         getApplicants.Connection = localDB;
-        getApplicants.CommandText = "Select count(AppID) From App where(Opened like 'unread')";
+        getApplicants.CommandText = "Select count(AppID) From App where(Opened like '*')";
         lblapps.Text = getApplicants.ExecuteScalar().ToString();
         lblApplicants.Text = getApplicants.ExecuteScalar().ToString();
 
         System.Data.SqlClient.SqlCommand getSch = new System.Data.SqlClient.SqlCommand();
         getSch.Connection = localDB;
-        getSch.CommandText = "Select count(PostID) From Scholarship where(DueDate between '04/27/2019' and '05/01/2019')";
+        getSch.CommandText = "Select count(PostID) From Scholarship where(Opened like '*')";
         lblsch.Text = getSch.ExecuteScalar().ToString();
         lblScholarship.Text = getSch.ExecuteScalar().ToString();
 
+        System.Data.SqlClient.SqlCommand getEvents = new System.Data.SqlClient.SqlCommand();
+        getEvents.Connection = localDB;
+        getEvents.CommandText = "Select count(PostID) From Events where(Opened like '*')";
+        lblEvents.Text = getEvents.ExecuteScalar().ToString();
+        lblEv.Text = getEvents.ExecuteScalar().ToString();
 
 
-
-        lblNotification.Text = getApplicants.ExecuteScalar().ToString();
+        int not = Convert.ToInt32(getApplicants.ExecuteScalar().ToString()) + Convert.ToInt32(getSch.ExecuteScalar().ToString()) + Convert.ToInt32(getEvents.ExecuteScalar().ToString());
+        if (not == 0)
+        {
+            lblNotification.Text = "";
+        }
+        else
+        {
+            lblNotification.Text = not.ToString();
+        }
         localDB.Close();
     }
 }

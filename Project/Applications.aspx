@@ -142,7 +142,7 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:Label ID="lblRead" Visible="false" ForeColor="Red" Text="*" runat="server"></asp:Label>
+                                            <h1><asp:Label ID="lblRead" ForeColor="#f37821" Text='<%#Eval("Opened") %>' runat="server"></asp:Label></h1>
                                             <asp:Label ID="lblID" visible="false" Text='<%#Eval("AppID") %>' runat="server"></asp:Label>
                                             <asp:Label  visible="false"  ID="lblUserID" Text='<%#Eval("UserID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
@@ -246,7 +246,15 @@
                                                         ID="Button1"
                                                         runat="server"
                                                         CommandName="Hire"
-                                                        CommandArgument='<%# Container.DataItemIndex %>' />                 
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />   
+                                                    <asp:Button
+                                                        Text="Mark as Read"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="Button5"
+                                                        runat="server"
+                                                        CommandName="Read"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' />   
                                                     <div class="dropdown-divider"></div>
                                                     <asp:Button
                                                         Text="Decline Applicant"
@@ -627,8 +635,6 @@
             <asp:Panel ID="HirePopup" runat="server"  BackColor="White" Height="250px"
                 Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 400px; top: -20px; 
                 border: outset 2px gray;padding:5px;display:none">
-                <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align:"center">Student Resume</h1>
-
                             <h3>Are you sure you want to hire this applicant?</h3>
                             <br />
                             <h5>The applicant and their school will receive a notification about your interest in them.</h5>   

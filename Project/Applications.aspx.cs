@@ -44,7 +44,8 @@ public partial class Applications: System.Web.UI.Page
     protected void showData()
     {
         //Populates Gridview 1 = Active
-        localDB.Open();
+        if (localDB.State != ConnectionState.Open)
+            localDB.Open();
         dt = new DataTable(); 
         SqlCommand cmd = new SqlCommand("SELECT * FROM App LEFT JOIN Users ON Users.UserID = App.UserID  LEFT JOIN Student ON Student.UserID = Users.UserID LEFT JOIN Post ON App.PostID = Post.PostID where Hired Like 'Open'", localDB);
         da = new SqlDataAdapter(cmd);
@@ -287,6 +288,17 @@ public partial class Applications: System.Web.UI.Page
             openApp();
             builder.Append("<script language=JavaScript> ShowResume(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowResume", builder.ToString());
+        }
+        if (e.CommandName == "Read")
+        {
+            localDB.Open();
+            System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
+            getTitle.Connection = localDB;
+            getTitle.CommandText = "Update App set Opened = ' ' where AppID = @id";
+            getTitle.Parameters.AddWithValue("id", id.Text);
+            getTitle.ExecuteNonQuery();
+            showData();
+            localDB.Close();
         }
 
 
