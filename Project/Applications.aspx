@@ -30,6 +30,16 @@
             $('#<%=PreviewPopup.ClientID %>').hide();
         }
 
+        //Preview popups
+        function ShowResume() {
+            $('#mask').show();
+            $('#<%=ResumePopup.ClientID %>').show();
+        }
+        function HideResume() {
+            $('#mask').hide();
+            $('#<%=ResumePopup.ClientID %>').hide();
+        }
+
         //Hire popups
         function ShowHire() {
             $('#mask').show();
@@ -133,18 +143,14 @@
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                            <asp:Label ID="lblID" visible="false" Text='<%#Eval("AppID") %>' runat="server"></asp:Label>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
                                             <asp:Label  visible="false"  ID="lblUserID" Text='<%#Eval("UserID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>                                   
+                                    </asp:TemplateField>                                                                     
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
                                         </ItemTemplate>
-                                    </asp:TemplateField>                                   
+                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -156,20 +162,6 @@
                                     <ItemTemplate>
                                         <span class="badge badge-info"><asp:Label ID="lblStatus" Text='<%#Eval("Hired") %>' runat="server"></asp:Label></span>
                                     </ItemTemplate>
-                                </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>                                     
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Name">
                                         <ItemTemplate>
@@ -179,14 +171,7 @@
                                             <span class="text-muted">Applied For: 
                                             <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField> 
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -198,14 +183,7 @@
                                         <ItemTemplate>
                                             <asp:Label ID="lblEmail" Text='<%#Eval("Email") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                    
                                     <asp:TemplateField HeaderText="Phone Number">
                                         <ItemTemplate>
                                             <asp:Label ID="lblPhone" Text='<%#Eval("PhoneNumber") %>' runat="server"></asp:Label>
@@ -314,44 +292,19 @@
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <asp:Label  visible="false"  ID="lblUserID" Text='<%#Eval("UserID") %>' runat="server"></asp:Label></span>
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
-                                                <asp:TemplateField>
-                                                <ItemTemplate>
                                                     <asp:Label  visible="false"  ID="lblID" Text='<%#Eval("AppID") %>' runat="server"></asp:Label></span>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>                                                
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <br />
-                                                    <h1></h1>
-                                                    <br />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>                                            
                                             <asp:TemplateField HeaderText="Status">
                                                 <ItemTemplate>
                                                     <span class="badge badge-success"><asp:Label ID="lblStatus" Text='<%#Eval("Hired") %>' runat="server"></asp:Label></span>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <br />
-                                                    <h1></h1>
-                                                    <br />
-                                                </ItemTemplate>
                                             </asp:TemplateField>                                            
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <br />
-                                                    <h1></h1>
-                                                    <br />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
                                             <asp:TemplateField HeaderText="Name">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblName" Text='<%#Eval("FirstName") %>' runat="server"></asp:Label>
@@ -372,20 +325,13 @@
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblEmail" Text='<%#Eval("Email") %>' runat="server"></asp:Label>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <br />
-                                                    <h1></h1>
-                                                    <br />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>
+                                            </asp:TemplateField>                                            
                                             <asp:TemplateField HeaderText="Phone Number">
                                                 <ItemTemplate>
                                                     <asp:Label ID="lblPhone" Text='<%#Eval("PhoneNumber") %>' runat="server"></asp:Label>
                                                 </ItemTemplate>
-                                            </asp:TemplateField>
-                                            <asp:TemplateField>
+                                            </asp:TemplateField> 
+                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <br />
                                                     <h1></h1>
@@ -397,13 +343,6 @@
                                                     <asp:Label ID="lblScore" Text='<%#Eval("Score") %>' runat="server"></asp:Label>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField>
-                                                <ItemTemplate>
-                                                    <br />
-                                                    <h1></h1>
-                                                    <br />
-                                                </ItemTemplate>
-                                            </asp:TemplateField>                                            
                                             <asp:TemplateField>
                                                 <ItemTemplate>
                                                     <br />
@@ -482,14 +421,10 @@
                                                 <Columns>
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                            <asp:Label  visible="false"  ID="lblUserID" Text='<%#Eval("UserID") %>' runat="server"></asp:Label></span>
+                                                            <asp:Label  visible="false"  ID="lblUserID" Text='<%#Eval("UserID") %>' runat="server"></asp:Label>
+                                                            <asp:Label  visible="false" ID="lblID" Text='<%#Eval("AppID") %>' runat="server"></asp:Label>
                                                         </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <asp:Label  visible="false" ID="lblID" Text='<%#Eval("AppID") %>' runat="server"></asp:Label></span>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
+                                                    </asp:TemplateField>                                                   
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
                                                             <img alt="Image" src="pages/assets/img/person.png" class="avatar" />
@@ -505,20 +440,6 @@
                                                     <asp:TemplateField HeaderText="Status">
                                                         <ItemTemplate>
                                                             <span class="badge badge-danger"><asp:Label ID="lblStatus" Text="Declined" runat="server"></asp:Label></span>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <br />
-                                                            <h1></h1>
-                                                            <br />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <br />
-                                                            <h1></h1>
-                                                            <br />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>
@@ -544,23 +465,9 @@
                                                             <br />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <br />
-                                                            <h1></h1>
-                                                            <br />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Email">
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblEmail" Text='<%#Eval("Email") %>' runat="server"></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField>
-                                                        <ItemTemplate>
-                                                            <br />
-                                                            <h1></h1>
-                                                            <br />
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>
@@ -705,6 +612,8 @@
             <asp:Panel ID="HirePopup" runat="server"  BackColor="White" Height="250px"
                 Width="500px" Style="z-index:111;background-color: White; position: absolute; left: 400px; top: -20px; 
                 border: outset 2px gray;padding:5px;display:none">
+                <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align:"center">Student Resume</h1>
+
                             <h3>Are you sure you want to hire this applicant?</h3>
                             <br />
                             <h5>The applicant and their school will receive a notification about your interest in them.</h5>   
@@ -726,6 +635,18 @@
                         <button type="button" onserverclick="CloseRe" class="btn btn-default" runat="server">Close</button>              
              </asp:Panel>
             <!--End Reactivate pannel-->
+
+            <!--Resume pannel-->
+            <div id="mask">
+            </div>
+            <asp:Panel ID="ResumePopup"  runat="server"  BackColor="White" Height="1050px"
+                Width="600px" Style="z-index:111;background-color: White; position: absolute; left: 25%; top: -12%; 
+                border: outset 2px gray;padding:5px;display:none">
+                <%--<asp:Image ID="imgResume" runat="server" />--%>
+                <img ID="imgResume" alt="resume" src="pages/assets/img/resume1.jpg" />
+                <button type="button" onserverclick="CloseResume" class="btn btn-default" runat="server">Close</button>              
+             </asp:Panel>
+            <!--End Resume pannel-->
 
         </section>
         <!--end of section-->

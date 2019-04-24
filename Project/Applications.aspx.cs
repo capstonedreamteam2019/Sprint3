@@ -7,12 +7,13 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.IO;
 
 public partial class Applications: System.Web.UI.Page
 {
     //Declare connection
     SqlConnection localDB = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["localDB"].ConnectionString);
-
+    
     //Create data tables for gridviews
     SqlDataAdapter da;
     DataTable dt;
@@ -30,6 +31,7 @@ public partial class Applications: System.Web.UI.Page
         {
             //Updates the Gridviews
             showData();
+           
         }
 
         if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
@@ -279,6 +281,12 @@ public partial class Applications: System.Web.UI.Page
             builder.Append("<script language=JavaScript> ShowDelete(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowDelete", builder.ToString());
         }
+        if (e.CommandName == "Resume")
+        {
+            builder.Append("<script language=JavaScript> ShowResume(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowResume", builder.ToString());
+        }
+
 
     }
 
@@ -302,7 +310,12 @@ public partial class Applications: System.Web.UI.Page
             id = selectedRow.FindControl("lblID") as Label;
             builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
-        }      
+        }
+        if (e.CommandName == "Resume")
+        {
+            builder.Append("<script language=JavaScript> ShowResume(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowResume", builder.ToString());
+        }
 
     }
 
@@ -320,6 +333,11 @@ public partial class Applications: System.Web.UI.Page
             LoadPreview();
             builder.Append("<script language=JavaScript> ShowPreview(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPreview", builder.ToString());
+        }
+        if (e.CommandName == "Resume")
+        {
+            builder.Append("<script language=JavaScript> ShowResume(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowResume", builder.ToString());
         }
 
     }
@@ -362,6 +380,13 @@ public partial class Applications: System.Web.UI.Page
         StringBuilder builder = new StringBuilder();
         builder.Append("<script language=JavaScript> HideRe(); </script>\n");
         Page.ClientScript.RegisterStartupScript(this.GetType(), "HideRe", builder.ToString());
+    }
+    //close Resume popup
+    protected void CloseResume(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideResume(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideResume", builder.ToString());
     }
 
 
@@ -514,32 +539,36 @@ public partial class Applications: System.Web.UI.Page
 
     protected void openApp(object sender, EventArgs e)
     {
+    //    if (id.Text == 1.ToString())
+    //    {
+    //        imgResume.    "pages/assets/resume1.jpg";
+    //    }
+
+
+
+
         //try
         //{
         //    System.Data.SqlClient.SqlCommand openPic = new System.Data.SqlClient.SqlCommand();
         //    openPic.Connection = localDB;
-        //    openPic.CommandText = "SELECT Document FROM files WHERE UserID = @id";
+        //    openPic.CommandText = "SELECT Resume FROM Student WHERE UserID = @id";
         //    openPic.Parameters.AddWithValue("id", id.Text);
         //    if (localDB.State != ConnectionState.Open)
         //        localDB.Open();
-        //    GridView1_RowCommand = new SqlCommand(sql, localDB);
-        //    SqlDataReader reader = GridView1_RowCommand.ExecuteReader();
+        //    SqlDataReader reader = openPic.ExecuteReader();
         //    reader.Read();
         //    if (reader.HasRows)
         //    {
         //        byte[] img = (byte[])(reader[0]);
         //        if (img == null)
-        //            picEmp.Image = null;
+        //            imgResume. = null;
         //        else
         //        {
         //            MemoryStream ms = new MemoryStream(img);
-        //            picEmp.Image = BadImageFormatException.FromStream(ms);
+        //            imgResume.Image = BadImageFormatException.ReferenceEquals(ms);
         //        }
         //    }
-        //    else
-        //    {
-        //        MessageBox.Show("This does not exist.");
-        //    }
+            
         //    localDB.Close();
         //}
         //catch

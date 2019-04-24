@@ -295,6 +295,16 @@ public partial class ManageScholarships : System.Web.UI.Page
             string postID = selectPostID.ExecuteScalar().ToString();
             selectPostID.ExecuteNonQuery();
 
+            try
+            {
+                DateTime start = DateTime.Parse(txtDeadline.Value);
+                txtDeadline.Value = start.ToString("MM/dd/yyyy");
+            }
+            catch
+            {
+
+            }
+
             //create scholarship object 
             Scholarship sch = new Scholarship(postID, HttpUtility.HtmlEncode(txtRequirements.Text), HttpUtility.HtmlEncode(txtAmount.Value), HttpUtility.HtmlEncode(txtDeadline.Value));
 
@@ -446,6 +456,16 @@ public partial class ManageScholarships : System.Web.UI.Page
             editPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = post.getLastUpdatedBy();
             editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = post.getLastUpdated();
             editPost.ExecuteNonQuery();
+
+            try
+            {
+                DateTime start = DateTime.Parse(txtEditDueDate.Value);
+                txtEditDueDate.Value = start.ToString("MM/dd/yyyy");
+            }
+            catch
+            {
+
+            }
 
             Scholarship sch = new Scholarship(id.Text, HttpUtility.HtmlEncode(txtEditRequirements.Text), HttpUtility.HtmlEncode(txtEditREward.Value), HttpUtility.HtmlEncode(txtEditDueDate.Value));
 

@@ -114,7 +114,7 @@
         <!-- Create Event Modal HTML -->
         <div id="mask">
                 </div>
-        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="850px"
+        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="750px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
             <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
             <div class="form-group">
@@ -551,7 +551,7 @@
             <!-- Preview Modal HTML -->
            <div id="mask">
                 </div>
-                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="800px"
+                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="650px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -1900%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Event</h1>
 
@@ -622,7 +622,7 @@
         <!-- Edit Modal HTML -->
          <div id="mask">
                 </div>
-                    <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="800px"
+                    <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="750px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:-1900%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Event</h1>
                         <div class="form-group">
@@ -663,7 +663,7 @@
                 <div id="mask">
                 </div>
                 <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="225px"
-                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -1800%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -2000%; border: outset 2px gray; padding: 5px; display: none">
                     <h3  style="font: Helvetica;">Are you sure you want to delete this Post?</h3>
                     <br />
                     <h5 style="font: Helvetica;">All applications for this post will also be deleted.</h5>
