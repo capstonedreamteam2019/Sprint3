@@ -2,23 +2,38 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style>
+    #mask
+        {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            z-index: 4;
+            opacity: 0.4;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; /* first!*/
+            filter: alpha(opacity=40); /* second!*/
+            background-color: gray;
+            display: none;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        //Create popups
+        function ShowCreate() {
+            $('#mask').show();
+            $('#<%=CreatePopup.ClientID %>').show();
+        }
+        function HideCreate() {
+            $('#mask').hide();
+            $('#<%=CreatePopup.ClientID %>').hide();
+        }
+   </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <form cssclass="container-fluid" runat="server">  
-      <div id="myModal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Are you sure you want to log out?</h3>
-                </div>
-                <div class="modal-body">
-                   <a href="landing-4.html" class="btn-lg btn-success">Yes</a>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">No, return to page</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
     <section class="space-sm">
         <div class="container">
           <div class="row justify-content-between">
@@ -33,40 +48,34 @@
                   </li>
                 </ul>
               </nav>
-              <ul>
-        
             </div>
             <!--end of col-->
           </div>
-            </div>
-            <!--end of col-->
-            
+         </div>
+            <!--end of col-->           
             <div class="col order-md-1">
               <h2 class="mb-0">Engage with your Community</h2>
               <span>Create and view events in your local community.</span>
               <div class="media align-items-center my-3">
               </div>
+            </div>
             <!--end of col-->
           </div>
           <!--end of row-->
         </div>
         <!--end of container-->
       </section>
-      <!--end of section-->
-    
-     <section class="flush-with-above">   
+      <!--end of section-->  
          <div class="container-fluid" style="width:75%">       
           <div class="row justify-content">
             <div class="col-auto">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">                
-                <li> <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>Create an Event</a></li>  		   
-                </ul>
+              <nav aria-label="Page navigation example">                            
+                <button type="button" class="btn btn-success" runat="server" onserverclick="openCreate"><i class="icon-plus">&nbsp;</i>Create an Event</button>                                          
              </nav>
             </div>
             <!--end of col-->
           </div>
- </div>
+        </div>
   <section class="flush-with-above">  
     <!--Body section-->
         <div class="container">
@@ -83,9 +92,6 @@
 
                     <TodayDayStyle BackColor="#B7FBF4" BorderStyle="Solid"></TodayDayStyle>
                 </asp:Calendar>
-            
-                <%--<asp:GridView ID="GridView1" runat="server" CssClass="form-group" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                </asp:GridView>--%>
 
                 </span>
                     </div>
@@ -95,11 +101,6 @@
             </div>
       </div>
             <!--end of container-->
-         
-         </div>      
-
-       <section class="flush-with-above">
-        <!--Body section-->
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -113,8 +114,6 @@
                                 <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                 <RowStyle CssClass="style" Width="100%" />
                                 </asp:GridView> 
-<%--                                <asp:GridView ID="GridView3" runat="server" CssClass="form-group" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
-                                    </asp:GridView>--%>
                                                
                     </div>
                     <!--end of col-->
@@ -122,68 +121,51 @@
                 <!--end of row-->
             </div>
         </div>
-            <!--end of container-->
-            </section>
+        <!--end of container-->   
 
-
-              </nav>
+        
+       <!-- Create Event Modal HTML -->
+        <div id="mask">
+                </div>
+        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="750px"
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
+            <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="title">Event Title:</label>
+                <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
             </div>
-            <!--end of col-->
-          </div>
-    
-          <!--end of row-->
-    
-
-        <!--end of container-->
-       <!-- Modal HTML -->
-      <div id="myModal2" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Create an Event</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-    <label for="title">Event Title:</label>
-    <input type="text" runat="server" class="form-control" id="title" placeholder="ie. Coffee Networking Event">
-  </div>
-   <div class="form-group">
-    <label for="startdate">Start Date:</label>
-    <input type="date" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
-  </div>
-     <div class="form-group">
-    <label for="enddate">End Date:</label>
-    <input type="date" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
-  </div>
-     <div class="form-group">
-    <label for="starttime">Start Time:</label>
-    <input type="time" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
-  </div>
-     <div class="form-group">
-    <label for="endtime">End Time:</label>
-    <input type="time" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
-  </div>
-     <div class="form-group">
-    <label for="location">Event Location:</label>
-    <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
-  </div>
-  <div class="form-group">
-    <label for="eventdescription">Event Description:</label>
-    <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
-  </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-success" runat="server" onserverclick="EventButton_Click">Create Event</button>
-                </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="startdate">Start Date:</label>
+                <input type="Date" runat="server" class="form-control" id="startdate" placeholder="ie. 4/9/2019">
             </div>
-        </div>
-    </div>
-			</section>
-			
-      <!--end of section-->
-   
+            <div class="form-group">
+                <label for="enddate">End Date:</label>
+                <input type="date" runat="server" class="form-control" id="enddate" placeholder="ie. 4/9/2019">
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="starttime">Start Time:</label>
+                <input type="time" runat="server" class="form-control" id="starttime" placeholder="ie. 2:00 pm">
+            </div>
+            <div class="form-group">
+                <label for="endtime">End Time:</label>
+                <input type="time" runat="server" class="form-control" id="endtime" placeholder="ie. 3:00 pm">
+            </div>
+            <div class="form-group">
+                <label style="color: red">*</label><label for="location">Event Location:</label>
+                <input type="text" runat="server" class="form-control" id="location" placeholder="ie. James Madison University">
+            </div>
+            <div class="form-group">
+                <label for="eventdescription">Event Description:</label>
+                <textarea class="form-control" runat="server" id="eventdescription" rows="3"></textarea>
+            </div>
+            <br />
+                <asp:Label ID="lblError" runat="server" forecolor="Red" Text=""></asp:Label><br />
+              <button type="button" class="btn btn-success" runat="server" validationgroup="group1" onserverclick="SubmitButton_Click">Create Event</button>
+              <button type="button" onserverclick="CloseCreate" class="btn btn-default" runat="server">Close</button>
+
+    </asp:Panel>
+        <!--end Create Modal-->
+   </section>
 
     <script type="text/javascript" src="assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/popper.min.js"></script>
@@ -196,7 +178,7 @@
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/theme.js"></script>
 
-    </span>
+   
       </form>
 
     </asp:Content>
