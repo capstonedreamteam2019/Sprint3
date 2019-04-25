@@ -37,7 +37,8 @@ public partial class ManageScholarships : System.Web.UI.Page
     protected void showData()
     {
         //Populate Gridview 1 = active
-        localDB.Open();
+        if (localDB.State != ConnectionState.Open)
+            localDB.Open();
         dt = new DataTable();
         SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID where(PostType like 'Scholarship')", localDB);
         da = new SqlDataAdapter(cmd);
@@ -178,6 +179,19 @@ public partial class ManageScholarships : System.Web.UI.Page
             builder.Append("<script language=JavaScript> ShowDelete(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowDelete", builder.ToString());
         }
+        if (e.CommandName == "Read")
+        {
+            localDB.Open();
+            System.Data.SqlClient.SqlCommand getTitle = new System.Data.SqlClient.SqlCommand();
+            getTitle.Connection = localDB;
+            getTitle.CommandText = "Update Scholarship set Opened = ' ' where PostID = @id";
+            getTitle.Parameters.AddWithValue("id", id.Text);
+            getTitle.ExecuteNonQuery();
+            showData();
+            localDB.Close();
+            showData();
+            Response.Redirect(Request.RawUrl);
+        }
 
     }
 
@@ -294,6 +308,16 @@ public partial class ManageScholarships : System.Web.UI.Page
             selectPostID.CommandText = "select max(postID) from Post";
             string postID = selectPostID.ExecuteScalar().ToString();
             selectPostID.ExecuteNonQuery();
+
+            try
+            {
+                DateTime start = DateTime.Parse(txtDeadline.Value);
+                txtDeadline.Value = start.ToString("MM/dd/yyyy");
+            }
+            catch
+            {
+
+            }
 
             //create scholarship object 
             Scholarship sch = new Scholarship(postID, HttpUtility.HtmlEncode(txtRequirements.Text), HttpUtility.HtmlEncode(txtAmount.Value), HttpUtility.HtmlEncode(txtDeadline.Value));
@@ -446,6 +470,16 @@ public partial class ManageScholarships : System.Web.UI.Page
             editPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = post.getLastUpdatedBy();
             editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = post.getLastUpdated();
             editPost.ExecuteNonQuery();
+
+            try
+            {
+                DateTime start = DateTime.Parse(txtEditDueDate.Value);
+                txtEditDueDate.Value = start.ToString("MM/dd/yyyy");
+            }
+            catch
+            {
+
+            }
 
             Scholarship sch = new Scholarship(id.Text, HttpUtility.HtmlEncode(txtEditRequirements.Text), HttpUtility.HtmlEncode(txtEditREward.Value), HttpUtility.HtmlEncode(txtEditDueDate.Value));
 

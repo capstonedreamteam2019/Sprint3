@@ -62,12 +62,13 @@
             <!--end of col-->
             <div class="col-12 col-sm-8 col-lg-6 fullwidth-split-text">
               <div class="col-12 col-lg-8 align-self-center">
-                <div class="text-center mb-5">
+                <div class="text-center">
                   <h1 class="h2 mb-2">Login Here</h1>
                   <span>Let's get connected.</span>
+                <br /><br />
+               <button type="button" class="text-center btn btn-info" runat="server" onserverclick="Populate_Click">Populate</button>
                 </div>
-               <button type="button" class="btn btn-info" runat="server" onserverclick="Populate_Click">Populate</button>
-                <form class="mb-4">
+                    <form class="mb-4">
                   <div class="form-group">
                     <label for="signup-email">Email Address</label>
                     <asp:TextBox class="form-control form-control-lg" ID="txtEmail" placeholder="Email Address" runat="server"></asp:TextBox>

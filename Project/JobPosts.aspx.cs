@@ -43,7 +43,7 @@ public partial class JobPosts : System.Web.UI.Page
         //Populate Gridview 1 = Active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID where(PostType like 'Job')", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID ORDER By Job.LastUpdated DESC", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -56,7 +56,7 @@ public partial class JobPosts : System.Web.UI.Page
         //Populate Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID where(PostType like 'Job')", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID ORDER By DeleteJob.LastUpdated DESC", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -73,7 +73,7 @@ public partial class JobPosts : System.Web.UI.Page
         //Populate Gridview 1 = Active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID where(PostType like 'Job') ORDER BY title ASC", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID ORDER BY title ASC", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -86,7 +86,7 @@ public partial class JobPosts : System.Web.UI.Page
         //Populate Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID where(PostType like 'Job') ORDER BY title ASC", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID ORDER BY title ASC", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -103,7 +103,7 @@ public partial class JobPosts : System.Web.UI.Page
         //Populate Gridview 1 = Active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID where(PostType like 'Job') ORDER By DueDate", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID ORDER By DueDate DESC", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -116,7 +116,39 @@ public partial class JobPosts : System.Web.UI.Page
         //Populate Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID where(PostType like 'Job') ORDER BY DueDate", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID ORDER BY DueDate DESC", localDB);
+        da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView2.DataSource = dt2;
+            GridView2.DataBind();
+        }
+    }
+
+
+
+    //last updated
+    protected void MostRecentFilter(object sender, EventArgs e)
+    {
+        //Populate Gridview 1 = Active
+        localDB.Open();
+        dt = new DataTable();
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID ORDER By Job.LastUpdated DESC", localDB);
+        da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+        }
+
+        //Populate Gridview 2 = Deleted
+        localDB.Open();
+        dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID ORDER BY DeleteJob.LastUpdated DESC", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -128,12 +160,12 @@ public partial class JobPosts : System.Web.UI.Page
     }
 
     //last updated
-    protected void LastUpdatedFilter(object sender, EventArgs e)
+    protected void OldestFilter(object sender, EventArgs e)
     {
         //Populate Gridview 1 = Active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID where(PostType like 'Job') ORDER By Job.LastUpdated", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Job LEFT JOIN Post ON Job.PostID = Post.PostID ORDER By Job.LastUpdated ASC", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -146,7 +178,7 @@ public partial class JobPosts : System.Web.UI.Page
         //Populate Gridview 2 = Deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID where(PostType like 'Job') ORDER BY DeleteJob.LastUpdated", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteJob LEFT JOIN DeletePost ON DeleteJob.PostID = DeletePost.PostID ORDER BY DeleteJob.LastUpdated ASC", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -289,6 +321,7 @@ public partial class JobPosts : System.Web.UI.Page
             System.Data.SqlClient.SqlCommand insertJob = new System.Data.SqlClient.SqlCommand();
             insertJob.Connection = localDB;
 
+
             //Create Post object
             Post posting = new Post(1, "Job", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(description.Value));
 
@@ -321,6 +354,8 @@ public partial class JobPosts : System.Web.UI.Page
                 selected = hourly.Value;
             }
 
+            DateTime start = DateTime.Parse(deadline.Value);
+            deadline.Value = start.ToString("MM/dd/yyyy");
 
             //Create Job object
             Job job = new Job(postID, HttpUtility.HtmlEncode(department.Value), HttpUtility.HtmlEncode(reqs.Value), HttpUtility.HtmlEncode(deadline.Value), HttpUtility.HtmlEncode(salary.Value), HttpUtility.HtmlEncode(respons.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(ADayInTheLife.Value));
@@ -365,7 +400,7 @@ public partial class JobPosts : System.Web.UI.Page
         description.Value = "Works in a team to create a marketing plan for a client";
         department.Value = "Marketing";
         reqs.Value = "3.0 GPA";
-        deadline.Value = "2019-02-04";
+        deadline.Value = "2019-12-04";
         salary.Value = "50000";
         respons.Value = "Responsible for maintaining a good relationship with the client";
         yearly.Checked = true;
@@ -590,8 +625,17 @@ public partial class JobPosts : System.Web.UI.Page
             editPost.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
             editPost.ExecuteNonQuery();
 
-            Job job = new Job(id.Text, HttpUtility.HtmlEncode(txtEditDepartment.Value), HttpUtility.HtmlEncode(txtEditRequirements.Value), HttpUtility.HtmlEncode(txtEditDeadline.Value), HttpUtility.HtmlEncode(txtEditSalary.Value), HttpUtility.HtmlEncode(txtEditResponsibilities.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtADay.Value));
+            try
+            {
+                DateTime start = DateTime.Parse(txtEditDeadline.Value);
+                txtEditDeadline.Value = start.ToString("MM/dd/yyyy");
+            }
+            catch
+            {
 
+            }
+
+            Job job = new Job(id.Text, HttpUtility.HtmlEncode(txtEditDepartment.Value), HttpUtility.HtmlEncode(txtEditRequirements.Value), HttpUtility.HtmlEncode(txtEditDeadline.Value), HttpUtility.HtmlEncode(txtEditSalary.Value), HttpUtility.HtmlEncode(txtEditResponsibilities.Value), HttpUtility.HtmlEncode(selected), HttpUtility.HtmlEncode(txtEditLocation.Value), HttpUtility.HtmlEncode(txtADay.Value));
 
             System.Data.SqlClient.SqlCommand editjob = new System.Data.SqlClient.SqlCommand();
             editjob.Connection = localDB;

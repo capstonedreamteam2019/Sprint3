@@ -114,7 +114,7 @@
         <!-- Create Event Modal HTML -->
         <div id="mask">
                 </div>
-        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="850px"
+        <asp:Panel ID="CreatePopup" runat="server" BackColor="White" Height="750px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -20%; border: outset 2px gray; padding: 5px; display: none">
             <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Create an Event</h1>
             <div class="form-group">
@@ -179,26 +179,17 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <span visible="false">
-                                                <asp:Label visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label></span>
+                                                <asp:Label visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                    
                                     <asp:TemplateField HeaderText="Event">
                                         <ItemTemplate>
                                             <span class="h6 mb-0">
-                                                <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>
-                                            <br />
-                                            <span class="text-muted">Last Updated: 
-                                           <asp:Label ID="Label1" Text='<%#Eval("lastUpdated") %>' runat="server"></asp:Label></span>       
+                                                <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>                                      
+                                            <span class="text-muted">Post Date: 
+                                           <asp:Label ID="Label1" Text='<%#Eval("PostDate") %>' runat="server"></asp:Label></span>   
                                         </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField> 
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -206,50 +197,8 @@
                                             <br />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>                                   
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate> 
                                             <br />
                                              <h1>     </h1>
                                             <br />
@@ -258,24 +207,9 @@
                                     <asp:TemplateField HeaderText="Event Date">
                                         <ItemTemplate>
                                             <asp:Label ID="lblDate" Text='<%#Eval("startdate") %>' runat="server"></asp:Label>
+                                            <asp:Label ID="Label3" Text='<%#Eval("starttime") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -302,8 +236,18 @@
                                             <br />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-
-
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <br />
+                                             <h1>     </h1>
+                                            <br />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Career Cluster">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblCareerCluster" Text='<%#Eval("CareerCluster") %>' runat="server"></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField> 
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <br />
@@ -380,143 +324,58 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <span visible="false">
-                                                <asp:Label visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label></span>
+                                                <h1><asp:Label ID="Label2" ForeColor="#f37821" Text='<%#Eval("Opened") %>' runat="server"></asp:Label></h1>
+                                                <asp:Label visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                    
                                     <asp:TemplateField HeaderText="Event">
                                         <ItemTemplate>
                                             <span class="h6 mb-0">
-                                                <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>
-                                            <br />
-                                            <span class="text-muted">Last Updated: 
-                                           <asp:Label ID="Label1" Text='<%#Eval("lastUpdated") %>' runat="server"></asp:Label></span>       
+                                                <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>                                      
+                                            <span class="text-muted">Post Date: 
+                                           <asp:Label ID="Label1" Text='<%#Eval("PostDate") %>' runat="server"></asp:Label></span>   
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate> 
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                    
                                     <asp:TemplateField HeaderText="Event Date">
                                         <ItemTemplate>
                                             <asp:Label ID="lblDate" Text='<%#Eval("startdate") %>' runat="server"></asp:Label>
+                                            <asp:Label ID="Label3" Text='<%#Eval("starttime") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                     <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                      <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-
+                                    </asp:TemplateField>                                    
                                     <asp:TemplateField HeaderText="Location">
                                         <ItemTemplate>
                                             <asp:Label ID="lblLocation" Text='<%#Eval("eventaddress") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
+                                    </asp:TemplateField>                                    
+                                    <asp:TemplateField HeaderText="Career Cluster">
                                         <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
+                                            <asp:Label ID="lblCareerCluster" Text='<%#Eval("CareerCluster") %>' runat="server"></asp:Label>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-
-
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                    
                                     <asp:TemplateField>
                                         <ItemTemplate>         
                                           <div class="dropdown">
-                                               <asp:Button
-                                                Text="Preview"
+                                                <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="icon-dots-three-horizontal"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
+                                                    <asp:Button
+                                                        Text="Preview"
                                                         type="Button"
-                                                        class="btn btn-success"
+                                                        class="dropdown-item"
                                                         ID="btnPreview"
                                                         runat="server"
                                                         CommandName="Preview"
                                                         CommandArgument='<%# Container.DataItemIndex %>' />
+                                                    <asp:Button
+                                                        Text="Mark as Read"
+                                                        type="Button"
+                                                        class="dropdown-item"
+                                                        ID="Button1"
+                                                        runat="server"
+                                                        CommandName="Read"
+                                                        CommandArgument='<%# Container.DataItemIndex %>' /> 
+                                                </div>
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -551,7 +410,7 @@
             <!-- Preview Modal HTML -->
            <div id="mask">
                 </div>
-                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="800px"
+                <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="650px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -1900%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Event</h1>
 
@@ -622,7 +481,7 @@
         <!-- Edit Modal HTML -->
          <div id="mask">
                 </div>
-                    <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="800px"
+                    <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="750px"
                     Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:-1900%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Event</h1>
                         <div class="form-group">
@@ -663,7 +522,7 @@
                 <div id="mask">
                 </div>
                 <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="225px"
-                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -1800%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -2000%; border: outset 2px gray; padding: 5px; display: none">
                     <h3  style="font: Helvetica;">Are you sure you want to delete this Post?</h3>
                     <br />
                     <h5 style="font: Helvetica;">All applications for this post will also be deleted.</h5>

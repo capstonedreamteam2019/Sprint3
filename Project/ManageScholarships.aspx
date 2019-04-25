@@ -121,6 +121,7 @@
                                                                 <Columns>
                                                                     <asp:TemplateField>
                                                                         <ItemTemplate>
+                                                                            <h1><asp:Label  ID="lblOpened" ForeColor="#f37821" Text='<%#Eval("Opened") %>' runat="server"></asp:Label></h1>
                                                                             <asp:Label Visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
                                                                         </ItemTemplate>
                                                                     </asp:TemplateField>
@@ -210,6 +211,14 @@
                                                                                         ID="Button1"
                                                                                         runat="server"
                                                                                         CommandName="Change"
+                                                                                        CommandArgument='<%# Container.DataItemIndex %>' />
+                                                                                    <asp:Button
+                                                                                        Text="Mark as Read"
+                                                                                        type="Button"
+                                                                                        class="dropdown-item"
+                                                                                        ID="Button3"
+                                                                                        runat="server"
+                                                                                        CommandName="Read"
                                                                                         CommandArgument='<%# Container.DataItemIndex %>' />
                                                                                     <div class="dropdown-divider"></div>
                                                                                     <asp:Button
@@ -417,7 +426,7 @@
                             <!--Start Preview Popup-->
                              <div id="mask">
                                 </div>
-                            <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="900px"
+                            <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="700px"
                                 Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 5%; border: outset 2px gray; padding: 5px; display: none">
                                 <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview of Scholarship</h1>
                                 <div class="form-group">

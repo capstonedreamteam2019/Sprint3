@@ -101,7 +101,8 @@
                   <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-md">
-                                    <a class="dropdown-item" runat="server" onserverclick="LastUpdatedFilter">Last Updated</a>
+                                    <a class="dropdown-item" runat="server" onserverclick="MostRecentFilter">Most Recent</a>
+                                    <a class="dropdown-item" runat="server" onserverclick="OldestFilter">Least Recent</a>
                                     <a class="dropdown-item" runat="server" onserverclick="DueDateFilter">Due Date</a>
                                     <a class="dropdown-item" runat="server" onserverclick="AlphabeticalFilter">Alphabetical</a>
                                 </div>
@@ -145,14 +146,7 @@
                                             <span class="text-muted">Last Updated: 
                                                     <asp:Label ID="Label1" Text='<%#Eval("LastUpdated") %>' runat="server"></asp:Label></span>
                                         </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                            <h1></h1>
-                                            <br />
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
+                                    </asp:TemplateField>                                    
                                     <asp:TemplateField HeaderText="Due Date">
                                         <ItemTemplate>
                                             <asp:Label ID="lblDueDate" Text='<%#Eval("DueDate") %>' runat="server"></asp:Label>
