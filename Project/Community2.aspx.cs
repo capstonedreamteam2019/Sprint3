@@ -17,6 +17,8 @@ public partial class Community2 : System.Web.UI.Page
     DataTable dt;
     SqlDataAdapter da2;
     DataTable dt2;
+    SqlDataAdapter da3;
+    DataTable dt3;
 
     System.Data.SqlClient.SqlCommand getLow = new System.Data.SqlClient.SqlCommand();
 
@@ -68,6 +70,18 @@ public partial class Community2 : System.Web.UI.Page
                 GridView2.DataSource = dt2;
                 GridView2.DataBind();
             }
+
+            localDB.Open();
+            dt3 = new DataTable();
+            SqlCommand cmd3 = new SqlCommand("SELECT * FROM DeleteEvent LEFT JOIN DeletePost ON DeleteEvent.PostID = DeletePost.PostID where BusinessID = 1", localDB);
+            da3 = new SqlDataAdapter(cmd3);
+            da3.Fill(dt3);
+            if (dt3.Rows.Count > 0)
+            {
+                GridView3.DataSource = dt3;
+                GridView3.DataBind();
+
+            }
         }
         catch
         {
@@ -99,6 +113,17 @@ public partial class Community2 : System.Web.UI.Page
             GridView2.DataSource = dt2;
             GridView2.DataBind();
         }
+
+        dt3 = new DataTable();
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM DeleteEvent LEFT JOIN DeletePost ON DeleteEvent.PostID = DeletePost.PostID where BusinessID = 1 ORDER BY startdate", localDB);
+        da3 = new SqlDataAdapter(cmd3);
+        da3.Fill(dt3);
+        localDB.Close();
+        if (dt3.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt3;
+            GridView3.DataBind();
+        }
     }
 
 
@@ -125,6 +150,17 @@ public partial class Community2 : System.Web.UI.Page
         {
             GridView2.DataSource = dt2;
             GridView2.DataBind();
+        }
+
+        dt3 = new DataTable();
+        SqlCommand cmd3 = new SqlCommand("SELECT * FROM DeleteEvent LEFT JOIN DeletePost ON DeleteEvent.PostID = DeletePost.PostID where BusinessID = 1 ORDER BY title", localDB);
+        da3 = new SqlDataAdapter(cmd3);
+        da3.Fill(dt3);
+        localDB.Close();
+        if (dt3.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt3;
+            GridView3.DataBind();
         }
     }
 
@@ -186,10 +222,34 @@ public partial class Community2 : System.Web.UI.Page
             showData();
             Response.Redirect(Request.RawUrl);
         }
+
+
     }
 
-    //open Create popup
-    protected void openCreate(object sender, EventArgs e)
+    //Row commands for gridview 3
+    protected void GridView3_RowCommand(Object sender, GridViewCommandEventArgs e)
+    {
+        int index = Convert.ToInt32(e.CommandArgument);
+        GridViewRow selectedRow = GridView3.Rows[index];
+        id = selectedRow.FindControl("lblID") as Label;
+
+        StringBuilder builder = new StringBuilder();
+
+        if (e.CommandName == "Preview")
+        {
+            LoadPreview();
+            builder.Append("<script language=JavaScript> ShowPreview(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowPreview", builder.ToString());
+        }
+        if (e.CommandName == "Re")
+        {
+            builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
+        }
+    }
+
+        //open Create popup
+        protected void openCreate(object sender, EventArgs e)
     {
         lblError.Text = "";
         StringBuilder builder = new StringBuilder();
@@ -227,6 +287,13 @@ public partial class Community2 : System.Web.UI.Page
         StringBuilder builder = new StringBuilder();
         builder.Append("<script language=JavaScript> HideDelete(); </script>\n");
         Page.ClientScript.RegisterStartupScript(this.GetType(), "HideDelete", builder.ToString());
+    }
+    //close Rectivate popup
+    protected void CloseRe(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideRe(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideRe", builder.ToString());
     }
 
     //Create New Event Post
@@ -592,6 +659,26 @@ public partial class Community2 : System.Web.UI.Page
         }
         showData();
 
+    }
+
+    protected void Reactivate_Click(object sender, EventArgs e)
+    {
+        localDB.Open();
+
+        System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
+        deletePost.Connection = localDB;
+        deletePost.CommandText = "DELETE FROM DeleteEvent where PostID = @id";
+        deletePost.Parameters.AddWithValue("id", id.Text);
+        deletePost.ExecuteNonQuery();
+
+        System.Data.SqlClient.SqlCommand deleteJob = new System.Data.SqlClient.SqlCommand();
+        deleteJob.Connection = localDB;
+        deleteJob.CommandText = "DELETE FROM DeleteEvent where PostID = @id";
+        deleteJob.Parameters.AddWithValue("id", id.Text);
+        deleteJob.ExecuteNonQuery();
+
+        localDB.Close();
+        showData();
     }
 
 }

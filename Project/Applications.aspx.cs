@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.IO;
+using System.Configuration;
 
 public partial class Applications: System.Web.UI.Page
 {
@@ -552,74 +553,53 @@ public partial class Applications: System.Web.UI.Page
 
     }
 
+    //protected void openApp()
+    //{   //cole
+    //    if (id.Text == 1.ToString()) 
+    //    {
+    //        imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume5.jpg");
+    //    }
+    //    //wang
+    //    if (id.Text == 2.ToString())
+    //    {
+    //        imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume1.jpg");
+    //    }
+    //    //barlow
+    //    if (id.Text == 3.ToString())
+    //    {
+    //        imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume2.jpg");
+    //    }
+    //    //shelly
+    //    if (id.Text == 4.ToString())
+    //    {
+    //        imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume3.png");
+    //    }
+    //    //seth
+    //    if (id.Text == 5.ToString())
+    //    {
+    //        imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume4.jpg");
+    //    }
+    //    //becky
+    //    if (id.Text == 6.ToString())
+    //    {
+    //        imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume6.jpg");
+    //    }
+
+    //}
+
     protected void openApp()
-    {   //cole
-        if (id.Text == 1.ToString()) 
-        {
-            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume5.jpg");
-        }
-        //wang
-        if (id.Text == 2.ToString())
-        {
-            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume1.jpg");
-        }
-        //barlow
-        if (id.Text == 3.ToString())
-        {
-            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume2.jpg");
-        }
-        //shelly
-        if (id.Text == 4.ToString())
-        {
-            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume3.png");
-        }
-        //seth
-        if (id.Text == 5.ToString())
-        {
-            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume4.jpg");
-        }
-        //becky
-        if (id.Text == 6.ToString())
-        {
-            imgResume.Attributes["src"] = ResolveUrl("pages/assets/img/resume6.jpg");
-        }
-        
-        
-
-
-
-
-        //try
-        //{
-        //    System.Data.SqlClient.SqlCommand openPic = new System.Data.SqlClient.SqlCommand();
-        //    openPic.Connection = localDB;
-        //    openPic.CommandText = "SELECT Resume FROM Student WHERE UserID = @id";
-        //    openPic.Parameters.AddWithValue("id", id.Text);
-        //    if (localDB.State != ConnectionState.Open)
-        //        localDB.Open();
-        //    SqlDataReader reader = openPic.ExecuteReader();
-        //    reader.Read();
-        //    if (reader.HasRows)
-        //    {
-        //        byte[] img = (byte[])(reader[0]);
-        //        if (img == null)
-        //            imgResume. = null;
-        //        else
-        //        {
-        //            MemoryStream ms = new MemoryStream(img);
-        //            imgResume.Image = BadImageFormatException.ReferenceEquals(ms);
-        //        }
-        //    }
-
-        //    localDB.Close();
-        //}
-        //catch
-        //{
-        //    localDB.Close();
-        //}
-
-        //string ToSaveFileTo = Server.MapPath("~\\File\\Report.pdf");
-
+    {
+        localDB.Open();
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
+        cmd.Connection = localDB;
+        cmd.CommandText = "Execute spGetImageById @id";
+        cmd.Parameters.Add("@id", SqlDbType.Int).Value = id.Text;
+        cmd.ExecuteNonQuery();       
+        byte[] bytes = (byte[])cmd.ExecuteScalar();
+            string strBase64 = Convert.ToBase64String(bytes);
+            Image1.ImageUrl = "data:Image/png;base64," + strBase64;
+        localDB.Close();
     }
-
 }
+
+

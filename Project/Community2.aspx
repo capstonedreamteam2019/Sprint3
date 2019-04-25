@@ -60,6 +60,16 @@
             $('#mask').hide();
             $('#<%=DeletePopup.ClientID %>').hide();
         }
+
+        //Reactivate popups
+        function ShowRe() {
+            $('#mask').show();
+            $('#<%=RePopup.ClientID %>').show();
+        }
+        function HideRe() {
+            $('#mask').hide();
+            $('#<%=RePopup.ClientID %>').hide();
+        }
     </script>
 
 
@@ -299,7 +309,7 @@
                 <!--end of row-->
             </div>
             <!--end of container-->
-
+    </section>
            
              <!-- SECOND Gridview-->
           
@@ -387,22 +397,157 @@
                 <!--end of row-->
             </div>
             <!--end of container-->
-         </div> <!--lines 233 and 234 were messing up the footer-->
-        </section> <!--lines 233 and 234 were messing up the footer-->
 
-            <div class="row justify-content-center">
-                <div class="col-auto">
-                    <nav aria-label="Page navigation example">
-                       
-                    </nav>
+        <!--End of Girdview-->
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header">
+                            <a class="card-link show" data-toggle="collapse" href="#collapseOne">Deleted Posts
+                            </a>
+                        </div>
+                        <div id="collapseOne" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+
+                                <!--Gridview-->
+                                <section class="flush-with-above">
+                                    <!--Body section-->
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
+                                                    <asp:GridView
+                                                        ID="GridView3"
+                                                        EmptyDataText="No Deleted Posts"
+                                                        Visible="true"
+                                                        runat="server"
+                                                        GridLines="none"
+                                                        AutoGenerateColumns="False"
+                                                        ForeColor="#343A40"
+                                                        OnRowCommand="GridView3_RowCommand">
+                                                        <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
+                                                        <RowStyle CssClass="style" Width="100%" />
+                                                        <Columns>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <asp:Label Visible="false" ID="lblID" Text='<%#Eval("PostID") %>' runat="server"></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Event">
+                                                                <ItemTemplate>
+                                                                    <span class="h6 mb-0">
+                                                                        <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>
+                                                                    <span class="text-muted">Post Date: 
+                                                                    <asp:Label ID="Label1" Text='<%#Eval("PostDate") %>' runat="server"></asp:Label></span>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <br />
+                                                                    <h1></h1>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <br />
+                                                                    <h1></h1>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Event Date">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblDate" Text='<%#Eval("startdate") %>' runat="server"></asp:Label>
+                                                                    <asp:Label ID="Label3" Text='<%#Eval("starttime") %>' runat="server"></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <br />
+                                                                    <h1></h1>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <br />
+                                                                    <h1></h1>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Location">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblLocation" Text='<%#Eval("eventaddress") %>' runat="server"></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <br />
+                                                                    <h1></h1>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <br />
+                                                                    <h1></h1>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField HeaderText="Career Cluster">
+                                                                <ItemTemplate>
+                                                                    <asp:Label ID="lblCareerCluster" Text='<%#Eval("CareerCluster") %>' runat="server"></asp:Label>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <br />
+                                                                    <h1></h1>
+                                                                    <br />
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                            <asp:TemplateField>
+                                                                <ItemTemplate>
+                                                                    <div class="dropdown">
+                                                                        <button class="btn btn-sm btn-outline-primary dropdown-toggle dropdown-toggle-no-arrow" type="button" id="dropdownMenuButton-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            <i class="icon-dots-three-horizontal"></i>
+                                                                        </button>
+                                                                        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right" aria-labelledby="dropdown01">
+                                                                            <asp:Button
+                                                                                Text="Preview"
+                                                                                type="Button"
+                                                                                class="dropdown-item"
+                                                                                ID="btnPreview"
+                                                                                runat="server"
+                                                                                CommandName="Preview"
+                                                                                CommandArgument='<%# Container.DataItemIndex %>' />
+                                                                            <asp:Button
+                                                                                Text="Reactivate"
+                                                                                type="Button"
+                                                                                class="dropdown-item"
+                                                                                ID="Button1"
+                                                                                runat="server"
+                                                                                CommandName="Re"
+                                                                                CommandArgument='<%# Container.DataItemIndex %>' />
+                                                                        </div>
+                                                                    </div>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                    </asp:GridView>
+                                                </div>
+                                            </div>
+                                            <!--end of col-->
+                                        </div>
+                                        <!--end of row-->
+                                    </div>
+                                    <!--end of container-->
+                                </section>
+                                <!--End of Girdview-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        <!--End of SECOND Gridview-->
-         </div> <!--lines 233 and 234 were messing up the footer-->
-        </section> <!--lines 233 and 234 were messing up the footer-->
-
-    <br /><br />
-
+        </div>
      <section>
 
            
@@ -411,7 +556,7 @@
            <div id="mask">
                 </div>
                 <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="650px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -1900%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -1800%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Event</h1>
 
                           <div class="form-group">
@@ -482,7 +627,7 @@
          <div id="mask">
                 </div>
                     <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="750px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:-1900%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:-1800%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Event</h1>
                         <div class="form-group">
                             <div>
@@ -522,7 +667,7 @@
                 <div id="mask">
                 </div>
                 <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="225px"
-                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -2000%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -1800%; border: outset 2px gray; padding: 5px; display: none">
                     <h3  style="font: Helvetica;">Are you sure you want to delete this Post?</h3>
                     <br />
                     <h5 style="font: Helvetica;">All applications for this post will also be deleted.</h5>
@@ -532,16 +677,19 @@
                 </asp:Panel>
                 <!--End delete pannel-->
 
+         <!--Reactivate pannel-->
+                <div id="mask">
+                </div>
+                <asp:Panel ID="RePopup" runat="server" BackColor="White" Height="250px"
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -10%; border: outset 2px gray; padding: 5px; display: none">
+                    <h3 class="brilliatureFont">Are you sure you want to re-activate this Post?</h3>
+                    <br />
+                    <h5 class="brilliatureFont">The post will become public for everyone to view and apply to.</h5>
 
-         <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137981458-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-137981458-2');
-</script>
+                    <button type="button" class="btn btn-success" runat="server" onserverclick="Reactivate_Click">Yes, Re-Activate</button>
+                    <button type="button" onserverclick="CloseRe" class="btn btn-default" runat="server">Close</button>
+                </asp:Panel>
+                <!--End Reactivate pannel-->
 
     </section>
     <!--end Body section-->

@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading;
 using System.Drawing;
+using System.Text;
 
 public partial class CommunityEngagement : System.Web.UI.Page
 {
@@ -45,6 +46,23 @@ public partial class CommunityEngagement : System.Web.UI.Page
         }
 
     }
+
+    //open Create popup
+    protected void openCreate(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
+    }
+
+    //Close Create popup
+    protected void CloseCreate(object sender, EventArgs e)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append("<script language=JavaScript> HideCreate(); </script>\n");
+        Page.ClientScript.RegisterStartupScript(this.GetType(), "HideCreate", builder.ToString());
+    }
+
 
     private void BuildSocialEventTable()
     {
@@ -123,6 +141,109 @@ public partial class CommunityEngagement : System.Web.UI.Page
 
     }
 
+    //Create New Event Post
+    protected void SubmitButton_Click(object sender, EventArgs e)
+    {
+
+
+        //Convert Date Formats
+        DateTime start = DateTime.Parse(startdate.Value);
+        startdate.Value = start.ToString("MM/dd/yyyy");
+
+        try
+        {
+            DateTime end = DateTime.Parse(enddate.Value);
+            enddate.Value = start.ToString("MM/dd/yyyy");
+        }
+        catch
+        {
+
+        }
+
+        DateTime timeStart = DateTime.Parse(starttime.Value);
+        starttime.Value = timeStart.ToString("hh:mm tt");
+
+        try
+        {
+            DateTime timeEnd = DateTime.Parse(endtime.Value);
+            endtime.Value = timeEnd.ToString("hh:mm tt");
+        }
+        catch
+        {
+
+        }
+
+        if ((title.Value == "") || (startdate.Value == "") || (starttime.Value == "") || (location.Value == ""))
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
+            //lblError.Text = "Please enter all required values.";
+
+        }
+        else
+        {
+
+            localDB.Open();
+
+            //Creates a new sql insert command
+            System.Data.SqlClient.SqlCommand insertPost = new System.Data.SqlClient.SqlCommand();
+            insertPost.Connection = localDB;
+
+            System.Data.SqlClient.SqlCommand selectPostID = new System.Data.SqlClient.SqlCommand();
+            selectPostID.Connection = localDB;
+
+            System.Data.SqlClient.SqlCommand insertEvent = new System.Data.SqlClient.SqlCommand();
+            insertEvent.Connection = localDB;
+
+
+            //Create Post object
+            Post posting = new Post(1, "Event", HttpUtility.HtmlEncode(title.Value), HttpUtility.HtmlEncode(eventdescription.Value));
+
+            //Insert data into database
+            insertPost.CommandText = "Execute InsertPost @busID, @type, @title, @postDate, @description, @lastUpdatedBy, @lastUpdated";
+
+            insertPost.Parameters.Add("@busID", SqlDbType.Int).Value = posting.getBusID();
+            insertPost.Parameters.Add("@type", SqlDbType.VarChar, 30).Value = posting.getType();
+            insertPost.Parameters.Add("@title", SqlDbType.VarChar, 100).Value = posting.getTitle();
+            insertPost.Parameters.Add("@postDate", SqlDbType.VarChar, 30).Value = posting.getPostDate();
+            insertPost.Parameters.Add("@description", SqlDbType.VarChar, 500).Value = posting.getDescription();
+            insertPost.Parameters.Add("@lastUpdatedBy", SqlDbType.VarChar, 30).Value = posting.getLastUpdatedBy();
+            insertPost.Parameters.Add("@lastUpdated", SqlDbType.VarChar, 30).Value = posting.getLastUpdated();
+
+            insertPost.ExecuteNonQuery();
+
+            //Find post ID just created
+            selectPostID.CommandText = "select max(postID) from Post";
+            string postID = selectPostID.ExecuteScalar().ToString();
+
+            //Local Event object
+            Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), HttpUtility.HtmlEncode(startdate.Value), HttpUtility.HtmlEncode(enddate.Value), HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value));
+
+            insertEvent.CommandText = "Execute InsertEvent @PostID, @EventAddress, @StartDate, @EndDate, @StartTime, @EndTime, @Opened, @LastUpdatedBy, @LastUpdated";
+
+            insertEvent.Parameters.Add("@PostID", SqlDbType.Int).Value = HttpUtility.HtmlEncode(events.getPostingID());
+            insertEvent.Parameters.Add("@EventAddress", SqlDbType.VarChar, 100).Value = HttpUtility.HtmlEncode(events.getLocation());
+            insertEvent.Parameters.Add("@StartDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartDate());
+            insertEvent.Parameters.Add("@EndDate", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndDate());
+            insertEvent.Parameters.Add("@StartTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getStartTime());
+            insertEvent.Parameters.Add("@EndTime", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getEndTime());
+            insertEvent.Parameters.Add("@Opened", SqlDbType.VarChar, 30).Value = " ";
+            insertEvent.Parameters.Add("@LastUpdatedBy", SqlDbType.VarChar, 50).Value = HttpUtility.HtmlEncode(events.getLastUpdatedBy());
+            insertEvent.Parameters.Add("@LastUpdated", SqlDbType.VarChar, 30).Value = HttpUtility.HtmlEncode(events.getLastUpdated());
+            insertEvent.ExecuteNonQuery();
+
+            localDB.Close();
+
+            title.Value = "";
+            eventdescription.Value = "";
+            location.Value = "";
+            starttime.Value = "";
+            endtime.Value = "";
+            startdate.Value = "";
+            enddate.Value = "";
+        }
+    }
 
     protected void EventButton_Click(object sender, EventArgs e)
     {
@@ -159,15 +280,25 @@ public partial class CommunityEngagement : System.Web.UI.Page
         DateTime start = DateTime.Parse(startdate.Value);
         startdate.Value = start.ToString("MM/dd/yyyy");
 
-        DateTime end = DateTime.Parse(enddate.Value);
-        enddate.Value = start.ToString("MM/dd/yyyy");
+        try
+        {
+            DateTime end = DateTime.Parse(enddate.Value);
+            enddate.Value = start.ToString("MM/dd/yyyy");
+        }
+        catch
+        { }
+        
 
         DateTime timeStart = DateTime.Parse(starttime.Value);
         starttime.Value = timeStart.ToString("hh:mm tt");
 
-        DateTime timeEnd = DateTime.Parse(endtime.Value);
-        endtime.Value = timeEnd.ToString("hh:mm tt");
-
+        try
+        {
+            DateTime timeEnd = DateTime.Parse(endtime.Value);
+            endtime.Value = timeEnd.ToString("hh:mm tt");
+        }
+        catch
+        { }
 
         //Local Event object
         Event events = new Event(postID, HttpUtility.HtmlEncode(location.Value), startdate.Value, enddate.Value, HttpUtility.HtmlEncode(starttime.Value), HttpUtility.HtmlEncode(endtime.Value));

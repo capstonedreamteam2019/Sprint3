@@ -672,12 +672,31 @@
             <asp:Panel ID="ResumePopup"  runat="server"  BackColor="White" Height="600px"
                 Width="600px" Style="z-index:111;background-color: White; position: absolute; left: 25%; top: -12%; 
                 border: outset 2px gray;padding:5px;display:none">
-                <asp:Image ID="imgResume" runat="server" Height="550px" src="pages/assets/img/resume1.jpg" /><br />
+<%--                <asp:Image ID="imgResume" runat="server" Height="550px" src="pages/assets/img/resume1.jpg" /><br />--%>
+                <asp:Image ID="Image2" Height="500px" Width="500px" runat="server" />
                 <button type="button" onserverclick="CloseResume" class="btn btn-default" runat="server">Close</button>              
              </asp:Panel>
             <!--End Resume pannel-->
 
+
+       
+        <asp:Image ID="Image1" runat="server" />
+        <div>
+        &nbsp;
+            <asp:FileUpload ID="FileUpload1" runat="server" />
+            <br />
+            <asp:Button ID="Button1" runat="server" Text="Button" OnServerClick="ButtonBrowse_Click"/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />
+            <br />
+            <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        </div>
+   
+
+
+
         </section>
         <!--end of section-->
     </form> 
+
 </asp:Content>
