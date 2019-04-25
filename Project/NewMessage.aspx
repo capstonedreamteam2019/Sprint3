@@ -40,11 +40,12 @@
               
               <div class="list-group list-group-chat list-group-flush">
                     <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
-                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" pagesize="6" GridLines="none" ForeColor="#343A40" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" pagesize="6" DataKeyNames="SchoolName" GridLines="none" ForeColor="#343A40" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowSelection="ChangeMain_Click" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
                           <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                           <RowStyle CssClass="style" Width="30%" />
-                          <Columns>
-                              <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName" />
+                          <Columns >
+                              <asp:CommandField ShowSelectButton="True" />
+                              <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName"  />
                               <asp:BoundField DataField="LastUpdated" HeaderText="LastUpdated" SortExpression="LastUpdated" />
                           </Columns>
                       </asp:GridView>
@@ -59,7 +60,7 @@
                 <div class="media align-items-center">
                   <img alt="Image" src="assets/img/avatar-male-4.jpg" class="avatar avatar-sm" />
                   <div class="media-body">
-                    <h6 class="mb-0 d-block">Harrisonburg High School
+                    <h6 id="mainViewContactSchool" runat="server" class="mb-0 d-block">Harrisonburg High School
                       <span class="badge badge-indicator badge-success"></span>
                     </h6>
                     <span class="text-muted text-small">Speaking with: Susan Thomas (Counselor)</span>
@@ -267,27 +268,26 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                	  <input class="form-control form-control-lg" type="search" placeholder="To:" />
-                	 <input class="form-control form-control-lg" type="search" placeholder="Subject" />
-                                      <div class="list-group list-group-chat list-group-flush">
-                    <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
-                     <asp:GridView ID="GridView2" runat="server" AllowPaging="True" pagesize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
-                          <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
-                          <RowStyle CssClass="style" Width="30%" />
-                          <Columns>
-                              <asp:CommandField ShowSelectButton="True" />
-                              <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName" />
-                              <asp:BoundField DataField="LastUpdated" HeaderText="LastUpdated" SortExpression="LastUpdated" />
-                          </Columns>
-                         
-                      </asp:GridView>
-                      <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [SchoolName], [LastUpdated] FROM [School]"></asp:SqlDataSource>
-                    </div>
 
-              </div>
-    <label for="exampleFormControlTextarea1"></label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
-  </div>
+                        <div class="list-group list-group-chat list-group-flush">
+                            <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
+                                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" PageSize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                                    <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
+                                    <RowStyle CssClass="style" Width="30%" />
+                                    <Columns>
+                                        <asp:CommandField ShowSelectButton="True" />
+                                        <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName" />
+                                        <asp:BoundField DataField="LastUpdated" HeaderText="LastUpdated" SortExpression="LastUpdated" />
+                                    </Columns>
+
+                                </asp:GridView>
+                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [SchoolName], [LastUpdated] FROM [School]"></asp:SqlDataSource>
+                            </div>
+
+                        </div>
+                        <label for="exampleFormControlTextarea1"></label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
+                    </div>
    
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -296,6 +296,7 @@
             </div>
         </div>
     </div>
+
       </section>
     </form>
       <!--end of section-->

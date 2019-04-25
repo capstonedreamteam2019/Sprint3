@@ -578,6 +578,17 @@
                     <button type="button" onserverclick="CloseRe" class="btn btn-default" runat="server">Close</button>
                 </asp:Panel>
                 <!--End Reactivate pannel-->
+
+                <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137981458-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-137981458-2');
+</script>
+
         </section>
         <!--end Body section-->
 
