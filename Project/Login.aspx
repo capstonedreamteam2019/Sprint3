@@ -12,6 +12,17 @@
     <link href="pages/assets/css/socicon.css" rel="stylesheet" type="text/css" media="all" />
     <link href="pages/assets/css/entypo.css" rel="stylesheet" type="text/css" media="all" />
     <link href="pages/assets/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-137981458-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-137981458-2');
+</script>
+
 </head>
 <body>
    
