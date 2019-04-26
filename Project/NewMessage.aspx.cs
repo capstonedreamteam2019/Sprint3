@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Text;
+using System.Threading;
 
 public partial class NewMessage : System.Web.UI.Page
 {
@@ -14,12 +17,10 @@ public partial class NewMessage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        ////GridView1.SelectedIndex = 0;
-        //GridView1.SelectedRowStyle.CssClass = "bg-primary text-white";
-        //mainViewContactSchool.InnerText = GridView1.SelectedRow.Cells[1].Text;
-        //mainViewContactName.InnerText = "Speaking with: " + GridView1.SelectedRow.Cells[2].Text;
-
+        //if (!IsPostBack)
+        //{
+        //    BindMessages();
+        //}
     }
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -75,93 +76,49 @@ public partial class NewMessage : System.Web.UI.Page
         insertMessage.ExecuteNonQuery();
 
         messageBox.Value = "";
-        LoadChatList(messageTo, messageFrom);
+
+        GridView3.DataBind();
 
 
-        
+        DataTable dt = new DataTable();
+        using (localDB)
+        {
+            SqlDataAdapter adp = new SqlDataAdapter("select messageToID, messageFromID, messagebody from messages1 where messagetoid=@to or messagefromid=@to order by messageid asc", localDB);
+            SqlParameter to = new SqlParameter();
+            to.ParameterName = "@to";
+            to.Value = GridView1.SelectedRow.Cells[1].Text.ToString();
+
+        }
+        if (dt.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt;
+            GridView3.DataBind();
+        }
+
 
     }
 
-    protected void LoadChatList(int messageTo, int messageFrom)
+
+
+    protected void GridView3_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        DataSet ds = new DataSet();
+        e.Row.Cells[0].Visible = false;
+        e.Row.Cells[1].Visible = false;
+
        
-
-        // DataTable FromTable = new DataTable();
-        string StrCmd = "select messageFromID, messageBody from messages1 where (messageFromID = @from and messageToID = @to) or (messageFromID = @ViseFrom and messageToID = @ViseTo) order by MessageId";
-        SqlCommand sqlcmd = new SqlCommand(StrCmd, localDB);
-        sqlcmd.Parameters.AddWithValue("@from", messageFrom);
-        sqlcmd.Parameters.AddWithValue("@to", messageTo);
-        sqlcmd.Parameters.AddWithValue("@ViseFrom", messageTo);
-        sqlcmd.Parameters.AddWithValue("@ViseTo", messageFrom);
-        
-
-        SqlDataAdapter sqlDA = new SqlDataAdapter(sqlcmd);
-        sqlDA.Fill(ds);
-
-        DataList2.DataSource = ds.Tables[0];
-        /*
-        foreach (DataRow row in ds.Tables[0].Rows)
+        if (e.Row.RowType == DataControlRowType.DataRow)
         {
-           if(string.Equals(row["MsgSender"].ToString() ,CurrentSender.Text,StringComparison.OrdinalIgnoreCase))
+            if (e.Row.Cells[0].Text == "16")
             {
-                //row["MsgSender"] = "<span style='color:blue; float: right'>You</span>";
-                //row["ChatMsg"] = "<span style='color:blue; float: right'>"+row["ChatMsg"].ToString()+"</span>";
-                DataList2. = false;
+                e.Row.Cells[2].CssClass = "bg-primary text-white text-right";
+
             }
-           else
+            else if (e.Row.Cells[1].Text == "16")
             {
-                // row["MsgSender"] = "<span style='color:orange; float:left'>"+ row["MsgSender"].ToString()+"</span>";
-                DataList2.Visible = true;
+                e.Row.Cells[2].CssClass = "bg-secondary";
             }
         }
-        ds.AcceptChanges();
-        */
 
-        DataList2.DataBind();
-
-        localDB.Close();
-    }
-
-    //protected string GetStyleForMsgList(int messageFrom)
-    //{
-    //    int messageID = 11;
-    //    if (messageID == messageFrom)
-    //    {
-    //        return "SenderClass";
-    //    }
-    //    return "ReceiverClass";
-    //}
-    //protected string GetPerfactName(int messageFrom)
-    //{
-    //    int messageID = 11;
-    //    if (messageID == messageFrom)
-    //    { 
-    //        return "<span style='color:#efdab5'>You :</sapn>";
-    //    }
-    //    return "<span style='color:#efdab5'>" + messageFrom + " : </span>";
-    //}
-
-
-    protected string GetStyleForMsgList(string str)
-    {
-        if (string.Equals(Server.HtmlEncode(str), "11", StringComparison.OrdinalIgnoreCase))
-        {
-            return "SenderClass";
-        }
-        return "ReceiverClass";
-    }
-    protected string GetPerfactName(string str)
-    {
-        if (string.Equals(Server.HtmlEncode(str), "11", StringComparison.OrdinalIgnoreCase))
-        {
-            return "<span style='color:#efdab5'>You :</sapn>";
-        }
-        return "<span style='color:#efdab5'>" + Server.HtmlEncode(str) + " : </span>";
-    }
-
-    protected void DataList1_SelectedIndexChanged(object sender, EventArgs e)
-    {
 
     }
 }
