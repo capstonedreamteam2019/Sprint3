@@ -66,15 +66,16 @@ public partial class Messaging : System.Web.UI.Page
         insertMessage.Connection = localDB;
 
         //Local Message object
-        Message newMessage = new Message(6, 1, message, DateTime.Now);
+        Message newMessage = new Message(6, 1, message, 0, DateTime.Now);
 
         //Insert data into database
-        insertMessage.CommandText = "insert into [Messages] ([MessageToID], [MessageFromID], [MessageBody], [LastUpdated])" +
-            "values (@to, @from, @body, @lastUpdated)";
+        insertMessage.CommandText = "insert into [Messages] ([MessageToID], [MessageFromID], [MessageBody], [HasSeen], [LastUpdated])" +
+            "values (@to, @from, @body,@hasSeen, @lastUpdated)";
 
         insertMessage.Parameters.Add(new SqlParameter("to", newMessage.getToID()));
         insertMessage.Parameters.Add(new SqlParameter("from", newMessage.getFromID()));
         insertMessage.Parameters.Add(new SqlParameter("body", newMessage.getBody()));
+        insertMessage.Parameters.Add(new SqlParameter("hasSeen", newMessage.getHasSeen()));
         insertMessage.Parameters.Add(new SqlParameter("lastUpdated", newMessage.getLastUpdated()));
 
         insertMessage.ExecuteNonQuery();
