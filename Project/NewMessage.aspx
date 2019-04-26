@@ -231,27 +231,7 @@ order by max(m.lastupdated)"></asp:SqlDataSource>
               <div class="card-footer bg-secondary">
 
 
-             <asp:Panel runat="server" ID="chatPanel">
-                <div style="vertical-align: middle; min-height: 480px;" class="pre-scrollable">
-                    <div>
-                        <asp:DataList ID="DataList2" runat="server" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Center" DataKeyField="MessageID" DataSourceID="SqlDataSource3" RepeatColumns="2">
-                            <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("MessageToID") %>'></asp:Label>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("MessageFromID") %>'></asp:Label>
-                                <br />
-
-                                <div class="<%# GetStyleForMsgList(Eval("MessageToID")) %>">
-                                    <asp:Label ID="Label3" runat="server" Text='<%# GetPerfactName(Eval("MsgSender").ToString()) %>'></asp:Label>
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Eval("ChatMsg") %>'></asp:Label>
-                                </div>
-                            </ItemTemplate>
-                        </asp:DataList>
-                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [MessageID], [MessageToID], [MessageFromID], [MessageBody] FROM [Messages1] where messageFromID = 11 and messageToID = 16"></asp:SqlDataSource>
-                    </div>
-                </div>
-            </asp:Panel>
-
-
+                 
 
 
                 <form class="d-flex align-items-center">
@@ -270,6 +250,18 @@ order by max(m.lastupdated)"></asp:SqlDataSource>
                   </button>
                 </form>
               </div>
+
+
+                <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource3">
+                      <Columns>
+                          <asp:BoundField DataField="messageToID" HeaderText="messageToID" SortExpression="messageToID" />
+                          <asp:BoundField DataField="messageFromID" HeaderText="messageFromID" SortExpression="messageFromID" />
+                          <asp:BoundField DataField="messagebody" HeaderText="messagebody" SortExpression="messagebody" />
+                      </Columns>
+                  </asp:GridView>
+                  <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="select messageToID, messageFromID, messagebody from messages1 where messagetoid=16 or messagefromid=16 order by messageid asc"></asp:SqlDataSource>
+
+
               
               
             </div>
