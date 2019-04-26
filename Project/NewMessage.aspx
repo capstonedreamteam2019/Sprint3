@@ -234,19 +234,20 @@ order by max(m.lastupdated)"></asp:SqlDataSource>
              <asp:Panel runat="server" ID="chatPanel">
                 <div style="vertical-align: middle; min-height: 480px;" class="pre-scrollable">
                     <div>
-                        <asp:DataList ID="DataList2" runat="server" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Center" DataKeyField="MessageID" DataSourceID="SqlDataSource3" RepeatColumns="2">
+                        <asp:DataList ID="DataList2" runat="server" Font-Bold="False" Font-Italic="False" Font-Overline="False" Font-Strikeout="False" Font-Underline="False" HorizontalAlign="Center" DataSourceID="SqlDataSource3">
                             <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Eval("MessageToID") %>'></asp:Label>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Eval("MessageFromID") %>'></asp:Label>
-                                <br />
-
-                                <div class="<%# GetStyleForMsgList(Eval("MessageToID")) %>">
-                                    <asp:Label ID="Label3" runat="server" Text='<%# GetPerfactName(Eval("MsgSender").ToString()) %>'></asp:Label>
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Eval("ChatMsg") %>'></asp:Label>
-                                </div>
+                                    messagebody:
+                                    <asp:Label ID="messagebodyLabel" runat="server" Text='<%# Eval("messagebody") %>'></asp:Label>
+                                    <br />
+                                    <br />
                             </ItemTemplate>
                         </asp:DataList>
-                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [MessageID], [MessageToID], [MessageFromID], [MessageBody] FROM [Messages1] where messageFromID = 11 and messageToID = 16"></asp:SqlDataSource>
+
+
+                        <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="select messagebody from messages1
+where messagetoid=16"></asp:SqlDataSource>
+
+
                     </div>
                 </div>
             </asp:Panel>

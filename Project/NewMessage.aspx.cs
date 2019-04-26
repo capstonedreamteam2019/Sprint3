@@ -75,22 +75,26 @@ public partial class NewMessage : System.Web.UI.Page
         insertMessage.ExecuteNonQuery();
 
         messageBox.Value = "";
+        LoadChatList(messageTo, messageFrom);
 
+
+        
 
     }
 
     protected void LoadChatList(int messageTo, int messageFrom)
     {
         DataSet ds = new DataSet();
+       
 
         // DataTable FromTable = new DataTable();
-        string StrCmd = "select messageFromID, messageBody from messages1 where (messageFromID = @from and messageToID = @to) or (messageFrom = @ViseFrom and messageToID = @ViseTo) order by MessageId";
+        string StrCmd = "select messageFromID, messageBody from messages1 where (messageFromID = @from and messageToID = @to) or (messageFromID = @ViseFrom and messageToID = @ViseTo) order by MessageId";
         SqlCommand sqlcmd = new SqlCommand(StrCmd, localDB);
         sqlcmd.Parameters.AddWithValue("@from", messageFrom);
         sqlcmd.Parameters.AddWithValue("@to", messageTo);
         sqlcmd.Parameters.AddWithValue("@ViseFrom", messageTo);
         sqlcmd.Parameters.AddWithValue("@ViseTo", messageFrom);
-        localDB.Open();
+        
 
         SqlDataAdapter sqlDA = new SqlDataAdapter(sqlcmd);
         sqlDA.Fill(ds);
@@ -119,22 +123,45 @@ public partial class NewMessage : System.Web.UI.Page
         localDB.Close();
     }
 
-    protected string GetStyleForMsgList(int messageFrom)
+    //protected string GetStyleForMsgList(int messageFrom)
+    //{
+    //    int messageID = 11;
+    //    if (messageID == messageFrom)
+    //    {
+    //        return "SenderClass";
+    //    }
+    //    return "ReceiverClass";
+    //}
+    //protected string GetPerfactName(int messageFrom)
+    //{
+    //    int messageID = 11;
+    //    if (messageID == messageFrom)
+    //    { 
+    //        return "<span style='color:#efdab5'>You :</sapn>";
+    //    }
+    //    return "<span style='color:#efdab5'>" + messageFrom + " : </span>";
+    //}
+
+
+    protected string GetStyleForMsgList(string str)
     {
-        int messageID = 11;
-        if (messageID == messageFrom)
+        if (string.Equals(Server.HtmlEncode(str), "11", StringComparison.OrdinalIgnoreCase))
         {
             return "SenderClass";
         }
         return "ReceiverClass";
     }
-    protected string GetPerfactName(int messageFrom)
+    protected string GetPerfactName(string str)
     {
-        int messageID = 11;
-        if (messageID == messageFrom)
-        { 
+        if (string.Equals(Server.HtmlEncode(str), "11", StringComparison.OrdinalIgnoreCase))
+        {
             return "<span style='color:#efdab5'>You :</sapn>";
         }
-        return "<span style='color:#efdab5'>" + messageFrom + " : </span>";
+        return "<span style='color:#efdab5'>" + Server.HtmlEncode(str) + " : </span>";
+    }
+
+    protected void DataList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }
