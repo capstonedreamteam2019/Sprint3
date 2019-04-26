@@ -32,8 +32,6 @@ public partial class Applications: System.Web.UI.Page
         {
             //Updates the Gridviews
             showData();
-            
-
         }
 
         if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
@@ -617,6 +615,8 @@ public partial class Applications: System.Web.UI.Page
         GridView1.DataBind();
         
     }
+
+
 }
 
 

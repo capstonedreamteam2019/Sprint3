@@ -70,7 +70,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-    <form runat="server">
+  
         <div class="main-container">
             <section>
                 <div class="container">
@@ -541,6 +541,6 @@
             </section>
             <!--end of section-->
         </div>
-    </form>         
+      
 
 </asp:Content>

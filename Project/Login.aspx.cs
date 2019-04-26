@@ -68,11 +68,7 @@ public partial class Login : System.Web.UI.Page
                         string storedHash = reader["UserPassword"].ToString(); // store the database password into this variable
 
                         if (PasswordHash.ValidatePassword(txtPassword.Text, storedHash)) // if the entered password matches what is stored, it will show success
-                        {
-                            System.Data.SqlClient.SqlCommand findID = new System.Data.SqlClient.SqlCommand();
-                            findID.Connection = localDB;
-                            findID.CommandText = "select UserID from Users where Email = @Username";
-                            Users.UserID = findID.ExecuteScalar().ToString();
+                        {                            
                             Response.Redirect("LandingPage.aspx");
                         }
 
