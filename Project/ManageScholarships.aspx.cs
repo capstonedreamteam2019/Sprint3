@@ -40,7 +40,7 @@ public partial class ManageScholarships : System.Web.UI.Page
         if (localDB.State != ConnectionState.Open)
             localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID where(PostType like 'Scholarship')", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID order by Post.LastUpdated DESC", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -53,7 +53,7 @@ public partial class ManageScholarships : System.Web.UI.Page
         //Populate gridview 2 = deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteScholarship LEFT JOIN DeletePost ON DeleteScholarship.PostID = DeletePost.PostID where(PostType like 'Scholarship')", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteScholarship LEFT JOIN DeletePost ON DeleteScholarship.PostID = DeletePost.PostID order by DeletePost.LastUpdated DESC", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();
@@ -128,7 +128,7 @@ public partial class ManageScholarships : System.Web.UI.Page
         //Populate Gridview 1 = active
         localDB.Open();
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID where(PostType like 'Scholarship') order by reward ASC", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Scholarship LEFT JOIN Post ON Scholarship.PostID = Post.PostID order by Post.LastUpdated DESC", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
@@ -141,7 +141,7 @@ public partial class ManageScholarships : System.Web.UI.Page
         //Populate gridview 2 = deleted
         localDB.Open();
         dt2 = new DataTable();
-        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteScholarship LEFT JOIN DeletePost ON DeleteScholarship.PostID = DeletePost.PostID where(PostType like 'Scholarship') order by reward ASC", localDB);
+        SqlCommand cmd2 = new SqlCommand("SELECT * FROM DeleteScholarship LEFT JOIN DeletePost ON DeleteScholarship.PostID = DeletePost.PostID order by DeletePost.LastUpdated DESC", localDB);
         da2 = new SqlDataAdapter(cmd2);
         da2.Fill(dt2);
         localDB.Close();

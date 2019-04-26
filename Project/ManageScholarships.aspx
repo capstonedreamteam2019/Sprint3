@@ -87,7 +87,7 @@
                                     <br>
                                     <nav class="nav flex-md-column">
                                         <a class="dropdown-item" runat="server" onserverclick="DueDateFilter">Due Date</a>
-                                        <a class="dropdown-item" runat="server" onserverclick="RewardFilter">Reward Amount</a>
+                                        <a class="dropdown-item" runat="server" onserverclick="RewardFilter">Last Updated</a>
                                         <a class="dropdown-item" runat="server" onserverclick="AlphabeticalFilter">Alphabetical</a>
                                     </nav>
                                 </div>

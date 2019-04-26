@@ -32,7 +32,8 @@ public partial class Applications: System.Web.UI.Page
         {
             //Updates the Gridviews
             showData();
-           
+            
+
         }
 
         if (Session["UserName"] == null || HttpContext.Current.Request.UrlReferrer == null)
@@ -329,6 +330,8 @@ public partial class Applications: System.Web.UI.Page
         }
         if (e.CommandName == "Resume")
         {
+            id = selectedRow.FindControl("lblUserID") as Label;
+            openApp();
             builder.Append("<script language=JavaScript> ShowResume(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowResume", builder.ToString());
         }
@@ -352,6 +355,8 @@ public partial class Applications: System.Web.UI.Page
         }
         if (e.CommandName == "Resume")
         {
+            id = selectedRow.FindControl("lblUserID") as Label;
+            openApp();
             builder.Append("<script language=JavaScript> ShowResume(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowResume", builder.ToString());
         }
@@ -599,6 +604,18 @@ public partial class Applications: System.Web.UI.Page
             string strBase64 = Convert.ToBase64String(bytes);
             Image1.ImageUrl = "data:Image/png;base64," + strBase64;
         localDB.Close();
+    }
+
+    private void LoadImages()
+    {
+        localDB.Open();
+        System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand();
+        cmd.Connection = localDB;        
+        cmd.CommandText = "Select * from Users";
+        SqlDataReader rdr = cmd.ExecuteReader();
+        GridView1.DataSource = rdr;
+        GridView1.DataBind();
+        
     }
 }
 

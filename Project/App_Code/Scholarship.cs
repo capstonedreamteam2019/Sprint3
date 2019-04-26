@@ -82,7 +82,7 @@ public class Scholarship
 
     public void setLastUpdated()
     {
-        this.lastUpdated = DateTime.Today.ToString();
+        this.lastUpdated = DateTime.Today.ToString().Substring(0, 10);
     }
 
 
