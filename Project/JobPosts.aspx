@@ -76,7 +76,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
    
-    <form runat="server">
+  
 
         <section class="space-sm">
             <div class="container">
@@ -592,6 +592,6 @@
         </section>
         <!--end Body section-->
 
-    </form>
+
 
 </asp:Content>
