@@ -3,6 +3,21 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+<style type="text/css">
+    .Orange {
+        background-color: Orange;
+    }
+
+    .Green {
+        background-color: Green;
+    }
+
+    .Teal {
+        background-color: teal;
+    }
+
+</style>
  
     <form class="card-header d-none d-lg-block" runat="server">
       <section>
@@ -252,7 +267,7 @@ order by max(m.lastupdated)"></asp:SqlDataSource>
               </div>
 
 
-                <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource3">
+                <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource3" OnRowDataBound="GridView3_RowDataBound">
                       <Columns>
                           <asp:BoundField DataField="messageToID" HeaderText="messageToID" SortExpression="messageToID" />
                           <asp:BoundField DataField="messageFromID" HeaderText="messageFromID" SortExpression="messageFromID" />

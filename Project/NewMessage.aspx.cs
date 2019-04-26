@@ -17,7 +17,10 @@ public partial class NewMessage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        //if (!IsPostBack)
+        //{
+        //    BindMessages();
+        //}
     }
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,26 +76,51 @@ public partial class NewMessage : System.Web.UI.Page
         insertMessage.ExecuteNonQuery();
 
         messageBox.Value = "";
+        GridView3.DataBind();
 
 
     }
 
-    protected void Message_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void BindMessages()
     {
 
+        DataTable dt = new DataTable();
+        using (localDB)
+        {
+            SqlDataAdapter adp = new SqlDataAdapter("select messageToID, messageFromID, messagebody from messages1 where messagetoid=@to or messagefromid=@to order by messageid asc", localDB);
+            SqlParameter to = new SqlParameter();
+            to.ParameterName = "@to";
+            to.Value = GridView1.SelectedRow.Cells[1].Text.ToString();
+
+        }
+        if (dt.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt;
+            GridView3.DataBind();
+        }
+
+
+    }
+
+
+    protected void GridView3_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        e.Row.Cells[0].Visible = false;
+        e.Row.Cells[1].Visible = false;
+
+       
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
-            if (e.Row.Cells[1].Text.Equals(16))
+            if (e.Row.Cells[0].Text == "16")
             {
-                e.Row.Cells[1].CssClass = "bg-primary text-white";
+                e.Row.Cells[2].CssClass = "bg-primary text-white text-right";
 
             }
-            else 
+            else if (e.Row.Cells[1].Text == "16")
             {
-                e.Row.Cells[1].CssClass = "bg-secondary";
+                e.Row.Cells[2].CssClass = "bg-secondary";
             }
         }
 
     }
-
 }
