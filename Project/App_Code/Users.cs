@@ -16,6 +16,7 @@ public class Users
     private string PhoneNumber;
     private string LastUpdatedBy;
     private string LastUpdated;
+    public static string UserID;
 
     public Users(string UserType, string Email, string UserPassword, string FirstName, string LastName, string MiddleName, string DateOfBirth, string Address, string PhoneNumber)
     {
