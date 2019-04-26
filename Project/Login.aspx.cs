@@ -42,8 +42,8 @@ public partial class Login : System.Web.UI.Page
     protected void LoginButton_Click(object sender, EventArgs e)
     {
         //connect to database to retrieve stored password string
-        try
-        {
+        //try
+        //{
 
             if (txtPassword.Text == "")
             {
@@ -69,10 +69,6 @@ public partial class Login : System.Web.UI.Page
 
                         if (PasswordHash.ValidatePassword(txtPassword.Text, storedHash)) // if the entered password matches what is stored, it will show success
                         {
-                            System.Data.SqlClient.SqlCommand findID = new System.Data.SqlClient.SqlCommand();
-                            findID.Connection = localDB;
-                            findID.CommandText = "select UserID from Users where Email = @Username";
-                            Users.UserID = findID.ExecuteScalar().ToString();
                             Response.Redirect("LandingPage.aspx");
                         }
 
@@ -89,11 +85,11 @@ public partial class Login : System.Web.UI.Page
 
                 localDB.Close();
             }
-        }
-        catch
-        {
-            lblStatus.Text = "Database Error.";
-        }
+        //}
+        //catch
+        //{
+        //    lblStatus.Text = "Database Error.";
+        //}
 
 
     }
