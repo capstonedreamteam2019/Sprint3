@@ -40,16 +40,21 @@
               
               <div class="list-group list-group-chat list-group-flush">
                     <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
-                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" pagesize="6" DataKeyNames="SchoolName" GridLines="none" ForeColor="#343A40" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowSelection="ChangeMain_Click" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" pagesize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowSelection="ChangeMain_Click" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
                           <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
-                          <RowStyle CssClass="style" Width="30%" />
-                          <Columns >
-                              <asp:CommandField ShowSelectButton="True" />
-                              <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName"  />
-                              <asp:BoundField DataField="LastUpdated" HeaderText="LastUpdated" SortExpression="LastUpdated" />
+                          <RowStyle CssClass="style"/>
+                          <Columns>
+                              <asp:CommandField ItemStyle-Width="5%" ShowSelectButton="True" />
+                              <asp:BoundField ItemStyle-Width="20%" DataField="Conversations" HeaderText="Conversations" SortExpression="Conversations" ReadOnly="True"  />
+                              <asp:BoundField ItemStyle-Width="10%" DataField="Time" HeaderText="Time" SortExpression="Time" ReadOnly="True" />
                           </Columns>
                       </asp:GridView>
-                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [SchoolName], [LastUpdated] FROM [School]"></asp:SqlDataSource>
+                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="select concat(s.schoolname, '-', u.firstName) as 'Conversations', max(m.lastupdated) as 'Time' from school s
+inner join schoolEmployee se on s.schoolID = se.schoolID
+inner join users u on se.userID = u.userID
+inner join messages1 m on u.userID = m.messageToID
+group by messageToID, schoolname, firstname
+order by max(m.lastupdated)"></asp:SqlDataSource>
                     </div>
 
               </div>
@@ -271,17 +276,19 @@
 
                         <div class="list-group list-group-chat list-group-flush">
                             <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
-                                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" PageSize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" PageSize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
                                     <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                                     <RowStyle CssClass="style" Width="30%" />
                                     <Columns>
-                                        <asp:CommandField ShowSelectButton="True" />
-                                        <asp:BoundField DataField="SchoolName" HeaderText="SchoolName" SortExpression="SchoolName" />
-                                        <asp:BoundField DataField="LastUpdated" HeaderText="LastUpdated" SortExpression="LastUpdated" />
+                                        <asp:BoundField DataField="Conversations" HeaderText="Conversations" SortExpression="Conversations" ReadOnly="True" />
+                                        <asp:BoundField DataField="Time" HeaderText="Time" SortExpression="Time" ReadOnly="True" />
                                     </Columns>
 
                                 </asp:GridView>
-                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="SELECT [SchoolName], [LastUpdated] FROM [School]"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="select s.schoolname as 'School', concat(u.firstName,' ', u.lastName) as 'Contact' from school s
+inner join schoolEmployee se on s.schoolID = se.schoolID
+inner join users u on se.userID = u.userID
+order by s.schoolname, u.lastname asc"></asp:SqlDataSource>
                             </div>
 
                         </div>
