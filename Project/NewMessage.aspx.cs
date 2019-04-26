@@ -76,13 +76,9 @@ public partial class NewMessage : System.Web.UI.Page
         insertMessage.ExecuteNonQuery();
 
         messageBox.Value = "";
+
         GridView3.DataBind();
 
-
-    }
-
-    protected void BindMessages()
-    {
 
         DataTable dt = new DataTable();
         using (localDB)
@@ -103,6 +99,7 @@ public partial class NewMessage : System.Web.UI.Page
     }
 
 
+
     protected void GridView3_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         e.Row.Cells[0].Visible = false;
@@ -121,6 +118,7 @@ public partial class NewMessage : System.Web.UI.Page
                 e.Row.Cells[2].CssClass = "bg-secondary";
             }
         }
+
 
     }
 }

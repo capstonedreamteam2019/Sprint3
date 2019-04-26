@@ -74,7 +74,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 
-    <form runat="server">
+   
         <section class="space-sm">
             <div class="container">
                 <div class="row justify-content-between">
@@ -685,6 +685,6 @@
 
         </section>
         <!--end of section-->
-    </form> 
+   
 
 </asp:Content>

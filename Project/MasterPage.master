@@ -28,6 +28,7 @@
 
 </head>
 <body>
+    <form runat="server">
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
 
@@ -60,7 +61,7 @@
               <ul class="navbar-nav">
               <!-- Dropdown - Messages -->
               <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                <form class="form-inline mr-auto w-100 navbar-search">
+                <div class="form-inline mr-auto w-100 navbar-search">
                   <div class="input-group">
                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
@@ -69,7 +70,7 @@
                       </button>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </li>
 
@@ -123,37 +124,53 @@
 
             <!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="Messaging.aspx" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="NewMessage.aspx" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <img alt="Image" src="pages/assets/img/Chat.svg" class="avatar avatar-xs" />
                 <!-- Counter - Messages -->
-                <span class="badge badge-info badge-counter">2</span>
+                <asp:Label id="lblMessage" runat="server" class="badge badge-info badge-counter"></asp:Label>
               </a>
               <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">
                   Your Messages
-                </h6>
-                <a class="dropdown-item d-flex align-items-center" href="Messaging.aspx">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="avatar" src="pages/assets/img/avatar-female-1.jpg" alt="Profile Icon">
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate-bold">Hi there! Please call the main office and ask for Emily Fowler and we can talk about the upcoming career fair.</div>
-                    <div class="small text-gray-500">Harrisonburg High School · Emily Fowler, Science Teacher · 58m</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="Messaging.aspx">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="avatar" src="pages/assets/img/avatar-male-2.jpg" alt="Profile Icon">
-                    <div class="status-indicator"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">Thank you, talk soon.</div>
-                    <div class="small text-gray-500">Charlottesville High School · Daniel Thomas, Guidance Counselor · 1d</div>
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="Messaging.aspx">Read More Messages</a>
+                </h6>                
+                  <a class="dropdown-item d-flex align-items-center" href="NewMessage.aspx">
+                  <asp:GridView
+                                ID="GridView1"
+                                EmptyDataText="No records in database."
+                                Visible="true"
+                                runat="server"
+                                GridLines="none"
+                                AutoGenerateColumns="False"
+                                ForeColor="#343A40"
+                                ShowHeader="False">
+                                <HeaderStyle Font-Bold="True" ForeColor="Black" />
+                                <RowStyle Width="100%" CssClass="style"  />
+                                <Columns>
+                                    
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                             <div class="dropdown-list-image mr-3">
+                                            <img class="avatar" src="pages/assets/img/person.png" alt="Profile Icon">
+                                            <div class="status-indicator"></div>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            
+                                            <div class="text-truncate"><asp:Label ID="lblBody" Text='<%#Eval("MessageBody") %>' runat="server"></asp:Label></div>
+                                            <div class="small text-gray-500"><asp:Label ID="lblUserID" Text='<%#Eval("FirstName") %>' runat="server"></asp:Label>
+                                            <asp:Label ID="Label1" Text='<%#Eval("LastName") %>' runat="server"></asp:Label> ·
+                                            <asp:Label ID="lblID" Text='<%#Eval("SchoolName") %>' runat="server"></asp:Label></div>
+                                            
+                                        </ItemTemplate>
+                                    </asp:TemplateField>         
+                                </Columns>
+                                
+                            </asp:GridView>
+                      </a>
+                <a class="dropdown-item text-center small text-gray-500" href="NewMessage.aspx">Read More Messages</a>
               </div>
             </li>
 
@@ -195,11 +212,13 @@
             </div>
         </div>
     </div>
+    
         <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>
 
     <!--Footer-->
+        </form>
          <footer class="bg-gray text-light footer-long">
         <div class="container">
           <div class="row">
