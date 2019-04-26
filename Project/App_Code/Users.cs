@@ -140,7 +140,7 @@ public class Users
 
     public void setLastUpdated()
     {
-        this.LastUpdated = DateTime.Today.ToString();
+        this.LastUpdated = DateTime.Today.ToString().Substring(0, 10);
     }
 
 

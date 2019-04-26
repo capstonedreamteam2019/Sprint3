@@ -247,21 +247,21 @@
                                     <div class="CirItem title-box CirItem2">
                                         <h2 class="title"><span>Teachers</span></h2>
                                         <p>
-                                            Wants to connect their students with professionals in the
+                                            Want to connect their students with professionals in the
                                             community but cannot figure out the best way to get the process going.
                                         </p>
                                     </div>
                                     <div class="CirItem title-box CirItem3">
                                         <h2 class="title"><span>Schools</span></h2>
                                         <p>
-                                            Wants to make sure students are knowledgable about what they want after
+                                            Want to make sure students are knowledgable about what they want after
                                             high school and are ready to help connect businesses student.
                                         </p>
                                     </div>
                                     <div class="CirItem title-box CirItem4">
                                         <h2 class="title"><span>Employers</span></h2>
                                         <p>
-                                            Wants to help the younger generations figure out a correct
+                                            Want to help the younger generations figure out a correct
                                             career path at an early age but can’t get connected with them
                                             using a safe platform.
                                         </p>
@@ -370,7 +370,6 @@
                     <div class="row justify-content-center text-center section-intro">
                         <div class="col-12 col-md-9 col-lg-8">
                             <span class="title-decorative">Brilliant, Simple Pricing.</span>
-                            <h2 class="display-6">Let's not break the bank.</h2>
                         </div>
                         <!--end of col-->
                     </div>

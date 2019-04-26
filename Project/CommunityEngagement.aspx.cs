@@ -178,7 +178,7 @@ public partial class CommunityEngagement : System.Web.UI.Page
             StringBuilder builder = new StringBuilder();
             builder.Append("<script language=JavaScript> ShowCreate(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowCreate", builder.ToString());
-            lblError.Text = "Please enter all required values.";
+            //lblError.Text = "Please enter all required values.";
 
         }
         else

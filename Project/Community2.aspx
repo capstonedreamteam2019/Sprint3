@@ -2,6 +2,22 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style>
+    .badge-brilliature {
+    color: #fff;
+    background-color: #11A2AC;
+    }
+
+    a.badge-brilliature:hover, a.badge-brilliature:focus {
+    color: #fff;
+    background-color: #11A2AC;
+    }
+    a.badge-brilliature:focus, a.badge-brilliature.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
+
+
+
     #mask
         {
             position: fixed;
@@ -201,10 +217,8 @@
                                         </ItemTemplate>
                                     </asp:TemplateField> 
                                     <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <br />
-                                             <h1>     </h1>
-                                            <br />
+                                        <ItemTemplate>                                           
+                                             <span class="badge badge-brilliature">Your Event</span>                                          
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -309,11 +323,11 @@
                 <!--end of row-->
             </div>
             <!--end of container-->
-    </section>
+    
            
              <!-- SECOND Gridview-->
           
-    <section class="flush-with-above">
+    
         <!--Body section-->
         <div class="container">
             <h5>Local Events</h5>
@@ -343,9 +357,14 @@
                                             <span class="h6 mb-0">
                                                 <asp:Label ID="lblTitle" Text='<%#Eval("Title") %>' runat="server"></asp:Label></span>                                      
                                             <span class="text-muted">Post Date: 
-                                           <asp:Label ID="Label1" Text='<%#Eval("PostDate") %>' runat="server"></asp:Label></span>   
+                                           <asp:Label ID="Label1" Text='<%#Eval("PostDate") %>' runat="server"></asp:Label></span>
                                         </ItemTemplate>
-                                    </asp:TemplateField>                                    
+                                    </asp:TemplateField> 
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <span class="badge badge-info">Local Event</span>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Event Date">
                                         <ItemTemplate>
                                             <asp:Label ID="lblDate" Text='<%#Eval("startdate") %>' runat="server"></asp:Label>
@@ -442,9 +461,7 @@
                                                             </asp:TemplateField>
                                                             <asp:TemplateField>
                                                                 <ItemTemplate>
-                                                                    <br />
-                                                                    <h1></h1>
-                                                                    <br />
+                                                                    <span class="badge badge-danger">Deleted</span>
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:TemplateField>
@@ -548,7 +565,7 @@
                     </div>
                 </div>
         </div>
-     <section>
+   
 
            
 
@@ -667,7 +684,7 @@
                 <div id="mask">
                 </div>
                 <asp:Panel ID="DeletePopup" runat="server" BackColor="White" Height="225px"
-                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -1800%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -150px; border: outset 2px gray; padding: 5px; display: none">
                     <h3  style="font: Helvetica;">Are you sure you want to delete this Post?</h3>
                     <br />
                     <h5 style="font: Helvetica;">All applications for this post will also be deleted.</h5>
@@ -681,7 +698,7 @@
                 <div id="mask">
                 </div>
                 <asp:Panel ID="RePopup" runat="server" BackColor="White" Height="250px"
-                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -10%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="500px" Style="z-index: 111; background-color: White; position: absolute; left: 30%; top: -150px; border: outset 2px gray; padding: 5px; display: none">
                     <h3 class="brilliatureFont">Are you sure you want to re-activate this Post?</h3>
                     <br />
                     <h5 class="brilliatureFont">The post will become public for everyone to view and apply to.</h5>

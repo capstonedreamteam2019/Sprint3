@@ -49,8 +49,8 @@ public partial class Community2 : System.Web.UI.Page
 
 
             localDB.Open();
-            dt = new DataTable();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where(PostType like 'Event') and BusinessID = 1", localDB);
+            dt = new DataTable();            
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where BusinessID = 1 ORDER By Post.LastUpdated DESC", localDB);
             da = new SqlDataAdapter(cmd);
             da.Fill(dt);
             if (dt.Rows.Count > 0)
@@ -61,7 +61,7 @@ public partial class Community2 : System.Web.UI.Page
             }
 
             dt2 = new DataTable();
-            SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where (PostType like 'Event') and BusinessID > 1", localDB);
+            SqlCommand cmd2 = new SqlCommand("SELECT * FROM Event LEFT JOIN Post ON Event.PostID = Post.PostID where BusinessID > 1 ORDER By Post.LastUpdated DESC", localDB);
             da2 = new SqlDataAdapter(cmd2);
             da2.Fill(dt2);
             localDB.Close();
@@ -243,6 +243,7 @@ public partial class Community2 : System.Web.UI.Page
         }
         if (e.CommandName == "Re")
         {
+            id = selectedRow.FindControl("lblID") as Label;
             builder.Append("<script language=JavaScript> ShowRe(); </script>\n");
             Page.ClientScript.RegisterStartupScript(this.GetType(), "ShowRe", builder.ToString());
         }
@@ -664,20 +665,27 @@ public partial class Community2 : System.Web.UI.Page
     protected void Reactivate_Click(object sender, EventArgs e)
     {
         localDB.Open();
+        try
+        {
 
-        System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
-        deletePost.Connection = localDB;
-        deletePost.CommandText = "DELETE FROM DeleteEvent where PostID = @id";
-        deletePost.Parameters.AddWithValue("id", id.Text);
-        deletePost.ExecuteNonQuery();
+            System.Data.SqlClient.SqlCommand deletePost = new System.Data.SqlClient.SqlCommand();
+            deletePost.Connection = localDB;
+            deletePost.CommandText = "DELETE FROM DeletePost where PostID = @id";
+            deletePost.Parameters.AddWithValue("id", id.Text);
+            deletePost.ExecuteNonQuery();
 
-        System.Data.SqlClient.SqlCommand deleteJob = new System.Data.SqlClient.SqlCommand();
-        deleteJob.Connection = localDB;
-        deleteJob.CommandText = "DELETE FROM DeleteEvent where PostID = @id";
-        deleteJob.Parameters.AddWithValue("id", id.Text);
-        deleteJob.ExecuteNonQuery();
+            System.Data.SqlClient.SqlCommand deleteJob = new System.Data.SqlClient.SqlCommand();
+            deleteJob.Connection = localDB;
+            deleteJob.CommandText = "DELETE FROM DeleteEvent where PostID = @id";
+            deleteJob.Parameters.AddWithValue("id", id.Text);
+            deleteJob.ExecuteNonQuery();
 
-        localDB.Close();
+            localDB.Close();
+        }
+        catch
+        {
+
+        }
         showData();
     }
 
