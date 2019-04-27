@@ -149,9 +149,7 @@
                                     </asp:TemplateField>                                                                     
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:Image class="avatar" ID="Image1" runat="server" 
-                                                ImageUrl='<%# "data:Image/png;base64,"
-                                                + Convert.ToBase64String((byte[])Eval("ProfilePic")) %>' />
+                                            <img class="avatar" src="pages/assets/img/person.png" alt="Profile Icon">
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
@@ -315,9 +313,7 @@
                                             </asp:TemplateField>                                                
                                             <asp:TemplateField>
                                                 <ItemTemplate>
-                                                    <asp:Image class="avatar" ID="Image1" runat="server" 
-                                                        ImageUrl='<%# "data:Image/png;base64,"
-                                                        + Convert.ToBase64String((byte[])Eval("ProfilePic")) %>' />
+                                                    <img class="avatar" src="pages/assets/img/person.png" alt="Profile Icon">
                                                 </ItemTemplate>
                                             </asp:TemplateField>                                            
                                             <asp:TemplateField HeaderText="Status">
@@ -454,9 +450,7 @@
                                                     </asp:TemplateField>                                                   
                                                     <asp:TemplateField>
                                                         <ItemTemplate>
-                                                            <asp:Image class="avatar" ID="Image1" runat="server" 
-                                                                ImageUrl='<%# "data:Image/png;base64,"
-                                                                + Convert.ToBase64String((byte[])Eval("ProfilePic")) %>' />
+                                                            <img class="avatar" src="pages/assets/img/person.png" alt="Profile Icon">
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                     <asp:TemplateField>

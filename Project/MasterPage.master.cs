@@ -51,7 +51,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
         System.Data.SqlClient.SqlCommand getMess = new System.Data.SqlClient.SqlCommand();
         getMess.Connection = localDB;
-        getMess.CommandText = "Select count(MessageID) From Messages1 where(HasSeen = 0)";
+        getMess.CommandText = "Select count(MessageID) From Messages1 where(HasSeen like '*')";
         string messages = getMess.ExecuteScalar().ToString();
         lblMessage.Text = messages;       
         localDB.Close();
@@ -64,7 +64,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void showData()
     {
         dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Messages1 inner JOIN Users ON Users.UserID = Messages1.MessageFromID  inner JOIN SchoolEmployee ON SchoolEmployee.UserID = Users.UserID inner JOIN School ON SchoolEmployee.SchoolID = School.SchoolID where(HasSeen = 0)", localDB);
+        SqlCommand cmd = new SqlCommand("SELECT * FROM Messages1 inner JOIN Users ON Users.UserID = Messages1.MessageFromID  inner JOIN SchoolEmployee ON SchoolEmployee.UserID = Users.UserID inner JOIN School ON SchoolEmployee.SchoolID = School.SchoolID where(HasSeen like '*')", localDB);
         da = new SqlDataAdapter(cmd);
         da.Fill(dt);
         localDB.Close();
