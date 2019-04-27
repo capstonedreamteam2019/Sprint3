@@ -68,7 +68,8 @@ public partial class Login : System.Web.UI.Page
                         string storedHash = reader["UserPassword"].ToString(); // store the database password into this variable
 
                         if (PasswordHash.ValidatePassword(txtPassword.Text, storedHash)) // if the entered password matches what is stored, it will show success
-                        {
+
+                        {                            
                             Response.Redirect("LandingPage.aspx");
                         }
 

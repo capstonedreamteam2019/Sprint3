@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <form cssclass="container-fluid" runat="server">  
+      
       <div id="myModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -207,7 +207,7 @@
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
     <script type="text/javascript" src="assets/js/theme.js"></script>
 
-    </span>
-      </form>
+ 
+   
 
     </asp:Content>
