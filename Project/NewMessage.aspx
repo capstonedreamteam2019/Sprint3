@@ -23,7 +23,7 @@
               
               <div class="list-group list-group-chat list-group-flush">
                     <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
-                     <asp:GridView ID="GridView1" runat="server" ShowHeader="false" AllowPaging="True" pagesize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowSelection="ChangeMain_Click" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="387px" DataKeyNames="userID">
+                     <asp:GridView ID="GridView1" runat="server" ShowHeader="false" AllowPaging="True" pagesize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowSelection="ChangeMain_Click" AllowSorting="True" AutoGenerateColumns="False" Width="387px" DataKeyNames="userID">
                           <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
                           <RowStyle CssClass="style"/>
                           <Columns>
@@ -35,12 +35,12 @@
                               
                           </Columns>
                       </asp:GridView>
-                      <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="select s.schoolname as 'School:', u.userID, concat(substring(u.firstName, 1, 1), '. ', u.lastName) as 'Contact:', max(m.lastupdated) as 'Time' from school s
+                     <%-- <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionStrings:localDB %>" SelectCommand="select s.schoolname as 'School:', u.userID, concat(substring(u.firstName, 1, 1), '. ', u.lastName) as 'Contact:', max(m.lastupdated) as 'Time' from school s
 inner join schoolEmployee se on s.schoolID = se.schoolID
 inner join users u on se.userID = u.userID
 inner join messages1 m on u.userID = m.messageToID
 group by messageToID, schoolname, u.userID, firstname, lastname
-order by max(m.lastupdated)"></asp:SqlDataSource>
+order by max(m.lastupdated)"></asp:SqlDataSource>--%>
                     </div>
 
               </div>
@@ -121,48 +121,7 @@ order by max(m.lastupdated)"></asp:SqlDataSource>
 
         <!--end of container-->
         
-         <!-- Modal HTML -->
-    <div id="myModal2" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">New Message:</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-
-                        <div class="list-group list-group-chat list-group-flush">
-                            <div class="table table-hover align-items-center table-borderless bg-white media align-items-center media-body">
-                                <asp:GridView ID="GridView2" runat="server" AllowPaging="True" PageSize="6" GridLines="None" ForeColor="#343A40" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" AllowSorting="True" AutoGenerateColumns="False" DataSourceID="SqlDataSource2">
-                                    <HeaderStyle BackColor="#f8f9fa" Font-Bold="True" ForeColor="Black" />
-                                    <RowStyle CssClass="style" Width="30%" />
-                                    <Columns>
-                                        <asp:CommandField ShowSelectButton="True" />
-                                        <asp:BoundField DataField="School:" HeaderText="School:" SortExpression="School:" />
-                                        <asp:BoundField DataField="Contact:" HeaderText="Contact:" SortExpression="Contact:" ReadOnly="True" />
-                                        <asp:BoundField DataField="ID:" HeaderText="ID:" SortExpression="ID:" />
-                                    </Columns>
-
-                                </asp:GridView>
-                                <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString %>" SelectCommand="select s.schoolname as 'School:', concat(u.firstName, ' ', u.lastName) as 'Contact:', u.userID as 'ID:'
-from school s 
-inner join schoolemployee se on s.schoolid=se.schoolid
-inner join users u on se.userid=u.userid
-order by schoolname, lastname asc"></asp:SqlDataSource>
-                            </div>
-
-                        </div>
-                        <label for="exampleFormControlTextarea1"></label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
-                    </div>
-   
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success">Send</button>
-                </div>
-            </div>
-        </div>
-    </div>
+     
 
       </section>
 

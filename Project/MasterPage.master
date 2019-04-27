@@ -123,7 +123,7 @@
             </li>
 
             <!-- Nav Item - Messages -->
-            <li class="nav-item dropdown no-arrow">
+            <%--<li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="NewMessage.aspx" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                <img alt="Image" src="pages/assets/img/Chat.svg" class="avatar avatar-xs" />
                 <!-- Counter - Messages -->
@@ -172,7 +172,7 @@
                       </a>
                 <a class="dropdown-item text-center small text-gray-500" href="NewMessage.aspx">Read More Messages</a>
               </div>
-            </li>
+            </li>--%>
 
      <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle dropdown-toggle-no-arrow" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

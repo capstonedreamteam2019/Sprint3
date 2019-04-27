@@ -17,17 +17,15 @@ public partial class NewMessage : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        GridView1.SelectedIndex = index;
-        GridView1.SelectedRowStyle.CssClass = "bg-primary text-white";
-        mainViewContactSchool.InnerText = GridView1.SelectedRow.Cells[1].Text;
-        mainViewContactName.InnerText = GridView1.SelectedRow.Cells[3].Text;
-
-
-
         if (!IsPostBack)
         {
             BindMessages();
         }
+
+        GridView1.SelectedIndex = index;
+        GridView1.SelectedRowStyle.CssClass = "bg-primary text-white";
+        mainViewContactSchool.InnerText = GridView1.SelectedRow.Cells[1].Text;
+        mainViewContactName.InnerText = GridView1.SelectedRow.Cells[3].Text;
     }
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -46,14 +44,14 @@ public partial class NewMessage : System.Web.UI.Page
 
     }
 
-    protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
-    {
+    //protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+    //{
 
-        GridViewRow row = GridView2.SelectedRow;
-        mainViewContactSchool.InnerText = row.Cells[1].Text;
-        mainViewContactName.InnerText = "Speaking with: " + row.Cells[2].Text;
+    //    GridViewRow row = GridView2.SelectedRow;
+    //    mainViewContactSchool.InnerText = row.Cells[1].Text;
+    //    mainViewContactName.InnerText = "Speaking with: " + row.Cells[2].Text;
 
-    }
+    //}
 
     protected void sendBTN_Click(object sender, EventArgs e)
     {
@@ -93,20 +91,33 @@ public partial class NewMessage : System.Web.UI.Page
     }
     protected void BindMessages()
     {
+        //1
+        localDB.Open();
         DataTable dt = new DataTable();
-        using (localDB)
-        {
-            SqlDataAdapter adp = new SqlDataAdapter("select messageToID, messageFromID, messagebody from messages1 where messagetoid=@to or messagefromid=@to order by messageid asc", localDB);
-            adp.SelectCommand.Parameters.Add(new SqlParameter { ParameterName = "@to", Value = GridView1.SelectedRow.Cells[2].Text, SqlDbType = SqlDbType.VarChar, Size = 100 });
-            adp.Fill(dt);
-
-        }
+        SqlCommand cmd = new SqlCommand("select s.schoolname as 'School:', u.userID, concat(substring(u.firstName, 1, 1), '. ', u.lastName) as 'Contact:', max(m.lastupdated) as 'Time' from school s inner join schoolEmployee se on s.schoolID = se.schoolID inner join users u on se.userID = u.userID inner join messages1 m on u.userID = m.messageToID group by messageToID, schoolname, u.userID, firstname, lastname order by max(m.lastupdated)", localDB);
+        SqlDataAdapter da = new SqlDataAdapter(cmd);
+        da.Fill(dt);
+        localDB.Close();
         if (dt.Rows.Count > 0)
         {
-            GridView3.DataSource = dt;
-            GridView3.DataBind();
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
         }
 
+
+        //Populate Gridview 3
+        localDB.Open();
+        DataTable dt2 = new DataTable();
+        SqlCommand cmd2 = new SqlCommand("select messageToID, messageFromID, messagebody from messages1 where messagetoid=@to or messagefromid=@to order by messageid asc", localDB);
+        SqlDataAdapter da2 = new SqlDataAdapter(cmd2);
+        da2.Fill(dt2);
+        localDB.Close();
+        if (dt.Rows.Count > 0)
+        {
+            GridView3.DataSource = dt2;
+            GridView3.DataBind();
+        }
+        
 
     }
 

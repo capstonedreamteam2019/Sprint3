@@ -15,7 +15,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        showData();
+        
         if (localDB.State != ConnectionState.Open)
             localDB.Open();
         System.Data.SqlClient.SqlCommand getApplicants = new System.Data.SqlClient.SqlCommand();
@@ -49,31 +49,31 @@ public partial class MasterPage : System.Web.UI.MasterPage
             lblNotification.Text = not.ToString();
         }
 
-        System.Data.SqlClient.SqlCommand getMess = new System.Data.SqlClient.SqlCommand();
-        getMess.Connection = localDB;
-        getMess.CommandText = "Select count(MessageID) From Messages1 where(HasSeen like '*')";
-        string messages = getMess.ExecuteScalar().ToString();
-        lblMessage.Text = messages;       
-        localDB.Close();
+        //System.Data.SqlClient.SqlCommand getMess = new System.Data.SqlClient.SqlCommand();
+        //getMess.Connection = localDB;
+        //getMess.CommandText = "Select count(MessageID) From Messages1 where(HasSeen like '*')";
+        //string messages = getMess.ExecuteScalar().ToString();
+        //lblMessage.Text = messages;       
+        //localDB.Close();
 
     }
 
 
 
     //Populates Gridview 1 
-    protected void showData()
-    {
-        dt = new DataTable();
-        SqlCommand cmd = new SqlCommand("SELECT * FROM Messages1 inner JOIN Users ON Users.UserID = Messages1.MessageFromID  inner JOIN SchoolEmployee ON SchoolEmployee.UserID = Users.UserID inner JOIN School ON SchoolEmployee.SchoolID = School.SchoolID where(HasSeen like '*')", localDB);
-        da = new SqlDataAdapter(cmd);
-        da.Fill(dt);
-        localDB.Close();
-        if (dt.Rows.Count > 0)
-        {
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-        }
-    }
+    //protected void showData()
+    //{
+    //    dt = new DataTable();
+    //    SqlCommand cmd = new SqlCommand("SELECT * FROM Messages1 inner JOIN Users ON Users.UserID = Messages1.MessageFromID  inner JOIN SchoolEmployee ON SchoolEmployee.UserID = Users.UserID inner JOIN School ON SchoolEmployee.SchoolID = School.SchoolID where(HasSeen like '*')", localDB);
+    //    da = new SqlDataAdapter(cmd);
+    //    da.Fill(dt);
+    //    localDB.Close();
+    //    if (dt.Rows.Count > 0)
+    //    {
+    //        GridView1.DataSource = dt;
+    //        GridView1.DataBind();
+    //    }
+    //}
 
 
 }

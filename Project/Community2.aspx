@@ -573,7 +573,7 @@
            <div id="mask">
                 </div>
                 <asp:Panel ID="PreviewPopup" runat="server" BackColor="White" Height="650px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: -1800%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top: 0%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Preview Event</h1>
 
                           <div class="form-group">
@@ -644,7 +644,7 @@
          <div id="mask">
                 </div>
                     <asp:Panel ID="EditPopup" runat="server" BackColor="White" Height="750px"
-                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:-1800%; border: outset 2px gray; padding: 5px; display: none">
+                    Width="700px" Style="z-index: 111; background-color: White; position: absolute; left: 22%; top:0%; border: outset 2px gray; padding: 5px; display: none">
                     <h1 style="background-color: #11A2AC; color:White; font-weight: bold; font: Helvetica; padding:3px"; align="center">Edit Event</h1>
                         <div class="form-group">
                             <div>
