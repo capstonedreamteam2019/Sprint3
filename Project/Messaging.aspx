@@ -8,7 +8,7 @@
         <div class="container">
           <div class="row card flex-row">
             <div class="col-auto">
-               <form runat="server" class="card-header d-none d-lg-block">
+             
             	<h5> Brilliature Messaging</h5>
                 <a href="#myModal2" class="btn btn-success" data-toggle="modal"><i class="icon-plus">&nbsp;</i>New Message</a>
                 <br>
@@ -435,7 +435,7 @@
     </div>
       </section>
       <!--end of section-->
-</form>
+
 
     <script type="text/javascript" src="pages/assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="pages/assets/js/popper.min.js"></script>
